@@ -1,113 +1,332 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-lang="es" data-titulo-es="SwiftPen — notas a mano para Android" data-titulo-en="SwiftPen — handwritten notes for Android">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SwiftPen</title>
-<meta name="description" content="SwiftPen: notas a mano para Android, rápidas como el papel.">
-<style>
-  :root {
-    --fondo: #fbfaff;
-    --texto: #1f1d2b;
-    --secundario: #5b5870;
-    --acento: #6d4fd8;
-    --borde: #e3e0f0;
-    --degradado: linear-gradient(90deg, #3b82f6, #8b5cf6);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --fondo: #16151d;
-      --texto: #ecebf3;
-      --secundario: #a9a6bb;
-      --acento: #a998ff;
-      --borde: #2c2a38;
-    }
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--fondo);
-    color: var(--texto);
-    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  }
-  main { max-width: 720px; margin: 0 auto; padding: 48px 16px 64px; }
-  h1 {
-    font-size: 2.6rem;
-    margin: 0;
-    background: var(--degradado);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    width: fit-content;
-  }
-  .lema { font-size: 1.2rem; color: var(--secundario); margin: 4px 0 32px; }
-  h2 { font-size: 1.15rem; margin: 32px 0 8px; }
-  ul { padding-left: 1.2rem; }
-  li { margin: 4px 0; }
-  a { color: var(--acento); }
-  .pro { font-size: .75rem; font-weight: 600; color: var(--acento); border: 1px solid var(--acento); border-radius: 999px; padding: 0 8px; margin-left: 4px; }
-  .idiomas, footer { color: var(--secundario); font-size: .9rem; }
-  hr { border: 0; border-top: 1px solid var(--borde); margin: 56px 0; }
-</style>
+<title>SwiftPen — notas a mano para Android</title>
+<meta name="description" content="SwiftPen: notas a mano para Android. Tinta instantánea, plantillas de papel, PDF y sincronización con tu propio almacenamiento. Sin cuentas, sin anuncios.">
+<meta property="og:title" content="SwiftPen — notas a mano para Android">
+<meta property="og:description" content="Escribe como en papel. Encuéntralo como en digital.">
+<meta property="og:image" content="https://matias-alm.github.io/swiftpen/img/editor-es.webp">
+<meta name="theme-color" content="#0b0c12" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f7f7fb" media="(prefers-color-scheme: light)">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/idioma.js"></script>
 </head>
 <body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-rayo" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></symbol>
+  <symbol id="i-plantilla" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></symbol>
+  <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></symbol>
+  <symbol id="i-formas" viewBox="0 0 24 24"><circle cx="8" cy="8" r="5"/><rect x="12" y="12" width="9" height="9" rx="1.5"/></symbol>
+  <symbol id="i-nube" viewBox="0 0 24 24"><path d="M17.5 19a4.5 4.5 0 1 0-1.4-8.8A6 6 0 0 0 4.5 12.5 3.5 3.5 0 0 0 6 19z"/></symbol>
+  <symbol id="i-luna" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+  <symbol id="i-micro" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
+  <symbol id="i-lupa" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-texto" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-candado" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="i-prohibido" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m5.6 5.6 12.8 12.8"/></symbol>
+  <symbol id="i-persona" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-sinred" viewBox="0 0 24 24"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.9a10 10 0 0 1 14 0M8.5 16.4a5 5 0 0 1 7 0"/><circle cx="12" cy="20" r="1"/></symbol>
+  <symbol id="i-carpeta" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M5 3.6v16.8c0 .8.9 1.3 1.6.9l13.8-8.4a1 1 0 0 0 0-1.8L6.6 2.7C5.9 2.3 5 2.8 5 3.6z"/></symbol>
+</svg>
+
+<header class="barra">
+  <div class="contenedor">
+    <a class="marca" href="./" aria-label="SwiftPen">
+      <img class="claro" src="img/wordmark-light.webp" alt="SwiftPen" width="680" height="176">
+      <img class="oscuro" src="img/wordmark-dark.webp" alt="SwiftPen" width="680" height="180">
+    </a>
+    <nav class="navegacion">
+      <a class="enlace" href="#funciones"><span lang="es">Funciones</span><span lang="en">Features</span></a>
+      <a class="enlace" href="#precio"><span lang="es">Precio</span><span lang="en">Pricing</span></a>
+      <a class="enlace" href="privacidad/"><span lang="es">Privacidad</span><span lang="en">Privacy</span></a>
+      <div class="idioma" role="group" aria-label="Idioma / Language">
+        <button type="button" data-idioma="es" aria-pressed="true">ES</button>
+        <button type="button" data-idioma="en" aria-pressed="false">EN</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
 <main>
 
-<p class="idiomas"><a href="#es">Español</a> · <a href="#en">English</a></p>
+<section class="hero">
+  <div class="contenedor">
+    <div class="hero-texto">
+      <p class="etiqueta"><span lang="es">Notas a mano para Android</span><span lang="en">Handwritten notes for Android</span></p>
+      <h1>
+        <span lang="es">Escribe como en papel.<br><span class="degradado">Encuéntralo como en digital.</span></span>
+        <span lang="en">Write like it's paper.<br><span class="degradado">Find it like it's digital.</span></span>
+      </h1>
+      <p class="entradilla">
+        <span lang="es">SwiftPen pone la tinta en el mismo instante en que el lápiz toca la pantalla. Papel de verdad, tus PDF y tus notas siempre en tu dispositivo.</span>
+        <span lang="en">SwiftPen lays down ink the instant your pen touches the screen. Real paper, your PDFs, and notes that always stay on your device.</span>
+      </p>
+      <div class="acciones">
+        <span class="boton principal" aria-disabled="true">
+          <svg class="lleno" aria-hidden="true"><use href="#i-play"/></svg>
+          <span class="dos-lineas"><small lang="es">Próximamente en</small><small lang="en">Coming soon to</small>Google Play</span>
+        </span>
+        <a class="boton" href="#funciones"><span lang="es">Ver qué tiene</span><span lang="en">See what's inside</span></a>
+      </div>
+      <p class="nota-pequena"><span lang="es">Gratis para empezar. Pro, con un solo pago.</span><span lang="en">Free to start. Pro is a one-time purchase.</span></p>
+    </div>
 
-<section id="es" lang="es">
-<h1>SwiftPen</h1>
-<p class="lema">Notas a mano para Android, rápidas como el papel.</p>
+    <div class="escena aparece">
+      <div class="tableta">
+        <picture lang="es">
+          <source srcset="img/editor-dark-es.webp" media="(prefers-color-scheme: dark)">
+          <img src="img/editor-es.webp" width="1600" height="893" alt="Una nota de biología escrita a mano en SwiftPen, con un diagrama de la célula.">
+        </picture>
+        <picture lang="en">
+          <source srcset="img/editor-dark-en.webp" media="(prefers-color-scheme: dark)">
+          <img src="img/editor-en.webp" width="1600" height="893" alt="A handwritten biology note in SwiftPen, with a diagram of a cell.">
+        </picture>
+      </div>
+      <div class="telefono">
+        <img lang="es" src="img/phone-es.webp" width="720" height="1514" alt="La biblioteca de SwiftPen en un móvil.">
+        <img lang="en" src="img/phone-en.webp" width="720" height="1514" alt="The SwiftPen library on a phone.">
+      </div>
+    </div>
 
-<p>SwiftPen está pensada para escribir con lápiz en una tableta: la tinta sale en el mismo instante en que tocás la pantalla, y la hoja se comporta como una hoja.</p>
-
-<h2>Qué tiene</h2>
-<ul>
-  <li>Pluma, resaltador, goma, lazo y formas que se enderezan solas.</li>
-  <li>Plantillas de papel (rayado, cuadriculado, punteado…) y hojas verticales u horizontales.</li>
-  <li>Importar PDF para escribir encima, y exportar a PDF o imagen.</li>
-  <li>Sincronización con tu propio servidor WebDAV o tu Google Drive.</li>
-  <li>Grabar audio mientras escribís y volver a escucharlo desde lo que anotaste <span class="pro">Pro</span></li>
-  <li>Buscar en lo escrito a mano y exportarlo como texto <span class="pro">Pro</span></li>
-</ul>
-
-<h2>Tus notas son tuyas</h2>
-<p>Sin cuentas, sin anuncios y sin servidores propios: todo se guarda en tu dispositivo y, si sincronizás, va directo a tu almacenamiento. Detalles en la <a href="privacidad/">política de privacidad</a>.</p>
-
-<h2>Disponibilidad</h2>
-<p>Próximamente en Google Play.</p>
+    <div class="promesas aparece">
+      <div class="promesa"><svg class="i" aria-hidden="true"><use href="#i-persona"/></svg><span lang="es">Sin cuentas</span><span lang="en">No accounts</span></div>
+      <div class="promesa"><svg class="i" aria-hidden="true"><use href="#i-prohibido"/></svg><span lang="es">Sin anuncios</span><span lang="en">No ads</span></div>
+      <div class="promesa"><svg class="i" aria-hidden="true"><use href="#i-candado"/></svg><span lang="es">Tus notas, en tu dispositivo</span><span lang="en">Your notes, on your device</span></div>
+      <div class="promesa"><svg class="i" aria-hidden="true"><use href="#i-sinred"/></svg><span lang="es">Funciona sin conexión</span><span lang="en">Works offline</span></div>
+    </div>
+  </div>
 </section>
 
-<hr>
+<section id="funciones">
+  <div class="contenedor">
+    <p class="etiqueta"><span lang="es">Funciones</span><span lang="en">Features</span></p>
+    <h2><span lang="es">Todo lo de un buen cuaderno.<br>Nada que sobre.</span><span lang="en">Everything a good notebook has.<br>Nothing it doesn't need.</span></h2>
 
-<section id="en" lang="en">
-<h1>SwiftPen</h1>
-<p class="lema">Handwritten notes for Android, as quick as paper.</p>
-
-<p>SwiftPen is built for writing with a stylus on a tablet: ink shows up the instant the pen touches the screen, and the page behaves like a page.</p>
-
-<h2>What's inside</h2>
-<ul>
-  <li>Pen, highlighter, eraser, lasso, and shapes that straighten themselves out.</li>
-  <li>Paper templates (ruled, grid, dotted…) in portrait or landscape.</li>
-  <li>Import PDFs to write on, and export to PDF or images.</li>
-  <li>Sync with your own WebDAV server or your Google Drive.</li>
-  <li>Record audio while you write, then replay it from what you noted down <span class="pro">Pro</span></li>
-  <li>Search your handwriting and export it as text <span class="pro">Pro</span></li>
-</ul>
-
-<h2>Your notes stay yours</h2>
-<p>No accounts, no ads and no servers of ours: everything lives on your device, and if you sync, it goes straight to your own storage. See the <a href="privacidad/#en">privacy policy</a> for details.</p>
-
-<h2>Availability</h2>
-<p>Coming soon to Google Play.</p>
+    <div class="rejilla">
+      <article class="tarjeta aparece">
+        <div class="icono"><svg class="i" aria-hidden="true"><use href="#i-rayo"/></svg></div>
+        <h3><span lang="es">Tinta sin retardo</span><span lang="en">Ink with no lag</span></h3>
+        <p><span lang="es">Se dibuja directo en la pantalla y se anticipa al trazo: escribir se siente como con un bolígrafo.</span><span lang="en">Ink is drawn straight to the screen and predicts where your stroke is going, so writing feels like using a real pen.</span></p>
+      </article>
+      <article class="tarjeta aparece">
+        <div class="icono"><svg class="i" aria-hidden="true"><use href="#i-plantilla"/></svg></div>
+        <h3><span lang="es">Papel a tu medida</span><span lang="en">Paper your way</span></h3>
+        <p><span lang="es">Rayado, cuadriculado, Cornell, hexagonal y más, en blanco, crema, kraft o azul. Hojas verticales u horizontales.</span><span lang="en">Ruled, grid, Cornell, hex and more, in white, cream, kraft or blue. Portrait or landscape pages.</span></p>
+      </article>
+      <article class="tarjeta aparece">
+        <div class="icono"><svg class="i" aria-hidden="true"><use href="#i-pdf"/></svg></div>
+        <h3><span lang="es">Tus PDF, para escribir encima</span><span lang="en">Write right on your PDFs</span></h3>
+        <p><span lang="es">Importa apuntes, fichas o exámenes y anótalos como una página más. Exporta a PDF o a imagen cuando quieras.</span><span lang="en">Bring in lecture notes, worksheets or past exams and mark them up like any other page. Export to PDF or images anytime.</span></p>
+      </article>
+      <article class="tarjeta aparece">
+        <div class="icono"><svg class="i" aria-hidden="true"><use href="#i-formas"/></svg></div>
+        <h3><span lang="es">Formas que se enderezan</span><span lang="en">Shapes that tidy themselves</span></h3>
+        <p><span lang="es">Dibuja un círculo, una flecha o un rectángulo y mantén el lápiz quieto al terminar: queda perfecto. Con el lazo mueves lo que quieras.</span><span lang="en">Sketch a circle, an arrow or a box and hold the pen still at the end: it snaps into shape. Use the lasso to move anything around.</span></p>
+      </article>
+      <article class="tarjeta aparece">
+        <div class="icono"><svg class="i" aria-hidden="true"><use href="#i-nube"/></svg></div>
+        <h3><span lang="es">Sincroniza con lo tuyo</span><span lang="en">Sync to your own storage</span></h3>
+        <p><span lang="es">Tu servidor WebDAV o tu Google Drive, sin intermediarios. Y las notas viejas pueden quedarse solo en la nube para liberar espacio.</span><span lang="en">Your own WebDAV server or your Google Drive, with nothing in between. Older notes can live in the cloud only to free up space.</span></p>
+      </article>
+      <article class="tarjeta aparece">
+        <div class="icono"><svg class="i" aria-hidden="true"><use href="#i-luna"/></svg></div>
+        <h3><span lang="es">Modo oscuro</span><span lang="en">Dark mode</span></h3>
+        <p><span lang="es">La interfaz se oscurece de noche; la hoja sigue siendo papel, para que tus notas se vean igual siempre.</span><span lang="en">The interface goes dark at night while the page stays paper, so your notes always look the same.</span></p>
+      </article>
+      <article class="tarjeta aparece">
+        <span class="pro">PRO</span>
+        <div class="icono"><svg class="i" aria-hidden="true"><use href="#i-micro"/></svg></div>
+        <h3><span lang="es">Audio que sigue a tu letra</span><span lang="en">Audio that follows your writing</span></h3>
+        <p><span lang="es">Graba la clase mientras escribes. Después toca cualquier palabra y escucha qué se decía en ese momento.</span><span lang="en">Record the lecture while you write. Later, tap any word to hear what was being said at that moment.</span></p>
+      </article>
+      <article class="tarjeta aparece">
+        <span class="pro">PRO</span>
+        <div class="icono"><svg class="i" aria-hidden="true"><use href="#i-lupa"/></svg></div>
+        <h3><span lang="es">Busca en lo escrito a mano</span><span lang="en">Search your handwriting</span></h3>
+        <p><span lang="es">SwiftPen lee tu letra en el propio dispositivo, sin enviarla a ningún servidor, y te lleva a la palabra que buscas.</span><span lang="en">SwiftPen reads your handwriting on the device itself, without sending it anywhere, and takes you straight to the word.</span></p>
+      </article>
+      <article class="tarjeta aparece">
+        <span class="pro">PRO</span>
+        <div class="icono"><svg class="i" aria-hidden="true"><use href="#i-texto"/></svg></div>
+        <h3><span lang="es">De tu letra a texto</span><span lang="en">From handwriting to text</span></h3>
+        <p><span lang="es">Exporta una nota como texto, en el orden en que se lee: columnas, notas al margen y párrafos incluidos.</span><span lang="en">Export a note as text in reading order, with columns, margin notes and paragraphs kept in place.</span></p>
+      </article>
+    </div>
+  </div>
 </section>
 
-<footer>
-<hr>
-<p>Matías Álvarez Massia · <a href="mailto:swiftpen.app@gmail.com">swiftpen.app@gmail.com</a></p>
-</footer>
+<section>
+  <div class="contenedor dueto">
+    <div class="dueto-texto aparece">
+      <p class="etiqueta"><span lang="es">Escritura</span><span lang="en">Writing</span></p>
+      <h2><span lang="es">Tu letra, tal cual.</span><span lang="en">Your handwriting, as it is.</span></h2>
+      <p class="entradilla"><span lang="es">Nada de trazos que llegan tarde ni líneas que se redondean solas. Lo que escribes es lo que queda.</span><span lang="en">No strokes trailing behind the pen, no lines smoothed into something else. What you write is what stays.</span></p>
+      <ul>
+        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Pluma, resaltador, goma y lazo</span><span lang="en">Pen, highlighter, eraser and lasso</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Colores y grosores a un toque</span><span lang="en">Colors and widths one tap away</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">El lápiz escribe y el dedo navega, o como prefieras</span><span lang="en">Pen writes and finger scrolls, or however you like</span></li>
+      </ul>
+    </div>
+    <div class="detalle aparece">
+      <img lang="es" src="img/detalle-es.webp" width="1300" height="345" loading="lazy" alt="Detalle de una nota escrita a mano con una frase resaltada.">
+      <img lang="en" src="img/detalle-en.webp" width="1300" height="345" loading="lazy" alt="Close-up of a handwritten note with a highlighted phrase.">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="contenedor dueto invertido">
+    <div class="dueto-texto aparece">
+      <p class="etiqueta"><span lang="es">Biblioteca</span><span lang="en">Library</span></p>
+      <h2><span lang="es">Todo en su sitio.</span><span lang="en">Everything in its place.</span></h2>
+      <p class="entradilla"><span lang="es">Cada nota con su miniatura, en carpetas y subcarpetas con su color. Y si borras algo, la papelera te lo guarda un tiempo.</span><span lang="en">Every note with its own thumbnail, in folders and subfolders with their own colors. Delete something by mistake and the trash keeps it for a while.</span></p>
+    </div>
+    <div class="marco aparece">
+      <picture lang="es">
+        <source srcset="img/library-dark-es.webp" media="(prefers-color-scheme: dark)">
+        <img src="img/library-es.webp" width="1600" height="893" loading="lazy" alt="La biblioteca de SwiftPen con carpetas y miniaturas de notas.">
+      </picture>
+      <picture lang="en">
+        <source srcset="img/library-dark-en.webp" media="(prefers-color-scheme: dark)">
+        <img src="img/library-en.webp" width="1600" height="893" loading="lazy" alt="The SwiftPen library with folders and note thumbnails.">
+      </picture>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="contenedor dueto">
+    <div class="dueto-texto aparece">
+      <p class="etiqueta"><span lang="es">Tableta y móvil</span><span lang="en">Tablet and phone</span></p>
+      <h2><span lang="es">Hecha para la tableta. Cómoda en el móvil.</span><span lang="en">Made for tablets. Comfortable on phones.</span></h2>
+      <p class="entradilla"><span lang="es">La barra de herramientas se adapta a la pantalla, y con la sincronización tus notas te siguen de un dispositivo a otro.</span><span lang="en">The toolbar adapts to your screen, and with sync your notes follow you from one device to the next.</span></p>
+    </div>
+    <div class="solo-telefono aparece">
+      <div class="telefono">
+        <img lang="es" src="img/phone-es.webp" width="720" height="1514" loading="lazy" alt="SwiftPen en un móvil.">
+        <img lang="en" src="img/phone-en.webp" width="720" height="1514" loading="lazy" alt="SwiftPen on a phone.">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="precio">
+  <div class="contenedor">
+    <p class="etiqueta"><span lang="es">Precio</span><span lang="en">Pricing</span></p>
+    <h2><span lang="es">Paga una vez, o nunca.</span><span lang="en">Pay once, or never.</span></h2>
+    <p class="entradilla"><span lang="es">Todo lo necesario para escribir es gratis, para siempre. Pro suma las funciones para estudiar mejor, con un solo pago.</span><span lang="en">Everything you need to write is free, forever. Pro adds the study features with a single payment.</span></p>
+
+    <div class="precios">
+      <div class="plan aparece">
+        <p class="etiqueta"><span lang="es">SwiftPen</span><span lang="en">SwiftPen</span></p>
+        <div class="cuanto"><span lang="es">Gratis</span><span lang="en">Free</span><span class="unidad" lang="es">para siempre</span><span class="unidad" lang="en">forever</span></div>
+        <ul>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Notas ilimitadas, con tinta sin retardo</span><span lang="en">Unlimited notes with lag-free ink</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Todas las plantillas de papel</span><span lang="en">Every paper template</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Importar y exportar PDF</span><span lang="en">PDF import and export</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Formas, lazo y carpetas</span><span lang="en">Shapes, lasso and folders</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Sincronización con WebDAV o Google Drive</span><span lang="en">Sync with WebDAV or Google Drive</span></li>
+        </ul>
+      </div>
+      <div class="plan destacado aparece">
+        <p class="etiqueta"><span class="degradado">SwiftPen Pro</span></p>
+        <div class="cuanto"><span lang="es">Pago único</span><span lang="en">One-time</span></div>
+        <ul>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Todo lo gratis, y además:</span><span lang="en">Everything in Free, plus:</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Audio sincronizado con lo que escribes</span><span lang="en">Audio synced to what you write</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Búsqueda en tu letra</span><span lang="en">Handwriting search</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Exportar lo escrito como texto ordenado</span><span lang="en">Export handwriting as tidy text</span></li>
+        </ul>
+        <p class="pie"><span lang="es">Sin suscripciones. El precio se anuncia con el lanzamiento.</span><span lang="en">No subscriptions. Pricing will be announced at launch.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="contenedor dueto">
+    <div class="dueto-texto aparece">
+      <p class="etiqueta"><span lang="es">Privacidad</span><span lang="en">Privacy</span></p>
+      <h2><span lang="es">Tus notas son tuyas.</span><span lang="en">Your notes stay yours.</span></h2>
+      <p class="entradilla"><span lang="es">SwiftPen no tiene servidores propios. Tus notas se guardan en tu dispositivo y, si sincronizas, van directas a tu almacenamiento. El reconocimiento de escritura también funciona sin que tu letra salga del teléfono.</span><span lang="en">SwiftPen has no servers of its own. Your notes are stored on your device and, if you sync, they go straight to your own storage. Handwriting recognition runs without your writing ever leaving the phone.</span></p>
+      <p style="margin-top:20px"><a href="privacidad/"><span lang="es">Leer la política de privacidad →</span><span lang="en">Read the privacy policy →</span></a></p>
+    </div>
+    <div class="rejilla" style="margin-top:0">
+      <div class="tarjeta aparece">
+        <div class="icono"><svg class="i" aria-hidden="true"><use href="#i-candado"/></svg></div>
+        <h3><span lang="es">Credenciales cifradas</span><span lang="en">Encrypted credentials</span></h3>
+        <p><span lang="es">La contraseña de tu servidor se guarda cifrada con el almacén de claves de Android.</span><span lang="en">Your server password is encrypted with Android's keystore.</span></p>
+      </div>
+      <div class="tarjeta aparece">
+        <div class="icono"><svg class="i" aria-hidden="true"><use href="#i-carpeta"/></svg></div>
+        <h3><span lang="es">Solo sus propios archivos</span><span lang="en">Only its own files</span></h3>
+        <p><span lang="es">En Google Drive, SwiftPen solo ve los archivos que crea. El resto de tu Drive queda fuera de su alcance.</span><span lang="en">In Google Drive, SwiftPen only sees the files it creates. The rest of your Drive stays out of reach.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="contenedor">
+    <p class="etiqueta"><span lang="es">Preguntas</span><span lang="en">Questions</span></p>
+    <h2><span lang="es">Lo que suelen preguntar.</span><span lang="en">Things people ask.</span></h2>
+    <div class="preguntas">
+      <details class="aparece">
+        <summary><span lang="es">¿Necesito crear una cuenta?</span><span lang="en">Do I need an account?</span></summary>
+        <p><span lang="es">No. Abres la app y escribes. Solo conectas una cuenta si quieres sincronizar con Google Drive.</span><span lang="en">No. Open the app and write. You only connect an account if you want to sync with Google Drive.</span></p>
+      </details>
+      <details class="aparece">
+        <summary><span lang="es">¿Funciona sin internet?</span><span lang="en">Does it work offline?</span></summary>
+        <p><span lang="es">Sí, todo. La búsqueda en tu letra necesita descargar el idioma una vez; después funciona sin conexión.</span><span lang="en">Yes, everything. Handwriting search downloads its language model once, then works offline.</span></p>
+      </details>
+      <details class="aparece">
+        <summary><span lang="es">¿Con qué lápiz funciona?</span><span lang="en">Which pens does it work with?</span></summary>
+        <p><span lang="es">Con los lápices activos de Android, como el S Pen o los USI. También puedes escribir con el dedo si lo activas.</span><span lang="en">With Android active styluses such as the S Pen or USI pens. You can also write with your finger if you turn it on.</span></p>
+      </details>
+      <details class="aparece">
+        <summary><span lang="es">¿Pro es una suscripción?</span><span lang="en">Is Pro a subscription?</span></summary>
+        <p><span lang="es">No. Es un pago único y queda tuyo. Lo gratis sigue siendo gratis.</span><span lang="en">No. It's a one-time purchase and it's yours to keep. The free features stay free.</span></p>
+      </details>
+      <details class="aparece">
+        <summary><span lang="es">¿Hay versión para iPad o para el ordenador?</span><span lang="en">Is there an iPad or desktop version?</span></summary>
+        <p><span lang="es">Por ahora, SwiftPen es solo para Android: tabletas y móviles.</span><span lang="en">For now, SwiftPen is Android only: tablets and phones.</span></p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="cierre">
+  <div class="contenedor">
+    <h2><span lang="es">Tu próximo cuaderno<br><span class="degradado">cabe en tu tableta.</span></span><span lang="en">Your next notebook<br><span class="degradado">fits in your tablet.</span></span></h2>
+    <div class="acciones">
+      <span class="boton principal" aria-disabled="true">
+        <svg class="lleno" aria-hidden="true"><use href="#i-play"/></svg>
+        <span class="dos-lineas"><small lang="es">Próximamente en</small><small lang="en">Coming soon to</small>Google Play</span>
+      </span>
+    </div>
+  </div>
+</section>
 
 </main>
+
+<footer>
+  <div class="contenedor">
+    <span>© 2026 Matías Álvarez Massia</span>
+    <nav>
+      <a href="privacidad/"><span lang="es">Privacidad</span><span lang="en">Privacy</span></a>
+      <a href="mailto:swiftpen.app@gmail.com"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
+    </nav>
+  </div>
+</footer>
+
 </body>
 </html>

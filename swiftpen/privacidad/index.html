@@ -1,77 +1,65 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-lang="es" data-titulo-es="SwiftPen · Política de privacidad" data-titulo-en="SwiftPen · Privacy Policy">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SwiftPen · Privacidad</title>
+<title>SwiftPen · Política de privacidad</title>
 <meta name="description" content="Política de privacidad de SwiftPen, la app de notas a mano para Android.">
-<style>
-  :root {
-    --fondo: #fbfaff;
-    --texto: #1f1d2b;
-    --secundario: #5b5870;
-    --acento: #6d4fd8;
-    --borde: #e3e0f0;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --fondo: #16151d;
-      --texto: #ecebf3;
-      --secundario: #a9a6bb;
-      --acento: #a998ff;
-      --borde: #2c2a38;
-    }
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--fondo);
-    color: var(--texto);
-    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  }
-  main { max-width: 720px; margin: 0 auto; padding: 32px 16px 64px; }
-  h1 { font-size: 1.8rem; margin: 0 0 4px; }
-  h2 { font-size: 1.15rem; margin: 32px 0 8px; }
-  p, li { color: var(--texto); }
-  .fecha, .idiomas { color: var(--secundario); font-size: .9rem; }
-  a { color: var(--acento); }
-  hr { border: 0; border-top: 1px solid var(--borde); margin: 56px 0; }
-  ul { padding-left: 1.2rem; }
-</style>
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/idioma.js"></script>
 </head>
 <body>
-<main>
 
-<p class="idiomas"><a href="#es">Español</a> · <a href="#en">English</a></p>
+<header class="barra">
+  <div class="contenedor">
+    <a class="marca" href="../" aria-label="SwiftPen">
+      <img class="claro" src="../img/wordmark-light.webp" alt="SwiftPen" width="680" height="176">
+      <img class="oscuro" src="../img/wordmark-dark.webp" alt="SwiftPen" width="680" height="180">
+    </a>
+    <nav class="navegacion">
+      <a class="enlace" href="../"><span lang="es">Volver a SwiftPen</span><span lang="en">Back to SwiftPen</span></a>
+      <div class="idioma" role="group" aria-label="Idioma / Language">
+        <button type="button" data-idioma="es" aria-pressed="true">ES</button>
+        <button type="button" data-idioma="en" aria-pressed="false">EN</button>
+      </div>
+    </nav>
+  </div>
+</header>
 
-<section id="es" lang="es">
-<h1>Política de privacidad de SwiftPen</h1>
+<main class="documento">
+
+<article lang="es">
+<h1>Política de privacidad</h1>
 <p class="fecha">Última actualización: 30 de septiembre de 2026</p>
 
-<p>SwiftPen es una app de Android para tomar notas a mano. La desarrolla Matías Álvarez Massia, en España. La idea de esta política es simple: <strong>tus notas son tuyas y se quedan en tu dispositivo</strong>. SwiftPen no tiene servidores propios, no pide crear una cuenta, no muestra publicidad y no incluye herramientas de analítica propias.</p>
+<p>SwiftPen es una app de Android para tomar notas a mano. La desarrolla Matías Álvarez Massia, en España. La idea de esta política es simple: <strong>tus notas son tuyas y se quedan en tu dispositivo</strong>. SwiftPen no tiene servidores propios, no te pide crear una cuenta, no muestra publicidad y no incluye herramientas de analítica propias.</p>
 
 <h2>Qué se guarda y dónde</h2>
 <ul>
   <li><strong>Notas, dibujos, PDF importados y grabaciones de audio:</strong> se guardan en el almacenamiento privado de la app, en tu dispositivo. Ninguna otra app puede leerlos.</li>
   <li><strong>Ajustes:</strong> también en tu dispositivo.</li>
-  <li><strong>Copia de seguridad de Android:</strong> si tenés activada la copia de seguridad de Google en el teléfono, Android puede incluir los datos de la app en ella. Esa copia la gestiona Google según su propia política, y la podés desactivar en los ajustes del sistema. La configuración de la sincronización, con la contraseña del servidor, no entra en esa copia: al restaurar hay que configurarla de nuevo.</li>
+  <li><strong>Copia de seguridad de Android:</strong> si tienes activada la copia de seguridad de Google en el teléfono, Android puede incluir los datos de la app en ella. Esa copia la gestiona Google según su propia política, y puedes desactivarla en los ajustes del sistema. La configuración de la sincronización, con la contraseña del servidor, no entra en esa copia: al restaurar tendrás que configurarla de nuevo.</li>
 </ul>
 
 <h2>Micrófono</h2>
-<p>SwiftPen usa el micrófono solo cuando tocás el botón de grabar dentro de una nota, y deja de captar sonido cuando pausás o parás la grabación. Mientras hay una grabación abierta, también en pausa, se muestra una notificación. El audio se guarda junto a la nota, en tu dispositivo, y no se envía a nadie.</p>
+<p>SwiftPen solo usa el micrófono cuando tocas el botón de grabar dentro de una nota, y deja de captar sonido cuando pausas o paras la grabación. Mientras hay una grabación abierta, también en pausa, se muestra una notificación. El audio se guarda junto a la nota, en tu dispositivo, y no se envía a nadie.</p>
 
 <h2>Reconocimiento de escritura</h2>
-<p>La búsqueda en lo escrito a mano y la exportación a texto usan ML Kit de Google, que funciona <strong>en el dispositivo</strong>: lo que escribís no sale del teléfono para reconocerse. El modelo de idioma se descarga de Google una vez. ML Kit envía a Google datos técnicos de diagnóstico y uso (modelo de dispositivo, versión de Android, versión de la app, rendimiento, idioma configurado), <strong>nunca el contenido de tus notas</strong>. Más información en la <a href="https://developers.google.com/ml-kit/android-data-disclosure">documentación de ML Kit</a>.</p>
+<p>La búsqueda en lo escrito a mano y la exportación a texto usan ML Kit de Google, que funciona <strong>en el dispositivo</strong>: lo que escribes no sale del teléfono para reconocerse. El modelo de idioma se descarga de Google una vez. ML Kit envía a Google datos técnicos de diagnóstico y uso (modelo de dispositivo, versión de Android, versión de la app, rendimiento, idioma configurado), <strong>nunca el contenido de tus notas</strong>. Más información en la <a href="https://developers.google.com/ml-kit/android-data-disclosure">documentación de ML Kit</a>.</p>
 
 <h2>Sincronización (opcional)</h2>
-<p>Si activás la sincronización, tus notas se copian <strong>directamente</strong> entre tu dispositivo y el servicio que elegiste. SwiftPen no pasa por ningún servidor intermedio y el desarrollador no recibe nada.</p>
+<p>Si activas la sincronización, tus notas se copian <strong>directamente</strong> entre tu dispositivo y el servicio que elijas. SwiftPen no pasa por ningún servidor intermedio y el desarrollador no recibe nada.</p>
 <ul>
-  <li><strong>Servidor WebDAV propio:</strong> las notas van al servidor que configurás vos, siempre por conexión cifrada (https). El usuario y la contraseña se guardan en tu dispositivo, y la contraseña va cifrada con el almacén de claves de Android.</li>
-  <li><strong>Google Drive:</strong> al conectar tu cuenta de Google, SwiftPen pide permiso solo para los archivos que crea la propia app (el permiso <code>drive.file</code>). No puede ver el resto de tu Drive. Lo que se guarda en Drive se rige por la <a href="https://policies.google.com/privacy">política de privacidad de Google</a>. Podés quitarle el acceso cuando quieras desde <a href="https://myaccount.google.com/permissions">tu cuenta de Google</a>.</li>
+  <li><strong>Servidor WebDAV propio:</strong> las notas van al servidor que configures tú, siempre por conexión cifrada (https). El usuario y la contraseña se guardan en tu dispositivo, y la contraseña va cifrada con el almacén de claves de Android.</li>
+  <li><strong>Google Drive:</strong> al conectar tu cuenta de Google, SwiftPen pide permiso solo para los archivos que crea la propia app (el permiso <code>drive.file</code>). No puede ver el resto de tu Drive. Lo que se guarda en Drive se rige por la <a href="https://policies.google.com/privacy">política de privacidad de Google</a>. Puedes quitarle el acceso cuando quieras desde <a href="https://myaccount.google.com/permissions">tu cuenta de Google</a>.</li>
 </ul>
 
 <h2>Compras</h2>
-<p>Si comprás SwiftPen Pro (cuando esté disponible), el pago lo procesa Google Play. El desarrollador no recibe tus datos de pago; Google Play solo le confirma a la app que la compra existe.</p>
+<p>Si compras SwiftPen Pro (cuando esté disponible), el pago lo procesa Google Play. El desarrollador no recibe tus datos de pago; Google Play solo le confirma a la app que la compra existe.</p>
 
 <h2>Lo que SwiftPen no hace</h2>
 <ul>
@@ -81,25 +69,23 @@
 </ul>
 
 <h2>Borrar tus datos</h2>
-<p>Desde la app podés borrar cualquier nota o grabación. Desinstalar SwiftPen borra todo lo que guarda en el dispositivo. Si sincronizabas, las copias en tu servidor o en tu Drive son tuyas y las borrás desde ahí.</p>
+<p>Desde la app puedes borrar cualquier nota o grabación. Desinstalar SwiftPen borra todo lo que guarda en el dispositivo. Si sincronizabas, las copias en tu servidor o en tu Drive son tuyas y las borras desde ahí.</p>
 
 <h2>Menores</h2>
 <p>SwiftPen no está dirigida a menores de 14 años y no recoge conscientemente datos de ellos.</p>
 
 <h2>Tus derechos</h2>
-<p>Como el desarrollador no guarda datos tuyos, normalmente no hay nada que consultar ni borrar de su lado. Igual podés escribir con cualquier pregunta, y tenés derecho a reclamar ante la <a href="https://www.aepd.es">Agencia Española de Protección de Datos</a>.</p>
+<p>Como el desarrollador no guarda datos tuyos, normalmente no hay nada que consultar ni borrar de su lado. Igualmente puedes escribir con cualquier pregunta, y tienes derecho a reclamar ante la <a href="https://www.aepd.es">Agencia Española de Protección de Datos</a>.</p>
 
 <h2>Cambios</h2>
-<p>Si esta política cambia, se actualiza esta página y su fecha. Un cambio que afecte a cómo se tratan tus datos también se va a avisar dentro de la app.</p>
+<p>Si esta política cambia, se actualiza esta página y su fecha. Un cambio que afecte a cómo se tratan tus datos también se avisará dentro de la app.</p>
 
 <h2>Contacto</h2>
 <p>Matías Álvarez Massia · <a href="mailto:swiftpen.app@gmail.com">swiftpen.app@gmail.com</a></p>
-</section>
+</article>
 
-<hr>
-
-<section id="en" lang="en">
-<h1>SwiftPen Privacy Policy</h1>
+<article lang="en">
+<h1>Privacy Policy</h1>
 <p class="fecha">Last updated: September 30, 2026</p>
 
 <p>SwiftPen is an Android app for handwritten notes, made by Matías Álvarez Massia in Spain. The short version: <strong>your notes are yours and they stay on your device</strong>. SwiftPen has no servers of its own, no sign-up, no ads and no analytics of its own.</p>
@@ -148,8 +134,19 @@
 
 <h2>Contact</h2>
 <p>Matías Álvarez Massia · <a href="mailto:swiftpen.app@gmail.com">swiftpen.app@gmail.com</a></p>
-</section>
+</article>
 
 </main>
+
+<footer>
+  <div class="contenedor">
+    <span>© 2026 Matías Álvarez Massia</span>
+    <nav>
+      <a href="../"><span lang="es">SwiftPen</span><span lang="en">SwiftPen</span></a>
+      <a href="mailto:swiftpen.app@gmail.com"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
+    </nav>
+  </div>
+</footer>
+
 </body>
 </html>
