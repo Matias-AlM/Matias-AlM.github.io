@@ -129,18 +129,36 @@ section { padding: 96px 0; }
 .boton svg { width: 22px; height: 22px; flex: none; }
 .nota-pequena { color: var(--faint); font-size: 14px; margin-top: 16px; }
 
-/* Dispositivos: las capturas ya vienen dentro de las carcasas reales de
- * Pixel Tablet y Pixel 9 (las de Android Studio), con fondo transparente.
- * Aqui solo se colocan y se les da sombra. */
-.escena { position: relative; margin: 56px auto 0; max-width: 1100px; padding-bottom: 24px; }
-.tableta, .telefono, .dispositivo { filter: drop-shadow(0 28px 40px rgba(20, 16, 50, .28)) drop-shadow(0 6px 12px rgba(20, 16, 50, .16)); }
-@media (prefers-color-scheme: dark) {
-  .tableta, .telefono, .dispositivo { filter: drop-shadow(0 30px 50px rgba(0, 0, 0, .6)) drop-shadow(0 8px 16px rgba(0, 0, 0, .4)); }
+/* Dispositivos
+ *
+ * Marcos dibujados, con las proporciones de un Pixel Tablet (marco de ~11
+ * mm sobre 258) y de un Pixel 9 (~3,4 mm sobre 72). Todo en cqw - fracciones
+ * del ancho del contenedor - para que escale con el dispositivo.
+ *
+ * El radio de la pantalla es el del marco menos su grosor: asi las dos
+ * curvas son concentricas, como en un aparato de verdad. Con radios
+ * elegidos por separado la esquina de la pantalla no acompana a la del
+ * marco y se nota enseguida. */
+.escena { position: relative; margin: 64px auto 0; max-width: 1040px; padding-bottom: 40px; container-type: inline-size; }
+.tableta {
+  position: relative; --radio: 3.2cqw; --borde: 1.5cqw;
+  border-radius: var(--radio); padding: var(--borde); background: var(--bezel); box-shadow: var(--shadow);
+  border: 1px solid rgba(255,255,255,.07);
 }
-.tableta img, .telefono img, .dispositivo img { width: 100%; height: auto; }
-.telefono { position: absolute; right: -1%; bottom: 0; width: 21%; }
+/* La camara frontal, en el centro del marco largo. */
+.tableta::before {
+  content: ""; position: absolute; top: calc(var(--borde) / 2); left: 50%; width: .8cqw; height: .8cqw;
+  transform: translate(-50%, -50%); border-radius: 50%; background: #23242d; width: .55cqw; height: .55cqw;
+  box-shadow: inset 0 0 0 .15cqw #15161c;
+}
+.tableta img, .telefono img { width: 100%; height: auto; border-radius: calc(var(--radio) - var(--borde)); }
+.telefono {
+  position: absolute; right: -2%; bottom: -8px; width: 23cqw; --radio: 3.45cqw; --borde: 1.08cqw;
+  border-radius: var(--radio); padding: var(--borde); background: var(--bezel); box-shadow: var(--shadow);
+  border: 1px solid rgba(255,255,255,.07);
+}
 @media (max-width: 719px) {
-  .telefono { position: relative; right: auto; bottom: auto; width: 36%; margin: -34% 3% 0 auto; }
+  .telefono { position: relative; right: auto; bottom: auto; width: 40cqw; margin: -26cqw 4% 0 auto; --radio: 6cqw; --borde: 1.9cqw; }
 }
 
 /* Franja de promesas */
@@ -178,9 +196,12 @@ section { padding: 96px 0; }
 .dueto-texto li { display: flex; gap: 12px; color: var(--muted); }
 .dueto-texto li svg { width: 20px; height: 20px; color: var(--accent); flex: none; margin-top: 4px; }
 .detalle { border-radius: 22px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); background: #fff; }
-.solo-telefono { width: 100%; max-width: 300px; justify-self: center; margin: 0 auto; }
-.solo-telefono .telefono { position: relative; right: auto; bottom: auto; width: 100%; margin: 0; }
-@media (max-width: 719px) { .solo-telefono { max-width: 240px; } }
+.marco { border-radius: 22px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); background: var(--surface); }
+.solo-telefono { width: 100%; max-width: 320px; justify-self: center; margin: 0 auto; container-type: inline-size; }
+.solo-telefono .telefono { position: relative; right: auto; bottom: auto; width: 100cqw; margin: 0; --radio: 15cqw; --borde: 4.7cqw; }
+@media (max-width: 719px) {
+  .solo-telefono .telefono { width: 70cqw; margin: 0 auto; --radio: 10.5cqw; --borde: 3.3cqw; }
+}
 
 /* Precio */
 .precios { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; margin-top: 48px; }
