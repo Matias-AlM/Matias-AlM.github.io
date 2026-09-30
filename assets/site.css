@@ -129,25 +129,18 @@ section { padding: 96px 0; }
 .boton svg { width: 22px; height: 22px; flex: none; }
 .nota-pequena { color: var(--faint); font-size: 14px; margin-top: 16px; }
 
-/* Dispositivos */
-.escena { position: relative; margin: 64px auto 0; max-width: 1040px; padding-bottom: 40px; }
-.tableta {
-  border-radius: 30px; padding: 14px; background: var(--bezel); box-shadow: var(--shadow);
-  border: 1px solid rgba(255,255,255,.06);
+/* Dispositivos: las capturas ya vienen dentro de las carcasas reales de
+ * Pixel Tablet y Pixel 9 (las de Android Studio), con fondo transparente.
+ * Aqui solo se colocan y se les da sombra. */
+.escena { position: relative; margin: 56px auto 0; max-width: 1100px; padding-bottom: 24px; }
+.tableta, .telefono, .dispositivo { filter: drop-shadow(0 28px 40px rgba(20, 16, 50, .28)) drop-shadow(0 6px 12px rgba(20, 16, 50, .16)); }
+@media (prefers-color-scheme: dark) {
+  .tableta, .telefono, .dispositivo { filter: drop-shadow(0 30px 50px rgba(0, 0, 0, .6)) drop-shadow(0 8px 16px rgba(0, 0, 0, .4)); }
 }
-.tableta img, .telefono img { border-radius: 18px; width: 100%; height: auto; }
-.telefono {
-  position: absolute; right: -2%; bottom: -8px; width: 23%; min-width: 150px;
-  border-radius: 34px; padding: 9px; background: var(--bezel); box-shadow: var(--shadow);
-  border: 1px solid rgba(255,255,255,.06);
-}
-.telefono img { border-radius: 26px; }
+.tableta img, .telefono img, .dispositivo img { width: 100%; height: auto; }
+.telefono { position: absolute; right: -1%; bottom: 0; width: 21%; }
 @media (max-width: 719px) {
-  .tableta { border-radius: 18px; padding: 7px; }
-  .tableta img { border-radius: 12px; }
-  .telefono { position: relative; right: auto; bottom: auto; width: 40%; min-width: 0; margin: -110px 4% 0 auto; border-radius: 22px; padding: 5px; }
-  .telefono img { border-radius: 17px; }
-  .solo-telefono .telefono { width: 70%; margin: 0 auto; border-radius: 30px; padding: 8px; }
+  .telefono { position: relative; right: auto; bottom: auto; width: 36%; margin: -34% 3% 0 auto; }
 }
 
 /* Franja de promesas */
@@ -184,10 +177,10 @@ section { padding: 96px 0; }
 .dueto-texto ul { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 12px; }
 .dueto-texto li { display: flex; gap: 12px; color: var(--muted); }
 .dueto-texto li svg { width: 20px; height: 20px; color: var(--accent); flex: none; margin-top: 4px; }
-.marco { border-radius: 22px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); background: var(--surface); }
 .detalle { border-radius: 22px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); background: #fff; }
-.solo-telefono { max-width: 320px; margin: 0 auto; }
+.solo-telefono { width: 100%; max-width: 300px; justify-self: center; margin: 0 auto; }
 .solo-telefono .telefono { position: relative; right: auto; bottom: auto; width: 100%; margin: 0; }
+@media (max-width: 719px) { .solo-telefono { max-width: 240px; } }
 
 /* Precio */
 .precios { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; margin-top: 48px; }
@@ -238,3 +231,25 @@ html.js .aparece.visible { opacity: 1; transform: none; }
 /* Iconos del sprite (<svg class="i"><use href="#i-..."/></svg>) */
 svg.i { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 svg.lleno { fill: currentColor; stroke: none; }
+
+/* Tabla comparativa (como la de Habits First): SwiftPen resaltada. */
+.comparativa { margin-top: 48px; overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 20px; border: 1px solid var(--border); background: var(--surface); }
+.comparativa table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 760px; font-size: 15px; }
+.comparativa th, .comparativa td { padding: 16px 18px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--border); }
+.comparativa tr:last-child td { border-bottom: 0; }
+.comparativa thead th { font-weight: 700; color: var(--text); white-space: nowrap; }
+.comparativa tbody th { font-weight: 500; color: var(--muted); white-space: nowrap; }
+.comparativa td { color: var(--muted); }
+.comparativa .nuestra { background: color-mix(in srgb, var(--accent) 9%, transparent); color: var(--text); font-weight: 600; }
+.comparativa .si, .comparativa .no { display: inline-flex; gap: 6px; align-items: flex-start; }
+.comparativa .si svg { color: #2fbf71; width: 18px; height: 18px; flex: none; margin-top: 2px; }
+.comparativa .no svg { color: #e5484d; width: 18px; height: 18px; flex: none; margin-top: 2px; }
+.aclaracion { color: var(--faint); font-size: 13.5px; margin-top: 14px; }
+/* Los criterios pueden partirse en dos lineas: con nowrap la primera
+ * columna se comia media pantalla en el movil. */
+.comparativa tbody th { white-space: normal; min-width: 150px; }
+@media (max-width: 719px) {
+  .comparativa table { font-size: 14px; min-width: 680px; }
+  .comparativa th, .comparativa td { padding: 12px 12px; }
+  .comparativa tbody th { min-width: 118px; }
+}
