@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SwiftPen</title>
+<meta name="description" content="SwiftPen: notas a mano para Android, rápidas como el papel.">
+<style>
+  :root {
+    --fondo: #fbfaff;
+    --texto: #1f1d2b;
+    --secundario: #5b5870;
+    --acento: #6d4fd8;
+    --borde: #e3e0f0;
+    --degradado: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fondo: #16151d;
+      --texto: #ecebf3;
+      --secundario: #a9a6bb;
+      --acento: #a998ff;
+      --borde: #2c2a38;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--fondo);
+    color: var(--texto);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 16px 64px; }
+  h1 {
+    font-size: 2.6rem;
+    margin: 0;
+    background: var(--degradado);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    width: fit-content;
+  }
+  .lema { font-size: 1.2rem; color: var(--secundario); margin: 4px 0 32px; }
+  h2 { font-size: 1.15rem; margin: 32px 0 8px; }
+  ul { padding-left: 1.2rem; }
+  li { margin: 4px 0; }
+  a { color: var(--acento); }
+  .pro { font-size: .75rem; font-weight: 600; color: var(--acento); border: 1px solid var(--acento); border-radius: 999px; padding: 0 8px; margin-left: 4px; }
+  .idiomas, footer { color: var(--secundario); font-size: .9rem; }
+  hr { border: 0; border-top: 1px solid var(--borde); margin: 56px 0; }
+</style>
+</head>
+<body>
+<main>
+
+<p class="idiomas"><a href="#es">Español</a> · <a href="#en">English</a></p>
+
+<section id="es" lang="es">
+<h1>SwiftPen</h1>
+<p class="lema">Notas a mano para Android, rápidas como el papel.</p>
+
+<p>SwiftPen está pensada para escribir con lápiz en una tableta: la tinta sale en el mismo instante en que tocás la pantalla, y la hoja se comporta como una hoja.</p>
+
+<h2>Qué tiene</h2>
+<ul>
+  <li>Pluma, resaltador, goma, lazo y formas que se enderezan solas.</li>
+  <li>Plantillas de papel (rayado, cuadriculado, punteado…) y hojas verticales u horizontales.</li>
+  <li>Importar PDF para escribir encima, y exportar a PDF o imagen.</li>
+  <li>Sincronización con tu propio servidor WebDAV o tu Google Drive.</li>
+  <li>Grabar audio mientras escribís y volver a escucharlo desde lo que anotaste <span class="pro">Pro</span></li>
+  <li>Buscar en lo escrito a mano y exportarlo como texto <span class="pro">Pro</span></li>
+</ul>
+
+<h2>Tus notas son tuyas</h2>
+<p>Sin cuentas, sin anuncios y sin servidores propios: todo se guarda en tu dispositivo y, si sincronizás, va directo a tu almacenamiento. Detalles en la <a href="privacidad/">política de privacidad</a>.</p>
+
+<h2>Disponibilidad</h2>
+<p>Próximamente en Google Play.</p>
+</section>
+
+<hr>
+
+<section id="en" lang="en">
+<h1>SwiftPen</h1>
+<p class="lema">Handwritten notes for Android, as quick as paper.</p>
+
+<p>SwiftPen is built for writing with a stylus on a tablet: ink shows up the instant the pen touches the screen, and the page behaves like a page.</p>
+
+<h2>What's inside</h2>
+<ul>
+  <li>Pen, highlighter, eraser, lasso, and shapes that straighten themselves out.</li>
+  <li>Paper templates (ruled, grid, dotted…) in portrait or landscape.</li>
+  <li>Import PDFs to write on, and export to PDF or images.</li>
+  <li>Sync with your own WebDAV server or your Google Drive.</li>
+  <li>Record audio while you write, then replay it from what you noted down <span class="pro">Pro</span></li>
+  <li>Search your handwriting and export it as text <span class="pro">Pro</span></li>
+</ul>
+
+<h2>Your notes stay yours</h2>
+<p>No accounts, no ads and no servers of ours: everything lives on your device, and if you sync, it goes straight to your own storage. See the <a href="privacidad/#en">privacy policy</a> for details.</p>
+
+<h2>Availability</h2>
+<p>Coming soon to Google Play.</p>
+</section>
+
+<footer>
+<hr>
+<p>Matías Álvarez Massia · <a href="mailto:swiftpen.app@gmail.com">swiftpen.app@gmail.com</a></p>
+</footer>
+
+</main>
+</body>
+</html>
