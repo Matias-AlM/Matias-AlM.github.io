@@ -336,8 +336,16 @@ svg.lleno { fill: currentColor; stroke: none; }
 .sellos li { display: inline-flex; align-items: center; gap: 8px; }
 .sellos svg { width: 18px; height: 18px; color: var(--accent); }
 
-/* La pieza grande del bento: las cifras de lo gratis frente a otras apps. */
-.cifras { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 10px; }
-.cifras li { display: flex; align-items: baseline; gap: 12px; color: var(--muted); font-size: 15px; }
-.cifras strong { min-width: 7.5rem; font-size: 1.35rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text); }
-.cifras li:first-child strong { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+/* La pieza grande del bento: lo gratis frente a otras apps, en barras. */
+.pieza.grande { justify-content: flex-start; gap: 10px; }
+.barras { list-style: none; padding: 0; margin: 18px 0 4px; display: grid; gap: 14px; }
+.barras li { display: grid; grid-template-columns: 6.5rem 1fr auto; align-items: center; gap: 12px; font-size: 15px; color: var(--muted); }
+.barras .app { font-weight: 600; color: var(--text); }
+.barras .barra-llena { height: 12px; border-radius: 999px; background: var(--surface-2); position: relative; overflow: hidden; }
+.barras .barra-llena::after { content: ""; position: absolute; inset: 0 auto 0 0; width: var(--largo); border-radius: inherit; background: color-mix(in srgb, var(--muted) 45%, transparent); }
+.barras .nuestra .barra-llena::after { background: var(--grad); }
+.barras strong { min-width: 6.5rem; text-align: right; color: var(--text); }
+.barras .nuestra strong { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 800; }
+.incluye { list-style: none; padding: 0; margin: 14px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.incluye li { font-size: 14px; font-weight: 600; padding: 6px 12px; border-radius: 999px; color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.pie-pieza { margin-top: auto !important; padding-top: 16px; font-size: 13px; color: var(--faint) !important; }
