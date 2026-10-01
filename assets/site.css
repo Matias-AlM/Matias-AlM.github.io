@@ -220,6 +220,8 @@ section { padding: 96px 0; }
 .dueto-texto li svg { width: 20px; height: 20px; color: var(--accent); flex: none; margin-top: 4px; }
 .detalle { border-radius: 22px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); background: #fff; }
 .marco { border-radius: 22px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); background: var(--surface); }
+/* Una tableta sola en un dueto (el lienzo infinito): sin el margen de la escena. */
+.escena.solo-tableta { margin: 0; padding: 0; max-width: none; }
 .solo-telefono { width: 100%; max-width: 320px; justify-self: center; margin: 0 auto; container-type: inline-size; }
 .solo-telefono .telefono { position: relative; right: auto; bottom: auto; width: 100cqw; margin: 0; --radio: 15cqw; --borde: 4.7cqw; }
 @media (max-width: 719px) {
@@ -338,8 +340,9 @@ svg.lleno { fill: currentColor; stroke: none; }
   border-radius: 22px; overflow: hidden; border: 1px solid var(--border); background: var(--border);
 }
 /* Columnas fijas y no auto-fill: con 9 elementos, 3x3 exacto. Una fila a
- * medias deja ver el fondo de los separadores como un hueco gris. */
-@media (min-width: 600px) { .lista-compacta { grid-template-columns: repeat(2, 1fr); } }
+ * medias deja ver el fondo de los separadores como un hueco gris; si cambia
+ * el numero de elementos, revisar esto. Entre medias, 1 columna: con 2
+ * quedaria uno suelto. */
 @media (min-width: 900px) { .lista-compacta { grid-template-columns: repeat(3, 1fr); } }
 .lista-compacta .item { display: flex; gap: 14px; align-items: flex-start; padding: 20px 22px; background: var(--surface); }
 .lista-compacta .item svg { width: 22px; height: 22px; color: var(--accent); flex: none; margin-top: 2px; }
@@ -375,6 +378,7 @@ svg.lleno { fill: currentColor; stroke: none; }
 .avisame-consentimiento { display: flex; gap: 10px; align-items: flex-start; margin-top: 12px; font-size: 14px; color: var(--muted); cursor: pointer; }
 .avisame-consentimiento input { margin-top: 3px; accent-color: var(--accent); width: 16px; height: 16px; flex: none; }
 .avisame-estado { min-height: 1.4em; margin: 10px 0 0; font-size: 14.5px; font-weight: 600; color: var(--accent); text-align: center; }
+.avisame-nota { display: block; margin-top: 6px; font-weight: 500; color: var(--muted); }
 .avisame.enviado .avisame-fila, .avisame.enviado .avisame-consentimiento { display: none; }
 .solo-lectores { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @media (max-width: 479px) { .avisame-fila { flex-direction: column; } }
