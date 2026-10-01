@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="/assets/site.css">
 <script src="/assets/idioma.js"></script>
+<script src="/assets/avisame.js" defer></script>
 </head>
 <body>
 
@@ -82,11 +83,11 @@
         <span lang="en">Handwritten notes, your PDFs and voice recordings that follow your writing, synced to your own storage. No accounts, no subscriptions.</span>
       </p>
       <div class="acciones">
-        <a class="boton principal" lang="es" href="mailto:swiftpen.app@gmail.com?subject=Av%C3%ADsame%20cuando%20salga%20SwiftPen">
+        <a class="boton principal" lang="es" href="#avisame">
           <svg class="lleno" aria-hidden="true"><use href="#i-play"/></svg>
           <span class="dos-lineas"><small>Próximamente en Google Play</small>Avísame cuando salga</span>
         </a>
-        <a class="boton principal" lang="en" href="mailto:swiftpen.app@gmail.com?subject=Let%20me%20know%20when%20SwiftPen%20launches">
+        <a class="boton principal" lang="en" href="#avisame">
           <svg class="lleno" aria-hidden="true"><use href="#i-play"/></svg>
           <span class="dos-lineas"><small>Coming soon to Google Play</small>Let me know when it's out</span>
         </a>
@@ -323,7 +324,7 @@
     <div class="preguntas">
       <details class="aparece">
         <summary><span lang="es">¿Cuándo sale?</span><span lang="en">When does it launch?</span></summary>
-        <p><span lang="es">Pronto, en Google Play. Si quieres enterarte el primer día, <a href="mailto:swiftpen.app@gmail.com?subject=Av%C3%ADsame%20cuando%20salga%20SwiftPen">escríbeme</a> y te aviso.</span><span lang="en">Soon, on Google Play. Want to know on day one? <a href="mailto:swiftpen.app@gmail.com?subject=Let%20me%20know%20when%20SwiftPen%20launches">Drop me a line</a> and I'll let you know.</span></p>
+        <p><span lang="es">Pronto, en Google Play. Si quieres enterarte el primer día, <a href="#avisame">déjame tu email</a> y te aviso.</span><span lang="en">Soon, on Google Play. Want to know on day one? <a href="#avisame">Leave your email</a> and I'll let you know.</span></p>
       </details>
       <details class="aparece">
         <summary><span lang="es">¿Necesito crear una cuenta?</span><span lang="en">Do I need an account?</span></summary>
@@ -356,15 +357,27 @@
 <section class="cierre">
   <div class="contenedor">
     <h2><span lang="es">Tu próximo cuaderno,<br><span class="degradado">en tu tableta y en tu bolsillo.</span></span><span lang="en">Your next notebook,<br><span class="degradado">on your tablet and in your pocket.</span></span></h2>
-    <div class="acciones">
-      <a class="boton principal" lang="es" href="mailto:swiftpen.app@gmail.com?subject=Av%C3%ADsame%20cuando%20salga%20SwiftPen">
-        <svg class="lleno" aria-hidden="true"><use href="#i-play"/></svg>
-        <span class="dos-lineas"><small>Próximamente en Google Play</small>Avísame cuando salga</span>
-      </a>
-      <a class="boton principal" lang="en" href="mailto:swiftpen.app@gmail.com?subject=Let%20me%20know%20when%20SwiftPen%20launches">
-        <svg class="lleno" aria-hidden="true"><use href="#i-play"/></svg>
-        <span class="dos-lineas"><small>Coming soon to Google Play</small>Let me know when it's out</span>
-      </a>
+    <div id="avisame">
+    <form class="avisame" lang="es" data-idioma="es" novalidate>
+      <p class="avisame-titulo">Te aviso el día que salga.</p>
+      <div class="avisame-fila">
+        <label class="solo-lectores" for="email-es">Tu email</label>
+        <input id="email-es" type="email" name="email" required autocomplete="email" inputmode="email" placeholder="tu@email.com">
+        <button class="boton principal" type="submit">Avísame</button>
+      </div>
+      <label class="avisame-consentimiento"><input type="checkbox" name="consentimiento" required> <span>Acepto que SwiftPen guarde mi email solo para avisarme del lanzamiento. <a href="privacidad/">Privacidad</a></span></label>
+      <p class="avisame-estado" role="status" aria-live="polite"></p>
+    </form>
+    <form class="avisame" lang="en" data-idioma="en" novalidate>
+      <p class="avisame-titulo">I'll let you know the day it's out.</p>
+      <div class="avisame-fila">
+        <label class="solo-lectores" for="email-en">Your email</label>
+        <input id="email-en" type="email" name="email" required autocomplete="email" inputmode="email" placeholder="you@email.com">
+        <button class="boton principal" type="submit">Notify me</button>
+      </div>
+      <label class="avisame-consentimiento"><input type="checkbox" name="consentimiento" required> <span>I agree that SwiftPen keeps my email only to tell me when it launches. <a href="privacidad/">Privacy</a></span></label>
+      <p class="avisame-estado" role="status" aria-live="polite"></p>
+    </form>
     </div>
   </div>
 </section>
