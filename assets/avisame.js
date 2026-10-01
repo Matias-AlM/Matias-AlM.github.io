@@ -15,8 +15,8 @@
   var OPCION_CONSENTIMIENTO = "Sí";
 
   var TEXTOS = {
-    es: { email: "Introduce un email válido.", consentimiento: "Es necesario aceptar para recibir el aviso.", enviando: "Enviando…", listo: "¡Gracias! Serás de los primeros en saber cuándo sale SwiftPen.", error: "No se ha podido enviar. Inténtalo de nuevo más tarde." },
-    en: { email: "Please enter a valid email address.", consentimiento: "Please accept to receive the notice.", enviando: "Sending…", listo: "Thanks! You'll be among the first to know when SwiftPen launches.", error: "Something went wrong. Please try again later." }
+    es: { email: "Introduce un email válido.", consentimiento: "Es necesario aceptar para recibir el aviso.", enviando: "Enviando…", listo: "¡Gracias! Serás de los primeros en saber cuándo sale SwiftPen.", nota: "Te hemos enviado un correo de confirmación. Si no lo ves, mira en la carpeta de spam y márcalo como «No es spam» para no perderte el aviso del lanzamiento.", error: "No se ha podido enviar. Inténtalo de nuevo más tarde." },
+    en: { email: "Please enter a valid email address.", consentimiento: "Please accept to receive the notice.", enviando: "Sending…", listo: "Thanks! You'll be among the first to know when SwiftPen launches.", nota: "We've sent you a confirmation email. If you can't find it, check your spam folder and mark it as \"Not spam\" so you don't miss the launch notice.", error: "Something went wrong. Please try again later." }
   };
 
   document.querySelectorAll("form.avisame").forEach(function (form) {
@@ -35,7 +35,16 @@
       boton.disabled = true;
       estado.textContent = t.enviando;
       fetch(FORMULARIO, { method: "POST", mode: "no-cors", body: datos })
-        .then(function () { form.classList.add("enviado"); estado.textContent = t.listo; form.reset(); })
+        .then(function () {
+          form.classList.add("enviado");
+          // Dos lineas: el gracias y, mas discreto, que mire el spam.
+          estado.textContent = t.listo;
+          var nota = document.createElement("span");
+          nota.className = "avisame-nota";
+          nota.textContent = t.nota;
+          estado.appendChild(nota);
+          form.reset();
+        })
         .catch(function () { estado.textContent = t.error; })
         .then(function () { boton.disabled = false; });
     });

@@ -220,6 +220,8 @@ section { padding: 96px 0; }
 .dueto-texto li svg { width: 20px; height: 20px; color: var(--accent); flex: none; margin-top: 4px; }
 .detalle { border-radius: 22px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); background: #fff; }
 .marco { border-radius: 22px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); background: var(--surface); }
+/* Una tableta sola en un dueto (el lienzo infinito): sin el margen de la escena. */
+.escena.solo-tableta { margin: 0; padding: 0; max-width: none; }
 .solo-telefono { width: 100%; max-width: 320px; justify-self: center; margin: 0 auto; container-type: inline-size; }
 .solo-telefono .telefono { position: relative; right: auto; bottom: auto; width: 100cqw; margin: 0; --radio: 15cqw; --borde: 4.7cqw; }
 @media (max-width: 719px) {
@@ -376,6 +378,7 @@ svg.lleno { fill: currentColor; stroke: none; }
 .avisame-consentimiento { display: flex; gap: 10px; align-items: flex-start; margin-top: 12px; font-size: 14px; color: var(--muted); cursor: pointer; }
 .avisame-consentimiento input { margin-top: 3px; accent-color: var(--accent); width: 16px; height: 16px; flex: none; }
 .avisame-estado { min-height: 1.4em; margin: 10px 0 0; font-size: 14.5px; font-weight: 600; color: var(--accent); text-align: center; }
+.avisame-nota { display: block; margin-top: 6px; font-weight: 500; color: var(--muted); }
 .avisame.enviado .avisame-fila, .avisame.enviado .avisame-consentimiento { display: none; }
 .solo-lectores { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @media (max-width: 479px) { .avisame-fila { flex-direction: column; } }
