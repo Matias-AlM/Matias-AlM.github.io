@@ -15,8 +15,8 @@
   var OPCION_CONSENTIMIENTO = "Sí";
 
   var TEXTOS = {
-    es: { email: "Escribe un email válido.", consentimiento: "Marca la casilla para poder avisarte.", enviando: "Enviando…", listo: "¡Listo! Te escribiré el día que salga.", error: "No se pudo enviar. Prueba otra vez en un rato." },
-    en: { email: "Please enter a valid email.", consentimiento: "Tick the box so I can let you know.", enviando: "Sending…", listo: "You're in! I'll email you on launch day.", error: "Couldn't send it. Please try again in a bit." }
+    es: { email: "Introduce un email válido.", consentimiento: "Es necesario aceptar para recibir el aviso.", enviando: "Enviando…", listo: "Gracias. Recibirás un email en cuanto SwiftPen esté disponible.", error: "No se ha podido enviar. Inténtalo de nuevo más tarde." },
+    en: { email: "Please enter a valid email address.", consentimiento: "Please accept to receive the notice.", enviando: "Sending…", listo: "Thank you. You'll receive an email as soon as SwiftPen is available.", error: "Something went wrong. Please try again later." }
   };
 
   document.querySelectorAll("form.avisame").forEach(function (form) {
