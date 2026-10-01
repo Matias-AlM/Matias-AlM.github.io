@@ -1,0 +1,109 @@
+<!doctype html>
+<!--
+  Correo de "gracias por tu interes", el que manda aviso.gs al dejar el
+  email en la web. Plantilla de HtmlService: <?= t.xxx ?> son los textos de
+  cada idioma (ver TEXTOS en aviso.gs).
+
+  Hecho para clientes de correo: tablas, estilos en linea y PNG (Outlook no
+  muestra webp). Las imagenes se cargan de la web, que es publica.
+-->
+<html lang="<?= idioma ?>">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
+<title><?= t.asunto ?></title>
+</head>
+<body style="margin:0; padding:0; background:#f2f2f8;">
+  <!-- Preencabezado: el texto que se ve junto al asunto en la bandeja. -->
+  <div style="display:none; max-height:0; overflow:hidden; opacity:0; color:transparent;"><?= t.preencabezado ?></div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f2f2f8;">
+    <tr>
+      <td align="center" style="padding:32px 16px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;">
+
+          <!-- Logo -->
+          <tr>
+            <td align="center" style="padding:0 0 24px;">
+              <a href="https://matias-alm.github.io/swiftpen/" style="text-decoration:none;">
+                <img src="https://matias-alm.github.io/swiftpen/img/correo/wordmark.png" width="170" alt="SwiftPen" style="display:block; width:170px; height:auto; border:0;">
+              </a>
+            </td>
+          </tr>
+
+          <!-- Tarjeta -->
+          <tr>
+            <td style="background:#ffffff; border-radius:20px; border:1px solid #e6e6ef; overflow:hidden;">
+              <!-- Franja con el degradado de la marca (color liso donde no hay degradados). -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr><td height="6" style="height:6px; line-height:6px; font-size:0; background:#6d57dc; background-image:linear-gradient(90deg,#3d6fe0,#a33fd4); border-radius:20px 20px 0 0;">&nbsp;</td></tr>
+              </table>
+
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding:36px 36px 8px; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:#16162a;">
+                    <img src="https://matias-alm.github.io/swiftpen/img/correo/icono.png" width="48" height="48" alt="" style="display:block; width:48px; height:48px; border:0; border-radius:12px; margin:0 0 20px;">
+                    <h1 style="margin:0 0 14px; font-size:26px; line-height:1.2; font-weight:800; letter-spacing:-0.4px;"><?= t.titulo ?></h1>
+                    <p style="margin:0 0 22px; font-size:16px; line-height:1.6; color:#4b4e60;"><?= t.entradilla ?></p>
+                  </td>
+                </tr>
+
+                <!-- Lo que es gratis -->
+                <tr>
+                  <td style="padding:0 36px; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+                    <p style="margin:0 0 12px; font-size:12px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:#7a3fe0;"><?= t.mientras ?></p>
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f6f4fd; border-radius:14px;">
+                      <? for (var i = 0; i < t.puntos.length; i++) { ?>
+                      <tr>
+                        <td width="40" valign="top" style="padding:<?= i === 0 ? '16px' : '6px' ?> 0 <?= i === t.puntos.length - 1 ? '16px' : '6px' ?> 18px; font-size:16px; line-height:1.5; color:#7a3fe0; font-weight:800;">&#10003;</td>
+                        <td valign="top" style="padding:<?= i === 0 ? '16px' : '6px' ?> 18px <?= i === t.puntos.length - 1 ? '16px' : '6px' ?> 0; font-size:15px; line-height:1.5; color:#16162a;">
+                          <strong style="font-weight:700;"><?= t.puntos[i][0] ?></strong><span style="color:#4b4e60;"> &middot; <?= t.puntos[i][1] ?></span>
+                        </td>
+                      </tr>
+                      <? } ?>
+                    </table>
+                  </td>
+                </tr>
+
+                <!-- Boton -->
+                <tr>
+                  <td align="left" style="padding:28px 36px 8px;">
+                    <table role="presentation" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="border-radius:12px; background:#6d57dc; background-image:linear-gradient(90deg,#3d6fe0,#a33fd4);">
+                          <a href="<?= t.enlace ?>" style="display:inline-block; padding:13px 22px; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:15px; font-weight:700; color:#ffffff; text-decoration:none; border-radius:12px;"><?= t.boton ?></a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <!-- Firma -->
+                <tr>
+                  <td style="padding:24px 36px 36px; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:15px; line-height:1.6; color:#4b4e60;">
+                    <?= t.despedida ?><br>
+                    <strong style="color:#16162a;"><?= t.firma ?></strong>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Pie -->
+          <tr>
+            <td style="padding:24px 12px 0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:12.5px; line-height:1.6; color:#80839a; text-align:center;">
+              <?= t.pie ?><br>
+              <a href="<?= enlaceBaja ?>" style="color:#7a3fe0; text-decoration:underline;"><?= t.baja ?></a>
+              &nbsp;&middot;&nbsp;
+              <a href="<?= t.privacidad ?>" style="color:#7a3fe0; text-decoration:underline;"><?= t.privacidadTexto ?></a>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
