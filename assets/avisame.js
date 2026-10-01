@@ -7,10 +7,10 @@
 //
 // Los ids salen del enlace "Obtener enlace prellenado" del formulario.
 (function () {
-  var FORMULARIO = "https://docs.google.com/forms/d/e/ID_DEL_FORMULARIO/formResponse";
-  var CAMPO_EMAIL = "entry.EMAIL";
-  var CAMPO_CONSENTIMIENTO = "entry.CONSENTIMIENTO";
-  var CAMPO_IDIOMA = "entry.IDIOMA";
+  var FORMULARIO = "https://docs.google.com/forms/d/e/1FAIpQLScY50qomnr8aoQ618ezqdxORCDCwen7VHNfES7s8PzQaAVCKg/formResponse";
+  var CAMPO_EMAIL = "entry.1210126568";
+  var CAMPO_CONSENTIMIENTO = "entry.575628627";
+  var CAMPO_IDIOMA = "entry.2063081660";
   // El texto exacto de la opcion de la casilla en el formulario.
   var OPCION_CONSENTIMIENTO = "Sí";
 
