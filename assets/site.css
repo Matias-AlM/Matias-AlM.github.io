@@ -293,3 +293,45 @@ svg.lleno { fill: currentColor; stroke: none; }
   border: 1.5px solid currentColor; border-radius: 999px; padding: 2px 8px; vertical-align: middle; margin-left: 6px;
 }
 .tarjeta .beta { position: absolute; top: 24px; right: 24px; margin: 0; }
+
+/* Destacadas: un bento de cuatro piezas de tamano desigual. La grande
+ * arriba a la izquierda, que es por donde se empieza a leer. */
+.bento { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 48px; }
+@media (min-width: 900px) {
+  .bento { grid-template-columns: repeat(4, 1fr); grid-auto-rows: minmax(220px, auto); }
+  .pieza.grande { grid-column: span 2; grid-row: span 2; }
+  .pieza.ancha { grid-column: span 2; }
+}
+.pieza {
+  position: relative; display: flex; flex-direction: column; gap: 8px; overflow: hidden;
+  padding: 28px; border-radius: 22px; background: var(--surface); border: 1px solid var(--border);
+}
+.pieza h3 { font-size: 1.3rem; }
+.pieza p { color: var(--muted); margin: 0; max-width: 30rem; }
+.pieza .pro, .pieza .beta { position: absolute; top: 24px; right: 24px; margin: 0; }
+.pieza.grande { justify-content: flex-end; background:
+  radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 60%), var(--surface); }
+.pieza.grande h3 { font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -0.02em; line-height: 1.1; }
+.pieza.grande .icono { width: 64px; height: 64px; border-radius: 18px; margin-bottom: auto; }
+.pieza.grande .icono svg { width: 32px; height: 32px; }
+.pieza .recorte { margin: 12px -28px -28px; border-top: 1px solid var(--border); background: #fff; }
+.pieza .recorte img { display: block; width: 100%; height: auto; }
+
+/* "Y ademas": el resto de funciones en una lista, una linea cada una. */
+.lista-compacta {
+  display: grid; grid-template-columns: 1fr; gap: 1px; margin-top: 40px;
+  border-radius: 22px; overflow: hidden; border: 1px solid var(--border); background: var(--border);
+}
+/* Columnas fijas y no auto-fill: con 9 elementos, 3x3 exacto. Una fila a
+ * medias deja ver el fondo de los separadores como un hueco gris. */
+@media (min-width: 600px) { .lista-compacta { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .lista-compacta { grid-template-columns: repeat(3, 1fr); } }
+.lista-compacta .item { display: flex; gap: 14px; align-items: flex-start; padding: 20px 22px; background: var(--surface); }
+.lista-compacta .item svg { width: 22px; height: 22px; color: var(--accent); flex: none; margin-top: 2px; }
+.lista-compacta strong { display: block; font-weight: 600; }
+.lista-compacta span.sub { display: block; color: var(--muted); font-size: 14.5px; }
+
+/* Las promesas del hero, en una linea de etiquetas bajo el boton. */
+.sellos { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; margin: 20px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: 15px; font-weight: 500; }
+.sellos li { display: inline-flex; align-items: center; gap: 8px; }
+.sellos svg { width: 18px; height: 18px; color: var(--accent); }
