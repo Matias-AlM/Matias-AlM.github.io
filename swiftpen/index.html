@@ -43,6 +43,10 @@
   <symbol id="i-persona" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
   <symbol id="i-sinred" viewBox="0 0 24 24"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.9a10 10 0 0 1 14 0M8.5 16.4a5 5 0 0 1 7 0"/><circle cx="12" cy="20" r="1"/></symbol>
   <symbol id="i-carpeta" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+  <symbol id="i-imagen" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></symbol>
+  <symbol id="i-infinito" viewBox="0 0 24 24"><path d="M12 12c-2-2.7-3.7-4-5.5-4a4 4 0 0 0 0 8c1.8 0 3.5-1.3 5.5-4zm0 0c2 2.7 3.7 4 5.5 4a4 4 0 0 0 0-8c-1.8 0-3.5 1.3-5.5 4z"/></symbol>
+  <symbol id="i-lapiz" viewBox="0 0 24 24"><path d="M17 3a2.8 2.8 0 0 1 4 4L7.5 20.5 2 22l1.5-5.5z"/><path d="m15 5 4 4"/></symbol>
+  <symbol id="i-huella" viewBox="0 0 24 24"><path d="M12 10a2 2 0 0 0-2 2c0 1 0 3.3-.6 5.6M14 13.1c0 2.4 0 4.9-1 7.9M17.3 21c.3-1.5.6-3.5.7-5M2 12a10 10 0 0 1 18-6M2 16h.01M21.8 16c.2-2 .1-5.4 0-6M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .3-2M8.6 22c.2-.7.4-1.4.5-2.1M9 6.8a6 6 0 0 1 9 5.2v2"/></symbol>
   <symbol id="i-play" viewBox="0 0 24 24"><path d="M5 3.6v16.8c0 .8.9 1.3 1.6.9l13.8-8.4a1 1 0 0 0 0-1.8L6.6 2.7C5.9 2.3 5 2.8 5 3.6z"/></symbol>
 </svg>
 
@@ -90,17 +94,17 @@
     <div class="escena aparece">
       <div class="tableta">
         <picture lang="es">
-          <source srcset="img/editor-dark-es.webp?v=3" media="(prefers-color-scheme: dark)">
-          <img src="img/editor-es.webp?v=3" width="1600" height="970" alt="Una nota de biología escrita a mano en SwiftPen, con un diagrama de la célula.">
+          <source srcset="img/editor-dark-es.webp?v=4" media="(prefers-color-scheme: dark)">
+          <img src="img/editor-es.webp?v=4" width="1600" height="970" alt="Una nota de biología escrita a mano en SwiftPen, con un diagrama de la célula.">
         </picture>
         <picture lang="en">
-          <source srcset="img/editor-dark-en.webp?v=3" media="(prefers-color-scheme: dark)">
-          <img src="img/editor-en.webp?v=3" width="1600" height="970" alt="A handwritten biology note in SwiftPen, with a diagram of a cell.">
+          <source srcset="img/editor-dark-en.webp?v=4" media="(prefers-color-scheme: dark)">
+          <img src="img/editor-en.webp?v=4" width="1600" height="970" alt="A handwritten biology note in SwiftPen, with a diagram of a cell.">
         </picture>
       </div>
       <div class="telefono">
-        <img lang="es" src="img/phone-es.webp?v=3" width="720" height="1514" alt="La biblioteca de SwiftPen en un móvil.">
-        <img lang="en" src="img/phone-en.webp?v=3" width="720" height="1514" alt="The SwiftPen library on a phone.">
+        <picture lang="es"><source srcset="img/phone-dark-es.webp?v=4" media="(prefers-color-scheme: dark)"><img src="img/phone-es.webp?v=4" width="720" height="1514" alt="La biblioteca de SwiftPen en un móvil."></picture>
+        <picture lang="en"><source srcset="img/phone-dark-en.webp?v=4" media="(prefers-color-scheme: dark)"><img src="img/phone-en.webp?v=4" width="720" height="1514" alt="The SwiftPen library on a phone."></picture>
       </div>
     </div>
 
@@ -137,7 +141,18 @@
       <article class="tarjeta aparece">
         <div class="icono"><svg class="i" aria-hidden="true"><use href="#i-formas"/></svg></div>
         <h3><span lang="es">Formas que se enderezan</span><span lang="en">Shapes that tidy themselves</span></h3>
-        <p><span lang="es">Dibuja un círculo, una flecha o un rectángulo y deja el lápiz quieto un momento: se convierte en una forma limpia. Con el lazo mueves lo que quieras.</span><span lang="en">Sketch a circle, an arrow or a box and hold the pen for a moment: it turns into a clean shape. Use the lasso to move anything around.</span></p>
+        <p><span lang="es">Dibuja un círculo, una flecha o un rectángulo y deja el lápiz quieto un momento: se convierte en una forma limpia. Con el lazo las mueves, copias, duplicas u ordenas en capas.</span><span lang="en">Sketch a circle, an arrow or a box and hold the pen for a moment: it snaps into a clean shape. With the lasso you can move it, copy it, duplicate it or send it back a layer.</span></p>
+      </article>
+      <article class="tarjeta aparece">
+        <div class="icono"><svg class="i" aria-hidden="true"><use href="#i-imagen"/></svg></div>
+        <h3><span lang="es">Fotos y hojas escaneadas</span><span lang="en">Photos and scanned pages</span></h3>
+        <p><span lang="es">Pega una foto o escanea una hoja con la cámara y escribe encima. Recórtala, voltéala o fíjala para que no se mueva.</span><span lang="en">Drop in a photo or scan a page with the camera, then write on top. Crop it, flip it or lock it in place.</span></p>
+      </article>
+      <article class="tarjeta aparece">
+        <span class="beta">BETA</span>
+        <div class="icono"><svg class="i" aria-hidden="true"><use href="#i-infinito"/></svg></div>
+        <h3><span lang="es">Lienzo infinito</span><span lang="en">Infinite canvas</span></h3>
+        <p><span lang="es">Una hoja sin bordes para mapas mentales y lluvias de ideas. Y si te pierdes, un botón te lleva al trazo más cercano.</span><span lang="en">A page with no edges, for mind maps and brainstorms. Lost your place? One tap takes you to the nearest ink.</span></p>
       </article>
       <article class="tarjeta aparece">
         <div class="icono"><svg class="i" aria-hidden="true"><use href="#i-luna"/></svg></div>
@@ -147,13 +162,19 @@
       <article class="tarjeta aparece">
         <div class="icono"><svg class="i" aria-hidden="true"><use href="#i-rayo"/></svg></div>
         <h3><span lang="es">Tinta fluida</span><span lang="en">Smooth ink</span></h3>
-        <p><span lang="es">Sin retardo que se note: escribes y el trazo ya está ahí.</span><span lang="en">No lag you'll notice: you write, and the ink is already there.</span></p>
+        <p><span lang="es">Sin retardo que se note: escribes y el trazo ya está ahí. Con tres plumas: bolígrafo, caligrafía y lápiz.</span><span lang="en">No lag you'll notice: you write, and the ink is already there. Pick from three pens: ballpoint, calligraphy and pencil.</span></p>
+      </article>
+      <article class="tarjeta aparece">
+        <span class="beta">BETA</span>
+        <div class="icono"><svg class="i" aria-hidden="true"><use href="#i-lapiz"/></svg></div>
+        <h3><span lang="es">Los gestos de tu lápiz</span><span lang="en">Your pen's gestures</span></h3>
+        <p><span lang="es">El doble toque o el botón lateral, para borrar, deshacer o sacar el lazo. Reconoce el S Pen, HONOR, Lenovo, Wacom y USI, y graba los gestos de cualquier otro.</span><span lang="en">Double-tap or press the side button to erase, undo or grab the lasso. Works with S Pen, HONOR, Lenovo, Wacom and USI pens, and can learn the gestures of any other.</span></p>
       </article>
       <article class="tarjeta aparece">
         <span class="pro">PRO</span>
         <div class="icono"><svg class="i" aria-hidden="true"><use href="#i-micro"/></svg></div>
         <h3><span lang="es">Audio que sigue a tu letra</span><span lang="en">Audio that follows your writing</span></h3>
-        <p><span lang="es">Graba la clase mientras escribes. Después toca cualquier palabra y escucha qué se decía en ese momento.</span><span lang="en">Record the lecture while you write. Later, tap any word to hear what was being said at that moment.</span></p>
+        <p><span lang="es">Graba la clase mientras escribes. Después toca cualquier palabra y escucha qué se decía en ese momento. Pruébalo con 3 grabaciones gratis.</span><span lang="en">Record the lecture while you write. Later, tap any word to hear what was being said at that moment. Try it with 3 free recordings.</span></p>
       </article>
       <article class="tarjeta aparece">
         <span class="pro">PRO</span>
@@ -178,14 +199,61 @@
       <h2><span lang="es">Escribe como en un cuaderno.</span><span lang="en">Write like it's a notebook.</span></h2>
       <p class="entradilla"><span lang="es">Apoya la mano, cambia de color con un toque y resalta lo importante. Tu letra queda tal cual la escribiste.</span><span lang="en">Rest your hand, switch colors with a tap and highlight what matters. Your handwriting stays exactly as you wrote it.</span></p>
       <ul>
-        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Pluma, resaltador, goma y lazo</span><span lang="en">Pen, highlighter, eraser and lasso</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Pluma, resaltador, formas, goma y lazo</span><span lang="en">Pen, highlighter, shapes, eraser and lasso</span></li>
         <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Colores y grosores a un toque</span><span lang="en">Colors and widths one tap away</span></li>
-        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">El lápiz escribe y el dedo navega, o como prefieras</span><span lang="en">Pen writes and finger scrolls, or however you like</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">El lápiz escribe y el dedo navega; con dos dedos, desplazas y haces zoom</span><span lang="en">The pen writes and your finger scrolls; use two fingers to pan and zoom</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">La barra de herramientas se adapta a cada pantalla</span><span lang="en">The toolbar adapts to every screen</span></li>
       </ul>
     </div>
     <div class="detalle aparece">
-      <img lang="es" src="img/detalle-es.webp" width="1300" height="345" loading="lazy" alt="Detalle de una nota escrita a mano con una frase resaltada.">
-      <img lang="en" src="img/detalle-en.webp" width="1300" height="345" loading="lazy" alt="Close-up of a handwritten note with a highlighted phrase.">
+      <img lang="es" src="img/detalle-es.webp?v=4" width="1300" height="239" loading="lazy" alt="Detalle de una nota escrita a mano con una frase resaltada.">
+      <img lang="en" src="img/detalle-en.webp?v=4" width="1300" height="239" loading="lazy" alt="Close-up of a handwritten note with a highlighted phrase.">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="contenedor dueto invertido">
+    <div class="dueto-texto aparece">
+      <p class="etiqueta"><span lang="es">Lazo</span><span lang="en">Lasso</span></p>
+      <h2><span lang="es">Rodea, mueve, reordena.</span><span lang="en">Circle it, move it, rearrange it.</span></h2>
+      <p class="entradilla"><span lang="es">Rodea un diagrama y llévatelo a otro sitio, a otra página o a otra nota. Sin borrar y volver a empezar.</span><span lang="en">Loop around a diagram and take it somewhere else: another spot, another page, another note. No erasing and starting over.</span></p>
+      <ul>
+        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">A mano alzada o en rectángulo</span><span lang="en">Freehand or rectangle</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Eliges qué agarra: tinta, resaltador, formas o imágenes</span><span lang="en">Choose what it picks up: ink, highlighter, shapes or images</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Copia, corta, duplica y pega con dos dedos</span><span lang="en">Copy, cut, duplicate, and paste with two fingers</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Trae al frente o manda al fondo</span><span lang="en">Bring to front or send to back</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Convierte lo seleccionado en texto <span class="pro">PRO</span></span><span lang="en">Turn the selection into text <span class="pro">PRO</span></span></li>
+      </ul>
+    </div>
+    <div class="detalle aparece">
+      <picture lang="es"><source srcset="img/lazo-dark-es.webp?v=4" media="(prefers-color-scheme: dark)"><img src="img/lazo-es.webp?v=4" width="1300" height="1000" loading="lazy" alt="El diagrama de la célula seleccionado con el lazo, con su barra de acciones."></picture>
+      <picture lang="en"><source srcset="img/lazo-dark-en.webp?v=4" media="(prefers-color-scheme: dark)"><img src="img/lazo-en.webp?v=4" width="1300" height="1000" loading="lazy" alt="The cell diagram selected with the lasso, with its action bar."></picture>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="contenedor dueto">
+    <div class="dueto-texto aparece">
+      <p class="etiqueta"><span lang="es">Lienzo infinito</span><span lang="en">Infinite canvas</span> <span class="beta">BETA</span></p>
+      <h2><span lang="es">Para las ideas que no caben en una hoja.</span><span lang="en">For ideas that won't fit on a page.</span></h2>
+      <p class="entradilla"><span lang="es">Crea una nota sin bordes y crece hacia donde haga falta: mapas mentales, esquemas, lluvias de ideas. En la biblioteca, el símbolo de infinito te dice cuál es cuál.</span><span lang="en">Start a note with no edges and grow it in any direction: mind maps, outlines, brainstorms. In the library, the infinity sign tells you which is which.</span></p>
+      <ul>
+        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Desplaza y haz zoom con dos dedos</span><span lang="en">Pan and zoom with two fingers</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Un botón te lleva al trazo más cercano si te pierdes</span><span lang="en">One button jumps to the nearest ink if you get lost</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Las mismas herramientas que en una hoja</span><span lang="en">All the same tools as on a page</span></li>
+      </ul>
+    </div>
+    <div class="marco aparece">
+      <picture lang="es">
+        <source srcset="img/lienzo-dark-es.webp?v=4" media="(prefers-color-scheme: dark)">
+        <img src="img/lienzo-es.webp?v=4" width="1600" height="970" loading="lazy" alt="Un mapa mental de un viaje a Japón en el lienzo infinito.">
+      </picture>
+      <picture lang="en">
+        <source srcset="img/lienzo-dark-en.webp?v=4" media="(prefers-color-scheme: dark)">
+        <img src="img/lienzo-en.webp?v=4" width="1600" height="970" loading="lazy" alt="A mind map of a trip to Japan on the infinite canvas.">
+      </picture>
     </div>
   </div>
 </section>
@@ -195,16 +263,16 @@
     <div class="dueto-texto aparece">
       <p class="etiqueta"><span lang="es">Biblioteca</span><span lang="en">Library</span></p>
       <h2><span lang="es">Todo en su sitio.</span><span lang="en">Everything in its place.</span></h2>
-      <p class="entradilla"><span lang="es">Cada nota con su miniatura, en carpetas y subcarpetas con su color. Y si borras algo, la papelera te lo guarda un tiempo.</span><span lang="en">Every note with its own thumbnail, in folders and subfolders with their own colors. Delete something by mistake and the trash keeps it for a while.</span></p>
+      <p class="entradilla"><span lang="es">Cada nota con su miniatura, en carpetas y subcarpetas con su color. Las que bloqueas se ven borrosas hasta que pones tu huella. Y si borras algo, la papelera te lo guarda un tiempo.</span><span lang="en">Every note with its own thumbnail, in folders and subfolders with their own colors. Locked notes stay blurred until you use your fingerprint. Delete something by mistake and the trash keeps it for a while.</span></p>
     </div>
     <div class="marco aparece">
       <picture lang="es">
-        <source srcset="img/library-dark-es.webp?v=3" media="(prefers-color-scheme: dark)">
-        <img src="img/library-es.webp?v=3" width="1600" height="970" loading="lazy" alt="La biblioteca de SwiftPen con carpetas y miniaturas de notas.">
+        <source srcset="img/library-dark-es.webp?v=4" media="(prefers-color-scheme: dark)">
+        <img src="img/library-es.webp?v=4" width="1600" height="970" loading="lazy" alt="La biblioteca de SwiftPen con carpetas y miniaturas de notas.">
       </picture>
       <picture lang="en">
-        <source srcset="img/library-dark-en.webp?v=3" media="(prefers-color-scheme: dark)">
-        <img src="img/library-en.webp?v=3" width="1600" height="970" loading="lazy" alt="The SwiftPen library with folders and note thumbnails.">
+        <source srcset="img/library-dark-en.webp?v=4" media="(prefers-color-scheme: dark)">
+        <img src="img/library-en.webp?v=4" width="1600" height="970" loading="lazy" alt="The SwiftPen library with folders and note thumbnails.">
       </picture>
     </div>
   </div>
@@ -219,23 +287,22 @@
       <ul>
         <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Si editas la misma nota en dos dispositivos, se combinan los cambios</span><span lang="en">Edit the same note on two devices and the changes are merged</span></li>
         <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Las notas viejas pueden quedarse solo en la nube para liberar espacio</span><span lang="en">Older notes can live in the cloud only to free up space</span></li>
-        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">La barra de herramientas se adapta a cada pantalla</span><span lang="en">The toolbar adapts to every screen</span></li>
       </ul>
     </div>
     <div class="escena escena-par aparece">
       <div class="tableta">
         <picture lang="es">
-          <source srcset="img/library-dark-es.webp?v=3" media="(prefers-color-scheme: dark)">
-          <img src="img/library-es.webp?v=3" width="1600" height="970" loading="lazy" alt="La misma biblioteca de notas en la tableta.">
+          <source srcset="img/library-dark-es.webp?v=4" media="(prefers-color-scheme: dark)">
+          <img src="img/library-es.webp?v=4" width="1600" height="970" loading="lazy" alt="La misma biblioteca de notas en la tableta.">
         </picture>
         <picture lang="en">
-          <source srcset="img/library-dark-en.webp?v=3" media="(prefers-color-scheme: dark)">
-          <img src="img/library-en.webp?v=3" width="1600" height="970" loading="lazy" alt="The same note library on the tablet.">
+          <source srcset="img/library-dark-en.webp?v=4" media="(prefers-color-scheme: dark)">
+          <img src="img/library-en.webp?v=4" width="1600" height="970" loading="lazy" alt="The same note library on the tablet.">
         </picture>
       </div>
       <div class="telefono">
-        <img lang="es" src="img/phone-es.webp?v=3" width="720" height="1514" loading="lazy" alt="Y en el móvil.">
-        <img lang="en" src="img/phone-en.webp?v=3" width="720" height="1514" loading="lazy" alt="And on the phone.">
+        <picture lang="es"><source srcset="img/phone-dark-es.webp?v=4" media="(prefers-color-scheme: dark)"><img src="img/phone-es.webp?v=4" width="720" height="1514" loading="lazy" alt="Y en el móvil."></picture>
+        <picture lang="en"><source srcset="img/phone-dark-en.webp?v=4" media="(prefers-color-scheme: dark)"><img src="img/phone-en.webp?v=4" width="720" height="1514" loading="lazy" alt="And on the phone."></picture>
       </div>
     </div>
   </div>
@@ -256,6 +323,8 @@
           <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Todas las plantillas de papel</span><span lang="en">Every paper template</span></li>
           <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Importar y exportar PDF</span><span lang="en">PDF import and export</span></li>
           <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Formas, lazo y carpetas</span><span lang="en">Shapes, lasso and folders</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Fotos, hojas escaneadas y lienzo infinito</span><span lang="en">Photos, scanned pages and the infinite canvas</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Bloqueo con huella</span><span lang="en">Fingerprint lock</span></li>
           <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Sincronización con WebDAV o Google Drive</span><span lang="en">Sync with WebDAV or Google Drive</span></li>
         </ul>
       </div>
@@ -264,7 +333,7 @@
         <div class="cuanto"><span lang="es">Pago único opcional</span><span lang="en">Optional one-time</span></div>
         <ul>
           <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Todo lo gratis, y además:</span><span lang="en">Everything in Free, plus:</span></li>
-          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Audio sincronizado con lo que escribes</span><span lang="en">Audio synced to what you write</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Audio sincronizado con lo que escribes (las 3 primeras grabaciones, gratis)</span><span lang="en">Audio synced to what you write (your first 3 recordings are free)</span></li>
           <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Búsqueda en tu letra</span><span lang="en">Handwriting search</span></li>
           <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Exportar lo escrito como texto ordenado</span><span lang="en">Export handwriting as tidy text</span></li>
         </ul>
@@ -317,6 +386,11 @@
         <h3><span lang="es">Solo sus propios archivos</span><span lang="en">Only its own files</span></h3>
         <p><span lang="es">En Google Drive, SwiftPen solo ve los archivos que crea. El resto de tu Drive queda fuera de su alcance.</span><span lang="en">In Google Drive, SwiftPen only sees the files it creates. The rest of your Drive stays out of reach.</span></p>
       </div>
+      <div class="tarjeta aparece">
+        <div class="icono"><svg class="i" aria-hidden="true"><use href="#i-huella"/></svg></div>
+        <h3><span lang="es">Bloqueo con huella</span><span lang="en">Fingerprint lock</span></h3>
+        <p><span lang="es">Bloquea toda la app o solo las notas que quieras, con tu huella o el bloqueo de pantalla. En las apps recientes tampoco se ven.</span><span lang="en">Lock the whole app or just the notes you choose, with your fingerprint or screen lock. They stay hidden in Recents, too.</span></p>
+      </div>
     </div>
   </div>
 </section>
@@ -336,11 +410,15 @@
       </details>
       <details class="aparece">
         <summary><span lang="es">¿Con qué lápiz funciona?</span><span lang="en">Which pens does it work with?</span></summary>
-        <p><span lang="es">Con los lápices activos de Android, como el S Pen o los USI. También puedes escribir con el dedo si lo activas.</span><span lang="en">With Android active styluses such as the S Pen or USI pens. You can also write with your finger if you turn it on.</span></p>
+        <p><span lang="es">Con los lápices activos de Android: el S Pen, los USI y Wacom, el Lenovo Tab Pen o el HONOR Magic-Pencil, entre otros. SwiftPen reconoce el tuyo y sus gestos, como el doble toque o el botón lateral; si no lo conoce, grabas sus gestos en los ajustes. También puedes escribir con el dedo si lo activas.</span><span lang="en">With Android active styluses: the S Pen, USI and Wacom pens, the Lenovo Tab Pen or the HONOR Magic-Pencil, among others. SwiftPen recognizes yours and its gestures, like a double-tap or the side button; if it doesn't know your pen, you can record its gestures in Settings. You can also write with your finger if you turn it on.</span></p>
       </details>
       <details class="aparece">
         <summary><span lang="es">¿Pro es una suscripción?</span><span lang="en">Is Pro a subscription?</span></summary>
         <p><span lang="es">No. Es un pago único opcional y queda tuyo: sirve para desbloquear más funciones y para apoyarme como desarrollador ;). Lo gratis sigue siendo gratis.</span><span lang="en">No. It's an optional one-time purchase and it's yours to keep: it unlocks extra features and supports me as a developer ;). The free features stay free.</span></p>
+      </details>
+      <details class="aparece">
+        <summary><span lang="es">¿Puedo probar las funciones Pro antes de pagar?</span><span lang="en">Can I try Pro before paying?</span></summary>
+        <p><span lang="es">El audio, sí: tienes 3 grabaciones gratis para ver cómo funciona. Las grabaciones que hagas se quedan en tus notas aunque no compres Pro.</span><span lang="en">Audio, yes: you get 3 free recordings to see how it works. They stay in your notes even if you never buy Pro.</span></p>
       </details>
       <details class="aparece">
         <summary><span lang="es">¿Hay versión para iPad o para el ordenador?</span><span lang="en">Is there an iPad or desktop version?</span></summary>

@@ -286,3 +286,10 @@ svg.lleno { fill: currentColor; stroke: none; }
 /* Cabeceras de la tabla con el icono de cada app. */
 .comparativa .app { display: inline-flex; align-items: center; gap: 10px; }
 .comparativa .app img { width: 28px; height: 28px; border-radius: 7px; flex: none; }
+
+/* Etiqueta de las funciones en pruebas: como PRO, pero de contorno. */
+.beta {
+  display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .08em; color: var(--accent);
+  border: 1.5px solid currentColor; border-radius: 999px; padding: 2px 8px; vertical-align: middle; margin-left: 6px;
+}
+.tarjeta .beta { position: absolute; top: 24px; right: 24px; margin: 0; }
