@@ -335,3 +335,9 @@ svg.lleno { fill: currentColor; stroke: none; }
 .sellos { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; margin: 20px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: 15px; font-weight: 500; }
 .sellos li { display: inline-flex; align-items: center; gap: 8px; }
 .sellos svg { width: 18px; height: 18px; color: var(--accent); }
+
+/* La pieza grande del bento: las cifras de lo gratis frente a otras apps. */
+.cifras { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 10px; }
+.cifras li { display: flex; align-items: baseline; gap: 12px; color: var(--muted); font-size: 15px; }
+.cifras strong { min-width: 7.5rem; font-size: 1.35rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text); }
+.cifras li:first-child strong { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
