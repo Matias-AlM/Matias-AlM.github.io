@@ -17,8 +17,8 @@
  * Puesta en marcha (una vez): ver LEEME.md, al lado de este archivo.
  */
 
-var WEB = "https://matias-alm.github.io/swiftpen/";
-var PRIVACIDAD = "https://matias-alm.github.io/swiftpen/privacidad/";
+var WEB = "https://getswiftpen.com/";
+var PRIVACIDAD = "https://getswiftpen.com/privacidad/";
 // El enlace de la ficha de Google Play, para el aviso del lanzamiento.
 var PLAY = "https://play.google.com/store/apps/details?id=com.matiasalm.swiftpen";
 var REMITENTE = "SwiftPen";
@@ -191,12 +191,12 @@ function pagina(idioma, estado, p) {
     '<!doctype html><html lang="' + idioma + '"><head><meta charset="utf-8"></head>' +
     '<body style="margin:0;background:#f2f2f8;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#16162a">' +
     '<div style="max-width:480px;margin:64px auto;padding:0 16px;text-align:center">' +
-    '<img src="https://matias-alm.github.io/swiftpen/img/correo/wordmark.png?v=2" width="150" alt="SwiftPen" style="width:150px;height:auto;margin-bottom:28px">' +
+    '<img src="https://getswiftpen.com/img/correo/wordmark.png?v=2" width="150" alt="SwiftPen" style="width:150px;height:auto;margin-bottom:28px">' +
     '<div style="background:#fff;border:1px solid #e6e6ef;border-radius:20px;padding:32px 28px">' +
     '<h1 style="margin:0 0 10px;font-size:24px">' + t[0] + '</h1>' +
     '<p style="margin:0;font-size:16px;line-height:1.6;color:#4b4e60">' + t[1] + '</p>' + boton +
     '</div>' +
-    '<p style="margin-top:20px"><a href="' + WEB + (idioma === "en" ? "#en" : "") + '" target="_top" style="color:#7a3fe0">matias-alm.github.io/swiftpen</a></p>' +
+    '<p style="margin-top:20px"><a href="' + WEB + (idioma === "en" ? "#en" : "") + '" target="_top" style="color:#7a3fe0">getswiftpen.com</a></p>' +
     '</div></body></html>';
   return HtmlService.createHtmlOutput(html).setTitle(t[0] + " · SwiftPen")
     .addMetaTag("viewport", "width=device-width, initial-scale=1");

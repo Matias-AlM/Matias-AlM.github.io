@@ -1,98 +1,16 @@
 <!doctype html>
-<html lang="es" data-lang="es" data-titulo-es="Darse de baja | SwiftPen" data-titulo-en="Unsubscribe | SwiftPen">
+<html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Darse de baja | SwiftPen</title>
+<title>SwiftPen</title>
+<!-- La web se mudo a getswiftpen.com. Se lleva la misma pagina, con su
+     ?parametros (los enlaces de baja de los correos) y su #idioma. -->
+<link rel="canonical" href="https://getswiftpen.com/baja/">
 <meta name="robots" content="noindex">
-<link rel="icon" href="/favicon.png">
-<link rel="preload" href="/assets/fuentes/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css">
-<script src="/assets/idioma.js"></script>
-<style>
-  /* Una tarjeta en medio, como la pagina de baja del script. */
-  .baja { max-width: 480px; margin: 72px auto; padding: 0 16px; text-align: center; }
-  .baja .tarjeta { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 32px 28px; }
-  .baja h1 { margin: 0 0 10px; font-size: 24px; }
-  .baja p { margin: 0; color: var(--muted); line-height: 1.6; }
-  .baja .boton { margin-top: 22px; cursor: pointer; font: inherit; font-weight: 600; }
-  .baja .boton[disabled] { opacity: .6; cursor: progress; }
-  .baja [data-estado] { display: none; }
-  .baja[data-estado-actual="confirmar"] [data-estado="confirmar"],
-  .baja[data-estado-actual="hecho"] [data-estado="hecho"],
-  .baja[data-estado-actual="error"] [data-estado="error"],
-  .baja[data-estado-actual="invalido"] [data-estado="invalido"] { display: block; }
-</style>
+<meta http-equiv="refresh" content="0; url=https://getswiftpen.com/baja/">
+<script>location.replace("https://getswiftpen.com/baja/" + location.search + location.hash);</script>
 </head>
 <body>
-
-<header class="barra">
-  <div class="contenedor">
-    <a class="marca" href="../" aria-label="SwiftPen">
-      <img class="claro" src="../img/wordmark-light.webp" alt="SwiftPen" width="680" height="185">
-      <img class="oscuro" src="../img/wordmark-dark.webp" alt="SwiftPen" width="680" height="185">
-    </a>
-    <nav class="navegacion">
-      <div class="idioma" role="group" aria-label="Idioma / Language">
-        <button type="button" data-idioma="es" aria-pressed="true">ES</button>
-        <button type="button" data-idioma="en" aria-pressed="false">EN</button>
-      </div>
-    </nav>
-  </div>
-</header>
-
-<main class="baja" data-estado-actual="confirmar">
-  <div class="tarjeta">
-    <div data-estado="confirmar">
-      <h1><span lang="es">¿Darte de baja?</span><span lang="en">Unsubscribe?</span></h1>
-      <p><span lang="es">Se borrará tu email de la lista de SwiftPen y no recibirás más correos.</span><span lang="en">Your email will be removed from the SwiftPen list, and you won't get any more emails.</span></p>
-      <button type="button" class="boton principal" id="confirmar"><span lang="es">Confirmar baja</span><span lang="en">Confirm</span></button>
-    </div>
-    <div data-estado="hecho" role="status">
-      <h1><span lang="es">Te has dado de baja</span><span lang="en">You're unsubscribed</span></h1>
-      <p><span lang="es">Tu email se ha borrado de la lista de SwiftPen. No recibirás más correos.</span><span lang="en">Your email has been removed from the SwiftPen list. You won't get any more emails.</span></p>
-    </div>
-    <div data-estado="error" role="alert">
-      <h1><span lang="es">No se pudo completar</span><span lang="en">Something went wrong</span></h1>
-      <p><span lang="es">Vuelve a intentarlo en un momento. Si sigue fallando, escribe a <a href="mailto:swiftpen.app@gmail.com">swiftpen.app@gmail.com</a> y te damos de baja a mano.</span><span lang="en">Please try again in a moment. If it keeps failing, write to <a href="mailto:swiftpen.app@gmail.com">swiftpen.app@gmail.com</a> and we'll remove you by hand.</span></p>
-      <button type="button" class="boton" id="reintentar"><span lang="es">Reintentar</span><span lang="en">Try again</span></button>
-    </div>
-    <div data-estado="invalido" role="alert">
-      <h1><span lang="es">Enlace no válido</span><span lang="en">Invalid link</span></h1>
-      <p><span lang="es">Este enlace de baja no es válido. Escribe a <a href="mailto:swiftpen.app@gmail.com">swiftpen.app@gmail.com</a> y te damos de baja a mano.</span><span lang="en">This unsubscribe link isn't valid. Write to <a href="mailto:swiftpen.app@gmail.com">swiftpen.app@gmail.com</a> and we'll remove you by hand.</span></p>
-    </div>
-  </div>
-</main>
-
-<script>
-// La baja la hace el script del formulario (_correo/aviso.gs, doGet con
-// accion=baja). Se le pide desde aqui SIN cookies: con ellas, quien tiene
-// varias cuentas de Google abiertas no llegaba a la pagina del script ("la
-// app no esta disponible"); sin ellas la peticion es anonima y funciona
-// siempre. Y solo al pulsar el boton: un filtro de correo que abre los
-// enlaces no ejecuta esto, asi que no da de baja a nadie.
-(function () {
-  var SCRIPT = "https://script.google.com/macros/s/AKfycbzTGQB0BScWyJu6zDPT3GrXCYrKWVuMSYd-aWp66VLiVfe9n3jlaNRFUnAOGlzmuvzgQg/exec";
-  var raiz = document.querySelector(".baja");
-  var p = new URLSearchParams(location.search);
-  var email = p.get("e"), firma = p.get("f");
-
-  function estado(nombre) { raiz.setAttribute("data-estado-actual", nombre); }
-  if (!email || !firma) { estado("invalido"); return; }
-
-  function darDeBaja(boton) {
-    boton.disabled = true;
-    var url = SCRIPT + "?accion=baja&e=" + encodeURIComponent(email) + "&f=" + encodeURIComponent(firma);
-    fetch(url, { credentials: "omit" })
-      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(function (r) { estado(r.ok ? "hecho" : "invalido"); })
-      .catch(function () { estado("error"); })
-      .then(function () { boton.disabled = false; });
-  }
-  document.getElementById("confirmar").addEventListener("click", function () { darDeBaja(this); });
-  document.getElementById("reintentar").addEventListener("click", function () { darDeBaja(this); });
-})();
-</script>
-
+<p><a href="https://getswiftpen.com/baja/">getswiftpen.com</a></p>
 </body>
 </html>
