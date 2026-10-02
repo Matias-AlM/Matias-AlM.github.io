@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="/assets/site.css">
 <script src="/assets/idioma.js"></script>
 <!-- Estadisticas sin cookies ni datos personales (ver la politica de privacidad). Solo en getswiftpen.com: las vistas previas y las pruebas locales no cuentan. Sin la parte ?... de la direccion. -->
-<script defer src="https://cloud.umami.is/script.js" data-website-id="8e72a64d-fc98-425b-8b24-4017cd4c6f43" data-domains="getswiftpen.com" data-exclude-search="true"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="8e72a64d-fc98-425b-8b24-4017cd4c6f43" data-domains="getswiftpen.com" data-exclude-search="true" data-do-not-track="true"></script>
 </head>
 <body>
 
@@ -93,13 +93,23 @@
 <h2 id="web">Esta web</h2>
 <ul>
   <li><strong>Alojamiento:</strong> la web está en Firebase Hosting, de Google. Como cualquier servidor, Google registra la dirección IP de cada visita para mantener el servicio seguro, según su <a href="https://firebase.google.com/support/privacy">política de privacidad de Firebase</a>. Google está adherida al Marco de Privacidad de Datos UE-EE. UU. El desarrollador no recibe esos registros.</li>
-  <li><strong>Estadísticas de visitas, sin rastreo:</strong> para saber qué partes de la web interesan, se cuentan las visitas y algunos toques (el botón del aviso, el cambio de idioma, las preguntas frecuentes) con <a href="https://umami.is/privacy">Umami</a>. Umami no usa cookies, no guarda tu dirección IP ni nada que te identifique y no te sigue por otras webs: lo que se ve son totales, como páginas vistas, desde qué web llegas, país, tipo de dispositivo y navegador. No se mide la página de baja ni lo que escribes en el formulario, y la app no lleva ninguna estadística.</li>
   <li><strong>Sin publicidad:</strong> la web no usa píxeles de seguimiento y no carga nada de redes sociales ni de anunciantes.</li>
   <li><strong>Recursos de terceros:</strong> la tipografía (Inter) y las imágenes se sirven desde la propia web. Lo único que llega de fuera es el script de estadísticas de Umami; y al enviar el formulario del aviso del lanzamiento se conecta con Google, como se explica arriba.</li>
 </ul>
 
+<h2 id="estadisticas">Estadísticas de visitas</h2>
+<p>Para saber cuántas personas visitan esta web y qué partes les interesan se usa <a href="https://umami.is">Umami Cloud</a>, de Umami Software, Inc. (EE. UU.), que trata estos datos como encargado, por cuenta del desarrollador y solo para esto. No usa cookies ni guarda nada en tu dispositivo, y no te sigue por otras webs.</p>
+<ul>
+  <li><strong>Qué se envía:</strong> al cargar una página, tu navegador envía la página visitada (sin la parte de la dirección que va tras «?»), la web de procedencia, el idioma, el tamaño de pantalla y el tipo de navegador y dispositivo. También algunos toques: el botón del aviso del lanzamiento, el envío del formulario (solo el idioma, nunca el email), el cambio de idioma, las preguntas frecuentes y los enlaces a esta política. La página para darse de baja no se mide.</li>
+  <li><strong>Tu dirección IP:</strong> se usa solo un momento, para deducir el país o la ciudad aproximados y para calcular un identificador de visita cifrado que cambia cada mes. La IP no se guarda, y con lo guardado no se sabe quién eres.</li>
+  <li><strong>Base jurídica:</strong> el interés legítimo del desarrollador en conocer cómo se usa la web para mejorarla (art. 6.1.f del RGPD).</li>
+  <li><strong>Conservación:</strong> 6 meses; después se borran.</li>
+  <li><strong>Transferencias:</strong> Umami y algunos de sus proveedores están en Estados Unidos; esas transferencias se amparan en las cláusulas contractuales tipo de la Comisión Europea, recogidas en su <a href="https://umami.is/dpa">acuerdo de tratamiento de datos</a>.</li>
+  <li><strong>Oponerte:</strong> puedes desactivar las estadísticas en este navegador cuando quieras con este botón. <button type="button" class="boton" id="estadisticas-boton" data-es-activar="Desactivar estadísticas en este navegador" data-es-desactivado="Estadísticas desactivadas en este navegador · volver a activarlas"></button> Se recuerda con una marca en tu navegador (<code>umami.disabled</code>), sin cookies. Si tu navegador envía la señal «Do Not Track», tampoco se mide nada.</li>
+</ul>
+
 <h2 id="cookies">Cookies</h2>
-<p>Esta web <strong>no usa cookies</strong>. Lo único que guarda en tu navegador es el idioma que eliges con el botón ES/EN, en su almacenamiento local (<code>localStorage</code>, clave <code>idioma</code>), para mostrarte la web en ese idioma la próxima vez. Es estrictamente necesario para lo que pides, no identifica a nadie y no sale de tu navegador, así que no necesita tu consentimiento. Se queda hasta que borres los datos del sitio en tu navegador.</p>
+<p>Esta web <strong>no usa cookies</strong>. Lo único que guarda en tu navegador es el idioma que eliges con el botón ES/EN (y, si lo pides, la marca para no medir tus visitas, ver arriba), en su almacenamiento local (<code>localStorage</code>, clave <code>idioma</code>), para mostrarte la web en ese idioma la próxima vez. Es estrictamente necesario para lo que pides, no identifica a nadie y no sale de tu navegador, así que no necesita tu consentimiento. Se queda hasta que borres los datos del sitio en tu navegador.</p>
 
 <h2>Borrar tus datos</h2>
 <p>Desde la app puedes borrar cualquier nota o grabación. Desinstalar SwiftPen borra todo lo que guarda en el dispositivo. Si sincronizabas, las copias en tu servidor o en tu Drive son tuyas y las borras desde ahí.</p>
@@ -108,7 +118,7 @@
 <p>SwiftPen no está dirigida a menores de 14 años y no recoge conscientemente datos de ellos.</p>
 
 <h2>Tus derechos</h2>
-<p>Salvo el email que hayas dejado para el aviso del lanzamiento, el desarrollador no guarda datos tuyos. Sobre ese email puedes pedir en cualquier momento acceder a él, corregirlo, borrarlo, limitar u oponerte a su uso o llevártelo (portabilidad), escribiendo a swiftpen.app@gmail.com. También tienes derecho a reclamar ante la <a href="https://www.aepd.es">Agencia Española de Protección de Datos</a>.</p>
+<p>Salvo el email que hayas dejado para el aviso del lanzamiento y las estadísticas de visitas descritas arriba, el desarrollador no guarda datos tuyos. Puedes oponerte a las estadísticas con el botón de su apartado. Sobre ese email puedes pedir en cualquier momento acceder a él, corregirlo, borrarlo, limitar u oponerte a su uso o llevártelo (portabilidad), escribiendo a swiftpen.app@gmail.com. También tienes derecho a reclamar ante la <a href="https://www.aepd.es">Agencia Española de Protección de Datos</a>.</p>
 
 <h2>Cambios</h2>
 <p>Si esta política cambia, se actualiza esta página y su fecha. Un cambio que afecte a cómo se tratan tus datos también se avisará dentro de la app.</p>
@@ -168,13 +178,23 @@
 <h2 id="web-en">This website</h2>
 <ul>
   <li><strong>Hosting:</strong> the site runs on Firebase Hosting, by Google. Like any web server, Google logs the IP address of each visit to keep the service secure, as described in its <a href="https://firebase.google.com/support/privacy">Firebase privacy information</a>. Google participates in the EU-U.S. Data Privacy Framework. The developer never receives those logs.</li>
-  <li><strong>Visit statistics, no tracking:</strong> to learn which parts of the site people care about, visits and a few taps (the launch-notice button, the language switch, the FAQ) are counted with <a href="https://umami.is/privacy">Umami</a>. Umami uses no cookies, doesn't store your IP address or anything that identifies you, and doesn't follow you across other sites: all anyone sees are totals, like page views, which site you came from, country, device type and browser. The unsubscribe page and whatever you type into the form are never measured, and the app has no analytics at all.</li>
   <li><strong>No ads:</strong> the site doesn't use tracking pixels or load anything from social networks or advertisers.</li>
   <li><strong>Third-party resources:</strong> the typeface (Inter) and the images are served from the site itself. The only thing loaded from elsewhere is Umami's statistics script; and submitting the launch-notice form connects to Google, as explained above.</li>
 </ul>
 
+<h2 id="statistics">Visit statistics</h2>
+<p>To learn how many people visit this site and which parts they care about, it uses <a href="https://umami.is">Umami Cloud</a>, by Umami Software, Inc. (USA), which handles this data as a processor, on the developer's behalf and only for this. It uses no cookies, stores nothing on your device and doesn't follow you across other sites.</p>
+<ul>
+  <li><strong>What's sent:</strong> when a page loads, your browser sends the page visited (without the part of the address after "?"), the site you came from, your language, screen size, and browser and device type. Also a few taps: the launch-notice button, submitting the form (only its language, never your email), the language switch, the FAQ and the links to this policy. The unsubscribe page is never measured.</li>
+  <li><strong>Your IP address:</strong> it's used only for a moment, to work out your approximate country or city and to compute an encrypted visit identifier that changes every month. The IP isn't stored, and what is stored can't tell who you are.</li>
+  <li><strong>Legal basis:</strong> the developer's legitimate interest in understanding how the site is used in order to improve it (Art. 6(1)(f) GDPR).</li>
+  <li><strong>Retention:</strong> 6 months, then it's deleted.</li>
+  <li><strong>Transfers:</strong> Umami and some of its providers are in the United States; those transfers rely on the European Commission's standard contractual clauses, included in its <a href="https://umami.is/dpa">data processing agreement</a>.</li>
+  <li><strong>Opting out:</strong> you can turn the statistics off in this browser at any time with this button. <button type="button" class="boton" id="statistics-button" data-en-activar="Turn off statistics in this browser" data-en-desactivado="Statistics are off in this browser · turn them back on"></button> It's remembered with a flag in your browser (<code>umami.disabled</code>), no cookies. If your browser sends the "Do Not Track" signal, nothing is measured either.</li>
+</ul>
+
 <h2 id="cookies-en">Cookies</h2>
-<p>This website <strong>doesn't use cookies</strong>. The only thing it stores in your browser is the language you pick with the ES/EN switch, in local storage (<code>localStorage</code>, key <code>idioma</code>), so the site shows up in that language next time. It's strictly necessary for what you asked for, doesn't identify you and never leaves your browser, so it doesn't need your consent. It stays until you clear the site's data in your browser.</p>
+<p>This website <strong>doesn't use cookies</strong>. The only thing it stores in your browser is the language you pick with the ES/EN switch (and, if you ask for it, the flag to stop measuring your visits, see above), in local storage (<code>localStorage</code>, key <code>idioma</code>), so the site shows up in that language next time. It's strictly necessary for what you asked for, doesn't identify you and never leaves your browser, so it doesn't need your consent. It stays until you clear the site's data in your browser.</p>
 
 <h2>Deleting your data</h2>
 <p>You can delete any note or recording from within the app. Uninstalling SwiftPen removes everything it stores on your device. If you used sync, the copies on your server or in your Drive belong to you, and you can delete them there.</p>
@@ -183,7 +203,7 @@
 <p>SwiftPen isn't aimed at children under 14 and doesn't knowingly collect their data.</p>
 
 <h2>Your rights</h2>
-<p>Apart from any email you left for the launch notice, the developer doesn't hold any of your data. For that email, you can ask at any time to access, correct or delete it, restrict or object to its use, or take a copy (portability), by writing to swiftpen.app@gmail.com. You also have the right to lodge a complaint with the <a href="https://www.aepd.es/en">Spanish Data Protection Agency (AEPD)</a>.</p>
+<p>Apart from any email you left for the launch notice and the visit statistics described above, the developer doesn't hold any of your data. You can opt out of the statistics with the button in that section. For that email, you can ask at any time to access, correct or delete it, restrict or object to its use, or take a copy (portability), by writing to swiftpen.app@gmail.com. You also have the right to lodge a complaint with the <a href="https://www.aepd.es/en">Spanish Data Protection Agency (AEPD)</a>.</p>
 
 <h2>Changes</h2>
 <p>If this policy changes, this page and its date will be updated. Any change to how your data is handled will also be announced in the app.</p>
@@ -204,5 +224,31 @@
   </div>
 </footer>
 
+<script>
+// Desactivar las estadisticas en este navegador: Umami no envia nada si
+// encuentra umami.disabled en localStorage (ver "Estadisticas de visitas").
+(function () {
+  function desactivado() { try { return localStorage.getItem("umami.disabled") === "1"; } catch (e) { return false; } }
+  var botones = [["estadisticas-boton", "es"], ["statistics-button", "en"]];
+  function pintar() {
+    botones.forEach(function (b) {
+      var el = document.getElementById(b[0]);
+      if (el) el.textContent = el.getAttribute("data-" + b[1] + (desactivado() ? "-desactivado" : "-activar"));
+    });
+  }
+  botones.forEach(function (b) {
+    var el = document.getElementById(b[0]);
+    if (!el) return;
+    el.addEventListener("click", function () {
+      try {
+        if (desactivado()) localStorage.removeItem("umami.disabled");
+        else localStorage.setItem("umami.disabled", "1");
+      } catch (e) { /* sin almacenamiento: no se puede recordar */ }
+      pintar();
+    });
+  });
+  pintar();
+})();
+</script>
 </body>
 </html>
