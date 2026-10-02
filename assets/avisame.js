@@ -37,6 +37,9 @@
       fetch(FORMULARIO, { method: "POST", mode: "no-cors", body: datos })
         .then(function () {
           form.classList.add("enviado");
+          // Solo que se envio y en que idioma, nunca el email - ver la
+          // politica de privacidad.
+          if (window.umami) window.umami.track("aviso-enviado", { idioma: form.dataset.idioma });
           // Dos lineas: el gracias y, mas discreto, que mire el spam.
           estado.textContent = t.listo;
           var nota = document.createElement("span");
