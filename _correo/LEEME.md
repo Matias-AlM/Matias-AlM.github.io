@@ -21,10 +21,16 @@ Google Form** de swiftpen.app@gmail.com.
 5. **Implementar → Nueva implementación → Aplicación web**:
    - Ejecutar como: **Yo** (swiftpen.app@gmail.com)
    - Quién tiene acceso: **Cualquier usuario**
-   - Implementar. Esa URL es la del enlace de baja; el script la saca solo.
-6. Prueba: apúntate en la web con un email tuyo. Debe llegar el correo de
-   gracias; su "Darme de baja" abre la página de confirmar, y al confirmar tu
-   fila desaparece de la hoja.
+   - Implementar.
+6. Copia la **URL de la aplicación web** (la que termina en `/exec`, no la de
+   `/dev`), pégala en `URL_DE_BAJA` al principio de `Code.gs` y guarda.
+   Después **Implementar → Gestionar implementaciones → editar → Nueva
+   versión**. Sin ella el script no manda ningún correo (lo dice en
+   *Ejecuciones*): no se puede mandar un correo sin una baja que funcione.
+   No uses la URL de `/dev`: solo la abre el dueño del script.
+7. Prueba: apúntate en la web con un email tuyo. Debe llegar el correo de
+   gracias; abre su "Darme de baja" **en una ventana de incógnito** (así lo
+   ve cualquiera que no seas tú), confirma, y tu fila desaparece de la hoja.
 
 Si cambias `aviso.gs` después, vuelve a **Implementar → Gestionar
 implementaciones → editar → Nueva versión**: la página de baja usa la versión

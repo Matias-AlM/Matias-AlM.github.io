@@ -22,6 +22,15 @@ var PRIVACIDAD = "https://matias-alm.github.io/swiftpen/privacidad/";
 // El enlace de la ficha de Google Play, para el aviso del lanzamiento.
 var PLAY = "https://play.google.com/store/apps/details?id=com.matiasalm.swiftpen";
 var REMITENTE = "SwiftPen";
+// La URL de la pagina de baja: la de Implementar > Gestionar implementaciones,
+// la que termina en /exec. Se pega aqui a mano UNA vez (no cambia al sacar
+// versiones nuevas de la misma implementacion).
+//
+// No se saca con ScriptApp.getService().getUrl(): desde el disparador del
+// formulario devuelve la URL de PRUEBAS (/dev), que solo abre el dueno del
+// script - a cualquier otro le sale "Sorry, unable to open the file at this
+// time" y no puede darse de baja.
+var URL_DE_BAJA = "";
 
 var TEXTOS = {
   es: {
@@ -163,7 +172,7 @@ function escapar(s) {
 function pagina(idioma, estado, p) {
   var t = PAGINAS[idioma][estado];
   var boton = estado !== "confirmar" ? "" :
-    '<form method="post" action="' + ScriptApp.getService().getUrl() + '" target="_top" style="margin:22px 0 0">' +
+    '<form method="post" action="' + urlDeBaja() + '" target="_top" style="margin:22px 0 0">' +
     '<input type="hidden" name="e" value="' + escapar(p.e) + '"><input type="hidden" name="f" value="' + escapar(p.f) + '">' +
     '<input type="hidden" name="l" value="' + idioma + '">' +
     '<button type="submit" style="font:700 15px/1 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#fff;border:0;border-radius:12px;padding:13px 22px;cursor:pointer;background:#6d57dc;background-image:linear-gradient(90deg,#3d6fe0,#a33fd4)">' + t[2] + '</button></form>';
@@ -265,7 +274,17 @@ function firma(email) {
 }
 
 function enlaceBaja(email, idioma) {
-  return ScriptApp.getService().getUrl() + "?e=" + encodeURIComponent(email) + "&f=" + firma(email) + "&l=" + idioma;
+  return urlDeBaja() + "?e=" + encodeURIComponent(email) + "&f=" + firma(email) + "&l=" + idioma;
+}
+
+/** URL_DE_BAJA, comprobada. Sin una baja que funcione no sale ningun correo:
+ * es obligatoria (LSSI art. 21, RGPD art. 21), y un correo sin ella es peor
+ * que no mandarlo. El error se ve en Ejecuciones. */
+function urlDeBaja() {
+  if (!/^https:\/\/script\.google\.com\/macros\/s\/[^\/]+\/exec$/.test(URL_DE_BAJA)) {
+    throw new Error("Falta URL_DE_BAJA (la URL /exec de la implementacion de aplicacion web): ver LEEME.md, paso 6.");
+  }
+  return URL_DE_BAJA;
 }
 
 function hojaDeRespuestas() {
