@@ -1,0 +1,9 @@
+# GitHub Pages (matias-alm.github.io) solo sirve ya las redirecciones a
+# getswiftpen.com y los logos de los correos ya enviados. La web de verdad
+# esta en sitio/ y la publica Firebase (ver construir.sh).
+exclude:
+  - sitio
+  - dist
+  - construir.sh
+  - firebase.json
+  - .firebaserc
