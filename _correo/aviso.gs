@@ -30,7 +30,7 @@ var REMITENTE = "SwiftPen";
 // formulario devuelve la URL de PRUEBAS (/dev), que solo abre el dueno del
 // script - a cualquier otro le sale "Sorry, unable to open the file at this
 // time" y no puede darse de baja.
-var URL_DE_BAJA = "";
+var URL_DE_BAJA = "https://script.google.com/macros/s/AKfycbzTGQB0BScWyJu6zDPT3GrXCYrKWVuMSYd-aWp66VLiVfe9n3jlaNRFUnAOGlzmuvzgQg/exec";
 
 var TEXTOS = {
   es: {
@@ -116,13 +116,24 @@ function alResponder(e) {
 
 // --- La baja -------------------------------------------------------------------
 
-/** El enlace del correo: una pagina con el boton de confirmar. No da de baja
- * por si solo (ver la cabecera). */
+/** Dos cosas:
+ * - accion=baja: la pide el boton de la pagina de baja de la WEB
+ *   (swiftpen/baja/), sin cookies de Google, y contesta en JSON. Es el camino
+ *   de los correos nuevos: una pagina del script no abre con varias cuentas
+ *   de Google en el navegador ("la app no esta disponible"), y una peticion
+ *   sin cookies llega como anonima, que funciona siempre.
+ * - sin accion: la pagina con el boton de confirmar, la de los enlaces de los
+ *   correos que ya salieron. No da de baja por si sola (ver la cabecera). */
 function doGet(e) {
   var p = (e && e.parameter) || {};
   var idioma = p.l === "en" ? "en" : "es";
   var email = normalizar(p.e);
   var valido = !!(email && p.f && p.f === firma(email));
+  if (p.accion === "baja") {
+    if (valido) darDeBaja(email);
+    return ContentService.createTextOutput(JSON.stringify({ ok: valido }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
   return pagina(idioma, valido ? "confirmar" : "invalido", p);
 }
 
@@ -273,8 +284,12 @@ function firma(email) {
   return Utilities.base64EncodeWebSafe(bytes).replace(/=+$/, "").slice(0, 24);
 }
 
+/** La pagina de baja de la web, que llama al script (ver doGet). urlDeBaja()
+ * se comprueba igual: sin el script implementado, esa pagina no puede dar de
+ * baja a nadie. */
 function enlaceBaja(email, idioma) {
-  return urlDeBaja() + "?e=" + encodeURIComponent(email) + "&f=" + firma(email) + "&l=" + idioma;
+  urlDeBaja();
+  return WEB + "baja/?e=" + encodeURIComponent(email) + "&f=" + firma(email) + "&l=" + idioma + "#" + idioma;
 }
 
 /** URL_DE_BAJA, comprobada. Sin una baja que funcione no sale ningun correo:
