@@ -21,6 +21,8 @@
 <link rel="preload" href="/assets/fuentes/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/site.css">
 <script src="/assets/idioma.js"></script>
+<!-- Estadisticas sin cookies ni datos personales (ver la politica de privacidad). Solo en getswiftpen.com: las vistas previas y las pruebas locales no cuentan. Sin la parte ?... de la direccion. -->
+<script defer src="https://cloud.umami.is/script.js" data-website-id="8e72a64d-fc98-425b-8b24-4017cd4c6f43" data-domains="getswiftpen.com" data-exclude-search="true"></script>
 <script src="/assets/avisame.js" defer></script>
 </head>
 <body>
@@ -58,10 +60,10 @@
     <nav class="navegacion">
       <a class="enlace" href="#funciones"><span lang="es">Funciones</span><span lang="en">Features</span></a>
       <a class="enlace" href="#precio"><span lang="es">Precio</span><span lang="en">Pricing</span></a>
-      <a class="enlace" href="privacidad/"><span lang="es">Privacidad</span><span lang="en">Privacy</span></a>
+      <a class="enlace" href="privacidad/" data-umami-event="privacidad" data-umami-event-lugar="cabecera"><span lang="es">Privacidad</span><span lang="en">Privacy</span></a>
       <div class="idioma" role="group" aria-label="Idioma / Language">
-        <button type="button" data-idioma="es" aria-pressed="true">ES</button>
-        <button type="button" data-idioma="en" aria-pressed="false">EN</button>
+        <button type="button" data-idioma="es" aria-pressed="true" data-umami-event="idioma" data-umami-event-idioma="es">ES</button>
+        <button type="button" data-idioma="en" aria-pressed="false" data-umami-event="idioma" data-umami-event-idioma="en">EN</button>
       </div>
     </nav>
   </div>
@@ -81,15 +83,15 @@
         <span lang="en">Handwritten notes, your PDFs and voice recordings that follow your writing, synced to your own storage. No accounts, no subscriptions.</span>
       </p>
       <div class="acciones">
-        <a class="boton principal" lang="es" href="#avisame">
+        <a class="boton principal" lang="es" href="#avisame" data-umami-event="ir-al-aviso" data-umami-event-lugar="portada">
           <svg class="lleno" aria-hidden="true"><use href="#i-play"/></svg>
           <span class="dos-lineas"><small>Próximamente en Google Play</small>Avísame cuando salga</span>
         </a>
-        <a class="boton principal" lang="en" href="#avisame">
+        <a class="boton principal" lang="en" href="#avisame" data-umami-event="ir-al-aviso" data-umami-event-lugar="portada">
           <svg class="lleno" aria-hidden="true"><use href="#i-play"/></svg>
           <span class="dos-lineas"><small>Coming soon to Google Play</small>Let me know when it's out</span>
         </a>
-        <a class="boton" href="#funciones"><span lang="es">Ver funciones</span><span lang="en">See features</span></a>
+        <a class="boton" href="#funciones" data-umami-event="ver-funciones"><span lang="es">Ver funciones</span><span lang="en">See features</span></a>
       </div>
       <p class="nota-pequena"><span lang="es">Gratis y sin límite de notas. Pro, con un pago único opcional.</span><span lang="en">Free, with unlimited notes. Pro is an optional one-time purchase.</span></p>
     </div>
@@ -139,7 +141,7 @@
           <li><span lang="es">Sin anuncios</span><span lang="en">No ads</span></li>
         </ul>
         <p class="cero"><span lang="es">0 €</span><span lang="en">$0</span><small><span lang="es">para siempre</span><span lang="en">forever</span></small></p>
-        <p class="pie-pieza"><a href="#comparada"><span lang="es">Compárala con otras apps ↓</span><span lang="en">See how it compares ↓</span></a></p>
+        <p class="pie-pieza"><a href="#comparada" data-umami-event="ver-comparativa"><span lang="es">Compárala con otras apps ↓</span><span lang="en">See how it compares ↓</span></a></p>
       </article>
       <article class="pieza ancha aparece">
         <h3><span lang="es">Escribe como en papel</span><span lang="en">Write like it's paper</span></h3>
@@ -237,7 +239,7 @@
         <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Las notas viejas pueden quedarse solo en la nube</span><span lang="en">Older notes can live in the cloud only</span></li>
         <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Tu letra se lee en tu propio dispositivo: nada de lo que escribes va a una IA en la nube</span><span lang="en">Your handwriting is read on your own device: nothing you write goes to an AI in the cloud</span></li>
       </ul>
-      <p style="margin-top:20px"><a href="privacidad/"><span lang="es">Leer la política de privacidad →</span><span lang="en">Read the privacy policy →</span></a></p>
+      <p style="margin-top:20px"><a href="privacidad/" data-umami-event="privacidad" data-umami-event-lugar="sincronizacion"><span lang="es">Leer la política de privacidad →</span><span lang="en">Read the privacy policy →</span></a></p>
     </div>
     <div class="escena escena-par aparece">
       <div class="tableta">
@@ -320,31 +322,31 @@
     <h2><span lang="es">Preguntas frecuentes.</span><span lang="en">Frequently asked questions.</span></h2>
     <div class="preguntas">
       <details class="aparece">
-        <summary><span lang="es">¿Cuándo sale?</span><span lang="en">When does it launch?</span></summary>
-        <p><span lang="es">Próximamente en Google Play. <a href="#avisame">Deja tu email</a> y recibirás un aviso el día del lanzamiento.</span><span lang="en">Coming soon to Google Play. <a href="#avisame">Leave your email</a> and you'll be notified on launch day.</span></p>
+        <summary data-umami-event="faq" data-umami-event-pregunta="cuando-sale"><span lang="es">¿Cuándo sale?</span><span lang="en">When does it launch?</span></summary>
+        <p><span lang="es">Próximamente en Google Play. <a href="#avisame" data-umami-event="ir-al-aviso" data-umami-event-lugar="faq">Deja tu email</a> y recibirás un aviso el día del lanzamiento.</span><span lang="en">Coming soon to Google Play. <a href="#avisame">Leave your email</a> and you'll be notified on launch day.</span></p>
       </details>
       <details class="aparece">
-        <summary><span lang="es">¿Necesito crear una cuenta?</span><span lang="en">Do I need an account?</span></summary>
+        <summary data-umami-event="faq" data-umami-event-pregunta="cuenta"><span lang="es">¿Necesito crear una cuenta?</span><span lang="en">Do I need an account?</span></summary>
         <p><span lang="es">No. Abres la app y escribes. Solo conectas una cuenta si quieres sincronizar con Google Drive.</span><span lang="en">No. Open the app and write. You only connect an account if you want to sync with Google Drive.</span></p>
       </details>
       <details class="aparece">
-        <summary><span lang="es">¿Funciona sin internet?</span><span lang="en">Does it work offline?</span></summary>
+        <summary data-umami-event="faq" data-umami-event-pregunta="sin-internet"><span lang="es">¿Funciona sin internet?</span><span lang="en">Does it work offline?</span></summary>
         <p><span lang="es">Sí. Solo necesitas conexión para sincronizar.</span><span lang="en">Yes. You only need a connection to sync.</span></p>
       </details>
       <details class="aparece">
-        <summary><span lang="es">¿Con qué lápiz funciona?</span><span lang="en">Which pens does it work with?</span></summary>
+        <summary data-umami-event="faq" data-umami-event-pregunta="lapiz"><span lang="es">¿Con qué lápiz funciona?</span><span lang="en">Which pens does it work with?</span></summary>
         <p><span lang="es">Con los lápices activos de Android, como el S Pen, los USI y Wacom, el Lenovo o el HONOR, y también con sus gestos. Y si lo activas, con el dedo.</span><span lang="en">With Android active styluses like the S Pen, USI and Wacom pens, Lenovo or HONOR, gestures included. You can also use your finger if you turn it on.</span></p>
       </details>
       <details class="aparece">
-        <summary><span lang="es">¿Pro es una suscripción?</span><span lang="en">Is Pro a subscription?</span></summary>
+        <summary data-umami-event="faq" data-umami-event-pregunta="pro-suscripcion"><span lang="es">¿Pro es una suscripción?</span><span lang="en">Is Pro a subscription?</span></summary>
         <p><span lang="es">No. Es un pago único opcional y queda tuyo: sirve para desbloquear más funciones y para apoyarme como desarrollador ;). Lo gratis sigue siendo gratis.</span><span lang="en">No. It's an optional one-time purchase and it's yours to keep: it unlocks extra features and supports me as a developer ;). The free features stay free.</span></p>
       </details>
       <details class="aparece">
-        <summary><span lang="es">¿Puedo probar las funciones Pro antes de pagar?</span><span lang="en">Can I try Pro before paying?</span></summary>
+        <summary data-umami-event="faq" data-umami-event-pregunta="probar-pro"><span lang="es">¿Puedo probar las funciones Pro antes de pagar?</span><span lang="en">Can I try Pro before paying?</span></summary>
         <p><span lang="es">El audio, sí: tienes 3 grabaciones gratis para ver cómo funciona. Las grabaciones que hagas se quedan en tus notas aunque no compres Pro.</span><span lang="en">Audio, yes: you get 3 free recordings to see how it works. They stay in your notes even if you never buy Pro.</span></p>
       </details>
       <details class="aparece">
-        <summary><span lang="es">¿Hay versión para iPad o para el ordenador?</span><span lang="en">Is there an iPad or desktop version?</span></summary>
+        <summary data-umami-event="faq" data-umami-event-pregunta="ipad-ordenador"><span lang="es">¿Hay versión para iPad o para el ordenador?</span><span lang="en">Is there an iPad or desktop version?</span></summary>
         <p><span lang="es">Por ahora, SwiftPen es solo para Android: tabletas y móviles.</span><span lang="en">For now, SwiftPen is Android only: tablets and phones.</span></p>
       </details>
     </div>
@@ -385,7 +387,7 @@
   <div class="contenedor">
     <span>© 2026 SwiftPen</span>
     <nav>
-      <a href="privacidad/"><span lang="es">Privacidad</span><span lang="en">Privacy</span></a>
+      <a href="privacidad/" data-umami-event="privacidad" data-umami-event-lugar="pie"><span lang="es">Privacidad</span><span lang="en">Privacy</span></a>
       <a lang="es" href="privacidad/#cookies">Cookies</a>
       <a lang="en" href="privacidad/#cookies-en">Cookies</a>
       <a href="mailto:swiftpen.app@gmail.com"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
