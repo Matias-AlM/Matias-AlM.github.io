@@ -22,6 +22,15 @@ var PRIVACIDAD = "https://matias-alm.github.io/swiftpen/privacidad/";
 // El enlace de la ficha de Google Play, para el aviso del lanzamiento.
 var PLAY = "https://play.google.com/store/apps/details?id=com.matiasalm.swiftpen";
 var REMITENTE = "SwiftPen";
+// La URL de la pagina de baja: la de Implementar > Gestionar implementaciones,
+// la que termina en /exec. Se pega aqui a mano UNA vez (no cambia al sacar
+// versiones nuevas de la misma implementacion).
+//
+// No se saca con ScriptApp.getService().getUrl(): desde el disparador del
+// formulario devuelve la URL de PRUEBAS (/dev), que solo abre el dueno del
+// script - a cualquier otro le sale "Sorry, unable to open the file at this
+// time" y no puede darse de baja.
+var URL_DE_BAJA = "https://script.google.com/macros/s/AKfycbzTGQB0BScWyJu6zDPT3GrXCYrKWVuMSYd-aWp66VLiVfe9n3jlaNRFUnAOGlzmuvzgQg/exec";
 
 var TEXTOS = {
   es: {
@@ -107,13 +116,24 @@ function alResponder(e) {
 
 // --- La baja -------------------------------------------------------------------
 
-/** El enlace del correo: una pagina con el boton de confirmar. No da de baja
- * por si solo (ver la cabecera). */
+/** Dos cosas:
+ * - accion=baja: la pide el boton de la pagina de baja de la WEB
+ *   (swiftpen/baja/), sin cookies de Google, y contesta en JSON. Es el camino
+ *   de los correos nuevos: una pagina del script no abre con varias cuentas
+ *   de Google en el navegador ("la app no esta disponible"), y una peticion
+ *   sin cookies llega como anonima, que funciona siempre.
+ * - sin accion: la pagina con el boton de confirmar, la de los enlaces de los
+ *   correos que ya salieron. No da de baja por si sola (ver la cabecera). */
 function doGet(e) {
   var p = (e && e.parameter) || {};
   var idioma = p.l === "en" ? "en" : "es";
   var email = normalizar(p.e);
   var valido = !!(email && p.f && p.f === firma(email));
+  if (p.accion === "baja") {
+    if (valido) darDeBaja(email);
+    return ContentService.createTextOutput(JSON.stringify({ ok: valido }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
   return pagina(idioma, valido ? "confirmar" : "invalido", p);
 }
 
@@ -163,7 +183,7 @@ function escapar(s) {
 function pagina(idioma, estado, p) {
   var t = PAGINAS[idioma][estado];
   var boton = estado !== "confirmar" ? "" :
-    '<form method="post" action="' + ScriptApp.getService().getUrl() + '" target="_top" style="margin:22px 0 0">' +
+    '<form method="post" action="' + urlDeBaja() + '" target="_top" style="margin:22px 0 0">' +
     '<input type="hidden" name="e" value="' + escapar(p.e) + '"><input type="hidden" name="f" value="' + escapar(p.f) + '">' +
     '<input type="hidden" name="l" value="' + idioma + '">' +
     '<button type="submit" style="font:700 15px/1 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#fff;border:0;border-radius:12px;padding:13px 22px;cursor:pointer;background:#6d57dc;background-image:linear-gradient(90deg,#3d6fe0,#a33fd4)">' + t[2] + '</button></form>';
@@ -264,8 +284,22 @@ function firma(email) {
   return Utilities.base64EncodeWebSafe(bytes).replace(/=+$/, "").slice(0, 24);
 }
 
+/** La pagina de baja de la web, que llama al script (ver doGet). urlDeBaja()
+ * se comprueba igual: sin el script implementado, esa pagina no puede dar de
+ * baja a nadie. */
 function enlaceBaja(email, idioma) {
-  return ScriptApp.getService().getUrl() + "?e=" + encodeURIComponent(email) + "&f=" + firma(email) + "&l=" + idioma;
+  urlDeBaja();
+  return WEB + "baja/?e=" + encodeURIComponent(email) + "&f=" + firma(email) + "&l=" + idioma + "#" + idioma;
+}
+
+/** URL_DE_BAJA, comprobada. Sin una baja que funcione no sale ningun correo:
+ * es obligatoria (LSSI art. 21, RGPD art. 21), y un correo sin ella es peor
+ * que no mandarlo. El error se ve en Ejecuciones. */
+function urlDeBaja() {
+  if (!/^https:\/\/script\.google\.com\/macros\/s\/[^\/]+\/exec$/.test(URL_DE_BAJA)) {
+    throw new Error("Falta URL_DE_BAJA (la URL /exec de la implementacion de aplicacion web): ver LEEME.md, paso 6.");
+  }
+  return URL_DE_BAJA;
 }
 
 function hojaDeRespuestas() {
