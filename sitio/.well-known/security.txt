@@ -1,0 +1,8 @@
+# Para avisar de un fallo de seguridad en SwiftPen (la app de Android o
+# esta web). Respondemos en español o en inglés.
+# To report a security issue in SwiftPen (the Android app or this
+# website). We reply in Spanish or English.
+Contact: mailto:swiftpen.app@gmail.com
+Expires: 2027-09-30T23:00:00.000Z
+Preferred-Languages: es, en
+Canonical: https://getswiftpen.com/.well-known/security.txt
