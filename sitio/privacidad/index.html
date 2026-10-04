@@ -44,7 +44,7 @@
 
 <article lang="es">
 <h1>Política de privacidad</h1>
-<p class="fecha">Última actualización: 3 de octubre de 2026</p>
+<p class="fecha">Última actualización: 4 de octubre de 2026</p>
 
 <p>SwiftPen es una app de Android para tomar notas a mano. La idea de esta política es simple: <strong>tus notas son tuyas y se quedan en tu dispositivo</strong>. SwiftPen no tiene servidores propios, no te pide crear una cuenta, no muestra publicidad y no incluye herramientas de analítica propias.</p>
 
@@ -58,8 +58,10 @@
 <h2>Micrófono</h2>
 <p>SwiftPen solo usa el micrófono cuando tocas el botón de grabar dentro de una nota, y deja de captar sonido cuando pausas o paras la grabación. Mientras hay una grabación abierta, también en pausa, se muestra una notificación. El audio se guarda junto a la nota, en tu dispositivo, y no se envía a nadie.</p>
 
-<h2>Reconocimiento de escritura</h2>
-<p>La búsqueda en lo escrito a mano y la exportación a texto usan ML Kit de Google, que funciona <strong>en el dispositivo</strong>: lo que escribes no sale del teléfono para reconocerse. El modelo de idioma se descarga de Google una vez. ML Kit envía a Google datos técnicos de diagnóstico y uso (modelo de dispositivo, versión de Android, versión de la app, rendimiento, idioma configurado), <strong>nunca el contenido de tus notas</strong>. Más información en la <a href="https://developers.google.com/ml-kit/android-data-disclosure">documentación de ML Kit</a>.</p>
+<h2>Reconocimiento de escritura y escáner</h2>
+<p>La búsqueda en lo escrito a mano y la exportación a texto usan ML Kit de Google, que funciona <strong>en el dispositivo</strong>: lo que escribes no sale del teléfono para reconocerse. El modelo de idioma se descarga de Google una vez.</p>
+<p>Escanear una hoja usa el escáner de documentos de Google Play services, que también funciona <strong>en el dispositivo</strong>: la foto no se envía a Google y SwiftPen solo recibe la página que tú confirmas. SwiftPen no necesita permiso de cámara.</p>
+<p>Cuando usas estas funciones, ML Kit envía a Google datos técnicos de diagnóstico y uso: fabricante y modelo del dispositivo, versión de Android, versión de la app, rendimiento, errores, el idioma configurado e identificadores técnicos de la instalación (y, en el escáner, del dispositivo). Según Google, se usan para diagnóstico y estadísticas de uso, viajan cifrados y no se ceden a terceros. <strong>Nunca se envía el contenido de tus notas ni de tus hojas escaneadas.</strong> Más información en la <a href="https://developers.google.com/ml-kit/android-data-disclosure">documentación de ML Kit</a>.</p>
 
 <h2>Sincronización (opcional)</h2>
 <p>Si activas la sincronización, tus notas se copian <strong>directamente</strong> entre tu dispositivo y el servicio que elijas. SwiftPen no pasa por ningún servidor intermedio y el desarrollador no recibe nada.</p>
@@ -130,7 +132,7 @@
 
 <article lang="en">
 <h1>Privacy Policy</h1>
-<p class="fecha">Last updated: October 3, 2026</p>
+<p class="fecha">Last updated: October 4, 2026</p>
 
 <p>SwiftPen is an Android app for handwritten notes. The short version: <strong>your notes are yours and they stay on your device</strong>. SwiftPen has no servers of its own, no sign-up, no ads and no analytics of its own.</p>
 
@@ -144,8 +146,10 @@
 <h2>Microphone</h2>
 <p>SwiftPen only uses the microphone after you tap record inside a note, and stops capturing sound as soon as you pause or stop. A notification is shown while a recording is open, even when paused. Recordings are saved with the note, on your device, and aren't sent anywhere.</p>
 
-<h2>Handwriting recognition</h2>
-<p>Searching your handwriting and exporting it as text rely on Google's ML Kit, which runs <strong>on your device</strong>: your writing never leaves the phone to be recognized. The language model is downloaded from Google once. ML Kit sends Google technical diagnostics and usage data (device model, Android version, app version, performance, configured language), <strong>never the content of your notes</strong>. See the <a href="https://developers.google.com/ml-kit/android-data-disclosure">ML Kit documentation</a> for details.</p>
+<h2>Handwriting recognition and scanning</h2>
+<p>Searching your handwriting and exporting it as text rely on Google's ML Kit, which runs <strong>on your device</strong>: your writing never leaves the phone to be recognized. The language model is downloaded from Google once.</p>
+<p>Scanning a page uses the document scanner in Google Play services, which also runs <strong>on your device</strong>: the photo isn't sent to Google, and SwiftPen only receives the page you confirm. SwiftPen doesn't need camera permission.</p>
+<p>When you use these features, ML Kit sends Google technical diagnostics and usage data: device manufacturer and model, Android version, app version, performance, errors, the configured language and technical identifiers for the installation (and, for the scanner, the device). According to Google, this data is used for diagnostics and usage statistics, is encrypted in transit and isn't shared with third parties. <strong>The content of your notes and scanned pages is never sent.</strong> See the <a href="https://developers.google.com/ml-kit/android-data-disclosure">ML Kit documentation</a> for details.</p>
 
 <h2>Sync (optional)</h2>
 <p>If you turn sync on, your notes are copied <strong>directly</strong> between your device and the service you picked. Nothing goes through a server of ours, and the developer never receives any of it.</p>
