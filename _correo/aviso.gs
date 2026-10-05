@@ -22,6 +22,10 @@ var PRIVACIDAD = "https://getswiftpen.com/privacidad/";
 // El enlace de la ficha de Google Play, para el aviso del lanzamiento.
 var PLAY = "https://play.google.com/store/apps/details?id=com.matiasalm.swiftpen";
 var REMITENTE = "SwiftPen";
+// La direccion desde la que salen los correos: tiene que estar configurada
+// como "Enviar como" en la cuenta que ejecuta el script
+// (swiftpen.app@gmail.com); si no, GmailApp falla al enviar.
+var DIRECCION = "support@getswiftpen.com";
 // La URL de la pagina de baja: la de Implementar > Gestionar implementaciones,
 // la que termina en /exec. Se pega aqui a mano UNA vez (no cambia al sacar
 // versiones nuevas de la misma implementacion).
@@ -167,12 +171,12 @@ var PAGINAS = {
   es: {
     confirmar: ["¿Darte de baja?", "Se borrará tu email de la lista de SwiftPen y no recibirás más correos.", "Confirmar baja"],
     hecho: ["Te has dado de baja", "Tu email se ha borrado de la lista de SwiftPen. No recibirás más correos."],
-    invalido: ["Enlace no válido", "Este enlace de baja no es válido. Escribe a swiftpen.app@gmail.com y te damos de baja a mano."]
+    invalido: ["Enlace no válido", "Este enlace de baja no es válido. Escribe a support@getswiftpen.com y te damos de baja a mano."]
   },
   en: {
     confirmar: ["Unsubscribe?", "Your email will be removed from the SwiftPen list, and you won't get any more emails.", "Confirm"],
     hecho: ["You're unsubscribed", "Your email has been removed from the SwiftPen list. You won't get any more emails."],
-    invalido: ["Invalid link", "This unsubscribe link isn't valid. Write to swiftpen.app@gmail.com and we'll remove you by hand."]
+    invalido: ["Invalid link", "This unsubscribe link isn't valid. Write to support@getswiftpen.com and we'll remove you by hand."]
   }
 };
 
@@ -248,7 +252,9 @@ function enviar(email, idioma, t) {
   plantilla.enlaceBaja = enlaceBaja(email, idioma);
   GmailApp.sendEmail(email, t.asunto, (t.textoPlano || t.entradilla + "\n\n") + plantilla.enlaceBaja, {
     htmlBody: plantilla.evaluate().getContent(),
-    name: REMITENTE
+    name: REMITENTE,
+    from: DIRECCION,
+    replyTo: DIRECCION
   });
 }
 
