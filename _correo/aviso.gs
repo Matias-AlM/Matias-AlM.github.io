@@ -22,6 +22,10 @@ var PRIVACIDAD = "https://getswiftpen.com/privacidad/";
 // El enlace de la ficha de Google Play, para el aviso del lanzamiento.
 var PLAY = "https://play.google.com/store/apps/details?id=com.matiasalm.swiftpen";
 var REMITENTE = "SwiftPen";
+// La direccion desde la que salen los correos: tiene que estar configurada
+// como "Enviar como" en la cuenta que ejecuta el script
+// (swiftpen.app@gmail.com); si no, GmailApp falla al enviar.
+var DIRECCION = "support@getswiftpen.com";
 // La URL de la pagina de baja: la de Implementar > Gestionar implementaciones,
 // la que termina en /exec. Se pega aqui a mano UNA vez (no cambia al sacar
 // versiones nuevas de la misma implementacion).
@@ -248,7 +252,9 @@ function enviar(email, idioma, t) {
   plantilla.enlaceBaja = enlaceBaja(email, idioma);
   GmailApp.sendEmail(email, t.asunto, (t.textoPlano || t.entradilla + "\n\n") + plantilla.enlaceBaja, {
     htmlBody: plantilla.evaluate().getContent(),
-    name: REMITENTE
+    name: REMITENTE,
+    from: DIRECCION,
+    replyTo: DIRECCION
   });
 }
 
