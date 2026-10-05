@@ -167,12 +167,12 @@ var PAGINAS = {
   es: {
     confirmar: ["¿Darte de baja?", "Se borrará tu email de la lista de SwiftPen y no recibirás más correos.", "Confirmar baja"],
     hecho: ["Te has dado de baja", "Tu email se ha borrado de la lista de SwiftPen. No recibirás más correos."],
-    invalido: ["Enlace no válido", "Este enlace de baja no es válido. Escribe a swiftpen.app@gmail.com y te damos de baja a mano."]
+    invalido: ["Enlace no válido", "Este enlace de baja no es válido. Escribe a support@getswiftpen.com y te damos de baja a mano."]
   },
   en: {
     confirmar: ["Unsubscribe?", "Your email will be removed from the SwiftPen list, and you won't get any more emails.", "Confirm"],
     hecho: ["You're unsubscribed", "Your email has been removed from the SwiftPen list. You won't get any more emails."],
-    invalido: ["Invalid link", "This unsubscribe link isn't valid. Write to swiftpen.app@gmail.com and we'll remove you by hand."]
+    invalido: ["Invalid link", "This unsubscribe link isn't valid. Write to support@getswiftpen.com and we'll remove you by hand."]
   }
 };
 
