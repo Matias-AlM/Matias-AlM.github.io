@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" data-lang="es" data-titulo-es="Darse de baja | SwiftPen" data-titulo-en="Unsubscribe | SwiftPen">
+<html lang="es" data-lang="es" data-titulo-es="Darse de baja | SwiftPen" data-titulo-en="Unsubscribe | SwiftPen" data-titulo-fr="Se désabonner | SwiftPen">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,6 +36,7 @@
       <div class="idioma" role="group" aria-label="Idioma / Language">
         <button type="button" data-idioma="es" aria-pressed="true">ES</button>
         <button type="button" data-idioma="en" aria-pressed="false">EN</button>
+        <button type="button" data-idioma="fr" aria-pressed="false">FR</button>
       </div>
     </nav>
   </div>
@@ -44,22 +45,22 @@
 <main class="baja" data-estado-actual="confirmar">
   <div class="tarjeta">
     <div data-estado="confirmar">
-      <h1><span lang="es">¿Darte de baja?</span><span lang="en">Unsubscribe?</span></h1>
-      <p><span lang="es">Se borrará tu email de la lista de SwiftPen y no recibirás más correos.</span><span lang="en">Your email will be removed from the SwiftPen list, and you won't get any more emails.</span></p>
-      <button type="button" class="boton principal" id="confirmar"><span lang="es">Confirmar baja</span><span lang="en">Confirm</span></button>
+      <h1><span lang="es">¿Darte de baja?</span><span lang="en">Unsubscribe?</span><span lang="fr">Se désabonner ?</span></h1>
+      <p><span lang="es">Se borrará tu email de la lista de SwiftPen y no recibirás más correos.</span><span lang="en">Your email will be removed from the SwiftPen list, and you won't get any more emails.</span><span lang="fr">Votre e-mail sera supprimé de la liste de SwiftPen et vous ne recevrez plus aucun message.</span></p>
+      <button type="button" class="boton principal" id="confirmar"><span lang="es">Confirmar baja</span><span lang="en">Confirm</span><span lang="fr">Confirmer</span></button>
     </div>
     <div data-estado="hecho" role="status">
-      <h1><span lang="es">Te has dado de baja</span><span lang="en">You're unsubscribed</span></h1>
-      <p><span lang="es">Tu email se ha borrado de la lista de SwiftPen. No recibirás más correos.</span><span lang="en">Your email has been removed from the SwiftPen list. You won't get any more emails.</span></p>
+      <h1><span lang="es">Te has dado de baja</span><span lang="en">You're unsubscribed</span><span lang="fr">Vous êtes désabonné</span></h1>
+      <p><span lang="es">Tu email se ha borrado de la lista de SwiftPen. No recibirás más correos.</span><span lang="en">Your email has been removed from the SwiftPen list. You won't get any more emails.</span><span lang="fr">Votre e-mail a été supprimé de la liste de SwiftPen. Vous ne recevrez plus aucun message.</span></p>
     </div>
     <div data-estado="error" role="alert">
-      <h1><span lang="es">No se pudo completar</span><span lang="en">Something went wrong</span></h1>
-      <p><span lang="es">Vuelve a intentarlo en un momento. Si sigue fallando, escribe a <a href="mailto:support@getswiftpen.com">support@getswiftpen.com</a> y te damos de baja a mano.</span><span lang="en">Please try again in a moment. If it keeps failing, write to <a href="mailto:support@getswiftpen.com">support@getswiftpen.com</a> and we'll remove you by hand.</span></p>
-      <button type="button" class="boton" id="reintentar"><span lang="es">Reintentar</span><span lang="en">Try again</span></button>
+      <h1><span lang="es">No se pudo completar</span><span lang="en">Something went wrong</span><span lang="fr">Un problème est survenu</span></h1>
+      <p><span lang="es">Vuelve a intentarlo en un momento. Si sigue fallando, escribe a <a href="mailto:support@getswiftpen.com">support@getswiftpen.com</a> y te damos de baja a mano.</span><span lang="en">Please try again in a moment. If it keeps failing, write to <a href="mailto:support@getswiftpen.com">support@getswiftpen.com</a> and we'll remove you by hand.</span><span lang="fr">Réessayez dans un instant. Si cela échoue encore, écrivez à <a href="mailto:support@getswiftpen.com">support@getswiftpen.com</a> et nous vous désabonnerons à la main.</span></p>
+      <button type="button" class="boton" id="reintentar"><span lang="es">Reintentar</span><span lang="en">Try again</span><span lang="fr">Réessayer</span></button>
     </div>
     <div data-estado="invalido" role="alert">
-      <h1><span lang="es">Enlace no válido</span><span lang="en">Invalid link</span></h1>
-      <p><span lang="es">Este enlace de baja no es válido. Escribe a <a href="mailto:support@getswiftpen.com">support@getswiftpen.com</a> y te damos de baja a mano.</span><span lang="en">This unsubscribe link isn't valid. Write to <a href="mailto:support@getswiftpen.com">support@getswiftpen.com</a> and we'll remove you by hand.</span></p>
+      <h1><span lang="es">Enlace no válido</span><span lang="en">Invalid link</span><span lang="fr">Lien non valide</span></h1>
+      <p><span lang="es">Este enlace de baja no es válido. Escribe a <a href="mailto:support@getswiftpen.com">support@getswiftpen.com</a> y te damos de baja a mano.</span><span lang="en">This unsubscribe link isn't valid. Write to <a href="mailto:support@getswiftpen.com">support@getswiftpen.com</a> and we'll remove you by hand.</span><span lang="fr">Ce lien de désabonnement n'est pas valide. Écrivez à <a href="mailto:support@getswiftpen.com">support@getswiftpen.com</a> et nous vous désabonnerons à la main.</span></p>
     </div>
   </div>
 </main>

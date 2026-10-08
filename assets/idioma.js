@@ -1,6 +1,6 @@
-// Idioma de la web: espanol o ingles, con el boton ES/EN de la barra.
+// Idioma de la web: espanol, ingles o frances, con el boton ES/EN/FR de la barra.
 //
-// Los dos textos van en el HTML con lang="es" / lang="en" y el CSS oculta
+// Los dos textos van en el HTML con lang="es" / lang="en" / lang="fr" y el CSS oculta
 // el inactivo. El idioma sale de lo elegido antes (si el navegador deja
 // guardarlo), o del idioma del navegador. Se aplica en el <head> para que no
 // parpadee el otro idioma al cargar.
@@ -23,9 +23,20 @@
     });
   }
 
-  var inicial = guardado() || ((navigator.language || "es").toLowerCase().indexOf("es") === 0 ? "es" : "en");
-  // Un enlace que termina en #en o #es (por ejemplo desde la ficha de Play) manda.
-  if (location.hash === "#en" || location.hash === "#es") inicial = location.hash.slice(1);
+  var IDIOMAS = ["es", "en", "fr"];
+  function delNavegador() {
+    var n = (navigator.language || "es").toLowerCase().slice(0, 2);
+    return IDIOMAS.indexOf(n) >= 0 ? n : "en";
+  }
+  function delEnlace() {
+    var h = location.hash.slice(1);
+    return IDIOMAS.indexOf(h) >= 0 ? h : null;
+  }
+
+  var guardadoAntes = guardado();
+  var inicial = (IDIOMAS.indexOf(guardadoAntes) >= 0 ? guardadoAntes : null) || delNavegador();
+  // Un enlace que termina en #en, #es o #fr (por ejemplo desde la ficha de Play) manda.
+  if (delEnlace()) inicial = delEnlace();
   aplicar(inicial);
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -38,7 +49,7 @@
     });
 
     window.addEventListener("hashchange", function () {
-      if (location.hash === "#en" || location.hash === "#es") aplicar(location.hash.slice(1));
+      if (delEnlace()) aplicar(delEnlace());
     });
 
     var aparecen = document.querySelectorAll(".aparece");

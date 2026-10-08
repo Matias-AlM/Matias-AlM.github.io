@@ -71,7 +71,11 @@ a:hover { text-decoration: underline; }
 
 /* Idioma: el texto de los dos idiomas esta en el HTML; se ve el activo. */
 html[data-lang="es"] [lang="en"]:not(html),
-html[data-lang="en"] [lang="es"]:not(html) { display: none !important; }
+html[data-lang="es"] [lang="fr"]:not(html),
+html[data-lang="en"] [lang="es"]:not(html),
+html[data-lang="en"] [lang="fr"]:not(html),
+html[data-lang="fr"] [lang="es"]:not(html),
+html[data-lang="fr"] [lang="en"]:not(html) { display: none !important; }
 
 .contenedor { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
 @media (min-width: 720px) { .contenedor { padding: 0 32px; } }
@@ -399,6 +403,7 @@ svg.lleno { fill: currentColor; stroke: none; }
   background: linear-gradient(90deg, #3d6fe0, #a33fd4); -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 [lang="en"] > .novedad .version { font-size: 4.6cqw; }
+[lang="fr"] > .novedad .version { font-size: 3.4cqw; }
 @media (max-width: 719px) { .novedad-cuerpo { padding: 4px 20px 24px; } }
 
 .documento section { padding: 0; }
