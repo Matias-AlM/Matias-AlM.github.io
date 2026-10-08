@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" data-lang="es" data-titulo-es="SwiftPen" data-titulo-en="SwiftPen">
+<html lang="es" data-lang="es" data-titulo-es="SwiftPen" data-titulo-en="SwiftPen" data-titulo-fr="SwiftPen">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -58,12 +58,13 @@
       <img class="oscuro" src="img/wordmark-dark.webp" alt="SwiftPen" width="680" height="185">
     </a>
     <nav class="navegacion">
-      <a class="enlace" href="#funciones"><span lang="es">Funciones</span><span lang="en">Features</span></a>
-      <a class="enlace" href="#precio"><span lang="es">Precio</span><span lang="en">Pricing</span></a>
-      <a class="enlace" href="privacidad/" data-umami-event="privacidad" data-umami-event-lugar="cabecera"><span lang="es">Privacidad</span><span lang="en">Privacy</span></a>
+      <a class="enlace" href="#funciones"><span lang="es">Funciones</span><span lang="en">Features</span><span lang="fr">Fonctions</span></a>
+      <a class="enlace" href="#precio"><span lang="es">Precio</span><span lang="en">Pricing</span><span lang="fr">Tarifs</span></a>
+      <a class="enlace" href="privacidad/" data-umami-event="privacidad" data-umami-event-lugar="cabecera"><span lang="es">Privacidad</span><span lang="en">Privacy</span><span lang="fr">Confidentialité</span></a>
       <div class="idioma" role="group" aria-label="Idioma / Language">
         <button type="button" data-idioma="es" aria-pressed="true" data-umami-event="idioma" data-umami-event-idioma="es">ES</button>
         <button type="button" data-idioma="en" aria-pressed="false" data-umami-event="idioma" data-umami-event-idioma="en">EN</button>
+        <button type="button" data-idioma="fr" aria-pressed="false" data-umami-event="idioma" data-umami-event-idioma="fr">FR</button>
       </div>
     </nav>
   </div>
@@ -76,11 +77,11 @@
     <div class="hero-texto">
       <h1>
         <span lang="es">Un cuaderno que es tuyo.<br><span class="degradado">De verdad.</span></span>
-        <span lang="en">A notebook that's yours.<br><span class="degradado">For real.</span></span>
+        <span lang="en">A notebook that's yours.<br><span class="degradado">For real.</span></span><span lang="fr">Un carnet qui vous appartient.<br><span class="degradado">Vraiment.</span></span>
       </h1>
       <p class="entradilla">
         <span lang="es">Apuntes a mano, tus PDF y notas de voz que siguen a tu letra, sincronizados con tu propio almacenamiento. Sin cuentas ni suscripciones.</span>
-        <span lang="en">Handwritten notes, your PDFs and voice recordings that follow your writing, synced to your own storage. No accounts, no subscriptions.</span>
+        <span lang="en">Handwritten notes, your PDFs and voice recordings that follow your writing, synced to your own storage. No accounts, no subscriptions.</span><span lang="fr">Notes manuscrites, PDF et enregistrements vocaux qui suivent votre écriture, synchronisés avec votre propre stockage. Sans compte, sans abonnement.</span>
       </p>
       <div class="acciones">
         <a class="boton principal" lang="es" href="#avisame" data-umami-event="ir-al-aviso" data-umami-event-lugar="portada">
@@ -91,9 +92,13 @@
           <svg class="lleno" aria-hidden="true"><use href="#i-play"/></svg>
           <span class="dos-lineas"><small>Coming soon to Google Play</small>Let me know when it's out</span>
         </a>
-        <a class="boton" href="#funciones" data-umami-event="ver-funciones"><span lang="es">Ver funciones</span><span lang="en">See features</span></a>
+        <a class="boton principal" lang="fr" href="#avisame" data-umami-event="ir-al-aviso" data-umami-event-lugar="portada">
+          <svg class="lleno" aria-hidden="true"><use href="#i-play"/></svg>
+          <span class="dos-lineas"><small>Bientôt sur Google Play</small>Prévenez-moi à la sortie</span>
+        </a>
+        <a class="boton" href="#funciones" data-umami-event="ver-funciones"><span lang="es">Ver funciones</span><span lang="en">See features</span><span lang="fr">Voir les fonctions</span></a>
       </div>
-      <p class="nota-pequena"><span lang="es">Gratis y sin límite de notas. Pro, con un pago único opcional.</span><span lang="en">Free, with unlimited notes. Pro is an optional one-time purchase.</span></p>
+      <p class="nota-pequena"><span lang="es">Gratis y sin límite de notas. Pro, con un pago único opcional.</span><span lang="en">Free, with unlimited notes. Pro is an optional one-time purchase.</span><span lang="fr">Gratuit, avec des notes illimitées. Pro est un achat unique facultatif.</span></p>
     </div>
 
     <div class="escena aparece">
@@ -106,60 +111,66 @@
           <source srcset="img/editor-dark-en.webp?v=7" media="(prefers-color-scheme: dark)">
           <img src="img/editor-en.webp?v=7" width="1600" height="1000" alt="A handwritten biology note in SwiftPen, with a diagram of a cell.">
         </picture>
+        <picture lang="fr">
+          <source srcset="img/editor-dark-en.webp?v=7" media="(prefers-color-scheme: dark)">
+          <img src="img/editor-en.webp?v=7" width="1600" height="1000" alt="Une note de biologie manuscrite dans SwiftPen, avec un schéma de cellule.">
+        </picture>
       </div>
       <div class="telefono">
         <picture lang="es"><source srcset="img/phone-dark-es.webp?v=6" media="(prefers-color-scheme: dark)"><img src="img/phone-es.webp?v=6" width="720" height="1597" alt="La biblioteca de SwiftPen en un móvil."></picture>
         <picture lang="en"><source srcset="img/phone-dark-en.webp?v=6" media="(prefers-color-scheme: dark)"><img src="img/phone-en.webp?v=6" width="720" height="1597" alt="The SwiftPen library on a phone."></picture>
+        <picture lang="fr"><source srcset="img/phone-dark-en.webp?v=6" media="(prefers-color-scheme: dark)"><img src="img/phone-en.webp?v=6" width="720" height="1597" alt="La bibliothèque de SwiftPen sur un téléphone."></picture>
       </div>
     </div>
 
     <ul class="sellos aparece">
-      <li><svg class="i" aria-hidden="true"><use href="#i-persona"/></svg><span lang="es">Sin cuentas</span><span lang="en">No accounts</span></li>
-      <li><svg class="i" aria-hidden="true"><use href="#i-prohibido"/></svg><span lang="es">Sin anuncios</span><span lang="en">No ads</span></li>
-      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Notas ilimitadas, gratis</span><span lang="en">Unlimited notes, free</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-persona"/></svg><span lang="es">Sin cuentas</span><span lang="en">No accounts</span><span lang="fr">Sans compte</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-prohibido"/></svg><span lang="es">Sin anuncios</span><span lang="en">No ads</span><span lang="fr">Sans publicité</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Notas ilimitadas, gratis</span><span lang="en">Unlimited notes, free</span><span lang="fr">Notes illimitées, gratuites</span></li>
     </ul>
   </div>
 </section>
 
 <section id="funciones">
   <div class="contenedor">
-    <p class="etiqueta"><span lang="es">Funciones</span><span lang="en">Features</span></p>
-    <h2><span lang="es">Lo mejor del papel,<br>sin sus límites.</span><span lang="en">The best of paper,<br>without its limits.</span></h2>
+    <p class="etiqueta"><span lang="es">Funciones</span><span lang="en">Features</span><span lang="fr">Fonctions</span></p>
+    <h2><span lang="es">Lo mejor del papel,<br>sin sus límites.</span><span lang="en">The best of paper,<br>without its limits.</span><span lang="fr">Le meilleur du papier,<br>sans ses limites.</span></h2>
 
     <div class="bento">
       <article class="pieza grande aparece">
-        <h3><span lang="es">Todo esto, gratis</span><span lang="en">All of this, free</span></h3>
-        <p><span lang="es">Lo esencial para tomar apuntes no se paga, ni hoy ni después.</span><span lang="en">The essentials for taking notes don't cost a thing, now or later.</span></p>
+        <h3><span lang="es">Todo esto, gratis</span><span lang="en">All of this, free</span><span lang="fr">Tout ceci, gratuitement</span></h3>
+        <p><span lang="es">Lo esencial para tomar apuntes no se paga, ni hoy ni después.</span><span lang="en">The essentials for taking notes don't cost a thing, now or later.</span><span lang="fr">L'essentiel pour prendre des notes ne se paie pas, ni aujourd'hui ni plus tard.</span></p>
         <ul class="incluye">
-          <li><span lang="es">Notas ilimitadas</span><span lang="en">Unlimited notes</span></li>
-          <li><span lang="es">Tus PDF</span><span lang="en">Your PDFs</span></li>
-          <li><span lang="es">Lazo y formas</span><span lang="en">Lasso and shapes</span></li>
-          <li><span lang="es">Lienzo infinito</span><span lang="en">Infinite canvas</span></li>
-          <li><span lang="es">Fotos y escáner</span><span lang="en">Photos and scanning</span></li>
-          <li><span lang="es">Sincronización</span><span lang="en">Sync</span></li>
-          <li><span lang="es">Bloqueo con huella</span><span lang="en">Fingerprint lock</span></li>
-          <li><span lang="es">Sin anuncios</span><span lang="en">No ads</span></li>
+          <li><span lang="es">Notas ilimitadas</span><span lang="en">Unlimited notes</span><span lang="fr">Notes illimitées</span></li>
+          <li><span lang="es">Tus PDF</span><span lang="en">Your PDFs</span><span lang="fr">Vos PDF</span></li>
+          <li><span lang="es">Lazo y formas</span><span lang="en">Lasso and shapes</span><span lang="fr">Lasso et formes</span></li>
+          <li><span lang="es">Lienzo infinito</span><span lang="en">Infinite canvas</span><span lang="fr">Canevas infini</span></li>
+          <li><span lang="es">Fotos y escáner</span><span lang="en">Photos and scanning</span><span lang="fr">Photos et numérisation</span></li>
+          <li><span lang="es">Sincronización</span><span lang="en">Sync</span><span lang="fr">Synchronisation</span></li>
+          <li><span lang="es">Bloqueo con huella</span><span lang="en">Fingerprint lock</span><span lang="fr">Verrouillage par empreinte</span></li>
+          <li><span lang="es">Sin anuncios</span><span lang="en">No ads</span><span lang="fr">Sans publicité</span></li>
         </ul>
-        <p class="cero"><span lang="es">0 €</span><span lang="en">$0</span><small><span lang="es">para siempre</span><span lang="en">forever</span></small></p>
-        <p class="pie-pieza"><a href="#comparada" data-umami-event="ver-comparativa"><span lang="es">Compárala con otras apps ↓</span><span lang="en">See how it compares ↓</span></a></p>
+        <p class="cero"><span lang="es">0 €</span><span lang="en">$0</span><span lang="fr">0 €</span><small><span lang="es">para siempre</span><span lang="en">forever</span><span lang="fr">pour toujours</span></small></p>
+        <p class="pie-pieza"><a href="#comparada" data-umami-event="ver-comparativa"><span lang="es">Compárala con otras apps ↓</span><span lang="en">See how it compares ↓</span><span lang="fr">Comparez avec d'autres applis ↓</span></a></p>
       </article>
       <article class="pieza ancha aparece">
-        <h3><span lang="es">Escribe como en papel</span><span lang="en">Write like it's paper</span></h3>
-        <p><span lang="es">Tinta sin retardo, tres plumas y papel a tu medida: rayado, liso, Cornell y más.</span><span lang="en">Lag-free ink, three pens and paper your way: ruled, plain, Cornell and more.</span></p>
+        <h3><span lang="es">Escribe como en papel</span><span lang="en">Write like it's paper</span><span lang="fr">Écrivez comme sur papier</span></h3>
+        <p><span lang="es">Tinta sin retardo, tres plumas y papel a tu medida: rayado, liso, Cornell y más.</span><span lang="en">Lag-free ink, three pens and paper your way: ruled, plain, Cornell and more.</span><span lang="fr">Une encre sans latence, trois stylos et le papier qu'il vous faut : ligné, uni, Cornell et bien d'autres.</span></p>
         <div class="recorte">
           <img lang="es" src="img/detalle-es.webp?v=4" width="1300" height="239" loading="lazy" alt="Detalle de una nota escrita a mano con una frase resaltada.">
           <img lang="en" src="img/detalle-en.webp?v=4" width="1300" height="239" loading="lazy" alt="Close-up of a handwritten note with a highlighted phrase.">
+          <img lang="fr" src="img/detalle-en.webp?v=4" width="1300" height="239" loading="lazy" alt="Gros plan sur une note manuscrite avec une phrase surlignée.">
         </div>
       </article>
       <article class="pieza aparece">
         <div class="icono"><svg class="i" aria-hidden="true"><use href="#i-pdf"/></svg></div>
-        <h3><span lang="es">Escribe sobre tus PDF</span><span lang="en">Write on your PDFs</span></h3>
-        <p><span lang="es">Importa apuntes o exámenes y anótalos como una página más.</span><span lang="en">Bring in lecture notes or past exams and mark them up like any page.</span></p>
+        <h3><span lang="es">Escribe sobre tus PDF</span><span lang="en">Write on your PDFs</span><span lang="fr">Écrivez sur vos PDF</span></h3>
+        <p><span lang="es">Importa apuntes o exámenes y anótalos como una página más.</span><span lang="en">Bring in lecture notes or past exams and mark them up like any page.</span><span lang="fr">Importez vos cours ou d'anciens examens et annotez-les comme n'importe quelle page.</span></p>
       </article>
       <article class="pieza aparece">
         <div class="icono"><svg class="i" aria-hidden="true"><use href="#i-nube"/></svg></div>
-        <h3><span lang="es">Sincroniza con tu nube</span><span lang="en">Sync with your cloud</span></h3>
-        <p><span lang="es">Tu WebDAV o tu Google Drive, sin servidores nuestros ni cuotas.</span><span lang="en">Your WebDAV or Google Drive, with no servers of ours and no fees.</span></p>
+        <h3><span lang="es">Sincroniza con tu nube</span><span lang="en">Sync with your cloud</span><span lang="fr">Synchronisez avec votre cloud</span></h3>
+        <p><span lang="es">Tu WebDAV o tu Google Drive, sin servidores nuestros ni cuotas.</span><span lang="en">Your WebDAV or Google Drive, with no servers of ours and no fees.</span><span lang="fr">Votre WebDAV ou votre Google Drive, sans serveurs de notre part et sans frais.</span></p>
       </article>
     </div>
   </div>
@@ -168,18 +179,19 @@
 <section>
   <div class="contenedor dueto invertido">
     <div class="dueto-texto aparece">
-      <p class="etiqueta"><span lang="es">Lazo</span><span lang="en">Lasso</span></p>
-      <h2><span lang="es">Rodea, mueve, reordena.</span><span lang="en">Circle it, move it, rearrange it.</span></h2>
-      <p class="entradilla"><span lang="es">Rodea un diagrama y llévatelo a otro sitio, a otra página o a otra nota, sin borrar y volver a empezar.</span><span lang="en">Loop around a diagram and take it anywhere: another spot, page or note. No erasing and starting over.</span></p>
+      <p class="etiqueta"><span lang="es">Lazo</span><span lang="en">Lasso</span><span lang="fr">Lasso</span></p>
+      <h2><span lang="es">Rodea, mueve, reordena.</span><span lang="en">Circle it, move it, rearrange it.</span><span lang="fr">Entourez, déplacez, réorganisez.</span></h2>
+      <p class="entradilla"><span lang="es">Rodea un diagrama y llévatelo a otro sitio, a otra página o a otra nota, sin borrar y volver a empezar.</span><span lang="en">Loop around a diagram and take it anywhere: another spot, page or note. No erasing and starting over.</span><span lang="fr">Entourez un schéma et emportez-le où vous voulez : ailleurs sur la page, sur une autre page ou dans une autre note. Sans tout effacer pour recommencer.</span></p>
       <ul>
-        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Filtra la selección: solo tinta, solo resaltador, formas o imágenes</span><span lang="en">Filter the selection: just ink, just highlights, shapes or images</span></li>
-        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Copia, duplica, pega con dos dedos y ordena en capas</span><span lang="en">Copy, duplicate, paste with two fingers and arrange in layers</span></li>
-        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Formas que se enderezan: dibuja y deja el lápiz quieto</span><span lang="en">Shapes that tidy themselves: sketch, then hold the pen still</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Filtra la selección: solo tinta, solo resaltador, formas o imágenes</span><span lang="en">Filter the selection: just ink, just highlights, shapes or images</span><span lang="fr">Filtrez la sélection : encre seule, surligneur seul, formes ou images</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Copia, duplica, pega con dos dedos y ordena en capas</span><span lang="en">Copy, duplicate, paste with two fingers and arrange in layers</span><span lang="fr">Copiez, dupliquez, collez à deux doigts et organisez en calques</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Formas que se enderezan: dibuja y deja el lápiz quieto</span><span lang="en">Shapes that tidy themselves: sketch, then hold the pen still</span><span lang="fr">Des formes qui se redressent : dessinez, puis laissez le stylet immobile</span></li>
       </ul>
     </div>
     <div class="detalle aparece">
       <picture lang="es"><source srcset="img/lazo-dark-es.webp?v=4" media="(prefers-color-scheme: dark)"><img src="img/lazo-es.webp?v=4" width="1300" height="1000" loading="lazy" alt="El diagrama de la célula seleccionado con el lazo, con su barra de acciones."></picture>
       <picture lang="en"><source srcset="img/lazo-dark-en.webp?v=4" media="(prefers-color-scheme: dark)"><img src="img/lazo-en.webp?v=4" width="1300" height="1000" loading="lazy" alt="The cell diagram selected with the lasso, with its action bar."></picture>
+      <picture lang="fr"><source srcset="img/lazo-dark-en.webp?v=4" media="(prefers-color-scheme: dark)"><img src="img/lazo-en.webp?v=4" width="1300" height="1000" loading="lazy" alt="Le schéma de la cellule sélectionné au lasso, avec sa barre d'actions."></picture>
     </div>
   </div>
 </section>
@@ -187,12 +199,12 @@
 <section>
   <div class="contenedor dueto">
     <div class="dueto-texto aparece">
-      <p class="etiqueta"><span lang="es">Lienzo infinito</span><span lang="en">Infinite canvas</span> <span class="beta">BETA</span></p>
-      <h2><span lang="es">Para las ideas que no caben en una hoja.</span><span lang="en">For ideas that won't fit on a page.</span></h2>
-      <p class="entradilla"><span lang="es">Una nota sin bordes que crece hacia donde haga falta: mapas mentales, esquemas, lluvias de ideas.</span><span lang="en">A note with no edges that grows in any direction: mind maps, outlines, brainstorms.</span></p>
+      <p class="etiqueta"><span lang="es">Lienzo infinito</span><span lang="en">Infinite canvas</span><span lang="fr">Canevas infini</span> <span class="beta">BETA</span></p>
+      <h2><span lang="es">Para las ideas que no caben en una hoja.</span><span lang="en">For ideas that won't fit on a page.</span><span lang="fr">Pour les idées qui ne tiennent pas sur une page.</span></h2>
+      <p class="entradilla"><span lang="es">Una nota sin bordes que crece hacia donde haga falta: mapas mentales, esquemas, lluvias de ideas.</span><span lang="en">A note with no edges that grows in any direction: mind maps, outlines, brainstorms.</span><span lang="fr">Une note sans bords qui s'étend dans toutes les directions : cartes mentales, plans, brainstormings.</span></p>
       <ul>
-        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Desplaza y haz zoom con dos dedos</span><span lang="en">Pan and zoom with two fingers</span></li>
-        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Un botón te lleva al trazo más cercano si te pierdes</span><span lang="en">One button jumps to the nearest ink if you get lost</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Desplaza y haz zoom con dos dedos</span><span lang="en">Pan and zoom with two fingers</span><span lang="fr">Déplacez-vous et zoomez à deux doigts</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Un botón te lleva al trazo más cercano si te pierdes</span><span lang="en">One button jumps to the nearest ink if you get lost</span><span lang="fr">Un bouton vous ramène au tracé le plus proche si vous vous perdez</span></li>
       </ul>
     </div>
     <div class="escena solo-tableta aparece">
@@ -205,6 +217,10 @@
         <source srcset="img/lienzo-dark-en.webp?v=7" media="(prefers-color-scheme: dark)">
         <img src="img/lienzo-en.webp?v=7" width="1600" height="1000" loading="lazy" alt="A mind map of a trip to Japan on the infinite canvas.">
       </picture>
+      <picture lang="fr">
+        <source srcset="img/lienzo-dark-en.webp?v=7" media="(prefers-color-scheme: dark)">
+        <img src="img/lienzo-en.webp?v=7" width="1600" height="1000" loading="lazy" alt="Une carte mentale d'un voyage au Japon sur le canevas infini.">
+      </picture>
       </div>
     </div>
   </div>
@@ -212,17 +228,17 @@
 
 <section>
   <div class="contenedor">
-    <h2><span lang="es">Todo lo demás, a un toque.</span><span lang="en">Everything else, one tap away.</span></h2>
+    <h2><span lang="es">Todo lo demás, a un toque.</span><span lang="en">Everything else, one tap away.</span><span lang="fr">Tout le reste, à portée de doigt.</span></h2>
     <div class="lista-compacta aparece">
-      <div class="item"><svg class="i" aria-hidden="true"><use href="#i-imagen"/></svg><div><strong><span lang="es">Fotos y hojas escaneadas</span><span lang="en">Photos and scanned pages</span></strong><span class="sub"><span lang="es">Recórtalas, voltéalas o fíjalas</span><span lang="en">Crop, flip or lock them in place</span></span></div></div>
-      <div class="item"><svg class="i" aria-hidden="true"><use href="#i-lapiz"/></svg><div><strong><span lang="es">Gestos del lápiz</span><span lang="en">Pen gestures</span> <span class="beta">BETA</span></strong><span class="sub"><span lang="es">Doble toque y botón, de cualquier marca</span><span lang="en">Double-tap and side button, any brand</span></span></div></div>
-      <div class="item"><svg class="i" aria-hidden="true"><use href="#i-huella"/></svg><div><strong><span lang="es">Bloqueo con huella</span><span lang="en">Fingerprint lock</span></strong><span class="sub"><span lang="es">La app entera o notas sueltas</span><span lang="en">The whole app or single notes</span></span></div></div>
-      <div class="item"><svg class="i" aria-hidden="true"><use href="#i-carpeta"/></svg><div><strong><span lang="es">Carpetas con color</span><span lang="en">Color-coded folders</span></strong><span class="sub"><span lang="es">Y una papelera, por si acaso</span><span lang="en">Plus a trash, just in case</span></span></div></div>
-      <div class="item"><svg class="i" aria-hidden="true"><use href="#i-pdf"/></svg><div><strong><span lang="es">Exporta a PDF o imagen</span><span lang="en">Export to PDF or images</span></strong><span class="sub"><span lang="es">Para compartir o imprimir</span><span lang="en">To share or print</span></span></div></div>
-      <div class="item"><svg class="i" aria-hidden="true"><use href="#i-sinred"/></svg><div><strong><span lang="es">Funciona sin internet</span><span lang="en">Works offline</span></strong><span class="sub"><span lang="es">Solo sincronizar necesita conexión</span><span lang="en">Only syncing needs a connection</span></span></div></div>
-      <div class="item"><svg class="i" aria-hidden="true"><use href="#i-texto"/></svg><div><strong><span lang="es">De tu letra a texto</span><span lang="en">Handwriting to text</span> <span class="pro">PRO</span></strong><span class="sub"><span lang="es">En el orden en que se lee</span><span lang="en">In the order it reads</span></span></div></div>
-      <div class="item"><svg class="i" aria-hidden="true"><use href="#i-micro"/></svg><div><strong><span lang="es">Audio que sigue a tu letra</span><span lang="en">Audio that follows your writing</span> <span class="pro">PRO</span></strong><span class="sub"><span lang="es">Las 3 primeras grabaciones, gratis</span><span lang="en">Your first 3 recordings are free</span></span></div></div>
-      <div class="item"><svg class="i" aria-hidden="true"><use href="#i-lupa"/></svg><div><strong><span lang="es">Busca en tu letra</span><span lang="en">Search your handwriting</span> <span class="pro">PRO</span></strong><span class="sub"><span lang="es">Sin que salga del dispositivo</span><span lang="en">Without it leaving your device</span></span></div></div>
+      <div class="item"><svg class="i" aria-hidden="true"><use href="#i-imagen"/></svg><div><strong><span lang="es">Fotos y hojas escaneadas</span><span lang="en">Photos and scanned pages</span><span lang="fr">Photos et pages numérisées</span></strong><span class="sub"><span lang="es">Recórtalas, voltéalas o fíjalas</span><span lang="en">Crop, flip or lock them in place</span><span lang="fr">Recadrez-les, retournez-les ou verrouillez-les</span></span></div></div>
+      <div class="item"><svg class="i" aria-hidden="true"><use href="#i-lapiz"/></svg><div><strong><span lang="es">Gestos del lápiz</span><span lang="en">Pen gestures</span><span lang="fr">Gestes du stylet</span> <span class="beta">BETA</span></strong><span class="sub"><span lang="es">Doble toque y botón, de cualquier marca</span><span lang="en">Double-tap and side button, any brand</span><span lang="fr">Double toucher et bouton latéral, toutes marques</span></span></div></div>
+      <div class="item"><svg class="i" aria-hidden="true"><use href="#i-huella"/></svg><div><strong><span lang="es">Bloqueo con huella</span><span lang="en">Fingerprint lock</span><span lang="fr">Verrouillage par empreinte</span></strong><span class="sub"><span lang="es">La app entera o notas sueltas</span><span lang="en">The whole app or single notes</span><span lang="fr">Toute l'appli ou seulement certaines notes</span></span></div></div>
+      <div class="item"><svg class="i" aria-hidden="true"><use href="#i-carpeta"/></svg><div><strong><span lang="es">Carpetas con color</span><span lang="en">Color-coded folders</span><span lang="fr">Dossiers en couleur</span></strong><span class="sub"><span lang="es">Y una papelera, por si acaso</span><span lang="en">Plus a trash, just in case</span><span lang="fr">Et une corbeille, au cas où</span></span></div></div>
+      <div class="item"><svg class="i" aria-hidden="true"><use href="#i-pdf"/></svg><div><strong><span lang="es">Exporta a PDF o imagen</span><span lang="en">Export to PDF or images</span><span lang="fr">Export en PDF ou en image</span></strong><span class="sub"><span lang="es">Para compartir o imprimir</span><span lang="en">To share or print</span><span lang="fr">Pour partager ou imprimer</span></span></div></div>
+      <div class="item"><svg class="i" aria-hidden="true"><use href="#i-sinred"/></svg><div><strong><span lang="es">Funciona sin internet</span><span lang="en">Works offline</span><span lang="fr">Fonctionne hors ligne</span></strong><span class="sub"><span lang="es">Solo sincronizar necesita conexión</span><span lang="en">Only syncing needs a connection</span><span lang="fr">Seule la synchronisation a besoin d'une connexion</span></span></div></div>
+      <div class="item"><svg class="i" aria-hidden="true"><use href="#i-texto"/></svg><div><strong><span lang="es">De tu letra a texto</span><span lang="en">Handwriting to text</span><span lang="fr">De l'écriture au texte</span> <span class="pro">PRO</span></strong><span class="sub"><span lang="es">En el orden en que se lee</span><span lang="en">In the order it reads</span><span lang="fr">Dans l'ordre de lecture</span></span></div></div>
+      <div class="item"><svg class="i" aria-hidden="true"><use href="#i-micro"/></svg><div><strong><span lang="es">Audio que sigue a tu letra</span><span lang="en">Audio that follows your writing</span><span lang="fr">Un audio qui suit votre écriture</span> <span class="pro">PRO</span></strong><span class="sub"><span lang="es">Las 3 primeras grabaciones, gratis</span><span lang="en">Your first 3 recordings are free</span><span lang="fr">Vos 3 premiers enregistrements sont gratuits</span></span></div></div>
+      <div class="item"><svg class="i" aria-hidden="true"><use href="#i-lupa"/></svg><div><strong><span lang="es">Busca en tu letra</span><span lang="en">Search your handwriting</span><span lang="fr">Recherchez dans votre écriture</span> <span class="pro">PRO</span></strong><span class="sub"><span lang="es">Sin que salga del dispositivo</span><span lang="en">Without it leaving your device</span><span lang="fr">Sans qu'elle quitte votre appareil</span></span></div></div>
     </div>
   </div>
 </section>
@@ -230,15 +246,15 @@
 <section>
   <div class="contenedor dueto">
     <div class="dueto-texto aparece">
-      <p class="etiqueta"><span lang="es">Sincronización y privacidad</span><span lang="en">Sync and privacy</span></p>
-      <h2><span lang="es">Sincronización de verdad<br>entre tus dispositivos.</span><span lang="en">Real sync<br>across your devices.</span></h2>
-      <p class="entradilla"><span lang="es">Empieza en la tableta y repasa en el móvil, todo en tu propia nube. SwiftPen no tiene servidores.</span><span lang="en">Start on your tablet and review on your phone, all in your own cloud. SwiftPen has no servers.</span></p>
+      <p class="etiqueta"><span lang="es">Sincronización y privacidad</span><span lang="en">Sync and privacy</span><span lang="fr">Synchronisation et confidentialité</span></p>
+      <h2><span lang="es">Sincronización de verdad<br>entre tus dispositivos.</span><span lang="en">Real sync<br>across your devices.</span><span lang="fr">Une vraie synchronisation<br>entre vos appareils.</span></h2>
+      <p class="entradilla"><span lang="es">Empieza en la tableta y repasa en el móvil, todo en tu propia nube. SwiftPen no tiene servidores.</span><span lang="en">Start on your tablet and review on your phone, all in your own cloud. SwiftPen has no servers.</span><span lang="fr">Commencez sur la tablette et révisez sur le téléphone, le tout dans votre propre cloud. SwiftPen n'a pas de serveurs.</span></p>
       <ul>
-        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Tu WebDAV o tu Google Drive</span><span lang="en">Your WebDAV or Google Drive</span></li>
-        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Si editas en dos sitios, se combina</span><span lang="en">Edit on two devices and it merges</span></li>
-        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Con Pro, tu letra se reconoce en el dispositivo, sin IA en la nube</span><span lang="en">With Pro, your handwriting is recognized on-device, no cloud AI</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Tu WebDAV o tu Google Drive</span><span lang="en">Your WebDAV or Google Drive</span><span lang="fr">Votre WebDAV ou votre Google Drive</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Si editas en dos sitios, se combina</span><span lang="en">Edit on two devices and it merges</span><span lang="fr">Si vous modifiez sur deux appareils, tout est fusionné</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Con Pro, tu letra se reconoce en el dispositivo, sin IA en la nube</span><span lang="en">With Pro, your handwriting is recognized on-device, no cloud AI</span><span lang="fr">Avec Pro, votre écriture est reconnue sur l'appareil, sans IA dans le cloud</span></li>
       </ul>
-      <p style="margin-top:20px"><a href="privacidad/" data-umami-event="privacidad" data-umami-event-lugar="sincronizacion"><span lang="es">Leer la política de privacidad →</span><span lang="en">Read the privacy policy →</span></a></p>
+      <p style="margin-top:20px"><a href="privacidad/" data-umami-event="privacidad" data-umami-event-lugar="sincronizacion"><span lang="es">Leer la política de privacidad →</span><span lang="en">Read the privacy policy →</span><span lang="fr">Lire la politique de confidentialité →</span></a></p>
     </div>
     <div class="escena escena-par aparece">
       <div class="tableta">
@@ -250,10 +266,15 @@
           <source srcset="img/library-dark-en.webp?v=7" media="(prefers-color-scheme: dark)">
           <img src="img/library-en.webp?v=7" width="1600" height="1000" loading="lazy" alt="The same note library on the tablet.">
         </picture>
+        <picture lang="fr">
+          <source srcset="img/library-dark-en.webp?v=7" media="(prefers-color-scheme: dark)">
+          <img src="img/library-en.webp?v=7" width="1600" height="1000" loading="lazy" alt="La même bibliothèque de notes sur la tablette.">
+        </picture>
       </div>
       <div class="telefono">
         <picture lang="es"><source srcset="img/phone-dark-es.webp?v=6" media="(prefers-color-scheme: dark)"><img src="img/phone-es.webp?v=6" width="720" height="1597" loading="lazy" alt="Y en el móvil."></picture>
         <picture lang="en"><source srcset="img/phone-dark-en.webp?v=6" media="(prefers-color-scheme: dark)"><img src="img/phone-en.webp?v=6" width="720" height="1597" loading="lazy" alt="And on the phone."></picture>
+        <picture lang="fr"><source srcset="img/phone-dark-en.webp?v=6" media="(prefers-color-scheme: dark)"><img src="img/phone-en.webp?v=6" width="720" height="1597" loading="lazy" alt="Et sur le téléphone."></picture>
       </div>
     </div>
   </div>
@@ -261,32 +282,32 @@
 
 <section id="precio">
   <div class="contenedor">
-    <p class="etiqueta"><span lang="es">Precio</span><span lang="en">Pricing</span></p>
-    <h2><span lang="es">Paga una vez, o nunca.</span><span lang="en">Pay once, or never.</span></h2>
-    <p class="entradilla"><span lang="es">Todo lo necesario para escribir es gratis, para siempre. Pro suma las funciones para estudiar mejor, con un pago único opcional.</span><span lang="en">Everything you need to write is free, forever. Pro adds the study features with an optional one-time payment.</span></p>
+    <p class="etiqueta"><span lang="es">Precio</span><span lang="en">Pricing</span><span lang="fr">Tarifs</span></p>
+    <h2><span lang="es">Paga una vez, o nunca.</span><span lang="en">Pay once, or never.</span><span lang="fr">Payez une fois, ou jamais.</span></h2>
+    <p class="entradilla"><span lang="es">Todo lo necesario para escribir es gratis, para siempre. Pro suma las funciones para estudiar mejor, con un pago único opcional.</span><span lang="en">Everything you need to write is free, forever. Pro adds the study features with an optional one-time payment.</span><span lang="fr">Tout ce qu'il faut pour écrire est gratuit, pour toujours. Pro ajoute les fonctions pour mieux étudier, avec un achat unique facultatif.</span></p>
 
     <div class="precios">
       <div class="plan aparece">
-        <p class="etiqueta"><span lang="es">SwiftPen</span><span lang="en">SwiftPen</span></p>
-        <div class="cuanto"><span lang="es">Gratis</span><span lang="en">Free</span><span class="unidad" lang="es">para siempre</span><span class="unidad" lang="en">forever</span></div>
+        <p class="etiqueta"><span lang="es">SwiftPen</span><span lang="en">SwiftPen</span><span lang="fr">SwiftPen</span></p>
+        <div class="cuanto"><span lang="es">Gratis</span><span lang="en">Free</span><span lang="fr">Gratuit</span><span class="unidad" lang="es">para siempre</span><span class="unidad" lang="en">forever</span><span class="unidad" lang="fr">pour toujours</span></div>
         <ul>
-          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Notas ilimitadas</span><span lang="en">Unlimited notes</span></li>
-          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Todas las plantillas de papel</span><span lang="en">Every paper template</span></li>
-          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">PDF, fotos y hojas escaneadas</span><span lang="en">PDFs, photos and scanned pages</span></li>
-          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Lazo, formas y lienzo infinito</span><span lang="en">Lasso, shapes and the infinite canvas</span></li>
-          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Sincronización con WebDAV o Google Drive</span><span lang="en">Sync with WebDAV or Google Drive</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Notas ilimitadas</span><span lang="en">Unlimited notes</span><span lang="fr">Notes illimitées</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Todas las plantillas de papel</span><span lang="en">Every paper template</span><span lang="fr">Tous les modèles de papier</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">PDF, fotos y hojas escaneadas</span><span lang="en">PDFs, photos and scanned pages</span><span lang="fr">PDF, photos et pages numérisées</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Lazo, formas y lienzo infinito</span><span lang="en">Lasso, shapes and the infinite canvas</span><span lang="fr">Lasso, formes et canevas infini</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Sincronización con WebDAV o Google Drive</span><span lang="en">Sync with WebDAV or Google Drive</span><span lang="fr">Synchronisation avec WebDAV ou Google Drive</span></li>
         </ul>
       </div>
       <div class="plan destacado aparece">
         <p class="etiqueta"><span class="degradado">SwiftPen Pro</span></p>
-        <div class="cuanto"><span lang="es">9,99 €</span><span lang="en">$9.99</span><span class="unidad" lang="es">pago único opcional</span><span class="unidad" lang="en">optional one-time</span></div>
+        <div class="cuanto"><span lang="es">9,99 €</span><span lang="en">$9.99</span><span lang="fr">9,99 €</span><span class="unidad" lang="es">pago único opcional</span><span class="unidad" lang="en">optional one-time</span><span class="unidad" lang="fr">achat unique facultatif</span></div>
         <ul>
-          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Todo lo gratis, y además:</span><span lang="en">Everything in Free, plus:</span></li>
-          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Audio sincronizado con lo que escribes (las 3 primeras grabaciones, gratis)</span><span lang="en">Audio synced to what you write (your first 3 recordings are free)</span></li>
-          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Búsqueda en tu letra</span><span lang="en">Handwriting search</span></li>
-          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Exportar lo escrito como texto ordenado</span><span lang="en">Export handwriting as tidy text</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Todo lo gratis, y además:</span><span lang="en">Everything in Free, plus:</span><span lang="fr">Tout le gratuit, et en plus :</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Audio sincronizado con lo que escribes (las 3 primeras grabaciones, gratis)</span><span lang="en">Audio synced to what you write (your first 3 recordings are free)</span><span lang="fr">Audio synchronisé avec ce que vous écrivez (vos 3 premiers enregistrements sont gratuits)</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Búsqueda en tu letra</span><span lang="en">Handwriting search</span><span lang="fr">Recherche dans votre écriture</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Exportar lo escrito como texto ordenado</span><span lang="en">Export handwriting as tidy text</span><span lang="fr">Export de votre écriture sous forme de texte propre</span></li>
         </ul>
-        <p class="pie"><span lang="es">Sin suscripciones: pagas una vez y es tuyo. Impuestos incluidos; en Google Play el precio puede variar según el país.</span><span lang="en">No subscriptions: pay once and it's yours. Taxes included; the price on Google Play may vary by country.</span></p>
+        <p class="pie"><span lang="es">Sin suscripciones: pagas una vez y es tuyo. Impuestos incluidos; en Google Play el precio puede variar según el país.</span><span lang="en">No subscriptions: pay once and it's yours. Taxes included; the price on Google Play may vary by country.</span><span lang="fr">Pas d'abonnement : vous payez une fois et c'est à vous. Taxes comprises ; sur Google Play, le prix peut varier selon le pays.</span></p>
       </div>
     </div>
   </div>
@@ -294,59 +315,59 @@
 
 <section id="comparada">
   <div class="contenedor">
-    <p class="etiqueta"><span lang="es">Comparada</span><span lang="en">Compared</span></p>
-    <h2><span lang="es">Hay apps que te cobran cada año<br>por tus propias notas.</span><span lang="en">Some apps charge you every year<br>for your own notes.</span></h2>
-    <p class="entradilla"><span lang="es">Cómo queda SwiftPen frente a las apps de notas a mano más usadas en Android.</span><span lang="en">How SwiftPen stacks up against the most popular handwriting apps on Android.</span></p>
+    <p class="etiqueta"><span lang="es">Comparada</span><span lang="en">Compared</span><span lang="fr">Comparatif</span></p>
+    <h2><span lang="es">Hay apps que te cobran cada año<br>por tus propias notas.</span><span lang="en">Some apps charge you every year<br>for your own notes.</span><span lang="fr">Certaines applis vous font payer chaque année<br>vos propres notes.</span></h2>
+    <p class="entradilla"><span lang="es">Cómo queda SwiftPen frente a las apps de notas a mano más usadas en Android.</span><span lang="en">How SwiftPen stacks up against the most popular handwriting apps on Android.</span><span lang="fr">Comment SwiftPen se place face aux applis de notes manuscrites les plus utilisées sur Android.</span></p>
     <div class="comparativa aparece">
       <table>
         <thead>
           <tr><th></th><th class="nuestra"><span class="app"><img src="img/apps/swiftpen.webp" width="28" height="28" alt="">SwiftPen</span></th><th><span class="app"><img src="img/apps/goodnotes.webp" width="28" height="28" alt="">Goodnotes</span></th><th><span class="app"><img src="img/apps/noteshelf.webp" width="28" height="28" alt="">Noteshelf 3</span></th><th><span class="app"><img src="img/apps/notewise.webp" width="28" height="28" alt="">Notewise</span></th><th><span class="app"><img src="img/apps/notability.webp" width="28" height="28" alt="">Notability</span></th></tr>
         </thead>
         <tbody>
-          <tr><th scope="row"><span lang="es">Precio</span><span lang="en">Price</span></th><td class="nuestra"><span lang="es">Gratis. Pro: $9,99, pago único opcional</span><span lang="en">Free. Pro: $9.99, optional one-time payment</span></td><td><span lang="es">$11,99 al año, o $35,99 con su nube. Sin pago único en Android</span><span lang="en">$11.99 a year, or $35.99 with their cloud. No one-time option on Android</span></td><td><span lang="es">Gratis con 3 cuadernos. Premium: $9,99 una vez</span><span lang="en">Free with 3 notebooks. Premium: $9.99 once</span></td><td><span lang="es">$28,99 a $129,99 al año, o $16,99 una vez sin nube ni IA</span><span lang="en">$28.99 to $129.99 a year, or $16.99 once without cloud or AI</span></td><td><span lang="es">$14,99 a $99,99 al año. Su pago único no se vende en Google Play</span><span lang="en">$14.99 to $99.99 a year. Its one-time option isn't sold on Google Play</span></td></tr>
-          <tr><th scope="row"><span lang="es">Suscripción</span><span lang="en">Subscription</span></th><td class="nuestra"><span class="si"><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span><span lang="es">Nunca</span><span lang="en">Never</span></span></span></td><td><span class="no"><svg class="i" aria-hidden="true"><use href="#i-cruz"/></svg><span><span lang="es">Sí, solo anual: no se puede pagar por meses. IA extra: $9,99 al mes</span><span lang="en">Yes, yearly only: no monthly billing. Extra AI: $9.99 a month</span></span></span></td><td><span class="si"><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span><span lang="es">No</span><span lang="en">No</span></span></span></td><td><span class="no"><svg class="i" aria-hidden="true"><use href="#i-cruz"/></svg><span><span lang="es">Sí: desde $4,99 al mes o $28,99 al año</span><span lang="en">Yes: from $4.99 a month or $28.99 a year</span></span></span></td><td><span class="no"><svg class="i" aria-hidden="true"><use href="#i-cruz"/></svg><span><span lang="es">Sí: desde $4,99 al mes o $14,99 al año</span><span lang="en">Yes: from $4.99 a month or $14.99 a year</span></span></span></td></tr>
-          <tr><th scope="row"><span lang="es">Notas en la versión gratis</span><span lang="en">Notes on the free plan</span></th><td class="nuestra"><span class="si"><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span><span lang="es">Ilimitadas</span><span lang="en">Unlimited</span></span></span></td><td><span class="no"><svg class="i" aria-hidden="true"><use href="#i-cruz"/></svg><span><span lang="es">3 cuadernos</span><span lang="en">3 notebooks</span></span></span></td><td><span class="no"><svg class="i" aria-hidden="true"><use href="#i-cruz"/></svg><span><span lang="es">3 cuadernos</span><span lang="en">3 notebooks</span></span></span></td><td><span class="no"><svg class="i" aria-hidden="true"><use href="#i-cruz"/></svg><span><span lang="es">10 notas</span><span lang="en">10 notes</span></span></span></td><td><span class="no"><svg class="i" aria-hidden="true"><use href="#i-cruz"/></svg><span><span lang="es">5 notas</span><span lang="en">5 notes</span></span></span></td></tr>
-          <tr><th scope="row"><span lang="es">Audio unido a lo que escribes</span><span lang="en">Audio linked to your writing</span></th><td class="nuestra"><span class="si"><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span><span lang="es">Sí, con Pro: pago único opcional</span><span lang="en">Yes, with Pro: optional one-time payment</span></span></span></td><td><span class="si"><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span><span lang="es">Sí</span><span lang="en">Yes</span></span></span></td><td><span class="no"><svg class="i" aria-hidden="true"><use href="#i-cruz"/></svg><span><span lang="es">No: graba, pero sin unir al trazo</span><span lang="en">No: records, but not linked to ink</span></span></span></td><td><span lang="es">Graba; transcribe con suscripción</span><span lang="en">Records; transcribes with a subscription</span></td><td><span class="si"><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span><span lang="es">Sí, gratis en sus 5 notas</span><span lang="en">Yes, free in its 5 notes</span></span></span></td></tr>
-          <tr><th scope="row"><span lang="es">Sincroniza con tu Drive o WebDAV</span><span lang="en">Syncs to your Drive or WebDAV</span></th><td class="nuestra"><span class="si"><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span><span lang="es">Sí</span><span lang="en">Yes</span></span></span></td><td><span class="no"><svg class="i" aria-hidden="true"><use href="#i-cruz"/></svg><span><span lang="es">No: solo su nube, desde $35,99 al año</span><span lang="en">No: their cloud only, from $35.99 a year</span></span></span></td><td><span class="si"><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span><span lang="es">Con Google Drive. A WebDAV, solo copia de seguridad</span><span lang="en">With Google Drive. To WebDAV, backup only</span></span></span></td><td><span class="no"><svg class="i" aria-hidden="true"><use href="#i-cruz"/></svg><span><span lang="es">No: solo su nube, con suscripción</span><span lang="en">No: their cloud only, with a subscription</span></span></span></td><td><span class="no"><svg class="i" aria-hidden="true"><use href="#i-cruz"/></svg><span><span lang="es">No: solo su nube</span><span lang="en">No: their cloud only</span></span></span></td></tr>
+          <tr><th scope="row"><span lang="es">Precio</span><span lang="en">Price</span><span lang="fr">Prix</span></th><td class="nuestra"><span lang="es">Gratis. Pro: $9,99, pago único opcional</span><span lang="en">Free. Pro: $9.99, optional one-time payment</span><span lang="fr">Gratuit. Pro : 9,99 $, achat unique facultatif</span></td><td><span lang="es">$11,99 al año, o $35,99 con su nube. Sin pago único en Android</span><span lang="en">$11.99 a year, or $35.99 with their cloud. No one-time option on Android</span><span lang="fr">11,99 $ par an, ou 35,99 $ avec leur cloud. Pas d'achat unique sur Android</span></td><td><span lang="es">Gratis con 3 cuadernos. Premium: $9,99 una vez</span><span lang="en">Free with 3 notebooks. Premium: $9.99 once</span><span lang="fr">Gratuit avec 3 cahiers. Premium : 9,99 $ une fois</span></td><td><span lang="es">$28,99 a $129,99 al año, o $16,99 una vez sin nube ni IA</span><span lang="en">$28.99 to $129.99 a year, or $16.99 once without cloud or AI</span><span lang="fr">De 28,99 $ à 129,99 $ par an, ou 16,99 $ une fois, sans cloud ni IA</span></td><td><span lang="es">$14,99 a $99,99 al año. Su pago único no se vende en Google Play</span><span lang="en">$14.99 to $99.99 a year. Its one-time option isn't sold on Google Play</span><span lang="fr">De 14,99 $ à 99,99 $ par an. Son achat unique n'est pas vendu sur Google Play</span></td></tr>
+          <tr><th scope="row"><span lang="es">Suscripción</span><span lang="en">Subscription</span><span lang="fr">Abonnement</span></th><td class="nuestra"><span class="si"><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span><span lang="es">Nunca</span><span lang="en">Never</span><span lang="fr">Jamais</span></span></span></td><td><span class="no"><svg class="i" aria-hidden="true"><use href="#i-cruz"/></svg><span><span lang="es">Sí, solo anual: no se puede pagar por meses. IA extra: $9,99 al mes</span><span lang="en">Yes, yearly only: no monthly billing. Extra AI: $9.99 a month</span><span lang="fr">Oui, annuel uniquement : pas de paiement mensuel. IA en plus : 9,99 $ par mois</span></span></span></td><td><span class="si"><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span><span lang="es">No</span><span lang="en">No</span><span lang="fr">Non</span></span></span></td><td><span class="no"><svg class="i" aria-hidden="true"><use href="#i-cruz"/></svg><span><span lang="es">Sí: desde $4,99 al mes o $28,99 al año</span><span lang="en">Yes: from $4.99 a month or $28.99 a year</span><span lang="fr">Oui : à partir de 4,99 $ par mois ou 28,99 $ par an</span></span></span></td><td><span class="no"><svg class="i" aria-hidden="true"><use href="#i-cruz"/></svg><span><span lang="es">Sí: desde $4,99 al mes o $14,99 al año</span><span lang="en">Yes: from $4.99 a month or $14.99 a year</span><span lang="fr">Oui : à partir de 4,99 $ par mois ou 14,99 $ par an</span></span></span></td></tr>
+          <tr><th scope="row"><span lang="es">Notas en la versión gratis</span><span lang="en">Notes on the free plan</span><span lang="fr">Notes dans la version gratuite</span></th><td class="nuestra"><span class="si"><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span><span lang="es">Ilimitadas</span><span lang="en">Unlimited</span><span lang="fr">Illimitées</span></span></span></td><td><span class="no"><svg class="i" aria-hidden="true"><use href="#i-cruz"/></svg><span><span lang="es">3 cuadernos</span><span lang="en">3 notebooks</span><span lang="fr">3 cahiers</span></span></span></td><td><span class="no"><svg class="i" aria-hidden="true"><use href="#i-cruz"/></svg><span><span lang="es">3 cuadernos</span><span lang="en">3 notebooks</span><span lang="fr">3 cahiers</span></span></span></td><td><span class="no"><svg class="i" aria-hidden="true"><use href="#i-cruz"/></svg><span><span lang="es">10 notas</span><span lang="en">10 notes</span><span lang="fr">10 notes</span></span></span></td><td><span class="no"><svg class="i" aria-hidden="true"><use href="#i-cruz"/></svg><span><span lang="es">5 notas</span><span lang="en">5 notes</span><span lang="fr">5 notes</span></span></span></td></tr>
+          <tr><th scope="row"><span lang="es">Audio unido a lo que escribes</span><span lang="en">Audio linked to your writing</span><span lang="fr">Audio lié à ce que vous écrivez</span></th><td class="nuestra"><span class="si"><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span><span lang="es">Sí, con Pro: pago único opcional</span><span lang="en">Yes, with Pro: optional one-time payment</span><span lang="fr">Oui, avec Pro : achat unique facultatif</span></span></span></td><td><span class="si"><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span><span lang="es">Sí</span><span lang="en">Yes</span><span lang="fr">Oui</span></span></span></td><td><span class="no"><svg class="i" aria-hidden="true"><use href="#i-cruz"/></svg><span><span lang="es">No: graba, pero sin unir al trazo</span><span lang="en">No: records, but not linked to ink</span><span lang="fr">Non : il enregistre, mais sans lien avec le tracé</span></span></span></td><td><span lang="es">Graba; transcribe con suscripción</span><span lang="en">Records; transcribes with a subscription</span><span lang="fr">Enregistre ; transcrit avec un abonnement</span></td><td><span class="si"><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span><span lang="es">Sí, gratis en sus 5 notas</span><span lang="en">Yes, free in its 5 notes</span><span lang="fr">Oui, gratuit dans ses 5 notes</span></span></span></td></tr>
+          <tr><th scope="row"><span lang="es">Sincroniza con tu Drive o WebDAV</span><span lang="en">Syncs to your Drive or WebDAV</span><span lang="fr">Synchronise avec votre Drive ou WebDAV</span></th><td class="nuestra"><span class="si"><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span><span lang="es">Sí</span><span lang="en">Yes</span><span lang="fr">Oui</span></span></span></td><td><span class="no"><svg class="i" aria-hidden="true"><use href="#i-cruz"/></svg><span><span lang="es">No: solo su nube, desde $35,99 al año</span><span lang="en">No: their cloud only, from $35.99 a year</span><span lang="fr">Non : uniquement leur cloud, à partir de 35,99 $ par an</span></span></span></td><td><span class="si"><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span><span lang="es">Con Google Drive. A WebDAV, solo copia de seguridad</span><span lang="en">With Google Drive. To WebDAV, backup only</span><span lang="fr">Avec Google Drive. Avec WebDAV, sauvegarde uniquement</span></span></span></td><td><span class="no"><svg class="i" aria-hidden="true"><use href="#i-cruz"/></svg><span><span lang="es">No: solo su nube, con suscripción</span><span lang="en">No: their cloud only, with a subscription</span><span lang="fr">Non : uniquement leur cloud, avec abonnement</span></span></span></td><td><span class="no"><svg class="i" aria-hidden="true"><use href="#i-cruz"/></svg><span><span lang="es">No: solo su nube</span><span lang="en">No: their cloud only</span><span lang="fr">Non : uniquement leur cloud</span></span></span></td></tr>
           </tbody>
       </table>
     </div>
-    <p class="aclaracion"><span lang="es">Precios en dólares según Google Play (EE. UU.) y la web de cada app, consultados el 2 de octubre de 2026. El precio al mes es el de pagar mes a mes, no el anual dividido entre doce (el mensual de Notewise, según su ficha del App Store); Goodnotes no tiene pago mensual en sus planes. En Notability, los precios sin su rebaja temporal. Pueden variar según el país.</span><span lang="en">Prices in US dollars from Google Play (US) and each app's website, checked on October 2, 2026. Monthly prices are for paying month to month, not the yearly price divided by twelve (Notewise's monthly price from its App Store listing); Goodnotes has no monthly billing on its plans. For Notability, prices without its temporary sale. They may vary by country.</span></p>
+    <p class="aclaracion"><span lang="es">Precios en dólares según Google Play (EE. UU.) y la web de cada app, consultados el 2 de octubre de 2026. El precio al mes es el de pagar mes a mes, no el anual dividido entre doce (el mensual de Notewise, según su ficha del App Store); Goodnotes no tiene pago mensual en sus planes. En Notability, los precios sin su rebaja temporal. Pueden variar según el país.</span><span lang="en">Prices in US dollars from Google Play (US) and each app's website, checked on October 2, 2026. Monthly prices are for paying month to month, not the yearly price divided by twelve (Notewise's monthly price from its App Store listing); Goodnotes has no monthly billing on its plans. For Notability, prices without its temporary sale. They may vary by country.</span><span lang="fr">Prix en dollars américains d'après Google Play (États-Unis) et le site de chaque appli, consultés le 2 octobre 2026. Les prix mensuels sont ceux du paiement mois par mois, et non le prix annuel divisé par douze (pour Notewise, le prix mensuel de sa fiche sur l'App Store) ; Goodnotes ne propose pas de paiement mensuel dans ses formules. Pour Notability, prix hors promotion temporaire. Ils peuvent varier selon le pays.</span></p>
   </div>
 </section>
 
 <section>
   <div class="contenedor">
-    <p class="etiqueta"><span lang="es">Preguntas</span><span lang="en">Questions</span></p>
-    <h2><span lang="es">Preguntas frecuentes.</span><span lang="en">Frequently asked questions.</span></h2>
+    <p class="etiqueta"><span lang="es">Preguntas</span><span lang="en">Questions</span><span lang="fr">Questions</span></p>
+    <h2><span lang="es">Preguntas frecuentes.</span><span lang="en">Frequently asked questions.</span><span lang="fr">Questions fréquentes.</span></h2>
     <div class="preguntas">
       <details class="aparece">
-        <summary data-umami-event="faq" data-umami-event-pregunta="cuando-sale"><span lang="es">¿Cuándo sale?</span><span lang="en">When does it launch?</span></summary>
-        <p><span lang="es">Próximamente en Google Play. <a href="#avisame" data-umami-event="ir-al-aviso" data-umami-event-lugar="faq">Deja tu email</a> y recibirás un aviso el día del lanzamiento.</span><span lang="en">Coming soon to Google Play. <a href="#avisame">Leave your email</a> and you'll be notified on launch day.</span></p>
+        <summary data-umami-event="faq" data-umami-event-pregunta="cuando-sale"><span lang="es">¿Cuándo sale?</span><span lang="en">When does it launch?</span><span lang="fr">Quand sort-elle ?</span></summary>
+        <p><span lang="es">Próximamente en Google Play. <a href="#avisame" data-umami-event="ir-al-aviso" data-umami-event-lugar="faq">Deja tu email</a> y recibirás un aviso el día del lanzamiento.</span><span lang="en">Coming soon to Google Play. <a href="#avisame">Leave your email</a> and you'll be notified on launch day.</span><span lang="fr">Bientôt sur Google Play. <a href="#avisame">Laissez votre e-mail</a> et vous serez prévenu le jour du lancement.</span></p>
       </details>
       <details class="aparece">
-        <summary data-umami-event="faq" data-umami-event-pregunta="cuenta"><span lang="es">¿Necesito crear una cuenta?</span><span lang="en">Do I need an account?</span></summary>
-        <p><span lang="es">No. Abres la app y escribes. Solo conectas una cuenta si quieres sincronizar con Google Drive.</span><span lang="en">No. Open the app and write. You only connect an account if you want to sync with Google Drive.</span></p>
+        <summary data-umami-event="faq" data-umami-event-pregunta="cuenta"><span lang="es">¿Necesito crear una cuenta?</span><span lang="en">Do I need an account?</span><span lang="fr">Dois-je créer un compte ?</span></summary>
+        <p><span lang="es">No. Abres la app y escribes. Solo conectas una cuenta si quieres sincronizar con Google Drive.</span><span lang="en">No. Open the app and write. You only connect an account if you want to sync with Google Drive.</span><span lang="fr">Non. Vous ouvrez l'appli et vous écrivez. Vous ne connectez un compte que si vous voulez synchroniser avec Google Drive.</span></p>
       </details>
       <details class="aparece">
-        <summary data-umami-event="faq" data-umami-event-pregunta="sin-internet"><span lang="es">¿Funciona sin internet?</span><span lang="en">Does it work offline?</span></summary>
-        <p><span lang="es">Sí. Solo necesitas conexión para sincronizar.</span><span lang="en">Yes. You only need a connection to sync.</span></p>
+        <summary data-umami-event="faq" data-umami-event-pregunta="sin-internet"><span lang="es">¿Funciona sin internet?</span><span lang="en">Does it work offline?</span><span lang="fr">Fonctionne-t-elle hors ligne ?</span></summary>
+        <p><span lang="es">Sí. Solo necesitas conexión para sincronizar.</span><span lang="en">Yes. You only need a connection to sync.</span><span lang="fr">Oui. Vous n'avez besoin d'une connexion que pour synchroniser.</span></p>
       </details>
       <details class="aparece">
-        <summary data-umami-event="faq" data-umami-event-pregunta="lapiz"><span lang="es">¿Con qué lápiz funciona?</span><span lang="en">Which pens does it work with?</span></summary>
-        <p><span lang="es">Con los lápices activos de Android, como el S Pen, los USI y Wacom, el Lenovo o el HONOR, y también con sus gestos. Y si lo activas, con el dedo.</span><span lang="en">With Android active styluses like the S Pen, USI and Wacom pens, Lenovo or HONOR, gestures included. You can also use your finger if you turn it on.</span></p>
+        <summary data-umami-event="faq" data-umami-event-pregunta="lapiz"><span lang="es">¿Con qué lápiz funciona?</span><span lang="en">Which pens does it work with?</span><span lang="fr">Avec quels stylets fonctionne-t-elle ?</span></summary>
+        <p><span lang="es">Con los lápices activos de Android, como el S Pen, los USI y Wacom, el Lenovo o el HONOR, y también con sus gestos. Y si lo activas, con el dedo.</span><span lang="en">With Android active styluses like the S Pen, USI and Wacom pens, Lenovo or HONOR, gestures included. You can also use your finger if you turn it on.</span><span lang="fr">Avec les stylets actifs Android, comme le S Pen, les stylets USI et Wacom, celui de Lenovo ou de HONOR, gestes compris. Et avec le doigt, si vous l'activez.</span></p>
       </details>
       <details class="aparece">
-        <summary data-umami-event="faq" data-umami-event-pregunta="pro-suscripcion"><span lang="es">¿Pro es una suscripción?</span><span lang="en">Is Pro a subscription?</span></summary>
-        <p><span lang="es">No. Es un pago único opcional y queda tuyo: sirve para desbloquear más funciones y para apoyarme como desarrollador ;). Lo gratis sigue siendo gratis.</span><span lang="en">No. It's an optional one-time purchase and it's yours to keep: it unlocks extra features and supports me as a developer ;). The free features stay free.</span></p>
+        <summary data-umami-event="faq" data-umami-event-pregunta="pro-suscripcion"><span lang="es">¿Pro es una suscripción?</span><span lang="en">Is Pro a subscription?</span><span lang="fr">Pro est-il un abonnement ?</span></summary>
+        <p><span lang="es">No. Es un pago único opcional y queda tuyo: sirve para desbloquear más funciones y para apoyarme como desarrollador ;). Lo gratis sigue siendo gratis.</span><span lang="en">No. It's an optional one-time purchase and it's yours to keep: it unlocks extra features and supports me as a developer ;). The free features stay free.</span><span lang="fr">Non. C'est un achat unique facultatif, et il est à vous pour toujours : il débloque des fonctions en plus et permet de soutenir le développeur ;). Ce qui est gratuit le reste.</span></p>
       </details>
       <details class="aparece">
-        <summary data-umami-event="faq" data-umami-event-pregunta="probar-pro"><span lang="es">¿Puedo probar las funciones Pro antes de pagar?</span><span lang="en">Can I try Pro before paying?</span></summary>
-        <p><span lang="es">El audio, sí: tienes 3 grabaciones gratis para ver cómo funciona. Las grabaciones que hagas se quedan en tus notas aunque no compres Pro.</span><span lang="en">Audio, yes: you get 3 free recordings to see how it works. They stay in your notes even if you never buy Pro.</span></p>
+        <summary data-umami-event="faq" data-umami-event-pregunta="probar-pro"><span lang="es">¿Puedo probar las funciones Pro antes de pagar?</span><span lang="en">Can I try Pro before paying?</span><span lang="fr">Puis-je essayer Pro avant de payer ?</span></summary>
+        <p><span lang="es">El audio, sí: tienes 3 grabaciones gratis para ver cómo funciona. Las grabaciones que hagas se quedan en tus notas aunque no compres Pro.</span><span lang="en">Audio, yes: you get 3 free recordings to see how it works. They stay in your notes even if you never buy Pro.</span><span lang="fr">L'audio, oui : vous avez 3 enregistrements gratuits pour voir comment ça marche. Ils restent dans vos notes même si vous n'achetez jamais Pro.</span></p>
       </details>
       <details class="aparece">
-        <summary data-umami-event="faq" data-umami-event-pregunta="ipad-ordenador"><span lang="es">¿Hay versión para iPad o para el ordenador?</span><span lang="en">Is there an iPad or desktop version?</span></summary>
-        <p><span lang="es">Por ahora, SwiftPen es solo para Android: tabletas y móviles.</span><span lang="en">For now, SwiftPen is Android only: tablets and phones.</span></p>
+        <summary data-umami-event="faq" data-umami-event-pregunta="ipad-ordenador"><span lang="es">¿Hay versión para iPad o para el ordenador?</span><span lang="en">Is there an iPad or desktop version?</span><span lang="fr">Existe-t-il une version pour iPad ou pour ordinateur ?</span></summary>
+        <p><span lang="es">Por ahora, SwiftPen es solo para Android: tabletas y móviles.</span><span lang="en">For now, SwiftPen is Android only: tablets and phones.</span><span lang="fr">Pour l'instant, SwiftPen n'existe que sur Android : tablettes et téléphones.</span></p>
       </details>
     </div>
   </div>
@@ -354,7 +375,7 @@
 
 <section class="cierre">
   <div class="contenedor">
-    <h2><span lang="es">Tu próximo cuaderno,<br><span class="degradado">en tu tableta y en tu bolsillo.</span></span><span lang="en">Your next notebook,<br><span class="degradado">on your tablet and in your pocket.</span></span></h2>
+    <h2><span lang="es">Tu próximo cuaderno,<br><span class="degradado">en tu tableta y en tu bolsillo.</span></span><span lang="en">Your next notebook,<br><span class="degradado">on your tablet and in your pocket.</span></span><span lang="fr">Votre prochain carnet,<br><span class="degradado">sur votre tablette et dans votre poche.</span></span></h2>
     <div id="avisame">
     <form class="avisame" lang="es" data-idioma="es" novalidate>
       <p class="avisame-titulo">Recibe un aviso cuando SwiftPen esté disponible.</p>
@@ -376,6 +397,16 @@
       <label class="avisame-consentimiento"><input type="checkbox" name="consentimiento" required> <span>I agree that SwiftPen may use my email solely to notify me about the launch. I can unsubscribe at any time. <a href="privacidad/">Privacy policy</a></span></label>
       <p class="avisame-estado" role="status" aria-live="polite"></p>
     </form>
+    <form class="avisame" lang="fr" data-idioma="fr" novalidate>
+      <p class="avisame-titulo">Soyez prévenu dès que SwiftPen sera disponible.</p>
+      <div class="avisame-fila">
+        <label class="solo-lectores" for="email-fr">Votre e-mail</label>
+        <input id="email-fr" type="email" name="email" required autocomplete="email" inputmode="email" placeholder="vous@email.com">
+        <button class="boton principal" type="submit">Prévenez-moi</button>
+      </div>
+      <label class="avisame-consentimiento"><input type="checkbox" name="consentimiento" required> <span>J'accepte que SwiftPen utilise mon e-mail uniquement pour m'informer du lancement. Je peux me désabonner à tout moment. <a href="privacidad/">Politique de confidentialité</a></span></label>
+      <p class="avisame-estado" role="status" aria-live="polite"></p>
+    </form>
     </div>
   </div>
 </section>
@@ -386,13 +417,14 @@
   <div class="contenedor">
     <span>© 2026 SwiftPen</span>
     <nav>
-      <a href="release-notes/"><span lang="es">Notas de actualización</span><span lang="en">Release notes</span></a>
-      <a href="privacidad/" data-umami-event="privacidad" data-umami-event-lugar="pie"><span lang="es">Privacidad</span><span lang="en">Privacy</span></a>
+      <a href="release-notes/"><span lang="es">Notas de actualización</span><span lang="en">Release notes</span><span lang="fr">Notes de mise à jour</span></a>
+      <a href="privacidad/" data-umami-event="privacidad" data-umami-event-lugar="pie"><span lang="es">Privacidad</span><span lang="en">Privacy</span><span lang="fr">Confidentialité</span></a>
       <a lang="es" href="privacidad/#cookies">Cookies</a>
       <a lang="en" href="privacidad/#cookies-en">Cookies</a>
-      <a href="terminos/"><span lang="es">Términos</span><span lang="en">Terms</span></a>
-      <a href="aviso-legal/"><span lang="es">Aviso legal</span><span lang="en">Legal notice</span></a>
-      <a href="mailto:support@getswiftpen.com"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
+      <a lang="fr" href="privacidad/#cookies-fr">Cookies</a>
+      <a href="terminos/"><span lang="es">Términos</span><span lang="en">Terms</span><span lang="fr">Conditions</span></a>
+      <a href="aviso-legal/"><span lang="es">Aviso legal</span><span lang="en">Legal notice</span><span lang="fr">Mentions légales</span></a>
+      <a href="mailto:support@getswiftpen.com"><span lang="es">Contacto</span><span lang="en">Contact</span><span lang="fr">Contact</span></a>
     </nav>
   </div>
 </footer>

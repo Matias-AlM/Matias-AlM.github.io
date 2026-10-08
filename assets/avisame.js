@@ -16,6 +16,7 @@
 
   var TEXTOS = {
     es: { email: "Introduce un email válido.", consentimiento: "Es necesario aceptar para recibir el aviso.", enviando: "Enviando…", listo: "¡Gracias! Serás de los primeros en saber cuándo sale SwiftPen.", nota: "Te hemos enviado un correo de confirmación. Si no lo ves, mira en la carpeta de spam y márcalo como «No es spam» para no perderte el aviso del lanzamiento.", error: "No se ha podido enviar. Inténtalo de nuevo más tarde." },
+    fr: { email: "Veuillez saisir une adresse e-mail valide.", consentimiento: "Vous devez accepter pour recevoir l'avis.", enviando: "Envoi en cours…", listo: "Merci ! Vous serez parmi les premiers à savoir quand SwiftPen sortira.", nota: "Nous vous avons envoyé un e-mail de confirmation. Si vous ne le trouvez pas, regardez dans vos courriers indésirables et marquez-le comme « Pas un spam » pour ne pas manquer l'avis de lancement.", error: "L'envoi a échoué. Veuillez réessayer plus tard." },
     en: { email: "Please enter a valid email address.", consentimiento: "Please accept to receive the notice.", enviando: "Sending…", listo: "Thanks! You'll be among the first to know when SwiftPen launches.", nota: "We've sent you a confirmation email. If you can't find it, check your spam folder and mark it as \"Not spam\" so you don't miss the launch notice.", error: "Something went wrong. Please try again later." }
   };
 
@@ -31,7 +32,9 @@
       var datos = new FormData();
       datos.append(CAMPO_EMAIL, email);
       datos.append(CAMPO_CONSENTIMIENTO, OPCION_CONSENTIMIENTO);
-      datos.append(CAMPO_IDIOMA, form.dataset.idioma);
+      // El formulario y los correos (_correo/aviso.gs) solo conocen es/en: quien
+      // se apunta desde la web en frances recibe el correo en ingles.
+      datos.append(CAMPO_IDIOMA, form.dataset.idioma === "fr" ? "en" : form.dataset.idioma);
       boton.disabled = true;
       estado.textContent = t.enviando;
       fetch(FORMULARIO, { method: "POST", mode: "no-cors", body: datos })

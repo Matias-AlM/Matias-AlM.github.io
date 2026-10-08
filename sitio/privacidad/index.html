@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" data-lang="es" data-titulo-es="Privacidad | SwiftPen" data-titulo-en="Privacy | SwiftPen">
+<html lang="es" data-lang="es" data-titulo-es="Privacidad | SwiftPen" data-titulo-en="Privacy | SwiftPen" data-titulo-fr="Confidentialité | SwiftPen">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,10 +31,11 @@
       <img class="oscuro" src="../img/wordmark-dark.webp" alt="SwiftPen" width="680" height="185">
     </a>
     <nav class="navegacion">
-      <a class="enlace" href="../"><span lang="es">Volver a SwiftPen</span><span lang="en">Back to SwiftPen</span></a>
+      <a class="enlace" href="../"><span lang="es">Volver a SwiftPen</span><span lang="en">Back to SwiftPen</span><span lang="fr">Retour à SwiftPen</span></a>
       <div class="idioma" role="group" aria-label="Idioma / Language">
         <button type="button" data-idioma="es" aria-pressed="true">ES</button>
         <button type="button" data-idioma="en" aria-pressed="false">EN</button>
+        <button type="button" data-idioma="fr" aria-pressed="false">FR</button>
       </div>
     </nav>
   </div>
@@ -218,17 +219,106 @@
 <p>The controller of the data described in this policy is Matías Mariano Álvarez Massia, tax ID (NIF) 02389078E, Calle Las Dalias 22, Fuengirola (Málaga), Spain. Contact: <a href="mailto:support@getswiftpen.com">support@getswiftpen.com</a>. More in the <a href="../aviso-legal/">legal notice</a>.</p>
 </article>
 
+<article lang="fr">
+<h1>Politique de confidentialité</h1>
+<p class="fecha">Dernière mise à jour : 5 octobre 2026</p>
+
+<p>SwiftPen est une application Android pour prendre des notes manuscrites. En bref : <strong>vos notes vous appartiennent et restent sur votre appareil</strong>. SwiftPen n'a pas de serveurs propres, ne vous demande pas de créer un compte, n'affiche aucune publicité et n'intègre aucun outil d'analyse qui lui soit propre.</p>
+
+<h2>Ce qui est enregistré, et où</h2>
+<ul>
+  <li><strong>Notes, dessins, PDF importés et enregistrements audio :</strong> ils sont conservés dans l'espace de stockage privé de l'application, sur votre appareil, où aucune autre application ne peut les lire.</li>
+  <li><strong>Réglages :</strong> également conservés sur votre appareil.</li>
+  <li><strong>Sauvegarde Android :</strong> si la sauvegarde Google est activée sur votre téléphone, Android peut y inclure les données de l'application. Cette sauvegarde est gérée par Google selon sa propre politique, et vous pouvez la désactiver dans les réglages du système. La configuration de la synchronisation, y compris le mot de passe du serveur, n'est pas incluse dans cette sauvegarde : après une restauration, vous devrez la configurer à nouveau.</li>
+</ul>
+
+<h2>Microphone</h2>
+<p>SwiftPen n'utilise le microphone qu'une fois que vous avez appuyé sur le bouton d'enregistrement dans une note, et cesse de capter le son dès que vous mettez en pause ou arrêtez. Une notification s'affiche tant qu'un enregistrement est ouvert, même en pause. Les enregistrements sont conservés avec la note, sur votre appareil, et ne sont envoyés à personne.</p>
+
+<h2>Reconnaissance de l'écriture et numérisation</h2>
+<p>La recherche dans votre écriture manuscrite et son exportation sous forme de texte reposent sur ML Kit de Google, qui fonctionne <strong>sur votre appareil</strong> : votre écriture ne quitte pas le téléphone pour être reconnue. Le modèle de langue est téléchargé une seule fois depuis Google.</p>
+<p>La numérisation d'une page utilise le scanner de documents de Google Play Services, qui fonctionne lui aussi <strong>sur votre appareil</strong> : la photo n'est pas envoyée à Google, et SwiftPen ne reçoit que la page que vous confirmez. SwiftPen n'a pas besoin de l'autorisation d'accès à l'appareil photo.</p>
+<p>Lorsque vous utilisez ces fonctionnalités, ML Kit envoie à Google des données techniques de diagnostic et d'utilisation : fabricant et modèle de l'appareil, version d'Android, version de l'application, performances, erreurs, langue configurée et identifiants techniques de l'installation (et, pour le scanner, de l'appareil). Selon Google, ces données servent aux diagnostics et aux statistiques d'utilisation, sont chiffrées pendant le transfert et ne sont pas partagées avec des tiers. <strong>Le contenu de vos notes et des pages numérisées n'est jamais envoyé.</strong> Pour plus de détails, consultez la <a href="https://developers.google.com/ml-kit/android-data-disclosure">documentation de ML Kit</a>.</p>
+
+<h2>Synchronisation (facultative)</h2>
+<p>Si vous activez la synchronisation, vos notes sont copiées <strong>directement</strong> entre votre appareil et le service que vous avez choisi. Rien ne passe par un serveur à nous, et le développeur n'en reçoit rien.</p>
+<ul>
+  <li><strong>Votre propre serveur WebDAV :</strong> les notes sont envoyées au serveur que vous avez configuré, toujours via une connexion chiffrée (https). Votre nom d'utilisateur et votre mot de passe sont conservés sur votre appareil, et le mot de passe est chiffré avec le Keystore d'Android.</li>
+  <li><strong>Google Drive :</strong> lorsque vous connectez votre compte Google, SwiftPen ne demande l'accès qu'aux fichiers qu'elle crée elle-même (l'autorisation <code>drive.file</code>) ; elle ne peut donc pas voir le reste de votre Drive. Ce qui est stocké dans Drive relève de la <a href="https://policies.google.com/privacy">Politique de confidentialité de Google</a>. Déconnecter Drive dans l'application demande à Google de retirer cette autorisation, et vous pouvez aussi la retirer à tout moment depuis <a href="https://myaccount.google.com/permissions">votre compte Google</a>. L'utilisation et le transfert par SwiftPen, vers toute autre application, des informations reçues des API Google respecteront la <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, y compris ses exigences d'utilisation limitée (Limited Use).</li>
+</ul>
+
+<h2>Achats</h2>
+<p>Si vous achetez SwiftPen Pro (une fois disponible), le paiement est géré par Google Play. Le développeur ne voit jamais vos données de paiement ; Google Play indique seulement à l'application que l'achat existe.</p>
+
+<h2>Ce que SwiftPen ne fait pas</h2>
+<ul>
+  <li>Elle ne collecte pas de données personnelles sur des serveurs qui lui appartiendraient, puisqu'elle n'en a pas.</li>
+  <li>Elle ne vend ni ne partage vos données avec qui que ce soit.</li>
+  <li>Elle n'affiche pas de publicités et ne vous suit pas d'une application à l'autre.</li>
+</ul>
+
+<h2>Avis de lancement (sur le site)</h2>
+<p>Si vous laissez votre e-mail sur ce site pour être prévenu(e) du lancement de SwiftPen, voici ce qu'il devient :</p>
+<ul>
+  <li><strong>Qui le traite :</strong> le responsable du traitement, Matías Mariano Álvarez Massia (coordonnées complètes dans les <a href="../aviso-legal/">mentions légales</a>). Contact : <a href="mailto:support@getswiftpen.com">support@getswiftpen.com</a>.</li>
+  <li><strong>Ce qui est conservé :</strong> votre e-mail, la langue de la page et la date de votre inscription.</li>
+  <li><strong>Finalité :</strong> vous envoyer un e-mail de confirmation lors de l'inscription, puis un unique avis lorsque SwiftPen sera disponible sur Google Play. Rien d'autre : ni newsletters, ni publicité, et il n'est jamais vendu ni partagé.</li>
+  <li><strong>Base juridique :</strong> votre consentement, donné en cochant la case du formulaire (art. 6, par. 1, point a) du RGPD). Laisser votre e-mail est facultatif, et vous pouvez retirer votre consentement à tout moment.</li>
+  <li><strong>Où il est conservé :</strong> dans Google Forms, Google Sheets et Gmail, sur le compte swiftpen.app@gmail.com. Google peut traiter des données en dehors de l'Union européenne ; Google LLC participe au <a href="https://policies.google.com/privacy/frameworks">cadre de protection des données UE-États-Unis (EU-U.S. Data Privacy Framework)</a>. Pour en savoir plus, consultez la <a href="https://policies.google.com/privacy">politique de confidentialité de Google</a>.</li>
+  <li><strong>Durée :</strong> jusqu'à l'envoi de l'avis de lancement. Ensuite, toute la liste est supprimée.</li>
+  <li><strong>Désinscription :</strong> chaque e-mail contient un lien « Se désabonner ». Une fois que vous avez confirmé, votre e-mail est supprimé immédiatement ; seule une empreinte chiffrée, qui ne permet pas de retrouver votre adresse, est conservée afin que vous ne receviez plus jamais d'e-mail. Vous pouvez aussi en faire la demande en écrivant à support@getswiftpen.com.</li>
+</ul>
+
+<h2 id="site-fr">Ce site</h2>
+<ul>
+  <li><strong>Hébergement :</strong> le site est hébergé sur Firebase Hosting, de Google. Comme tout serveur web, Google enregistre l'adresse IP de chaque visite pour assurer la sécurité du service, comme l'explique son document <a href="https://firebase.google.com/support/privacy">Firebase privacy information</a>. Google participe au cadre de protection des données UE-États-Unis. Le développeur ne reçoit jamais ces journaux.</li>
+  <li><strong>Pas de publicité :</strong> le site n'utilise pas de pixels de suivi et ne charge rien depuis des réseaux sociaux ni des annonceurs.</li>
+  <li><strong>Ressources de tiers :</strong> la police (Inter) et les images sont servies par le site lui-même. La seule chose chargée depuis l'extérieur est le script de statistiques d'Umami ; et l'envoi du formulaire d'avis de lancement établit une connexion avec Google, comme expliqué plus haut.</li>
+</ul>
+
+<h2 id="statistiques">Statistiques de visite</h2>
+<p>Pour savoir combien de personnes visitent ce site et quelles parties les intéressent, il utilise <a href="https://umami.is">Umami Cloud</a>, d'Umami Software, Inc. (États-Unis), qui traite ces données en tant que sous-traitant, pour le compte du développeur et uniquement à cette fin. Il n'utilise aucun cookie, ne stocke rien sur votre appareil et ne vous suit pas sur d'autres sites.</p>
+<ul>
+  <li><strong>Ce qui est envoyé :</strong> au chargement d'une page, votre navigateur envoie la page visitée (sans la partie de l'adresse située après le « ? »), le site d'où vous venez, votre langue, la taille de votre écran, ainsi que le type de navigateur et d'appareil. S'y ajoutent quelques actions : le bouton de l'avis de lancement, l'envoi du formulaire (seulement sa langue, jamais votre e-mail), le changement de langue, la FAQ et les liens vers cette politique. La page de désinscription n'est jamais mesurée.</li>
+  <li><strong>Votre adresse IP :</strong> elle n'est utilisée qu'un instant, pour déterminer votre pays ou votre ville approximatifs et calculer un identifiant de visite chiffré qui change chaque mois. L'IP n'est pas conservée, et ce qui l'est ne permet pas de savoir qui vous êtes.</li>
+  <li><strong>Base juridique :</strong> l'intérêt légitime du développeur à comprendre comment le site est utilisé afin de l'améliorer (art. 6, par. 1, point f) du RGPD).</li>
+  <li><strong>Durée de conservation :</strong> 6 mois, puis les données sont supprimées.</li>
+  <li><strong>Où elles sont conservées :</strong> la région de données de l'Union européenne a été choisie ; les statistiques sont donc stockées sur des serveurs situés dans l'UE (en Allemagne, selon Umami).</li>
+  <li><strong>Comment elles y parviennent :</strong> pour diffuser le script et recevoir chaque visite, Umami s'appuie sur des fournisseurs d'infrastructure américains, tels que Cloudflare et Vercel, qui ne traitent votre IP et les détails techniques de la requête que de passage, généralement sur le serveur de leur réseau le plus proche de vous. Comme Umami Software, Inc. (San Francisco) et certains de ses fournisseurs sont des sociétés américaines, un accès depuis les États-Unis est possible ; il est encadré par les clauses contractuelles types de la Commission européenne (décision 2021/914), incluses dans son <a href="https://umami.is/dpa">accord de traitement des données</a>. Liste de ses fournisseurs : <a href="https://umami.is/subprocessors">umami.is/subprocessors</a>.</li>
+  <li><strong>Vous y opposer :</strong> vous pouvez désactiver les statistiques dans ce navigateur à tout moment avec ce bouton. <button type="button" class="boton" id="statistiques-bouton" data-fr-activar="Désactiver les statistiques dans ce navigateur" data-fr-desactivado="Les statistiques sont désactivées dans ce navigateur · les réactiver"></button> Ce choix est mémorisé par un indicateur dans votre navigateur (<code>umami.disabled</code>), sans cookies. Si votre navigateur envoie le signal « Ne pas suivre » (Do Not Track), rien n'est mesuré non plus.</li>
+</ul>
+
+<h2 id="cookies-fr">Cookies</h2>
+<p>Ce site <strong>n'utilise pas de cookies</strong>. La seule chose qu'il enregistre dans votre navigateur est la langue que vous choisissez avec le sélecteur ES/EN/FR (et, si vous le demandez, l'indicateur qui arrête la mesure de vos visites, voir ci-dessus), dans le stockage local (<code>localStorage</code>, clé <code>idioma</code>), afin que le site s'affiche dans cette langue la fois suivante. C'est strictement nécessaire à ce que vous avez demandé, cela ne vous identifie pas et ne quitte jamais votre navigateur : votre consentement n'est donc pas nécessaire. Cela reste en place jusqu'à ce que vous effaciez les données du site dans votre navigateur.</p>
+
+<h2>Suppression de vos données</h2>
+<p>Vous pouvez supprimer n'importe quelle note ou n'importe quel enregistrement depuis l'application. Désinstaller SwiftPen supprime tout ce qu'elle stocke sur votre appareil. Si vous avez utilisé la synchronisation, les copies présentes sur votre serveur ou dans votre Drive vous appartiennent, et vous pouvez les y supprimer.</p>
+
+<h2>Enfants</h2>
+<p>SwiftPen ne s'adresse pas aux enfants de moins de 13 ans, et l'application ne collecte de données personnelles de personne. Pour vous inscrire à l'avis de lancement sur ce site, vous devez avoir au moins 14 ans, l'âge à partir duquel on peut donner son propre consentement en Espagne.</p>
+
+<h2>Vos droits</h2>
+<p>En dehors de l'éventuel e-mail laissé pour l'avis de lancement et des statistiques de visite décrites plus haut, le développeur ne détient aucune de vos données. Vous pouvez vous opposer aux statistiques avec le bouton de cette section. Pour cet e-mail, vous pouvez à tout moment demander à y accéder (droit d'accès), à le rectifier ou à l'effacer, à limiter ou à vous opposer à son traitement, ou à en obtenir une copie (portabilité), en écrivant à support@getswiftpen.com. Vous avez également le droit d'introduire une réclamation auprès de l'<a href="https://www.aepd.es/en">AEPD (Agencia Española de Protección de Datos)</a> et, si vous résidez en France, auprès de la <a href="https://www.cnil.fr">CNIL</a>.</p>
+
+<h2>Modifications</h2>
+<p>Si cette politique change, cette page et sa date seront mises à jour. Toute modification de la manière dont vos données sont traitées sera également signalée dans l'application.</p>
+
+<h2>Responsable du traitement et contact</h2>
+<p>Le responsable du traitement des données décrites dans cette politique est Matías Mariano Álvarez Massia, NIF 02389078E, Calle Las Dalias 22, Fuengirola (Málaga), Espagne. Contact : <a href="mailto:support@getswiftpen.com">support@getswiftpen.com</a>. Plus d'informations dans les <a href="../aviso-legal/">mentions légales</a>.</p>
+</article>
+
+
 </main>
 
 <footer>
   <div class="contenedor">
     <span>© 2026 SwiftPen</span>
     <nav>
-      <a href="../release-notes/"><span lang="es">Notas de actualización</span><span lang="en">Release notes</span></a>
-      <a href="../"><span lang="es">SwiftPen</span><span lang="en">SwiftPen</span></a>
-      <a href="../terminos/"><span lang="es">Términos</span><span lang="en">Terms</span></a>
-      <a href="../aviso-legal/"><span lang="es">Aviso legal</span><span lang="en">Legal notice</span></a>
-      <a href="mailto:support@getswiftpen.com"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
+      <a href="../release-notes/"><span lang="es">Notas de actualización</span><span lang="en">Release notes</span><span lang="fr">Notes de mise à jour</span></a>
+      <a href="../"><span lang="es">SwiftPen</span><span lang="en">SwiftPen</span><span lang="fr">SwiftPen</span></a>
+      <a href="../terminos/"><span lang="es">Términos</span><span lang="en">Terms</span><span lang="fr">Conditions</span></a>
+      <a href="../aviso-legal/"><span lang="es">Aviso legal</span><span lang="en">Legal notice</span><span lang="fr">Mentions légales</span></a>
+      <a href="mailto:support@getswiftpen.com"><span lang="es">Contacto</span><span lang="en">Contact</span><span lang="fr">Contact</span></a>
     </nav>
   </div>
 </footer>
@@ -238,7 +328,7 @@
 // encuentra umami.disabled en localStorage (ver "Estadisticas de visitas").
 (function () {
   function desactivado() { try { return localStorage.getItem("umami.disabled") === "1"; } catch (e) { return false; } }
-  var botones = [["estadisticas-boton", "es"], ["statistics-button", "en"]];
+  var botones = [["estadisticas-boton", "es"], ["statistics-button", "en"], ["statistiques-bouton", "fr"]];
   function pintar() {
     botones.forEach(function (b) {
       var el = document.getElementById(b[0]);

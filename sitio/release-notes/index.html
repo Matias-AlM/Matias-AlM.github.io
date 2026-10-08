@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" data-lang="es" data-titulo-es="Notas de actualización | SwiftPen" data-titulo-en="Release notes | SwiftPen">
+<html lang="es" data-lang="es" data-titulo-es="Notas de actualización | SwiftPen" data-titulo-en="Release notes | SwiftPen" data-titulo-fr="Notes de mise à jour | SwiftPen">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,10 +26,11 @@
       <img class="oscuro" src="../img/wordmark-dark.webp" alt="SwiftPen" width="680" height="185">
     </a>
     <nav class="navegacion">
-      <a class="enlace" href="../"><span lang="es">Volver a SwiftPen</span><span lang="en">Back to SwiftPen</span></a>
+      <a class="enlace" href="../"><span lang="es">Volver a SwiftPen</span><span lang="en">Back to SwiftPen</span><span lang="fr">Retour à SwiftPen</span></a>
       <div class="idioma" role="group" aria-label="Idioma / Language">
         <button type="button" data-idioma="es" aria-pressed="true">ES</button>
         <button type="button" data-idioma="en" aria-pressed="false">EN</button>
+        <button type="button" data-idioma="fr" aria-pressed="false">FR</button>
       </div>
     </nav>
   </div>
@@ -38,8 +39,8 @@
 <main class="documento">
 
 <header class="novedad-titulo">
-  <h1><span lang="es">Notas de actualización</span><span lang="en">Release notes</span></h1>
-  <p><span lang="es">Todas las novedades de cada versión de SwiftPen, de la más reciente a la más antigua.</span><span lang="en">What's new in every version of SwiftPen, from the latest to the oldest.</span></p>
+  <h1><span lang="es">Notas de actualización</span><span lang="en">Release notes</span><span lang="fr">Notes de mise à jour</span></h1>
+  <p><span lang="es">Todas las novedades de cada versión de SwiftPen, de la más reciente a la más antigua.</span><span lang="en">What's new in every version of SwiftPen, from the latest to the oldest.</span><span lang="fr">Les nouveautés de chaque version de SwiftPen, de la plus récente à la plus ancienne.</span></p>
 </header>
 
 <article lang="es">
@@ -122,17 +123,57 @@
 </section>
 </article>
 
+<article lang="fr">
+<!-- Une version nueva: copia el bloque <section class="novedad"> de abajo (en los tres idiomas), cambiale el numero (titulo y .version de la imagen), la fecha y las notas, y ponlo ARRIBA, justo despues de este comentario. Cada version lleva su propia imagen. -->
+<section class="novedad" id="v1-1-0">
+  <div class="novedad-cabecera">
+    <img src="../img/novedades-cabecera.jpg" alt="SwiftPen" width="1800" height="1013">
+    <div class="version" aria-hidden="true">Mise à jour 1.1.0</div>
+  </div>
+  <div class="novedad-cuerpo">
+<div class="version-titulo"><h2>SwiftPen 1.1.0</h2></div>
+<p class="fecha">8 octobre 2026</p>
+<p>Cette version apporte une aide intégrée à chaque outil, SwiftPen en français, de nouvelles façons de gérer vos pages et plusieurs améliorations de stabilité.</p>
+<h3 class="etiqueta nov">Nouveautés</h3>
+<ul>
+  <li><strong>Aide intégrée :</strong> chaque outil et chaque réglage dispose d'un bouton point d'interrogation avec une courte vidéo qui montre comment il fonctionne.</li>
+  <li>Ajout du <strong>français</strong> comme langue de l'application.</li>
+  <li>Ajout de la <strong>rotation des pages</strong> vers la droite ou vers la gauche, sans limite de rotations.</li>
+  <li>La vue Toutes les pages permet désormais de <strong>sélectionner plusieurs pages</strong> à la fois et de <strong>retirer un PDF entier</strong>.</li>
+  <li><strong>Hyperliens dans les PDF</strong> : les liens d'un document importé sont désormais cliquables.</li>
+  <li>Prise en charge native et testée du <strong>HONOR Magic-Pencil 4 et 4S</strong>.</li>
+  <li>Refonte de l'introduction, avec de nouvelles options et animations.</li>
+  <li><strong>Arrière-plan aurore :</strong> décore la bibliothèque aux couleurs de SwiftPen. Il est facultatif et peut être désactivé dans les Réglages.</li>
+</ul>
+<h3 class="etiqueta mej">Améliorations</h3>
+<ul>
+  <li>Changer l'orientation du papier ne fait plus pivoter ce que vous avez écrit. Pour faire pivoter une page entière, utilisez Faire pivoter la page.</li>
+</ul>
+<h3 class="etiqueta cor">Corrections</h3>
+<ul>
+  <li>Chaque page d'un PDF importé conserve désormais sa propre orientation.</li>
+  <li>En dézoomant, la page reste centrée.</li>
+  <li>Correction de la séparation des lignes dans la reconnaissance de l'écriture.</li>
+  <li>Correction d'une fermeture de l'application au retour d'un changement de langue dans une note contenant un PDF.</li>
+  <li>En revenant des Réglages ouverts depuis une note, vous retournez maintenant à cette note.</li>
+  <li>L'état de la synchronisation s'affiche dans la langue de l'application et n'indique plus l'heure de synchronisation d'un autre service.</li>
+  <li>Le réglage de la corbeille indique clairement combien de temps les notes supprimées sont conservées.</li>
+</ul>
+  </div>
+</section>
+</article>
+
 </main>
 
 <footer>
   <div class="contenedor">
     <span>© 2026 SwiftPen</span>
     <nav>
-      <a href="../"><span lang="es">SwiftPen</span><span lang="en">SwiftPen</span></a>
-      <a href="./"><span lang="es">Notas de actualización</span><span lang="en">Release notes</span></a>
-      <a href="../privacidad/"><span lang="es">Privacidad</span><span lang="en">Privacy</span></a>
-      <a href="../aviso-legal/"><span lang="es">Aviso legal</span><span lang="en">Legal notice</span></a>
-      <a href="mailto:support@getswiftpen.com"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
+      <a href="../"><span lang="es">SwiftPen</span><span lang="en">SwiftPen</span><span lang="fr">SwiftPen</span></a>
+      <a href="./"><span lang="es">Notas de actualización</span><span lang="en">Release notes</span><span lang="fr">Notes de mise à jour</span></a>
+      <a href="../privacidad/"><span lang="es">Privacidad</span><span lang="en">Privacy</span><span lang="fr">Confidentialité</span></a>
+      <a href="../aviso-legal/"><span lang="es">Aviso legal</span><span lang="en">Legal notice</span><span lang="fr">Mentions légales</span></a>
+      <a href="mailto:support@getswiftpen.com"><span lang="es">Contacto</span><span lang="en">Contact</span><span lang="fr">Contact</span></a>
     </nav>
   </div>
 </footer>
