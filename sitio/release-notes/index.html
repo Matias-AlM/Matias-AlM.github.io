@@ -37,21 +37,24 @@
 
 <main class="documento">
 
-<div class="novedad-cabecera">
-  <img src="../img/novedades-cabecera.jpg" alt="SwiftPen" width="1800" height="1013">
-  <div class="version" aria-hidden="true"><span lang="es">Actualización 1.1.0</span><span lang="en">Update 1.1.0</span></div>
-</div>
+<header class="novedad-hero">
+  <div class="novedad-titulo">
+    <h1>Release notes</h1>
+    <p><span lang="es">Todas las novedades de cada versión de SwiftPen, de la más reciente a la más antigua.</span><span lang="en">What's new in every version of SwiftPen, from the latest to the oldest.</span></p>
+  </div>
+  <div class="novedad-cabecera">
+    <img src="../img/novedades-cabecera.jpg" alt="SwiftPen" width="1800" height="1013">
+    <div class="version" aria-hidden="true"><span lang="es">Actualización 1.1.0</span><span lang="en">Update 1.1.0</span></div>
+  </div>
+</header>
 
 <article lang="es">
-<h1>Release notes</h1>
-<p>Todas las novedades de cada versión de SwiftPen, de la más reciente a la más antigua.</p>
-
-<!-- Una version nueva: copia el bloque <section> de abajo (en los dos idiomas), cambiale el numero, la fecha y las notas, y ponlo ARRIBA, justo despues de este comentario. Sube tambien el numero de .version en la cabecera. -->
+<!-- Una version nueva: copia el bloque <section> de abajo (en los dos idiomas), cambiale el numero, la fecha y las notas, y ponlo ARRIBA, justo despues de este comentario. Sube tambien el numero de .version en la cabecera (.novedad-cabecera). -->
 <section id="v1-1-0">
 <div class="version-titulo"><h2>SwiftPen 1.1.0</h2></div>
 <p class="fecha">8 de octubre de 2026</p>
 <p>Esta versión incorpora ayuda integrada en cada herramienta, SwiftPen en francés, más opciones para gestionar las páginas y diversas mejoras de estabilidad.</p>
-<h3>Novedades</h3>
+<h3 class="etiqueta nov">Novedades</h3>
 <ul>
   <li><strong>Ayuda integrada:</strong> cada herramienta y ajuste incluye un botón de interrogación con un vídeo breve que explica su uso.</li>
   <li>Se añadió el <strong>francés</strong> como idioma de la aplicación.</li>
@@ -62,11 +65,11 @@
   <li>Se renovó la introducción, con nuevas opciones y animaciones.</li>
   <li><strong>Fondo de aurora:</strong> decora la biblioteca con los colores de SwiftPen. Es opcional y se puede desactivar en Ajustes.</li>
 </ul>
-<h3>Mejoras</h3>
+<h3 class="etiqueta mej">Mejoras</h3>
 <ul>
   <li>Cambiar la orientación del papel ya no gira lo escrito. Para girar una página completa, usa la opción Girar página.</li>
 </ul>
-<h3>Correcciones</h3>
+<h3 class="etiqueta cor">Correcciones</h3>
 <ul>
   <li>Cada página de un PDF importado conserva ahora su orientación.</li>
   <li>Al alejar el zoom, la página permanece centrada.</li>
@@ -80,15 +83,12 @@
 </article>
 
 <article lang="en">
-<h1>Release notes</h1>
-<p>What's new in every version of SwiftPen, from the latest to the oldest.</p>
-
-<!-- Una version nueva: copia el bloque <section> de abajo (en los dos idiomas), cambiale el numero, la fecha y las notas, y ponlo ARRIBA, justo despues de este comentario. Sube tambien el numero de .version en la cabecera. -->
+<!-- Una version nueva: copia el bloque <section> de abajo (en los dos idiomas), cambiale el numero, la fecha y las notas, y ponlo ARRIBA, justo despues de este comentario. Sube tambien el numero de .version en la cabecera (.novedad-cabecera). -->
 <section id="v1-1-0">
 <div class="version-titulo"><h2>SwiftPen 1.1.0</h2></div>
 <p class="fecha">October 8, 2026</p>
 <p>This release adds built-in help for every tool, SwiftPen in French, new ways to manage your pages and several stability improvements.</p>
-<h3>What's new</h3>
+<h3 class="etiqueta nov">What's new</h3>
 <ul>
   <li><strong>Built-in help:</strong> every tool and setting now has a question mark button with a short video that shows how it works.</li>
   <li>Added <strong>French</strong> as an app language.</li>
@@ -99,11 +99,11 @@
   <li>Redesigned the introduction, with new options and animations.</li>
   <li><strong>Aurora background:</strong> decorates the library with SwiftPen's colors. It is optional and can be turned off in Settings.</li>
 </ul>
-<h3>Improvements</h3>
+<h3 class="etiqueta mej">Improvements</h3>
 <ul>
   <li>Changing the paper orientation no longer rotates what you wrote. To rotate a whole page, use Rotate page.</li>
 </ul>
-<h3>Bug fixes</h3>
+<h3 class="etiqueta cor">Bug fixes</h3>
 <ul>
   <li>Each page of an imported PDF now keeps its own orientation.</li>
   <li>Zooming out now keeps the page centered.</li>
