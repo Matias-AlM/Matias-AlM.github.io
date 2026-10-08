@@ -37,20 +37,19 @@
 
 <main class="documento">
 
-<header class="novedad-hero">
-  <div class="novedad-titulo">
-    <h1>Release notes</h1>
-    <p><span lang="es">Todas las novedades de cada versión de SwiftPen, de la más reciente a la más antigua.</span><span lang="en">What's new in every version of SwiftPen, from the latest to the oldest.</span></p>
-  </div>
-  <div class="novedad-cabecera">
-    <img src="../img/novedades-cabecera.jpg" alt="SwiftPen" width="1800" height="1013">
-    <div class="version" aria-hidden="true"><span lang="es">Actualización 1.1.0</span><span lang="en">Update 1.1.0</span></div>
-  </div>
+<header class="novedad-titulo">
+  <h1>Release notes</h1>
+  <p><span lang="es">Todas las novedades de cada versión de SwiftPen, de la más reciente a la más antigua.</span><span lang="en">What's new in every version of SwiftPen, from the latest to the oldest.</span></p>
 </header>
 
 <article lang="es">
-<!-- Una version nueva: copia el bloque <section> de abajo (en los dos idiomas), cambiale el numero, la fecha y las notas, y ponlo ARRIBA, justo despues de este comentario. Sube tambien el numero de .version en la cabecera (.novedad-cabecera). -->
-<section id="v1-1-0">
+<!-- Una version nueva: copia el bloque <section class="novedad"> de abajo (en los dos idiomas), cambiale el numero (titulo y .version de la imagen), la fecha y las notas, y ponlo ARRIBA, justo despues de este comentario. Cada version lleva su propia imagen. -->
+<section class="novedad" id="v1-1-0">
+  <div class="novedad-cabecera">
+    <img src="../img/novedades-cabecera.jpg" alt="SwiftPen" width="1800" height="1013">
+    <div class="version" aria-hidden="true">Actualización 1.1.0</div>
+  </div>
+  <div class="novedad-cuerpo">
 <div class="version-titulo"><h2>SwiftPen 1.1.0</h2></div>
 <p class="fecha">8 de octubre de 2026</p>
 <p>Esta versión incorpora ayuda integrada en cada herramienta, SwiftPen en francés, más opciones para gestionar las páginas y diversas mejoras de estabilidad.</p>
@@ -79,12 +78,18 @@
   <li>El estado de la sincronización se muestra en el idioma de la aplicación y ya no incluye la hora de otro servicio.</li>
   <li>El ajuste de la papelera indica con claridad cuánto tiempo se conservan las notas eliminadas.</li>
 </ul>
+  </div>
 </section>
 </article>
 
 <article lang="en">
-<!-- Una version nueva: copia el bloque <section> de abajo (en los dos idiomas), cambiale el numero, la fecha y las notas, y ponlo ARRIBA, justo despues de este comentario. Sube tambien el numero de .version en la cabecera (.novedad-cabecera). -->
-<section id="v1-1-0">
+<!-- Una version nueva: copia el bloque <section class="novedad"> de abajo (en los dos idiomas), cambiale el numero (titulo y .version de la imagen), la fecha y las notas, y ponlo ARRIBA, justo despues de este comentario. Cada version lleva su propia imagen. -->
+<section class="novedad" id="v1-1-0">
+  <div class="novedad-cabecera">
+    <img src="../img/novedades-cabecera.jpg" alt="SwiftPen" width="1800" height="1013">
+    <div class="version" aria-hidden="true">Update 1.1.0</div>
+  </div>
+  <div class="novedad-cuerpo">
 <div class="version-titulo"><h2>SwiftPen 1.1.0</h2></div>
 <p class="fecha">October 8, 2026</p>
 <p>This release adds built-in help for every tool, SwiftPen in French, new ways to manage your pages and several stability improvements.</p>
@@ -113,6 +118,7 @@
   <li>Sync status now appears in the app language and no longer shows another service's last sync time.</li>
   <li>The Trash setting now states clearly how long deleted notes are kept.</li>
 </ul>
+  </div>
 </section>
 </article>
 
