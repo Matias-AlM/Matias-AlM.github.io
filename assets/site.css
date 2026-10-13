@@ -96,16 +96,94 @@ html[data-lang="fr"] [lang="en"]:not(html) { display: none !important; }
   .marca .claro { display: none; }
   .marca .oscuro { display: block; }
 }
-.navegacion { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 22px; margin-left: auto; font-size: 15px; }
+.navegacion { display: flex; align-items: center; gap: 4px 22px; margin-left: auto; font-size: 15px; }
 .navegacion a { color: var(--muted); }
 .navegacion a:hover { color: var(--text); text-decoration: none; }
-.navegacion a:focus-visible, .idioma button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
-/* En movil los enlaces pasan a una segunda fila (visibles, sin JS ni menu). */
-@media (max-width: 959px) {
-  .barra .contenedor { flex-wrap: wrap; height: auto; padding-top: 10px; padding-bottom: 10px; row-gap: 2px; }
-  .barra .idioma { order: 2; margin-left: auto; }
-  .navegacion { order: 3; flex-basis: 100%; margin-left: 0; }
-  .navegacion a { padding: 8px 0; }
+.navegacion a:focus-visible, .idioma button:focus-visible,
+.menu-boton:focus-visible, .idioma-boton:focus-visible, .idioma-lista button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+/* Menu: en escritorio una fila (enlaces + idioma); en movil, boton y panel a pantalla completa.
+ * Sin JS no hay boton y todo queda a la vista, en filas que se parten. */
+.menu { display: flex; align-items: center; gap: 4px 24px; flex: 1; justify-content: flex-end; }
+.menu .navegacion { margin-left: 0; }
+html:not(.js) .barra .contenedor { flex-wrap: wrap; height: auto; padding-top: 10px; padding-bottom: 10px; }
+html:not(.js) .menu { flex-basis: 100%; flex-wrap: wrap; justify-content: flex-start; }
+.menu-boton { display: none; }
+
+.idioma-sel { position: relative; }
+.idioma-boton {
+  display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
+  font: 600 13px/1 "Inter", system-ui, sans-serif; letter-spacing: .02em;
+  color: var(--muted); background: transparent; border: 1px solid var(--border);
+  border-radius: 999px; padding: 8px 12px;
+}
+.idioma-boton:hover, .idioma-sel.abierto .idioma-boton { color: var(--text); background: var(--surface-2); }
+.idioma-boton svg { width: 16px; height: 16px; }
+.idioma-boton::after {
+  content: ""; width: 6px; height: 6px; margin: -3px 1px 0 1px;
+  border: solid currentColor; border-width: 0 1.5px 1.5px 0; transform: rotate(45deg); transition: transform .2s ease;
+}
+.idioma-sel.abierto .idioma-boton::after { transform: rotate(-135deg); margin-top: 3px; }
+.idioma-lista {
+  list-style: none; margin: 0; padding: 6px; min-width: 100%;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow);
+}
+.idioma-lista button {
+  display: flex; align-items: center; justify-content: space-between; gap: 18px; width: 100%;
+  font: 500 15px/1.2 "Inter", system-ui, sans-serif; color: var(--text); text-align: left;
+  background: transparent; border: 0; border-radius: 9px; padding: 10px 12px; cursor: pointer;
+}
+.idioma-lista button:hover { background: var(--surface-2); }
+.idioma-lista button[aria-current="true"] { font-weight: 700; }
+.idioma-lista button[aria-current="true"]::after {
+  content: ""; width: 5px; height: 10px; margin-right: 3px;
+  border: solid var(--accent); border-width: 0 2px 2px 0; transform: rotate(45deg);
+}
+html.js .idioma-lista {
+  position: absolute; right: 0; top: calc(100% + 8px); z-index: 2; min-width: 160px;
+  opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: opacity .18s ease, transform .18s ease, visibility 0s .18s;
+}
+html.js .idioma-sel.abierto .idioma-lista { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+html:not(.js) .navegacion { flex-wrap: wrap; }
+html:not(.js) .idioma-boton { display: none; }
+html:not(.js) .idioma-lista { display: flex; gap: 4px; padding: 3px; border-radius: 999px; box-shadow: none; }
+html:not(.js) .idioma-lista button { padding: 7px 12px; border-radius: 999px; }
+
+@media (max-width: 759px) {
+  html.js .menu-boton {
+    display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px;
+    margin-right: -10px; padding: 0; background: transparent; border: 0; color: var(--text); cursor: pointer;
+  }
+  .menu-icono, .menu-icono::before { display: block; width: 18px; height: 1.5px; background: currentColor; transition: transform .3s ease; }
+  .menu-icono { position: relative; }
+  .menu-icono::before { content: ""; position: absolute; left: 0; top: 6px; }
+  .menu-icono { transform: translateY(-3px); }
+  .menu-boton[aria-expanded="true"] .menu-icono { transform: rotate(45deg); }
+  .menu-boton[aria-expanded="true"] .menu-icono::before { transform: translateY(-6px) rotate(-90deg); }
+  html.menu-abierto { overflow: hidden; }
+
+  html.js .menu {
+    position: absolute; left: 0; right: 0; top: 100%; height: calc(100dvh - 64px); z-index: 5;
+    flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 0; flex: none;
+    padding: 8px 16px 32px; overflow-y: auto; overscroll-behavior: contain;
+    background: var(--bg); opacity: 0; visibility: hidden; transform: translateY(-8px);
+    transition: opacity .25s ease, transform .25s ease, visibility 0s .25s;
+  }
+  html.js .menu.abierto { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+  html.js .menu .navegacion { flex-direction: column; align-items: stretch; gap: 0; font-size: 26px; font-weight: 600; letter-spacing: -.01em; }
+  html.js .menu .navegacion a { color: var(--text); padding: 16px 0; border-bottom: 1px solid var(--border); }
+  html.js .idioma-sel { margin-top: 20px; }
+  html.js .idioma-boton { width: 100%; justify-content: flex-start; font-size: 15px; padding: 14px 16px; border-radius: 14px; }
+  html.js .idioma-boton::after { margin-left: auto; }
+  html.js .idioma-lista { position: static; display: none; opacity: 1; visibility: visible; transform: none; margin-top: 8px; box-shadow: none; }
+  html.js .idioma-sel.abierto .idioma-lista { display: block; }
+}
+@media (min-width: 760px) {
+  .menu-boton { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu, .idioma-lista, .menu-icono, .menu-icono::before, .idioma-boton::after { transition: none !important; }
 }
 
 .idioma {
