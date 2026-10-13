@@ -96,10 +96,17 @@ html[data-lang="fr"] [lang="en"]:not(html) { display: none !important; }
   .marca .claro { display: none; }
   .marca .oscuro { display: block; }
 }
-.navegacion { display: flex; align-items: center; gap: 22px; font-size: 15px; }
+.navegacion { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 22px; margin-left: auto; font-size: 15px; }
 .navegacion a { color: var(--muted); }
 .navegacion a:hover { color: var(--text); text-decoration: none; }
-@media (max-width: 719px) { .navegacion .enlace { display: none; } }
+.navegacion a:focus-visible, .idioma button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+/* En movil los enlaces pasan a una segunda fila (visibles, sin JS ni menu). */
+@media (max-width: 959px) {
+  .barra .contenedor { flex-wrap: wrap; height: auto; padding-top: 10px; padding-bottom: 10px; row-gap: 2px; }
+  .barra .idioma { order: 2; margin-left: auto; }
+  .navegacion { order: 3; flex-basis: 100%; margin-left: 0; }
+  .navegacion a { padding: 8px 0; }
+}
 
 .idioma {
   display: inline-flex; padding: 3px; border-radius: 999px;
