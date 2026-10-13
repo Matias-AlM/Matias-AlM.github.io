@@ -159,11 +159,11 @@ html:not(.js) .idioma-lista button { padding: 7px 12px; border-radius: 999px; }
   .menu-icono { width: 26px; height: 26px; overflow: visible; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   .menu-icono path { transform-box: view-box; transition: transform .3s ease, opacity .2s ease; }
   .menu-icono .a { transform-origin: 12px 7px; }
-  .menu-icono .b { transform-origin: 9.5px 12px; }
-  .menu-icono .c { transform-origin: 7px 17px; }
-  .menu-boton[aria-expanded="true"] .a { transform: translateY(5px) rotate(45deg) scaleX(.75); }
+  .menu-icono .b { transform-origin: 14.5px 12px; }
+  .menu-icono .c { transform-origin: 17px 17px; }
+  .menu-boton[aria-expanded="true"] .a { transform: translateY(5px) rotate(-45deg) scaleX(.75); }
   .menu-boton[aria-expanded="true"] .b { transform: scaleX(0); opacity: 0; }
-  .menu-boton[aria-expanded="true"] .c { transform: translate(5px, -5px) rotate(-45deg) scaleX(2); }
+  .menu-boton[aria-expanded="true"] .c { transform: translate(-5px, -5px) rotate(45deg) scaleX(2); }
   html.menu-abierto { overflow: hidden; }
 
   html.js .menu {
