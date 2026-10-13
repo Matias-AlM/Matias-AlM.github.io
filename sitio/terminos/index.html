@@ -25,14 +25,20 @@
       <img class="claro" src="../img/wordmark-light.webp" alt="SwiftPen" width="680" height="185">
       <img class="oscuro" src="../img/wordmark-dark.webp" alt="SwiftPen" width="680" height="185">
     </a>
-    <nav class="navegacion">
-      <a class="enlace" href="../"><span lang="es">Volver a SwiftPen</span><span lang="en">Back to SwiftPen</span><span lang="fr">Retour à SwiftPen</span></a>
-      <div class="idioma" role="group" aria-label="Idioma / Language">
-        <button type="button" data-idioma="es" aria-pressed="true">ES</button>
-        <button type="button" data-idioma="en" aria-pressed="false">EN</button>
-        <button type="button" data-idioma="fr" aria-pressed="false">FR</button>
+    <button class="menu-boton" type="button" aria-expanded="false" aria-controls="menu"><span class="solo-lectores"><span lang="es">Menú</span><span lang="en">Menu</span><span lang="fr">Menu</span></span><svg class="menu-icono" viewBox="0 0 24 24" aria-hidden="true"><path class="a" d="M4 7h16"/><path class="b" d="M9 12h11"/><path class="c" d="M14 17h6"/></svg></button>
+    <div class="menu" id="menu">
+      <nav class="navegacion">
+        <a class="enlace" href="../"><span lang="es">Volver a SwiftPen</span><span lang="en">Back to SwiftPen</span><span lang="fr">Retour à SwiftPen</span></a>
+      </nav>
+      <div class="idioma-sel">
+        <button class="idioma-boton" type="button" aria-expanded="false" aria-controls="idioma-lista"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 3.9 5.7 3.9 9s-1.3 6.3-3.9 9c-2.6-2.7-3.9-5.7-3.9-9S9.4 5.7 12 3z"/></svg><span class="idioma-actual">ES</span><span class="solo-lectores"><span lang="es">Idioma</span><span lang="en">Language</span><span lang="fr">Langue</span></span></button>
+        <ul class="idioma-lista" id="idioma-lista">
+          <li><button type="button" data-idioma="es" aria-current="true">Español</button></li>
+          <li><button type="button" data-idioma="en" aria-current="false">English</button></li>
+          <li><button type="button" data-idioma="fr" aria-current="false">Français</button></li>
+        </ul>
       </div>
-    </nav>
+    </div>
   </div>
 </header>
 
