@@ -345,7 +345,7 @@ details p { color: var(--muted); margin: 12px 0 0; }
 /* Cierre y pie */
 .cierre { text-align: center; }
 .cierre .acciones { margin-top: 28px; }
-footer { border-top: 1px solid var(--border); padding: 32px 0 48px; color: var(--faint); font-size: 14px; }
+footer { background: var(--bg); border-top: 1px solid var(--border); padding: 32px 0 48px; color: var(--faint); font-size: 14px; }
 footer .contenedor { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; }
 footer nav { display: flex; gap: 20px; flex-wrap: wrap; }
 footer a { color: var(--muted); }
