@@ -13,6 +13,16 @@
 <meta property="og:image" content="https://getswiftpen.com/img/portada.jpg?v=3">
 <link rel="preload" href="/assets/fuentes/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/site.css">
+<!-- Las notas de cada version van por triplicado, una vez por idioma (ver
+     el comentario de mas abajo), y site.css oculta los idiomas inactivos.
+     Si esa hoja de estilos no llega a cargar (por ejemplo al previsualizar
+     sitio/ sin su assets/ al lado), que como minimo no se repita el texto
+     de las notas en los tres idiomas: por defecto solo se ve el espanol. -->
+<style>
+article[lang="en"], article[lang="fr"] { display: none; }
+html[data-lang="en"] article[lang="en"],
+html[data-lang="fr"] article[lang="fr"] { display: block; }
+</style>
 <script src="/assets/idioma.js"></script>
 <!-- Estadisticas sin cookies ni datos personales (ver la politica de privacidad). Solo en getswiftpen.com: las vistas previas y las pruebas locales no cuentan. Sin la parte ?... de la direccion. -->
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8e72a64d-fc98-425b-8b24-4017cd4c6f43" data-domains="getswiftpen.com" data-exclude-search="true" data-do-not-track="true"></script>
