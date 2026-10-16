@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="es" data-lang="es" data-titulo-es="SwiftPen · Vista previa del rediseño" data-titulo-en="SwiftPen · Redesign preview" data-titulo-fr="SwiftPen · Aperçu de la refonte">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>SwiftPen · Vista previa del rediseño</title>
+<meta name="description" content="SwiftPen: notas a mano para Android. Tus PDF, notas de voz unidas a tu letra y sincronización con tu propio almacenamiento. Sin cuentas, sin anuncios y sin suscripción.">
+<meta name="theme-color" content="#0b0c12" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f7f7fb" media="(prefers-color-scheme: light)">
+<link rel="icon" href="/favicon.png">
+<link rel="preload" href="/assets/fuentes/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/rediseno.css">
+<style>
+/* Solo de esta pagina (hero y funciones). Lo comun vive en assets/rediseno.css. */
+.hero-rejilla { display: grid; gap: var(--e5); align-items: center; }
+.hero-texto .titular { font-size: clamp(2.3rem, 4.2vw + .6rem, 4.25rem); }
+.hero-texto .subtitulo { max-width: 34rem; }
+.acciones { display: flex; flex-wrap: wrap; gap: var(--e3); margin-top: var(--e4); }
+.acciones .principal { padding: 8px 24px; }
+.dos-lineas { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; text-align: left; }
+.dos-lineas small { font-size: .72rem; font-weight: 500; opacity: .85; }
+.sellos { display: flex; flex-wrap: wrap; gap: var(--e2) var(--e4); margin: var(--e4) 0 0; padding: 0; list-style: none; font-size: .95rem; font-weight: 600; color: var(--muted); }
+.sellos li { display: inline-flex; align-items: center; gap: var(--e2); }
+.sellos svg { width: 20px; height: 20px; fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.escena { position: relative; padding-right: 14%; padding-bottom: 8%; }
+.tableta { border: 6px solid var(--bezel); border-radius: 22px; overflow: hidden; background: var(--bezel); box-shadow: var(--shadow); }
+.tableta img { width: 100%; aspect-ratio: 1600 / 1000; }
+.telefono { position: absolute; right: 0; bottom: 0; width: 24%; border: 4px solid var(--bezel); border-radius: 20px; overflow: hidden; background: var(--bezel); box-shadow: var(--shadow); }
+.telefono img { width: 100%; aspect-ratio: 720 / 1597; }
+@media (min-width: 960px) {
+  .hero-rejilla { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--e6); }
+}
+@media (max-width: 959px) {
+  .escena { max-width: 560px; margin-inline: auto; width: 100%; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .escena { animation: hero-entra .6s ease both; }
+}
+@keyframes hero-entra { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+/* Funciones: cada panel = titulo + fila de 1 a 3 clips (video o imagen) con su texto debajo.
+ * En movil la fila es un carrusel de scroll-snap horizontal. */
+#funciones { padding-block: clamp(24px, 4vh, 48px); }
+#funciones .cabecera-seccion { margin-bottom: var(--e4); }
+.hero { padding-block: clamp(24px, 4vh, 64px); }
+.clips h3 { margin: 0 0 var(--e3); font-size: 1.35rem; line-height: 1.2; letter-spacing: -.01em; }
+.clips-fila { display: flex; gap: var(--e3); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(var(--e3) * -1); padding-inline: var(--e3); scroll-padding-inline: var(--e3); }
+.clips-fila::-webkit-scrollbar { display: none; }
+.clip { flex: none; width: 82%; scroll-snap-align: start; display: flex; flex-direction: column; gap: var(--e2); min-width: 0; }
+.clip p { margin: 0; font-size: 1rem; line-height: 1.5; color: var(--muted); }
+.clip .video-caja { box-shadow: var(--shadow-suave); }
+.clip .video-caja video { object-fit: contain; }
+.clips.uno .video-caja[data-video="audio"] { max-width: 240px; }
+@media (min-width: 760px) {
+  .clips-fila { display: grid; overflow: visible; margin: 0; padding: 0; gap: var(--e4); align-items: start; }
+  .clip { width: auto; }
+  .clips.dos .clips-fila { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .clips.tres .clips-fila { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .clips.tres .video-caja { aspect-ratio: 16 / 10; }
+  .clips.dos .video-caja { aspect-ratio: 2 / 1; }
+  .clip .video-caja img { object-fit: contain; }
+  .clips.uno { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); align-items: center; column-gap: var(--e5); }
+  .clips.uno h3 { grid-column: 1; grid-row: 1; align-self: end; }
+  .clips.uno .clips-fila, .clips.uno .clip { display: contents; }
+  .clips.uno .clip p { grid-column: 1; grid-row: 2; align-self: start; font-size: 1.0625rem; }
+  .clips.uno .video-caja { grid-column: 2; grid-row: 1 / span 2; max-width: 400px; justify-self: center; width: 100%; }
+  .clips.uno .video-caja[data-video="audio"] { max-width: 340px; }
+}
+/* Sin JS no se pueden cambiar de pestana: se ocultan los botones y se ven los paneles apilados. */
+html:not(.js) .tabs-lista { display: none; }
+html:not(.js) .tab-panel + .tab-panel { margin-top: var(--e5); }
+/* Misma altura de panel en los tres idiomas (el frances es el mas largo): suelo comun, medido a mano. */
+.tabs { --alto-min: 380px; }
+.tab-panel { min-height: max(var(--alto-panel, 0px), var(--alto-min)); }
+@media (max-width: 759px) { .tabs { --alto-min: 470px; } }
+/* La seccion es flex en columna: sin esto el contenedor se encoge al contenido (el carrusel lo ensancharia). */
+.seccion-pantalla > .contenedor { width: 100%; }
+</style>
+<script src="/assets/idioma.js"></script>
+<!-- Estadisticas sin cookies ni datos personales (ver la politica de privacidad). Solo en getswiftpen.com: las vistas previas y las pruebas locales no cuentan. Sin la parte ?... de la direccion. -->
+<script defer src="https://cloud.umami.is/script.js" data-website-id="8e72a64d-fc98-425b-8b24-4017cd4c6f43" data-domains="getswiftpen.com" data-exclude-search="true" data-do-not-track="true"></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M5 3.6v16.8c0 .8.9 1.3 1.6.9l13.8-8.4a1 1 0 0 0 0-1.8L6.6 2.7C5.9 2.3 5 2.8 5 3.6z"/></symbol>
+  <symbol id="i-persona" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-prohibido" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m5.6 5.6 12.8 12.8"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7"/></symbol>
+</svg>
+
+<header class="barra">
+  <div class="contenedor">
+    <a class="marca" href="/nuevo/" aria-label="SwiftPen">
+      <img class="claro" src="/img/wordmark-light.webp" alt="SwiftPen" width="680" height="185">
+      <img class="oscuro" src="/img/wordmark-dark.webp" alt="SwiftPen" width="680" height="185">
+    </a>
+    <div class="menu" id="menu">
+      <nav class="navegacion">
+        <a href="#funciones"><span lang="es">Funciones</span><span lang="en">Features</span><span lang="fr">Fonctions</span></a>
+        <a href="#precio"><span lang="es">Precio</span><span lang="en">Pricing</span><span lang="fr">Tarifs</span></a>
+        <a href="/roadmap/"><span lang="es">Roadmap</span><span lang="en">Roadmap</span><span lang="fr">Feuille de route</span></a>
+        <a href="/release-notes/"><span lang="es">Notas</span><span lang="en">Notes</span><span lang="fr">Notes</span></a>
+      </nav>
+      <div class="idioma-sel">
+        <button class="idioma-boton" type="button" aria-expanded="false" aria-controls="idioma-lista"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 3.9 5.7 3.9 9s-1.3 6.3-3.9 9c-2.6-2.7-3.9-5.7-3.9-9S9.4 5.7 12 3z"/></svg><span class="idioma-actual">ES</span><span class="solo-lectores"><span lang="es">Idioma</span><span lang="en">Language</span><span lang="fr">Langue</span></span></button>
+        <ul class="idioma-lista" id="idioma-lista">
+          <li><button type="button" data-idioma="es" aria-current="true">Español</button></li>
+          <li><button type="button" data-idioma="en" aria-current="false">English</button></li>
+          <li><button type="button" data-idioma="fr" aria-current="false">Français</button></li>
+        </ul>
+      </div>
+    </div>
+    <!-- El CTA va despues del menu en el DOM pero antes en pantalla (order) para quedar fuera del panel movil. -->
+    <a class="boton principal cta" href="#avisame"><span lang="es">Avísame</span><span lang="en">Notify me</span><span lang="fr">Prévenez-moi</span></a>
+    <button class="menu-boton" type="button" aria-expanded="false" aria-controls="menu"><span class="solo-lectores"><span lang="es">Menú</span><span lang="en">Menu</span><span lang="fr">Menu</span></span><svg class="menu-icono" viewBox="0 0 24 24" aria-hidden="true"><path class="a" d="M4 7h16"/><path class="b" d="M9 12h11"/><path class="c" d="M14 17h6"/></svg></button>
+  </div>
+</header>
+
+<main>
+
+<!-- S1: hero -->
+<section class="seccion-pantalla hero" id="inicio">
+  <div class="contenedor hero-rejilla">
+    <div class="hero-texto">
+      <h1 class="titular"><span lang="es">Un cuaderno que es tuyo.<br><span class="degradado">De verdad.</span></span><span lang="en">A notebook that's yours.<br><span class="degradado">For real.</span></span><span lang="fr">Un carnet qui vous appartient.<br><span class="degradado">Vraiment.</span></span></h1>
+      <p class="subtitulo"><span lang="es">Apuntes a mano, tus PDF y notas de voz que siguen a tu letra, sincronizados con tu propio almacenamiento. Sin cuentas ni suscripciones.</span><span lang="en">Handwritten notes, your PDFs and voice recordings that follow your writing, synced to your own storage. No accounts, no subscriptions.</span><span lang="fr">Notes manuscrites, PDF et enregistrements vocaux qui suivent votre écriture, synchronisés avec votre propre stockage. Sans compte, sans abonnement.</span></p>
+      <!-- CTA unico. Cuando salga en Google Play, este hueco pasa a ser el badge de la ficha. -->
+      <div class="acciones" id="hueco-play">
+        <a class="boton principal" href="#avisame" data-umami-event="ir-al-aviso" data-umami-event-lugar="portada">
+          <svg aria-hidden="true" fill="currentColor"><use href="#i-play"/></svg>
+          <span class="dos-lineas"><small><span lang="es">Próximamente en Google Play</span><span lang="en">Coming soon to Google Play</span><span lang="fr">Bientôt sur Google Play</span></small><span lang="es">Avísame cuando salga</span><span lang="en">Let me know when it's out</span><span lang="fr">Prévenez-moi à la sortie</span></span>
+        </a>
+        <a class="boton" href="#funciones" data-umami-event="ver-funciones"><span lang="es">Ver funciones</span><span lang="en">See features</span><span lang="fr">Voir les fonctions</span></a>
+      </div>
+      <ul class="sellos">
+        <li><svg aria-hidden="true"><use href="#i-persona"/></svg><span lang="es">Sin cuentas</span><span lang="en">No accounts</span><span lang="fr">Sans compte</span></li>
+        <li><svg aria-hidden="true"><use href="#i-prohibido"/></svg><span lang="es">Sin anuncios</span><span lang="en">No ads</span><span lang="fr">Sans publicité</span></li>
+        <li><svg aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Notas ilimitadas, gratis</span><span lang="en">Unlimited notes, free</span><span lang="fr">Notes illimitées, gratuites</span></li>
+      </ul>
+    </div>
+    <div class="escena">
+      <div class="tableta"><picture lang="es"><source srcset="/img/editor-dark-es.webp?v=7" media="(prefers-color-scheme: dark)"><img src="/img/editor-es.webp?v=7" width="1600" height="1000" alt="Una nota de biología escrita a mano en SwiftPen, con un diagrama de la célula." fetchpriority="high"></picture><picture lang="en"><source srcset="/img/editor-dark-en.webp?v=7" media="(prefers-color-scheme: dark)"><img src="/img/editor-en.webp?v=7" width="1600" height="1000" alt="A handwritten biology note in SwiftPen, with a diagram of a cell." fetchpriority="high"></picture><picture lang="fr"><source srcset="/img/editor-dark-en.webp?v=7" media="(prefers-color-scheme: dark)"><img src="/img/editor-en.webp?v=7" width="1600" height="1000" alt="Une note de biologie manuscrite dans SwiftPen, avec un schéma de cellule." fetchpriority="high"></picture></div>
+      <div class="telefono"><picture lang="es"><source srcset="/img/phone-dark-es.webp?v=6" media="(prefers-color-scheme: dark)"><img src="/img/phone-es.webp?v=6" width="720" height="1597" alt="La biblioteca de SwiftPen en un móvil." loading="lazy"></picture><picture lang="en"><source srcset="/img/phone-dark-en.webp?v=6" media="(prefers-color-scheme: dark)"><img src="/img/phone-en.webp?v=6" width="720" height="1597" alt="The SwiftPen library on a phone." loading="lazy"></picture><picture lang="fr"><source srcset="/img/phone-dark-en.webp?v=6" media="(prefers-color-scheme: dark)"><img src="/img/phone-en.webp?v=6" width="720" height="1597" alt="La bibliothèque de SwiftPen sur un téléphone." loading="lazy"></picture></div>
+    </div>
+  </div>
+</section>
+
+<!-- S2: funciones con pestañas -->
+<section class="seccion-pantalla bajo-el-pliegue" id="funciones">
+  <div class="contenedor">
+    <div class="cabecera-seccion">
+      <p class="etiqueta"><span lang="es">Funciones</span><span lang="en">Features</span><span lang="fr">Fonctions</span></p>
+      <h2 class="titulo" id="titulo-funciones"><span lang="es">Lo mejor del papel, sin sus límites.</span><span lang="en">The best of paper, without its limits.</span><span lang="fr">Le meilleur du papier, sans ses limites.</span></h2>
+    </div>
+    <div class="tabs">
+      <div class="tabs-lista" role="tablist" aria-labelledby="titulo-funciones">
+        <button class="tab" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="true" data-umami-event="ver-pestana" data-umami-event-pestana="escribir"><span lang="es">Escribir</span><span lang="en">Write</span><span lang="fr">Écrire</span></button>
+        <button class="tab" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" data-umami-event="ver-pestana" data-umami-event-pestana="borrar"><span lang="es">Borrar</span><span lang="en">Erase</span><span lang="fr">Effacer</span></button>
+        <button class="tab" role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false" data-umami-event="ver-pestana" data-umami-event-pestana="seleccionar"><span lang="es">Seleccionar</span><span lang="en">Select</span><span lang="fr">Sélectionner</span></button>
+        <button class="tab" role="tab" id="tab-4" aria-controls="panel-4" aria-selected="false" data-umami-event="ver-pestana" data-umami-event-pestana="audio"><span lang="es">Audio</span><span lang="en">Audio</span><span lang="fr">Audio</span></button>
+        <button class="tab" role="tab" id="tab-5" aria-controls="panel-5" aria-selected="false" data-umami-event="ver-pestana" data-umami-event-pestana="pdf"><span lang="es">PDF y lienzo</span><span lang="en">PDF & canvas</span><span lang="fr">PDF et canevas</span></button>
+      </div>
+      <div class="tab-panel" role="tabpanel" id="panel-1" aria-labelledby="tab-1">
+        <div class="clips dos"><h3><span lang="es">Escribe como en papel</span><span lang="en">Write like it's paper</span><span lang="fr">Écrivez comme sur papier</span></h3><div class="clips-fila"><div class="clip"><figure class="video-caja" data-video="forma_perfecta" style="--proporcion: 960 / 558" role="group" aria-labelledby="clip-1"><video muted loop playsinline preload="none" poster="/video/es/forma_perfecta.webp" width="960" height="558" aria-labelledby="clip-1"></video></figure><p id="clip-1"><span lang="es">Al terminar un trazo, deja el lápiz quieto un momento y se convierte en una forma perfecta.</span><span lang="en">When you finish a stroke, hold the pen still for a moment and it turns into a perfect shape.</span><span lang="fr">À la fin d'un trait, gardez le stylet immobile un instant et il devient une forme parfaite.</span></p></div><div class="clip"><figure class="video-caja" data-video="linea_recta" style="--proporcion: 960 / 402" role="group" aria-labelledby="clip-2"><video muted loop playsinline preload="none" poster="/video/es/linea_recta.webp" width="960" height="402" aria-labelledby="clip-2"></video></figure><p id="clip-2"><span lang="es">Manteniendo: deja el lápiz quieto al final y el trazo se endereza. Siempre: sale recto directamente.</span><span lang="en">Holding: pause at the end of the stroke and it straightens out. Always: it comes out straight right away.</span><span lang="fr">En maintenant : gardez le stylet immobile à la fin et le trait se redresse. Toujours : il sort droit directement.</span></p></div></div></div>
+      </div>
+      <div class="tab-panel" role="tabpanel" id="panel-2" aria-labelledby="tab-2">
+        <div class="clips tres"><h3><span lang="es">Borra a tu manera</span><span lang="en">Erase your way</span><span lang="fr">Effacez à votre façon</span></h3><div class="clips-fila"><div class="clip"><figure class="video-caja" data-video="garabatear" style="--proporcion: 874 / 644" role="group" aria-labelledby="clip-3"><video muted loop playsinline preload="none" poster="/video/es/garabatear.webp" width="874" height="644" aria-labelledby="clip-3"></video></figure><p id="clip-3"><span lang="es">Garabatea encima de lo escrito para borrarlo. Si te equivocas, deshacer lo devuelve.</span><span lang="en">Scribble over your writing to erase it. If you change your mind, undo brings it back.</span><span lang="fr">Gribouillez sur ce que vous avez écrit pour l'effacer. En cas d'erreur, annuler le fait revenir.</span></p></div><div class="clip"><figure class="video-caja" data-video="objeto_completo" style="--proporcion: 960 / 554" role="group" aria-labelledby="clip-4"><video muted loop playsinline preload="none" poster="/video/es/objeto_completo.webp" width="960" height="554" aria-labelledby="clip-4"></video></figure><p id="clip-4"><span lang="es">Basta con rozar un trazo para borrarlo entero. Desactivado, borra solo por donde pasas.</span><span lang="en">Just brush a stroke to erase the whole thing. Turn it off to erase only where you go over.</span><span lang="fr">Il suffit d'effleurer un trait pour l'effacer en entier. Désactivé, la gomme n'efface que là où elle passe.</span></p></div><div class="clip"><figure class="video-caja" data-video="alcance_goma" style="--proporcion: 960 / 402" role="group" aria-labelledby="clip-5"><video muted loop playsinline preload="none" poster="/video/es/alcance_goma.webp" width="960" height="402" aria-labelledby="clip-5"></video></figure><p id="clip-5"><span lang="es">Elige qué borra la goma. Con solo el resaltador, quitas el resaltado sin tocar lo escrito.</span><span lang="en">Choose what the eraser removes. With only the highlighter, you can clear highlights without touching your writing.</span><span lang="fr">Choisissez ce que la gomme efface. Avec seulement le surligneur, vous retirez le surlignage sans toucher à l'écriture.</span></p></div></div></div>
+      </div>
+      <div class="tab-panel" role="tabpanel" id="panel-3" aria-labelledby="tab-3">
+        <div class="clips dos"><h3><span lang="es">Rodea, mueve, reordena</span><span lang="en">Circle it, move it, rearrange it</span><span lang="fr">Entourez, déplacez, réorganisez</span></h3><div class="clips-fila"><div class="clip"><figure class="video-caja" data-video="lazo_seleccionar" style="--proporcion: 960 / 412" role="group" aria-labelledby="clip-6"><video muted loop playsinline preload="none" poster="/video/es/lazo_seleccionar.webp" width="960" height="412" aria-labelledby="clip-6"></video></figure><p id="clip-6"><span lang="es">Elige qué agarra el lazo. Así mueves un dibujo sin llevarte el texto de al lado.</span><span lang="en">Choose what the lasso picks up, so you can move a drawing without dragging along the text next to it.</span><span lang="fr">Choisissez ce que le lasso attrape : vous déplacez un dessin sans emporter le texte d'à côté.</span></p></div><div class="clip"><figure class="video-caja" style="--proporcion: 1300 / 1000"><picture lang="es"><source srcset="/img/lazo-dark-es.webp?v=4" media="(prefers-color-scheme: dark)"><img src="/img/lazo-es.webp?v=4" width="1300" height="1000" alt="El diagrama de la célula seleccionado con el lazo, con su barra de acciones." loading="lazy"></picture><picture lang="en"><source srcset="/img/lazo-dark-en.webp?v=4" media="(prefers-color-scheme: dark)"><img src="/img/lazo-en.webp?v=4" width="1300" height="1000" alt="The cell diagram selected with the lasso, with its action bar." loading="lazy"></picture><picture lang="fr"><source srcset="/img/lazo-dark-en.webp?v=4" media="(prefers-color-scheme: dark)"><img src="/img/lazo-en.webp?v=4" width="1300" height="1000" alt="Le schéma de la cellule sélectionné au lasso, avec sa barre d'actions." loading="lazy"></picture></figure><p id="clip-lazo"><span lang="es">Rodea un diagrama y llévatelo a otro sitio, a otra página o a otra nota, sin borrar y volver a empezar.</span><span lang="en">Loop around a diagram and take it anywhere: another spot, page or note. No erasing and starting over.</span><span lang="fr">Entourez un schéma et emportez-le où vous voulez : ailleurs sur la page, sur une autre page ou dans une autre note. Sans tout effacer pour recommencer.</span></p></div></div></div>
+      </div>
+      <div class="tab-panel" role="tabpanel" id="panel-4" aria-labelledby="tab-4">
+        <div class="clips uno"><h3><span lang="es">Tu letra, al ritmo del audio</span><span lang="en">Your writing, in time with the audio</span><span lang="fr">Votre écriture, au rythme de l'audio</span></h3><div class="clips-fila"><div class="clip"><figure class="video-caja" data-video="audio" style="--proporcion: 800 / 794" role="group" aria-labelledby="clip-7"><video muted loop playsinline preload="none" poster="/video/es/audio.webp" width="800" height="794" aria-labelledby="clip-7"></video></figure><p id="clip-7"><span lang="es">Graba mientras escribes. Al escucharlo, tu letra se vuelve a escribir al ritmo del audio; toca una palabra para saltar a ese momento.</span><span lang="en">Record while you write. On playback, your writing redraws in sync with the audio; tap a word to jump to that moment.</span><span lang="fr">Enregistrez pendant que vous écrivez. À l'écoute, votre écriture se redessine au rythme de l'audio ; touchez un mot pour aller à ce moment-là.</span></p></div></div></div>
+      </div>
+      <div class="tab-panel" role="tabpanel" id="panel-5" aria-labelledby="tab-5">
+        <div class="clips uno"><h3><span lang="es">Tus PDF y un lienzo sin bordes</span><span lang="en">Your PDFs and a canvas with no edges</span><span lang="fr">Vos PDF et un canevas sans bords</span></h3><div class="clips-fila"><div class="clip"><figure class="video-caja" style="--proporcion: 1600 / 1000"><picture lang="es"><source srcset="/img/lienzo-dark-es.webp?v=7" media="(prefers-color-scheme: dark)"><img src="/img/lienzo-es.webp?v=7" width="1600" height="1000" alt="Un mapa mental de un viaje a Japón en el lienzo infinito." loading="lazy"></picture><picture lang="en"><source srcset="/img/lienzo-dark-en.webp?v=7" media="(prefers-color-scheme: dark)"><img src="/img/lienzo-en.webp?v=7" width="1600" height="1000" alt="A mind map of a trip to Japan on the infinite canvas." loading="lazy"></picture><picture lang="fr"><source srcset="/img/lienzo-dark-en.webp?v=7" media="(prefers-color-scheme: dark)"><img src="/img/lienzo-en.webp?v=7" width="1600" height="1000" alt="Une carte mentale d'un voyage au Japon sur le canevas infini." loading="lazy"></picture></figure><p id="clip-lienzo"><span lang="es">Importa apuntes o exámenes y anótalos como una página más. Y para las ideas que no caben en una hoja, un lienzo sin bordes que crece hacia donde haga falta.</span><span lang="en">Bring in lecture notes or past exams and mark them up like any page. And for ideas that won't fit on a page, a canvas with no edges that grows in any direction.</span><span lang="fr">Importez vos cours ou d'anciens examens et annotez-les comme n'importe quelle page. Et pour les idées qui ne tiennent pas sur une page, un canevas sans bords qui s'étend dans toutes les directions.</span></p></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- T4: S3 (bento: sincronización, gratis, extras), S4 (precio y comparativa; ancla #precio) y S5 (FAQ y cierre con el formulario) -->
+
+<div id="avisame"></div>
+
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <span>© 2026 SwiftPen</span>
+    <nav aria-label="Pie">
+      <a href="/release-notes/"><span lang="es">Notas de actualización</span><span lang="en">Release notes</span><span lang="fr">Notes de mise à jour</span></a>
+      <a href="/roadmap/"><span lang="es">Hoja de ruta</span><span lang="en">Roadmap</span><span lang="fr">Feuille de route</span></a>
+      <a href="/privacidad/"><span lang="es">Privacidad</span><span lang="en">Privacy</span><span lang="fr">Confidentialité</span></a>
+      <a href="/terminos/"><span lang="es">Términos</span><span lang="en">Terms</span><span lang="fr">Conditions</span></a>
+      <a href="/aviso-legal/"><span lang="es">Aviso legal</span><span lang="en">Legal notice</span><span lang="fr">Mentions légales</span></a>
+      <a href="mailto:support@getswiftpen.com">support@getswiftpen.com</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="/assets/interaccion.js"></script>
+</body>
+</html>
