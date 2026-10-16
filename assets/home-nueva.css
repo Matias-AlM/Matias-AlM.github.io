@@ -161,3 +161,19 @@ svg.i { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor;
   .plan .cuanto { font-size: 1.9rem; }
   .plan .plan-nota { margin-top: var(--e2); }
 }
+
+/* ---------- Secciones en bloques de color (estilo Notability) ----------
+ * Cada seccion lleva su tinte pastel a todo el ancho; las tarjetas siguen en --surface y destacan. */
+:root {
+  --tinte-funciones: #dfe9ff; --tinte-control: #d9f3e6; --tinte-precio: #ffe9d1; --tinte-preguntas: #f4e1fa; --tinte-cierre: #e4dcff;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tinte-funciones: #131c33; --tinte-control: #112821; --tinte-precio: #2a1f14; --tinte-preguntas: #261630; --tinte-cierre: #1f1a3d;
+  }
+}
+#funciones { background: var(--tinte-funciones); }
+#control { background: var(--tinte-control); }
+#precio { background: var(--tinte-precio); }
+#preguntas { background: var(--tinte-preguntas); }
+#avisame { background: var(--tinte-cierre); }
