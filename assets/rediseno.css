@@ -137,7 +137,8 @@ html[data-lang="fr"] [lang="en"]:not(html) { display: none !important; }
 }
 .barra .contenedor { display: flex; align-items: center; height: var(--alto-barra); gap: var(--e3); }
 .marca { display: flex; align-items: center; min-height: var(--tactil); margin-right: auto; }
-.marca img { height: 30px; width: auto; }
+.marca { flex: none; }
+.marca img { height: 30px; width: auto; max-width: none; flex: none; object-fit: contain; }
 .marca .oscuro { display: none; }
 @media (prefers-color-scheme: dark) {
   .marca .claro { display: none; }
@@ -187,7 +188,7 @@ html:not(.js) .idioma-boton { display: none; }
 html:not(.js) .idioma-lista { display: flex; gap: 4px; padding: 3px; border-radius: var(--radio-pildora); box-shadow: none; }
 
 /* Movil: logo + CTA + boton de menu; los enlaces y el idioma, en un panel a pantalla completa. */
-@media (max-width: 759px) {
+@media (max-width: 1099px) {
   .barra .contenedor { gap: var(--e2); }
   .barra .cta { padding: 8px 16px; }
   html.js .menu-boton {
@@ -219,7 +220,7 @@ html:not(.js) .idioma-lista { display: flex; gap: 4px; padding: 3px; border-radi
   html.js .idioma-lista { position: static; display: none; opacity: 1; visibility: visible; transform: none; margin-top: var(--e2); box-shadow: none; }
   html.js .idioma-sel.abierto .idioma-lista { display: block; }
 }
-@media (min-width: 760px) { .menu-boton { display: none !important; } }
+@media (min-width: 1100px) { .menu-boton { display: none !important; } }
 
 /* ---------- Seccion de una pantalla ----------
  * Una idea por seccion. Alto minimo suave (nunca fijo, sin scroll-snap vertical):

@@ -52,7 +52,8 @@
     var selector = document.querySelector(".idioma-sel");
     if (!menu || !botonMenu || !selector) return;
     var botonIdioma = selector.querySelector(".idioma-boton");
-    var enMovil = window.matchMedia("(max-width: 759px)");
+    // Movil = el boton de menu se ve (el punto de corte vive en el CSS de cada hoja).
+    function enMovil() { return getComputedStyle(botonMenu).display !== "none"; }
 
     function abrirIdioma(abrir) {
       selector.classList.toggle("abierto", abrir);
@@ -67,7 +68,7 @@
     }
     // En movil el panel cerrado esta oculto: sus enlaces no reciben foco ni lectores.
     function ajustarPanel() {
-      if (!enMovil.matches && menu.classList.contains("abierto")) abrirMenu(false);
+      if (!enMovil() && menu.classList.contains("abierto")) abrirMenu(false);
     }
 
     botonMenu.addEventListener("click", function () { abrirMenu(!menu.classList.contains("abierto")); });
@@ -91,7 +92,7 @@
         botonMenu.focus();
       }
     });
-    enMovil.addEventListener("change", ajustarPanel);
+    window.addEventListener("resize", ajustarPanel);
   }
 
   document.addEventListener("DOMContentLoaded", function () {

@@ -176,3 +176,7 @@ html:not(.js) .bento-tabs .tab-panel + .tab-panel { margin-top: var(--e5); }
 .cierre .avisame-consentimiento a { color: #ffd2f6; }
 .pie-grande .pie-logo { min-height: 0; margin-bottom: var(--e2); }
 .pie-logo img { height: 34px; width: auto; }
+
+/* Barra: el boton de aviso no se parte en dos lineas; en pantallas muy estrechas, mas compacto */
+.barra .cta { white-space: nowrap; }
+@media (max-width: 380px) { .barra .cta { padding: 8px 12px; font-size: 14px; } .barra .contenedor { gap: 6px; padding-inline: 12px; } }
