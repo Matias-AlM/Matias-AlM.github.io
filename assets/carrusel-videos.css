@@ -1,0 +1,58 @@
+/* Carrusel de videos de ayuda (S2 de la home nueva). Marcado y comportamiento en
+ * carrusel-videos.js. Sin JS: los videos se ven apilados, cada uno con su texto
+ * (.carrusel sin .cv-activo). Usa los tokens de rediseno.css. */
+.carrusel { --cv-ancho: min(500px, 44vw); --cv-paso: .9; }
+@media (max-width: 759px) { .carrusel { --cv-ancho: 74vw; --cv-paso: .82; } }
+
+/* ---------- Sin JS ---------- */
+.cv-lista { display: grid; gap: var(--e5); margin: 0; padding: 0; list-style: none; }
+.cv-item { max-width: 640px; margin-inline: auto; }
+.cv-video {
+  position: relative; margin: 0; overflow: hidden; aspect-ratio: 16 / 10;
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: var(--radio-grande); box-shadow: var(--shadow-suave);
+}
+.cv-video video { width: 100%; height: 100%; object-fit: contain; }
+.cv-texto { margin: var(--e2) 0 0; color: var(--muted); }
+.cv-controles { display: none; }
+
+/* ---------- Con JS ---------- */
+.carrusel.cv-activo .cv-lista {
+  display: block; position: relative; max-width: none;
+  height: calc(var(--cv-ancho) * 10 / 16); overflow-x: clip; touch-action: pan-y;
+}
+.cv-activo .cv-item {
+  position: absolute; top: 0; left: 50%; width: var(--cv-ancho); max-width: none; margin: 0;
+  transform: translateX(calc(-50% + var(--o, 0) * var(--cv-ancho) * var(--cv-paso))) scale(var(--s, 1));
+  opacity: var(--op, 1); z-index: var(--z, 1); cursor: pointer; user-select: none;
+  transition: transform .55s cubic-bezier(.22, .8, .3, 1), opacity .55s ease;
+}
+.cv-activo .cv-item[data-d="0"] { cursor: default; }
+.cv-activo .cv-item[data-d="3"] { pointer-events: none; }
+
+.cv-descripcion { display: none; }
+.cv-activo .cv-descripcion { display: grid; max-width: 40rem; margin: var(--e4) auto 0; text-align: center; }
+/* Todos los textos apilados en la misma celda: la altura es la del mayor (sin saltos) y el cambio es un fundido. */
+.cv-descripcion .cv-texto {
+  grid-area: 1 / 1; margin: 0; font-size: var(--t-subtitulo); line-height: 1.5; color: var(--text);
+  opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility 0s .35s;
+}
+.cv-descripcion .cv-texto.cv-actual { opacity: 1; visibility: visible; transition-delay: 0s; }
+
+.cv-activo .cv-controles { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--e1) var(--e3); margin-top: var(--e3); }
+.cv-boton {
+  display: inline-flex; align-items: center; justify-content: center; flex: none; padding: 0; cursor: pointer;
+  width: var(--tactil); height: var(--tactil); color: var(--text);
+  background: var(--surface); border: 1px solid var(--border); border-radius: 50%;
+}
+.cv-boton:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--border)); }
+.cv-boton svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.cv-boton.cv-pausa svg { fill: currentColor; stroke: none; }
+.cv-puntos { display: flex; justify-content: center; order: 2; flex-basis: 100%; }
+@media (min-width: 760px) { .cv-puntos { order: 0; flex-basis: auto; } }
+.cv-punto { width: var(--tactil); height: var(--tactil); padding: 0; cursor: pointer; background: none; border: 0; display: inline-flex; align-items: center; justify-content: center; }
+.cv-punto::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--faint); opacity: .5; transition: transform var(--normal) ease, opacity var(--normal) ease, background-color var(--normal) ease; }
+.cv-punto[aria-current="true"]::before { background: var(--accent); opacity: 1; transform: scale(1.5); }
+@media (prefers-reduced-motion: reduce) {
+  .cv-activo .cv-item, .cv-descripcion .cv-texto { transition: none !important; }
+}
