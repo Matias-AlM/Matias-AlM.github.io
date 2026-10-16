@@ -162,14 +162,22 @@ svg.i { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor;
   .plan .plan-nota { margin-top: var(--e2); }
 }
 
-/* ---------- Secciones en bloques de color (estilo Notability) ----------
- * Cada seccion lleva su tinte pastel a todo el ancho; las tarjetas siguen en --surface y destacan. */
+/* ---------- Secciones en bloques de color ----------
+ * Solo la gama de SwiftPen (azul, morado y su mezcla sobre --bg), a todo el ancho; en oscuro siguen los mismos tokens.
+ * Las tarjetas siguen en --surface y destacan. */
 :root {
-  --tinte-funciones: #dfe9ff; --tinte-control: #d9f3e6; --tinte-precio: #ffe9d1; --tinte-preguntas: #f4e1fa; --tinte-cierre: #e4dcff;
+  --tinte-funciones: color-mix(in srgb, var(--blue) 14%, var(--bg));
+  --tinte-control: color-mix(in srgb, var(--purple) 12%, var(--bg));
+  --tinte-precio: color-mix(in srgb, var(--blue) 7%, color-mix(in srgb, var(--purple) 7%, var(--bg)));
+  --tinte-preguntas: var(--surface-2);
+  --tinte-cierre: color-mix(in srgb, var(--accent) 18%, var(--bg));
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --tinte-funciones: #131c33; --tinte-control: #112821; --tinte-precio: #2a1f14; --tinte-preguntas: #261630; --tinte-cierre: #1f1a3d;
+    --tinte-funciones: color-mix(in srgb, var(--blue) 16%, var(--bg));
+    --tinte-control: color-mix(in srgb, var(--purple) 15%, var(--bg));
+    --tinte-precio: color-mix(in srgb, var(--blue) 8%, color-mix(in srgb, var(--purple) 8%, var(--bg)));
+    --tinte-cierre: color-mix(in srgb, var(--accent) 22%, var(--bg));
   }
 }
 #funciones { background: var(--tinte-funciones); }
