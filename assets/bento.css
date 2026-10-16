@@ -30,73 +30,44 @@
 html:not(.js) .sin-js-titulo { display: block; }
 html:not(.js) .bento-tabs .tab-panel + .tab-panel { margin-top: var(--e5); }
 
-/* Rejilla de 4 columnas con celdas de proporcion fija: G (grande, media 56 % a la izquierda), A (ancha, 21:9),
- * P (pequena) y T (alta, 1 columna x 2 filas). Cada recurso va en la celda cuya proporcion (--ar) se le parece.
- * La rejilla no cambia nunca: el detalle vive en un <dialog> modal. */
+/* Bento estatico (como notability.com): celdas fijas de tamanos distintos, sin interaccion. Rejilla de 12 columnas
+ * (c3..c12 = columnas que ocupa, f2 = dos filas); cada recurso va en la celda cuya proporcion (--ar) se le parece.
+ * Las celdas sin recurso (.llena) rellenan la altura de su fila con un icono sobre el degradado de marca. */
 .bento-tools { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-items: stretch; }
-.bc { display: flex; min-width: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radio-grande); box-shadow: var(--shadow-suave); overflow: clip; }
-.bc-boton { all: unset; box-sizing: border-box; position: relative; display: flex; flex-direction: column; width: 100%; color: var(--text); }
-button.bc-boton { cursor: pointer; }
-button.bc-boton:focus-visible { outline: 3px solid var(--foco); outline-offset: -3px; }
-button.bc-boton:hover .bc-mas { background-color: color-mix(in srgb, var(--accent) 18%, var(--surface)); }
-.bc-media { display: block; flex: none; aspect-ratio: var(--ar, 16 / 10); background: var(--surface-2); overflow: hidden; }
+.bc { display: flex; flex-direction: column; min-width: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radio-grande); box-shadow: var(--shadow-suave); overflow: clip; }
+.bc-media { display: block; flex: none; aspect-ratio: var(--ar, 4 / 3); background: var(--surface-2); overflow: hidden; }
+.bc.llena .bc-media { aspect-ratio: auto; flex: 1 1 auto; min-height: 120px; }
 .bc-media picture { display: block; height: 100%; }
-.bc-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.bc.ajuste .bc-media img { object-fit: contain; }
-.bc-icono { display: grid; place-items: center; background: var(--grad); }
-.bc-icono svg { width: 22%; height: auto; max-height: 55%; fill: none; stroke: var(--sobre-grad); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-.bc-t { display: block; flex: 1; padding: var(--e3); padding-right: 52px; }
-.bc-t strong { display: block; font-size: 1.02rem; line-height: 1.3; letter-spacing: -.005em; }
-.bc-s { display: block; margin-top: 3px; font-size: .9rem; line-height: 1.45; color: var(--muted); }
-/* El + solo existe en las celdas cuyo detalle anade informacion */
-.bc-mas {
-  position: absolute; right: 12px; bottom: 12px; width: 30px; height: 30px; border-radius: 50%;
-  background-color: var(--surface-2); background-repeat: no-repeat; background-position: center;
-  background-image: linear-gradient(var(--text), var(--text)), linear-gradient(var(--text), var(--text)); background-size: 12px 2px, 2px 12px;
-}
-.bc.G, .bc.A, .bc.T { grid-column: 1 / -1; }
-.bc.T .bc-media { aspect-ratio: 16 / 10; }
-.bc.T .bc-media img { object-fit: contain; }
+.bc-media img, .bc-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bc.ajuste .bc-media img, .bc.ajuste .bc-media video { object-fit: contain; }
+.bc-icono { display: grid; place-items: center; width: 100%; height: 100%; background: var(--grad); }
+.bc-icono svg { width: clamp(40px, 22%, 88px); height: auto; aspect-ratio: 1; fill: none; stroke: var(--sobre-grad); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.bc-t { display: block; flex: none; padding: var(--e3); }
+.bc-t strong { display: block; font-size: 1.05rem; line-height: 1.3; letter-spacing: -.005em; }
+.bc-s { display: block; margin-top: 4px; font-size: .92rem; line-height: 1.5; color: var(--muted); }
+/* Movil: una columna; las pequenas (c3, c4) en dos columnas */
+.bc { grid-column: 1 / -1; }
+.bc.c3, .bc.c4 { grid-column: span 1; }
+.bc.mfull { grid-column: 1 / -1; }
+@media (max-width: 759px) { .bc.ajuste:not(.llena) .bc-media { aspect-ratio: 16 / 10 !important; } .bc.mfull.llena .bc-media { aspect-ratio: 16 / 7; } .bc.mfull.llena.ajuste .bc-media { aspect-ratio: 4 / 3; } }
+.bc.c3 .bc-media, .bc.c4 .bc-media { min-height: 0; }
+.bc.llena.c3 .bc-media, .bc.llena.c4 .bc-media { aspect-ratio: 4 / 3; flex: none; }
+.bc.llena:not(.c3):not(.c4) .bc-media { aspect-ratio: 16 / 7; flex: none; }
+.bc.ajuste.llena .bc-media { aspect-ratio: 4 / 3; }
 @media (min-width: 760px) {
-  .bento-tools { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
-  .bc.G, .bc.A { grid-column: span 2; }
-  .bc.G .bc-boton { flex-direction: row; align-items: stretch; }
-  .bc.G .bc-media { flex: 0 0 56%; align-self: center; aspect-ratio: var(--ar, 4 / 3); }
-  .bc.G .bc-t { display: flex; flex-direction: column; justify-content: center; padding: var(--e4); padding-right: 56px; }
-  .bc.G .bc-t strong { font-size: 1.4rem; }
-  .bc.G .bc-s { font-size: 1rem; }
-  .bc.T { grid-column: span 1; grid-row: span 2; }
-  .bc.T .bc-media { flex: 1; aspect-ratio: auto; min-height: 0; }
+  .bento-tools { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
+  .bc.c3 { grid-column: span 3; } .bc.c4 { grid-column: span 4; } .bc.c5 { grid-column: span 5; } .bc.c7 { grid-column: span 7; }
+  .bc.c8 { grid-column: span 8; } .bc.c12 { grid-column: 1 / -1; }
+  .bc.f2 { grid-row: span 2; }
+  .bc.mfull.c4 { grid-column: span 4; }
+  .bc.llena .bc-media, .bc.llena.c3 .bc-media, .bc.llena.c4 .bc-media, .bc.llena:not(.c3):not(.c4) .bc-media { aspect-ratio: auto; flex: 1 1 auto; min-height: 130px; }
+  .bc.c8.f2 .bc-t strong, .bc.c5 .bc-t strong, .bc.c7 .bc-t strong { font-size: 1.2rem; }
+  .bc-t { padding: var(--e3) var(--e4) var(--e4); }
 }
-
-/* ---------- Detalle: <dialog> modal (hoja inferior en movil) ---------- */
-.bc-dialogo { width: min(720px, 92vw); max-height: 90dvh; padding: var(--e4); border: 0; border-radius: var(--radio-grande); background: var(--surface); color: var(--text); box-shadow: var(--shadow); overflow: auto; }
-.bc-dialogo::backdrop { background: rgb(0 0 0 / .5); }
-.bc-dialogo h3 { margin: var(--e3) 0 var(--e2); font-size: 1.35rem; line-height: 1.25; }
-.bc-dialogo p { margin: 0 0 var(--e2); color: var(--muted); }
-.bc-d-media:empty { display: none; }
-.bc-d-media { background: var(--surface-2); border-radius: 12px; overflow: hidden; }
-.bc-dialogo video, .bc-dialogo img { width: 100%; height: auto; display: block; }
-.bc-dialogo picture { display: block; }
-.bc-cerrar { position: absolute; top: 10px; right: 10px; z-index: 2; width: var(--tactil); height: var(--tactil); display: grid; place-items: center; padding: 0; cursor: pointer; color: var(--text); background: color-mix(in srgb, var(--surface) 88%, transparent); border: 1px solid var(--border); border-radius: 50%; }
-.bc-cerrar svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
-html:has(dialog[open]) { overflow: hidden; scrollbar-gutter: stable; }
-@media (max-width: 759px) {
-  .bc-dialogo { margin: auto 0 0; width: 100%; max-width: none; max-height: 90dvh; border-radius: 20px 20px 0 0; }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .bc-dialogo { transition: opacity .2s ease, transform .2s ease, display .2s allow-discrete, overlay .2s allow-discrete; }
-  .bc-dialogo:not([open]) { opacity: 0; transform: translateY(12px); }
-  @starting-style { .bc-dialogo[open] { opacity: 0; transform: translateY(12px); } }
-}
-/* Sin JS el <dialog> no se puede abrir: el detalle se muestra bajo la celda */
-html:not(.js) .bc { flex-direction: column; }
-html:not(.js) .bc-dialogo { display: block; position: static; width: auto; max-height: none; box-shadow: none; border-top: 1px solid var(--border); border-radius: 0; background: transparent; }
-html:not(.js) .bc-dialogo { opacity: 1 !important; transform: none !important; padding: var(--e3); }
-html:not(.js) .bc-cerrar, html:not(.js) .bc-mas, html:not(.js) .bc-d-media { display: none; }
+@media (prefers-reduced-motion: reduce) { .bc-media video { display: block; } }
 .bento-tabs .tabs-lista { scroll-snap-type: x proximity; }
 .bento-tabs .tab { scroll-snap-align: center; }
-
+@media (min-width: 760px) { .bento-tabs .tab-panel { max-width: 1100px; margin-inline: auto; } }
 
 /* ---------- Mensaje de la marca ---------- */
 .marca-rejilla { display: grid; gap: var(--e4); align-items: center; }
@@ -192,9 +163,10 @@ html:not(.js) .bc-cerrar, html:not(.js) .bc-mas, html:not(.js) .bc-d-media { dis
 .barra .cta { white-space: nowrap; }
 @media (max-width: 380px) { .barra .cta { padding: 8px 12px; font-size: 14px; } .barra .contenedor { gap: 6px; padding-inline: 12px; } }
 
-/* Ancho del bento acotado para que cada pestana quepa en una pantalla de escritorio */
-@media (min-width: 760px) { .bento-tabs .tab-panel { max-width: 920px; margin-inline: auto; } }
 #herramientas { padding-block: clamp(24px, 4vh, 36px); }
 #herramientas .cabecera-seccion { margin-bottom: var(--e3); }
-.bc-icono.ancha { aspect-ratio: 3 / 1; }
-@media (max-width: 759px) { .bc-icono.ancha { aspect-ratio: 16 / 6; } }
+
+/* Las celdas que rellenan altura no se dimensionan por su imagen; el panel mide lo que mida su pestana (como notability.com) */
+.bc.llena .bc-media { position: relative; }
+.bc.llena .bc-media picture, .bc.llena .bc-media img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.bento-tabs .tab-panel { min-height: 0 !important; }
