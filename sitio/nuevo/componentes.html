@@ -58,7 +58,7 @@
   </div>
 </section>
 
-<!-- .tabs + .video-caja. JS de las pestañas: assets/interaccion.js (T2). Aqui, un script minimo solo para la muestra. -->
+<!-- .tabs + .video-caja. JS: assets/interaccion.js. Los paneles no llevan hidden en el HTML (lo pone el JS), asi sin JS se ven apilados. -->
 <section class="seccion-pantalla bajo-el-pliegue" id="funciones">
   <div class="contenedor">
     <div class="cabecera-seccion">
@@ -68,8 +68,8 @@
     <div class="tabs">
       <div class="tabs-lista" role="tablist" aria-label="Funciones">
         <button class="tab" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="true">Pestaña 1</button>
-        <button class="tab" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" tabindex="-1">Pestaña 2</button>
-        <button class="tab" role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false" tabindex="-1">Pestaña 3</button>
+        <button class="tab" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false">Pestaña 2</button>
+        <button class="tab" role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false">Pestaña 3</button>
       </div>
       <div class="tab-panel" role="tabpanel" id="panel-1" aria-labelledby="tab-1">
         <div class="tab-panel-contenido">
@@ -77,18 +77,17 @@
             <h3>Panel 1</h3>
             <p>Texto del panel, dos líneas como máximo. Todos los paneles de unas pestañas deben tener la misma altura (<code>--alto-panel</code>).</p>
           </div>
-          <figure class="video-caja" style="--proporcion: 16 / 10">
-            <!-- Con video real: <video muted loop playsinline preload="none" poster="..." aria-label="...">; el boton de pausa lo cablea interaccion.js -->
-            <figcaption>.video-caja (16 / 10)</figcaption>
-            <button class="video-pausa" type="button" aria-label="Pausar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button>
+          <figure class="video-caja" data-video="forma_perfecta" style="--proporcion: 960 / 558">
+            <!-- interaccion.js crea <video muted loop playsinline preload="none"> y el boton de pausa, y pone src/poster segun el idioma activo -->
+            <figcaption>forma_perfecta</figcaption>
           </figure>
         </div>
       </div>
-      <div class="tab-panel" role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden>
-        <div class="tab-panel-contenido"><div><h3>Panel 2</h3><p>Otro texto de ejemplo.</p></div><figure class="video-caja vertical"><figcaption>.vertical (9 / 16)</figcaption></figure></div>
+      <div class="tab-panel" role="tabpanel" id="panel-2" aria-labelledby="tab-2">
+        <div class="tab-panel-contenido"><div><h3>Panel 2</h3><p>Otro texto de ejemplo.</p></div><figure class="video-caja" data-video="garabatear" style="--proporcion: 874 / 644"><figcaption>garabatear</figcaption></figure></div>
       </div>
-      <div class="tab-panel" role="tabpanel" id="panel-3" aria-labelledby="tab-3" hidden>
-        <div class="tab-panel-contenido"><div><h3>Panel 3</h3><p>Otro texto de ejemplo.</p></div><figure class="video-caja"><figcaption>.video-caja</figcaption></figure></div>
+      <div class="tab-panel" role="tabpanel" id="panel-3" aria-labelledby="tab-3">
+        <div class="tab-panel-contenido"><div><h3>Panel 3</h3><p>Otro texto de ejemplo.</p></div><figure class="video-caja" data-video="lazo_seleccionar" style="--proporcion: 960 / 412"><figcaption>lazo_seleccionar</figcaption></figure></div>
       </div>
     </div>
   </div>
@@ -148,21 +147,6 @@
   </div>
 </footer>
 
-<!-- Solo para la muestra: pestañas minimas. La version real (APG completa) es assets/interaccion.js. -->
-<script>
-document.querySelectorAll(".tabs").forEach(function (t) {
-  var tabs = t.querySelectorAll("[role=tab]");
-  tabs.forEach(function (tab) {
-    tab.addEventListener("click", function () {
-      tabs.forEach(function (o) {
-        var on = o === tab;
-        o.setAttribute("aria-selected", on);
-        o.tabIndex = on ? 0 : -1;
-        document.getElementById(o.getAttribute("aria-controls")).hidden = !on;
-      });
-    });
-  });
-});
-</script>
+<script src="/assets/interaccion.js"></script>
 </body>
 </html>
