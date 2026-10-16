@@ -30,44 +30,61 @@
 html:not(.js) .sin-js-titulo { display: block; }
 html:not(.js) .bento-tabs .tab-panel + .tab-panel { margin-top: var(--e5); }
 
-.bento-tools { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: dense; grid-auto-rows: minmax(0, auto); gap: 10px; }
+.bento-tools { display: grid; grid-template-columns: 1fr; align-items: stretch; gap: 10px; }
+/* Cada celda ocupa siempre su hueco: al abrirla crece dentro de el y las vecinas de su fila se estiran con ella. */
 .bc { position: relative; min-width: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radio-grande); box-shadow: var(--shadow-suave); overflow: hidden; }
-.bc > summary { display: flex; flex-direction: column; height: 100%; padding: var(--e3); cursor: pointer; list-style: none; border-radius: inherit; }
+.bc > summary { display: flex; flex-direction: column; gap: 10px; padding: var(--e3); cursor: pointer; list-style: none; border-radius: inherit; }
 .bc > summary::-webkit-details-marker { display: none; }
 .bc > summary::after {
-  content: ""; position: absolute; top: 14px; right: 14px; width: 24px; height: 24px; border-radius: 50%;
+  content: ""; position: absolute; top: 14px; right: 14px; width: 28px; height: 28px; border-radius: 50%;
   background-color: var(--surface-2); background-repeat: no-repeat; background-position: center;
   background-image: linear-gradient(var(--text), var(--text)), linear-gradient(var(--text), var(--text));
-  background-size: 10px 2px, 2px 10px; transition: transform var(--normal) ease;
+  background-size: 12px 2px, 2px 12px; transition: transform var(--normal) ease;
 }
 .bc[open] > summary::after { transform: rotate(45deg); }
-.bc-cuerpo { display: flex; gap: 10px; align-items: flex-start; padding-right: 26px; }
-.bc-cuerpo svg.i { margin-top: 2px; width: 22px; height: 22px; color: var(--accent); }
-.bc-t strong { display: block; font-size: 1rem; line-height: 1.3; letter-spacing: -.005em; }
-.bc-s { display: block; margin-top: 2px; font-size: .9rem; line-height: 1.4; color: var(--muted); }
+.bc-cuerpo { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; padding-right: 32px; }
+.bc-cuerpo svg.i { width: 40px; height: 40px; padding: 9px; color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, var(--surface)); border-radius: 12px; }
+.bc-t strong { display: block; font-size: 1.05rem; line-height: 1.3; letter-spacing: -.005em; }
+.bc-s { display: block; margin-top: 3px; font-size: .92rem; line-height: 1.45; color: var(--muted); }
 .bc-detalle { padding: 0 var(--e3) var(--e3); color: var(--muted); font-size: .95rem; line-height: 1.5; }
 .bc-detalle p { margin: 0 0 var(--e2); }
 .bc-detalle p:last-child { margin-bottom: 0; }
 .bc-img { display: block; margin-top: var(--e2); }
 .bc-img img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border); background: #fff; }
-.bc-media { display: block; flex: 1 1 auto; min-height: 0; margin: calc(var(--e3) * -1) calc(var(--e3) * -1) var(--e3); overflow: hidden; background: var(--surface-2); }
-.bc-media picture { display: block; height: 100%; }
-.bc-media img { width: 100%; height: 100%; min-height: 110px; max-height: 190px; object-fit: cover; object-position: top left; }
-.bc.grande { grid-column: 1 / -1; background: linear-gradient(160deg, var(--surface), color-mix(in srgb, var(--accent) 7%, var(--surface))); }
-.bc.grande .bc-t strong { font-size: 1.15rem; }
-.bc[open] { grid-column: 1 / -1; grid-row: auto; }
-.bc[open] > summary { height: auto; }
-.bc[open] .bc-media { display: none; }
 .bc summary:hover { background: color-mix(in srgb, var(--accent) 5%, transparent); }
+
+/* Celda grande: ocupa la primera fila entera, con la imagen completa (sin recortar) a un lado. */
+.bc.grande { background: linear-gradient(150deg, var(--surface), color-mix(in srgb, var(--accent) 8%, var(--surface))); }
+.bc.grande > summary { gap: var(--e3); }
+.bc.grande .bc-cuerpo { padding-right: 0; flex-direction: row; gap: 12px; }
+.bc.grande .bc-cuerpo svg.i { flex: none; }
+.bc.grande .bc-t strong { font-size: 1.3rem; }
+.bc.grande .bc-s { font-size: 1rem; }
+.bc-media { display: block; margin: 0; border-radius: 14px; overflow: hidden; background: #fff; border: 1px solid var(--border); aspect-ratio: 16 / 10; }
+.bc-media picture { display: block; height: 100%; }
+.bc-media img { width: 100%; height: 100%; object-fit: contain; object-position: center; }
+.bc-icono { display: grid; place-items: center; background: var(--grad); border: 0; }
+.bc-icono svg { width: 28%; height: auto; max-height: 70%; fill: none; stroke: var(--sobre-grad); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
 @media (min-width: 760px) {
-  .bento-tools { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: minmax(128px, auto); gap: 14px; }
+  .bento-tools { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+  .bc.grande { grid-column: 1 / -1; }
+  .bc.grande > summary { flex-direction: row; align-items: center; padding: var(--e4); gap: var(--e5); }
+  .bc.grande .bc-media { flex: none; width: min(36%, 360px); order: -1; }
+  .bc.grande .bc-cuerpo { flex: 1; align-items: flex-start; padding-right: 44px; }
+  .bc.grande .bc-t strong { font-size: 1.6rem; }
+  .bc.grande .bc-detalle { padding: 0 var(--e4) var(--e4); }
   .bc > summary { padding: var(--e4) var(--e3) var(--e3); }
-  .bc.grande { grid-column: span 2; grid-row: span 2; }
-  .bc.grande > summary { padding: var(--e4); }
-  .bc-media { margin: calc(var(--e4) * -1) calc(var(--e4) * -1) var(--e3); }
-  .bc-media img { max-height: 220px; min-height: 140px; }
-  .bc.grande .bc-t strong { font-size: 1.3rem; }
-  .bc.grande .bc-s { font-size: 1rem; }
+}
+/* Escritorio: las pequenas son hijas directas de la rejilla. Movil: carrusel horizontal bajo la grande. */
+.bc-pequenas { display: contents; }
+@media (max-width: 759px) {
+  .bc-pequenas { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; align-items: stretch; margin-inline: calc(var(--e3) * -1); padding: 2px var(--e3) var(--e2); scroll-padding-inline: var(--e3); }
+  .bc-pequenas::-webkit-scrollbar { display: none; }
+  .bc-pequenas .bc { flex: none; width: 74%; scroll-snap-align: start; }
+  .bc:not(.grande) > summary, .bc:not(.grande) .bc-cuerpo { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .bc.grande .bc-media { order: -1; }
+  .bc.grande > summary { padding: var(--e3); }
+  .bc-cuerpo svg.i { width: 36px; height: 36px; padding: 8px; flex: none; }
 }
 
 /* ---------- Mensaje de la marca ---------- */
@@ -125,10 +142,6 @@ html:not(.js) .bento-tabs .tab-panel + .tab-panel { margin-top: var(--e5); }
 .pie-cols nav { display: flex; flex-direction: column; align-items: flex-start; }
 .pie-tit { margin: 0 0 var(--e1); font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #8588a0; }
 .pie-grande a { padding: 0; min-height: var(--tactil); color: #f2f2f5; }
-.pie-marca {
-  margin: var(--e5) 0 0; font-size: clamp(3.4rem, 17.5vw, 17rem); font-weight: 800; line-height: .9; letter-spacing: -.05em; text-align: center; white-space: nowrap;
-  background: linear-gradient(90deg, #5b93ff, #c45cf6); -webkit-background-clip: text; background-clip: text; color: transparent; user-select: none;
-}
 .pie-copy { margin: var(--e3) 0 0; text-align: center; font-size: .875rem; color: #a3a6b8; }
 
 /* Los tintes por id de home-nueva.css (#precio, #preguntas, #avisame) ceden a las bandas de esta hoja. */
@@ -139,13 +152,6 @@ html:not(.js) .bento-tabs .tab-panel + .tab-panel { margin-top: var(--e5); }
 /* ---------- Ajustes de altura ---------- */
 #comparada { padding-block: clamp(28px, 4.5vh, 48px); }
 @media (max-width: 759px) {
-  /* Movil: las celdas pequenas, en una columna y en fila compacta */
-  .bento-tools { grid-template-columns: 1fr; gap: 8px; }
-  .bc > summary { padding: 12px var(--e3); }
-  .bc-media { margin: -12px calc(var(--e3) * -1) 12px; }
-  .bc-media img { max-height: 120px; min-height: 90px; }
-  .bc.grande > summary { padding-top: 12px; }
-  .bc-s { font-size: .85rem; }
   .banda .cabecera-seccion { margin-bottom: var(--e3); }
   #comparada .comparativa table { min-width: 1000px; font-size: 13px; }
   #comparada .comparativa th, #comparada .comparativa td { padding: 8px 10px; line-height: 1.35; }
@@ -163,3 +169,9 @@ html:not(.js) .bento-tabs .tab-panel + .tab-panel { margin-top: var(--e5); }
   #comparada .aclaracion { font-size: .72rem; }
   #comparada .titulo { font-size: 1.5rem; }
 }
+
+/* Cierre con color: la segunda linea del titular en degradado claro (AA sobre #5b2bc4) */
+.cierre .resalte { background: linear-gradient(90deg, #a9c8ff, #ffc2f2); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.cierre .avisame-titulo { color: #ffd2f6; }
+.cierre .avisame-consentimiento a { color: #ffd2f6; }
+.marca img { border-radius: 9px; }
