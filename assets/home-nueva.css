@@ -163,20 +163,21 @@ svg.i { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor;
 }
 
 /* ---------- Secciones en bloques de color ----------
- * Solo la gama de SwiftPen (azul, morado y su mezcla sobre --bg), a todo el ancho; en oscuro siguen los mismos tokens.
- * Las tarjetas siguen en --surface y destacan. */
+ * Solo la gama de SwiftPen sobre --bg, a todo el ancho. Orden azul, morado, neutro, azul y, al final, el acento
+ * (la unica seccion intensa): dos vecinas nunca se parecen. Las tarjetas siguen en --surface y destacan.
+ * Cortes rectos entre bloques. */
 :root {
   --tinte-funciones: color-mix(in srgb, var(--blue) 14%, var(--bg));
   --tinte-control: color-mix(in srgb, var(--purple) 12%, var(--bg));
-  --tinte-precio: color-mix(in srgb, var(--blue) 7%, color-mix(in srgb, var(--purple) 7%, var(--bg)));
-  --tinte-preguntas: var(--surface-2);
+  --tinte-precio: var(--surface-2);
+  --tinte-preguntas: color-mix(in srgb, var(--blue) 10%, var(--bg));
   --tinte-cierre: color-mix(in srgb, var(--accent) 18%, var(--bg));
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --tinte-funciones: color-mix(in srgb, var(--blue) 16%, var(--bg));
     --tinte-control: color-mix(in srgb, var(--purple) 15%, var(--bg));
-    --tinte-precio: color-mix(in srgb, var(--blue) 8%, color-mix(in srgb, var(--purple) 8%, var(--bg)));
+    --tinte-preguntas: color-mix(in srgb, var(--blue) 11%, var(--bg));
     --tinte-cierre: color-mix(in srgb, var(--accent) 22%, var(--bg));
   }
 }
