@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="es" data-lang="es" data-titulo-es="Componentes · SwiftPen" data-titulo-en="Components · SwiftPen" data-titulo-fr="Composants · SwiftPen">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Componentes · SwiftPen</title>
+<meta name="theme-color" content="#0b0c12" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f7f7fb" media="(prefers-color-scheme: light)">
+<link rel="icon" href="/favicon.png">
+<link rel="preload" href="/assets/fuentes/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/rediseno.css">
+<script src="/assets/idioma.js"></script>
+</head>
+<body>
+<!-- Pagina de muestra de los componentes de rediseno.css. Sin contenido real: copia el marcado.
+     Texto en tres idiomas: <span lang="es">..</span><span lang="en">..</span><span lang="fr">..</span> -->
+
+<header class="barra">
+  <div class="contenedor">
+    <a class="marca" href="/nuevo/" aria-label="SwiftPen">
+      <img class="claro" src="/img/wordmark-light.webp" alt="SwiftPen" width="680" height="185">
+      <img class="oscuro" src="/img/wordmark-dark.webp" alt="SwiftPen" width="680" height="185">
+    </a>
+    <div class="menu" id="menu">
+      <nav class="navegacion">
+        <a href="#funciones"><span lang="es">Funciones</span><span lang="en">Features</span><span lang="fr">Fonctions</span></a>
+        <a href="#precio"><span lang="es">Precio</span><span lang="en">Pricing</span><span lang="fr">Tarifs</span></a>
+        <a href="/roadmap/"><span lang="es">Roadmap</span><span lang="en">Roadmap</span><span lang="fr">Feuille de route</span></a>
+        <a href="/release-notes/"><span lang="es">Notas</span><span lang="en">Notes</span><span lang="fr">Notes</span></a>
+      </nav>
+      <div class="idioma-sel">
+        <button class="idioma-boton" type="button" aria-expanded="false" aria-controls="idioma-lista"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 3.9 5.7 3.9 9s-1.3 6.3-3.9 9c-2.6-2.7-3.9-5.7-3.9-9S9.4 5.7 12 3z"/></svg><span class="idioma-actual">ES</span><span class="solo-lectores"><span lang="es">Idioma</span><span lang="en">Language</span><span lang="fr">Langue</span></span></button>
+        <ul class="idioma-lista" id="idioma-lista">
+          <li><button type="button" data-idioma="es" aria-current="true">Español</button></li>
+          <li><button type="button" data-idioma="en" aria-current="false">English</button></li>
+          <li><button type="button" data-idioma="fr" aria-current="false">Français</button></li>
+        </ul>
+      </div>
+    </div>
+    <!-- El CTA va despues del menu en el DOM pero antes en pantalla (order) para quedar fuera del panel movil. -->
+    <a class="boton principal cta" href="#avisame"><span lang="es">Avísame</span><span lang="en">Notify me</span><span lang="fr">Prévenez-moi</span></a>
+    <button class="menu-boton" type="button" aria-expanded="false" aria-controls="menu"><span class="solo-lectores"><span lang="es">Menú</span><span lang="en">Menu</span><span lang="fr">Menu</span></span><svg class="menu-icono" viewBox="0 0 24 24" aria-hidden="true"><path class="a" d="M4 7h16"/><path class="b" d="M9 12h11"/><path class="c" d="M14 17h6"/></svg></button>
+  </div>
+</header>
+
+<main>
+
+<!-- .seccion-pantalla: una idea por seccion. .bajo-el-pliegue añade content-visibility:auto (no en la primera). -->
+<section class="seccion-pantalla" id="inicio">
+  <div class="contenedor">
+    <div class="cabecera-seccion">
+      <p class="etiqueta">.seccion-pantalla</p>
+      <h1 class="titular"><span lang="es">Titular <span class="degradado">grande</span></span><span lang="en">Big <span class="degradado">headline</span></span><span lang="fr">Grand <span class="degradado">titre</span></span></h1>
+      <p class="subtitulo"><span lang="es">Subtítulo de ejemplo: texto de relleno, sin contenido real.</span><span lang="en">Sample subtitle: placeholder text, no real content.</span><span lang="fr">Sous-titre d'exemple : texte de remplissage, sans contenu réel.</span></p>
+      <p><a class="boton principal" href="#funciones">.boton.principal</a> <a class="boton" href="#funciones">.boton</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- .tabs + .video-caja. JS: assets/interaccion.js. Los paneles no llevan hidden en el HTML (lo pone el JS), asi sin JS se ven apilados. -->
+<section class="seccion-pantalla bajo-el-pliegue" id="funciones">
+  <div class="contenedor">
+    <div class="cabecera-seccion">
+      <p class="etiqueta">.tabs + .video-caja</p>
+      <h2 class="titulo"><span lang="es">Título de sección</span><span lang="en">Section title</span><span lang="fr">Titre de section</span></h2>
+    </div>
+    <div class="tabs">
+      <div class="tabs-lista" role="tablist" aria-label="Funciones">
+        <button class="tab" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="true">Pestaña 1</button>
+        <button class="tab" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false">Pestaña 2</button>
+        <button class="tab" role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false">Pestaña 3</button>
+      </div>
+      <div class="tab-panel" role="tabpanel" id="panel-1" aria-labelledby="tab-1">
+        <div class="tab-panel-contenido">
+          <div>
+            <h3>Panel 1</h3>
+            <p>Texto del panel, dos líneas como máximo. Todos los paneles de unas pestañas deben tener la misma altura (<code>--alto-panel</code>).</p>
+          </div>
+          <figure class="video-caja" data-video="forma_perfecta" style="--proporcion: 960 / 558">
+            <!-- interaccion.js crea <video muted loop playsinline preload="none"> y el boton de pausa, y pone src/poster segun el idioma activo -->
+            <figcaption>forma_perfecta</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="tab-panel" role="tabpanel" id="panel-2" aria-labelledby="tab-2">
+        <div class="tab-panel-contenido"><div><h3>Panel 2</h3><p>Otro texto de ejemplo.</p></div><figure class="video-caja" data-video="garabatear" style="--proporcion: 874 / 644"><figcaption>garabatear</figcaption></figure></div>
+      </div>
+      <div class="tab-panel" role="tabpanel" id="panel-3" aria-labelledby="tab-3">
+        <div class="tab-panel-contenido"><div><h3>Panel 3</h3><p>Otro texto de ejemplo.</p></div><figure class="video-caja" data-video="lazo_seleccionar" style="--proporcion: 960 / 412"><figcaption>lazo_seleccionar</figcaption></figure></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="seccion-pantalla bajo-el-pliegue" id="bento">
+  <div class="contenedor">
+    <div class="cabecera-seccion">
+      <p class="etiqueta">.bento</p>
+      <h2 class="titulo"><span lang="es">Cuadrícula de celdas</span><span lang="en">Cell grid</span><span lang="fr">Grille de cellules</span></h2>
+    </div>
+    <div class="bento">
+      <button class="bento-celda grande" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 19a4.5 4.5 0 1 0-1.4-8.8A6 6 0 0 0 4.5 12.5 3.5 3.5 0 0 0 6 19z"/></svg>
+        <h3>.bento-celda.grande</h3><p>Una celda grande (2 filas en escritorio).</p>
+      </button>
+      <button class="bento-celda" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c-2-2.7-3.7-4-5.5-4a4 4 0 0 0 0 8c1.8 0 3.5-1.3 5.5-4zm0 0c2 2.7 3.7 4 5.5 4a4 4 0 0 0 0-8c-1.8 0-3.5 1.3-5.5 4z"/></svg><h3>Celda</h3><p>Texto corto.</p></button>
+      <button class="bento-celda" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><h3>Celda</h3><p>Texto corto.</p></button>
+      <button class="bento-celda" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><h3>Celda</h3><p>Texto corto.</p></button>
+      <button class="bento-celda" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><h3>Celda</h3><p>Texto corto.</p></button>
+    </div>
+  </div>
+</section>
+
+<!-- .acordeon sobre <details>: funciona sin JS. -->
+<section class="seccion-pantalla bajo-el-pliegue" id="precio">
+  <div class="contenedor">
+    <div class="cabecera-seccion">
+      <p class="etiqueta">.acordeon</p>
+      <h2 class="titulo"><span lang="es">Preguntas</span><span lang="en">Questions</span><span lang="fr">Questions</span></h2>
+    </div>
+    <div class="acordeon">
+      <details open><summary>Pregunta abierta</summary><div class="acordeon-cuerpo"><p>Respuesta de ejemplo.</p></div></details>
+      <details><summary>Pregunta cerrada</summary><div class="acordeon-cuerpo"><p>Respuesta de ejemplo.</p></div></details>
+      <details><summary>Otra pregunta</summary><div class="acordeon-cuerpo"><p>Respuesta de ejemplo.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<section class="seccion-pantalla bajo-el-pliegue" id="avisame">
+  <div class="contenedor"><div class="cabecera-seccion"><p class="etiqueta">#avisame</p><h2 class="titulo">Destino del CTA</h2></div></div>
+</section>
+
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <span>© 2026 SwiftPen</span>
+    <nav aria-label="Pie">
+      <a href="/release-notes/"><span lang="es">Notas de actualización</span><span lang="en">Release notes</span><span lang="fr">Notes de mise à jour</span></a>
+      <a href="/roadmap/"><span lang="es">Hoja de ruta</span><span lang="en">Roadmap</span><span lang="fr">Feuille de route</span></a>
+      <a href="/privacidad/"><span lang="es">Privacidad</span><span lang="en">Privacy</span><span lang="fr">Confidentialité</span></a>
+      <a href="/terminos/"><span lang="es">Términos</span><span lang="en">Terms</span><span lang="fr">Conditions</span></a>
+      <a href="/aviso-legal/"><span lang="es">Aviso legal</span><span lang="en">Legal notice</span><span lang="fr">Mentions légales</span></a>
+      <a href="mailto:support@getswiftpen.com">support@getswiftpen.com</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="/assets/interaccion.js"></script>
+</body>
+</html>
