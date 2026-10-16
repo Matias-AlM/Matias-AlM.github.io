@@ -1,0 +1,165 @@
+/* Resto de la home nueva (issue #58): bento de herramientas, bandas a todo el ancho, Pro, comparacion,
+ * cierre y pie grande. Cargar despues de home-nueva.css. Cada banda lleva su fondo; las neutras siguen
+ * el tema, las de color (degradado y solido) y la negra son iguales en claro y oscuro. */
+
+/* ---------- Bandas ---------- */
+.banda { padding-block: clamp(36px, 6vh, 64px); scroll-margin-top: var(--alto-barra); }
+.banda > .contenedor { max-width: 1360px; }
+.banda .cabecera-seccion { margin-bottom: var(--e4); }
+.banda .titulo { font-size: clamp(1.9rem, 2.4vw + 1rem, 2.75rem); }
+.banda-neutra { background: var(--surface-2); }
+.banda-clara { background: var(--surface); }
+.banda-color { background: linear-gradient(135deg, #3d6fe0, #a33fd4); color: #fff; }
+.banda-solida { background: #5b2bc4; color: #fff; }
+.banda-negra {
+  background: #0b0c12; color: #f2f2f5; color-scheme: dark;
+  --surface: #141620; --surface-2: #1b1e2b; --border: rgba(255, 255, 255, .1);
+  --text: #f2f2f5; --muted: #a3a6b8; --faint: #8588a0; --accent: #c45cf6;
+  --grad: linear-gradient(90deg, #5b93ff, #c45cf6); --sobre-grad: #0b0c12; --shadow-suave: none;
+}
+.banda-color .titulo, .banda-solida .titulo { color: #fff; }
+.boton.claro { background: #fff; color: #16161d; border: 0; }
+.banda-color a:not(.boton), .banda-solida a:not(.boton) { color: #fff; text-decoration: underline; }
+.banda-solida .boton.principal { background: #fff; color: #16161d; }
+
+/* ---------- Bento ---------- */
+.bento-tabs { --alto-min: 0px; }
+.bento-tabs .tab-panel { min-height: var(--alto-panel, 0); }
+.bento-tabs .tabs-lista { margin-bottom: var(--e3); }
+.sin-js-titulo { display: none; margin: 0 0 var(--e2); font-size: 1.3rem; }
+html:not(.js) .sin-js-titulo { display: block; }
+html:not(.js) .bento-tabs .tab-panel + .tab-panel { margin-top: var(--e5); }
+
+.bento-tools { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: dense; grid-auto-rows: minmax(0, auto); gap: 10px; }
+.bc { position: relative; min-width: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radio-grande); box-shadow: var(--shadow-suave); overflow: hidden; }
+.bc > summary { display: flex; flex-direction: column; height: 100%; padding: var(--e3); cursor: pointer; list-style: none; border-radius: inherit; }
+.bc > summary::-webkit-details-marker { display: none; }
+.bc > summary::after {
+  content: ""; position: absolute; top: 14px; right: 14px; width: 24px; height: 24px; border-radius: 50%;
+  background-color: var(--surface-2); background-repeat: no-repeat; background-position: center;
+  background-image: linear-gradient(var(--text), var(--text)), linear-gradient(var(--text), var(--text));
+  background-size: 10px 2px, 2px 10px; transition: transform var(--normal) ease;
+}
+.bc[open] > summary::after { transform: rotate(45deg); }
+.bc-cuerpo { display: flex; gap: 10px; align-items: flex-start; padding-right: 26px; }
+.bc-cuerpo svg.i { margin-top: 2px; width: 22px; height: 22px; color: var(--accent); }
+.bc-t strong { display: block; font-size: 1rem; line-height: 1.3; letter-spacing: -.005em; }
+.bc-s { display: block; margin-top: 2px; font-size: .9rem; line-height: 1.4; color: var(--muted); }
+.bc-detalle { padding: 0 var(--e3) var(--e3); color: var(--muted); font-size: .95rem; line-height: 1.5; }
+.bc-detalle p { margin: 0 0 var(--e2); }
+.bc-detalle p:last-child { margin-bottom: 0; }
+.bc-img { display: block; margin-top: var(--e2); }
+.bc-img img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border); background: #fff; }
+.bc-media { display: block; flex: 1 1 auto; min-height: 0; margin: calc(var(--e3) * -1) calc(var(--e3) * -1) var(--e3); overflow: hidden; background: var(--surface-2); }
+.bc-media picture { display: block; height: 100%; }
+.bc-media img { width: 100%; height: 100%; min-height: 110px; max-height: 190px; object-fit: cover; object-position: top left; }
+.bc.grande { grid-column: 1 / -1; background: linear-gradient(160deg, var(--surface), color-mix(in srgb, var(--accent) 7%, var(--surface))); }
+.bc.grande .bc-t strong { font-size: 1.15rem; }
+.bc[open] { grid-column: 1 / -1; grid-row: auto; }
+.bc[open] > summary { height: auto; }
+.bc[open] .bc-media { display: none; }
+.bc summary:hover { background: color-mix(in srgb, var(--accent) 5%, transparent); }
+@media (min-width: 760px) {
+  .bento-tools { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: minmax(128px, auto); gap: 14px; }
+  .bc > summary { padding: var(--e4) var(--e3) var(--e3); }
+  .bc.grande { grid-column: span 2; grid-row: span 2; }
+  .bc.grande > summary { padding: var(--e4); }
+  .bc-media { margin: calc(var(--e4) * -1) calc(var(--e4) * -1) var(--e3); }
+  .bc-media img { max-height: 220px; min-height: 140px; }
+  .bc.grande .bc-t strong { font-size: 1.3rem; }
+  .bc.grande .bc-s { font-size: 1rem; }
+}
+
+/* ---------- Mensaje de la marca ---------- */
+.marca-rejilla { display: grid; gap: var(--e4); align-items: center; }
+.marca-sub { margin: var(--e3) 0 var(--e4); font-size: var(--t-subtitulo); line-height: 1.5; max-width: 34rem; }
+.marca-puntos { display: grid; gap: var(--e3); margin: 0; padding: 0; list-style: none; }
+.marca-puntos li { padding: var(--e3) var(--e4); background: rgba(11, 12, 18, .28); border: 1px solid rgba(255, 255, 255, .28); border-radius: var(--radio); }
+.marca-puntos strong { display: block; font-size: 1.15rem; }
+.marca-puntos span { display: block; margin-top: 2px; line-height: 1.45; }
+@media (min-width: 960px) { .marca-rejilla { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: var(--e6); } }
+
+/* ---------- Pro ---------- */
+.banda-negra .cabecera-seccion { margin-bottom: var(--e3); }
+.banda-negra .subtitulo { margin-top: var(--e2); }
+.banda-negra .plan { background: var(--surface); }
+.banda-negra .plan.destacado { background: linear-gradient(var(--surface), var(--surface)) padding-box, var(--grad) border-box; }
+.enlace-comparar { margin: var(--e3) 0 0; text-align: center; font-weight: 600; }
+.enlace-comparar a { display: inline-flex; align-items: center; min-height: var(--tactil); color: #fff; }
+
+/* ---------- Comparacion visible y compacta ---------- */
+#comparada .cabecera-seccion { margin-bottom: var(--e3); }
+#comparada .subtitulo { margin-top: var(--e2); font-size: 1rem; }
+#comparada .titulo { font-size: clamp(1.6rem, 1.8vw + 1rem, 2.3rem); }
+#comparada .comparativa { background: var(--bg); }
+#comparada .comparativa table { min-width: 880px; font-size: 14px; }
+#comparada .comparativa th, #comparada .comparativa td { padding: 9px 12px; line-height: 1.4; }
+#comparada .comparativa tbody th { min-width: 0; width: 15%; position: sticky; left: 0; z-index: 1; background: var(--bg); }
+#comparada .comparativa .nuestra { background: color-mix(in srgb, var(--accent) 9%, var(--bg)); }
+#comparada .comparativa tbody th, #comparada .comparativa thead th:first-child { box-shadow: 1px 0 0 var(--border); }
+#comparada .comparativa sup a { color: var(--accent); font-weight: 700; padding: 0 2px; }
+#comparada .aclaracion { margin-top: var(--e2); font-size: .8rem; line-height: 1.45; }
+#comparada .aclaracion + .aclaracion { margin-top: var(--e1); }
+@media (min-width: 1100px) { #comparada .comparativa table { min-width: 0; } }
+
+/* ---------- Preguntas ---------- */
+#preguntas .acordeon summary { padding-block: 12px; }
+
+/* ---------- Cierre ---------- */
+.cierre .contenedor { text-align: center; }
+.cierre .avisame-titulo, .cierre .avisame-consentimiento, .cierre .avisame-estado { color: #fff; }
+.cierre .avisame-fila input { border-color: transparent; }
+.cierre .avisame { margin-top: var(--e3); }
+.hueco-play {
+  display: inline-flex; align-items: center; gap: 12px; margin: var(--e4) auto 0; padding: 8px 22px 8px 16px;
+  color: #fff; border: 1.5px dashed rgba(255, 255, 255, .7); border-radius: 14px;
+}
+.hueco-play svg { width: 26px; height: 26px; }
+.hueco-play .dos-lineas { align-items: flex-start; }
+.hueco-play strong { font-size: 1.2rem; line-height: 1.1; }
+
+/* ---------- Pie oscuro con el nombre enorme ---------- */
+.pie.pie-grande { background: #05060a; border-top: 0; padding: var(--e6) 0 var(--e4); color: #a3a6b8; overflow: hidden; }
+.pie-grande .contenedor { display: block; }
+.pie-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: var(--e4); }
+.pie-cols nav { display: flex; flex-direction: column; align-items: flex-start; }
+.pie-tit { margin: 0 0 var(--e1); font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #8588a0; }
+.pie-grande a { padding: 0; min-height: var(--tactil); color: #f2f2f5; }
+.pie-marca {
+  margin: var(--e5) 0 0; font-size: clamp(3.4rem, 17.5vw, 17rem); font-weight: 800; line-height: .9; letter-spacing: -.05em; text-align: center; white-space: nowrap;
+  background: linear-gradient(90deg, #5b93ff, #c45cf6); -webkit-background-clip: text; background-clip: text; color: transparent; user-select: none;
+}
+.pie-copy { margin: var(--e3) 0 0; text-align: center; font-size: .875rem; color: #a3a6b8; }
+
+/* Los tintes por id de home-nueva.css (#precio, #preguntas, #avisame) ceden a las bandas de esta hoja. */
+#precio { background: #0b0c12; }
+#preguntas { background: var(--surface-2); }
+#avisame { background: #5b2bc4; }
+
+/* ---------- Ajustes de altura ---------- */
+#comparada { padding-block: clamp(28px, 4.5vh, 48px); }
+@media (max-width: 759px) {
+  /* Movil: las celdas pequenas, en una columna y en fila compacta */
+  .bento-tools { grid-template-columns: 1fr; gap: 8px; }
+  .bc > summary { padding: 12px var(--e3); }
+  .bc-media { margin: -12px calc(var(--e3) * -1) 12px; }
+  .bc-media img { max-height: 120px; min-height: 90px; }
+  .bc.grande > summary { padding-top: 12px; }
+  .bc-s { font-size: .85rem; }
+  .banda .cabecera-seccion { margin-bottom: var(--e3); }
+  #comparada .comparativa table { min-width: 1000px; font-size: 13px; }
+  #comparada .comparativa th, #comparada .comparativa td { padding: 8px 10px; line-height: 1.35; }
+  #comparada .comparativa tbody th { width: 96px; min-width: 96px; }
+  #comparada .aclaracion { font-size: .75rem; }
+  #comparada .cabecera-seccion .subtitulo { font-size: .95rem; }
+}
+#comparada .comparativa table { font-size: 13.5px; }
+#comparada .comparativa th, #comparada .comparativa td { padding-block: 7px; }
+#comparada .aclaracion { font-size: .75rem; line-height: 1.4; }
+#comparada .cabecera-seccion { margin-bottom: var(--e2); }
+@media (max-width: 759px) {
+  #comparada .comparativa table { min-width: 1100px; font-size: 13px; }
+  #comparada .comparativa th, #comparada .comparativa td { padding: 6px 8px; }
+  #comparada .aclaracion { font-size: .72rem; }
+  #comparada .titulo { font-size: 1.5rem; }
+}
