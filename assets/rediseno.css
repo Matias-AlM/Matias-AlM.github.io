@@ -35,7 +35,6 @@
   --shadow: 0 30px 80px -30px rgba(40, 30, 90, 0.35), 0 8px 24px -12px rgba(40, 30, 90, 0.18);
   --shadow-suave: 0 10px 30px -14px rgba(40, 30, 90, 0.28);
   --bezel: #16161d;
-  --punto: rgba(22, 22, 40, 0.16);
   --foco: #5b2bc4;
 
   /* Escala de espaciado 4/8/16/24/40/64/96 */
@@ -77,7 +76,6 @@
     --shadow: 0 40px 100px -30px rgba(0, 0, 0, 0.8), 0 10px 30px -12px rgba(0, 0, 0, 0.6);
     --shadow-suave: 0 10px 30px -14px rgba(0, 0, 0, 0.7);
     --bezel: #05060a;
-    --punto: rgba(255, 255, 255, 0.13);
     --foco: #d9a2ff;
     color-scheme: dark;
   }
@@ -88,7 +86,7 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  background: radial-gradient(circle, var(--punto) 1px, transparent 1.3px) 0 0/24px 24px var(--bg);
+  background: var(--bg);
   color: var(--text);
   font: var(--t-cuerpo)/1.6 var(--fuente);
   -webkit-font-smoothing: antialiased;
