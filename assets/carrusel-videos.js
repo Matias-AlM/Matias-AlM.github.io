@@ -2,7 +2,9 @@
 // translucidos. Al acabar el central pasa solo al siguiente. Se mueve con flechas, puntos,
 // pulsando un vecino o deslizando. Con movimiento reducido nada arranca ni avanza solo y el
 // boton de pausa/play sigue visible. Sin JS el HTML queda apilado (ver carrusel-videos.css).
-// Cargar despues de idioma.js. No depende de interaccion.js.
+// Varios por pagina (uno por panel de pestanas): cada .carrusel lleva su estado. Un item puede ser
+// una imagen en vez de un video; con un solo item no hay vecinos ni flechas (y el video se repite).
+// Cargar despues de idioma.js; no depende de interaccion.js (que oculta los paneles inactivos).
 (function () {
   var raiz = document.documentElement;
   var sinMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -42,9 +44,10 @@
 
     // Sin controles nativos ni <source>: el JS pone src segun el idioma.
     videos.forEach(function (v) {
+      if (!v) return;
       v.removeAttribute("controls");
       Array.prototype.forEach.call(v.querySelectorAll("source"), function (s) { s.remove(); });
-      v.loop = false;
+      v.loop = total === 1;
       v.muted = true;
     });
     textos.forEach(function (p) { descripcion.appendChild(p); });
@@ -69,11 +72,15 @@
     controles.appendChild(puntos);
     descripcion.parentNode.insertBefore(controles, descripcion.nextSibling);
     carrusel.classList.add("cv-activo");
+    if (total === 1) controles.classList.add("cv-solo");
 
     function ruta(clip, ext) { return "/video/" + idioma() + "/" + clip + "." + ext; }
 
     function pintarPausa() {
-      var estado = videos[activo].paused ? "play" : "pausa";
+      var v = videos[activo];
+      pausa.hidden = !v;
+      if (!v) return;
+      var estado = v.paused ? "play" : "pausa";
       pausa.setAttribute("aria-label", texto(estado));
       pausa.querySelector("path").setAttribute("d", ICONOS[estado]);
     }
@@ -88,6 +95,7 @@
 
     function reproducir() {
       var v = videos[activo];
+      if (!v) return;
       var origen = ruta(v.dataset.clip, "mp4");
       if (v.getAttribute("src") !== origen) v.src = origen;
       // Si el navegador la rechaza (ahorro de datos...) el boton sigue mostrando play.
@@ -97,6 +105,7 @@
     // Vuelve al poster y deja de tener el video cargado
     function soltar(i) {
       var v = videos[i];
+      if (!v) return;
       v.pause();
       if (v.getAttribute("src")) { v.removeAttribute("src"); v.load(); }
     }
@@ -131,6 +140,7 @@
     siguiente.addEventListener("click", function () { ir(activo + 1); });
     pausa.addEventListener("click", function () {
       var v = videos[activo];
+      if (!v) return;
       if (v.paused) { pausadoPorUsuario = false; reproducir(); }
       else { pausadoPorUsuario = true; v.pause(); }
     });
@@ -140,6 +150,7 @@
     });
 
     videos.forEach(function (v, i) {
+      if (!v) return;
       v.addEventListener("play", function () { if (i === activo) pintarPausa(); });
       v.addEventListener("pause", function () { if (i === activo) pintarPausa(); });
       v.addEventListener("ended", function () {
@@ -165,6 +176,7 @@
     // Idioma: poster y video de la carpeta del idioma activo (conserva el instante y el estado)
     function aplicarIdioma() {
       videos.forEach(function (v, i) {
+        if (!v) return;
         v.poster = ruta(v.dataset.clip, "webp");
         if (i === activo && v.getAttribute("src")) {
           var t = v.currentTime, sonaba = !v.paused;
@@ -179,7 +191,7 @@
 
     // Solo suena mientras se ve (y con la pestana visible)
     function alCambiarVista() {
-      if (permitido()) reproducir(); else videos[activo].pause();
+      if (permitido()) reproducir(); else if (videos[activo]) videos[activo].pause();
     }
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(function (es) {

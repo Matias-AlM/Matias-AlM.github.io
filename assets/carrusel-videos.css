@@ -1,7 +1,7 @@
 /* Carrusel de videos de ayuda (S2 de la home nueva). Marcado y comportamiento en
  * carrusel-videos.js. Sin JS: los videos se ven apilados, cada uno con su texto
  * (.carrusel sin .cv-activo). Usa los tokens de rediseno.css. */
-.carrusel { --cv-ancho: min(500px, 44vw); --cv-paso: .9; }
+.carrusel { --cv-ancho: min(420px, 40vw); --cv-paso: .9; }
 @media (max-width: 759px) { .carrusel { --cv-ancho: 74vw; --cv-paso: .82; } }
 
 /* ---------- Sin JS ---------- */
@@ -31,15 +31,15 @@
 .cv-activo .cv-item[data-d="3"] { pointer-events: none; }
 
 .cv-descripcion { display: none; }
-.cv-activo .cv-descripcion { display: grid; max-width: 40rem; margin: var(--e4) auto 0; text-align: center; }
+.cv-activo .cv-descripcion { display: grid; max-width: 52rem; margin: var(--e3) auto 0; text-align: center; }
 /* Todos los textos apilados en la misma celda: la altura es la del mayor (sin saltos) y el cambio es un fundido. */
 .cv-descripcion .cv-texto {
-  grid-area: 1 / 1; margin: 0; font-size: var(--t-subtitulo); line-height: 1.5; color: var(--text);
+  grid-area: 1 / 1; margin: 0; font-size: clamp(1rem, .4vw + .95rem, 1.15rem); line-height: 1.5; color: var(--text);
   opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility 0s .35s;
 }
 .cv-descripcion .cv-texto.cv-actual { opacity: 1; visibility: visible; transition-delay: 0s; }
 
-.cv-activo .cv-controles { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--e1) var(--e3); margin-top: var(--e3); }
+.cv-activo .cv-controles { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--e1) var(--e3); margin-top: var(--e2); }
 .cv-boton {
   display: inline-flex; align-items: center; justify-content: center; flex: none; padding: 0; cursor: pointer;
   width: var(--tactil); height: var(--tactil); color: var(--text);
@@ -48,6 +48,8 @@
 .cv-boton:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--border)); }
 .cv-boton svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .cv-boton.cv-pausa svg { fill: currentColor; stroke: none; }
+.cv-boton[hidden] { display: none; }
+.cv-solo .cv-anterior, .cv-solo .cv-siguiente, .cv-solo .cv-puntos { display: none; }
 .cv-puntos { display: flex; justify-content: center; order: 2; flex-basis: 100%; }
 @media (min-width: 760px) { .cv-puntos { order: 0; flex-basis: auto; } }
 .cv-punto { width: var(--tactil); height: var(--tactil); padding: 0; cursor: pointer; background: none; border: 0; display: inline-flex; align-items: center; justify-content: center; }

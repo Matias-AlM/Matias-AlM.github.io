@@ -11,7 +11,7 @@
 <link rel="icon" href="/favicon.png">
 <link rel="preload" href="/assets/fuentes/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/rediseno.css">
-<link rel="stylesheet" href="/assets/carrusel-videos.css">
+<link rel="stylesheet" href="/assets/carrusel-videos.css?v=2">
 <style>
 /* Solo de esta pagina (hero y funciones). Lo comun vive en assets/rediseno.css. */
 .hero-rejilla { display: grid; gap: var(--e5); align-items: center; }
@@ -47,6 +47,13 @@
 .hero { padding-block: clamp(24px, 4vh, 64px); }
 /* La seccion es flex en columna: sin esto el contenedor se encoge al contenido. */
 .seccion-pantalla > .contenedor { width: 100%; }
+#funciones .titulo { font-size: clamp(1.9rem, 2.4vw + 1rem, 2.75rem); }
+/* Tabs: los paneles miden lo mismo en los 3 idiomas (suelo medido a mano, ver informe). */
+.tabs { --alto-min: 386px; }
+@media (max-width: 759px) { .tabs { --alto-min: 385px; } }
+.tab-panel { min-height: max(var(--alto-panel, 0px), var(--alto-min)); }
+html:not(.js) .tabs-lista { display: none; }
+html:not(.js) .tab-panel + .tab-panel { margin-top: var(--e5); }
 </style>
 <script src="/assets/idioma.js"></script>
 <!-- Estadisticas sin cookies ni datos personales (ver la politica de privacidad). Solo en getswiftpen.com: las vistas previas y las pruebas locales no cuentan. Sin la parte ?... de la direccion. -->
@@ -125,17 +132,53 @@
       <p class="etiqueta"><span lang="es">Funciones</span><span lang="en">Features</span><span lang="fr">Fonctions</span></p>
       <h2 class="titulo" id="titulo-funciones"><span lang="es">Lo mejor del papel, sin sus límites.</span><span lang="en">The best of paper, without its limits.</span><span lang="fr">Le meilleur du papier, sans ses limites.</span></h2>
     </div>
-    <!-- Carrusel: assets/carrusel-videos.{css,js}. Sin JS los 7 videos se ven apilados con su texto. -->
-    <div class="carrusel" role="region" aria-roledescription="carrusel" aria-labelledby="titulo-funciones">
-      <ul class="cv-lista">
-        <li class="cv-item"><figure class="cv-video"><video controls muted playsinline preload="none" poster="/video/es/forma_perfecta.webp" width="960" height="558" data-clip="forma_perfecta" aria-describedby="cv-texto-1"><source src="/video/es/forma_perfecta.mp4" type="video/mp4"></video></figure><p class="cv-texto" id="cv-texto-1"><span lang="es">Al terminar un trazo, deja el lápiz quieto un momento y se convierte en una forma perfecta.</span><span lang="en">When you finish a stroke, hold the pen still for a moment and it turns into a perfect shape.</span><span lang="fr">À la fin d'un trait, gardez le stylet immobile un instant et il devient une forme parfaite.</span></p></li>
-        <li class="cv-item"><figure class="cv-video"><video controls muted playsinline preload="none" poster="/video/es/linea_recta.webp" width="960" height="402" data-clip="linea_recta" aria-describedby="cv-texto-2"><source src="/video/es/linea_recta.mp4" type="video/mp4"></video></figure><p class="cv-texto" id="cv-texto-2"><span lang="es">Manteniendo: deja el lápiz quieto al final y el trazo se endereza. Siempre: sale recto directamente.</span><span lang="en">Holding: pause at the end of the stroke and it straightens out. Always: it comes out straight right away.</span><span lang="fr">En maintenant : gardez le stylet immobile à la fin et le trait se redresse. Toujours : il sort droit directement.</span></p></li>
-        <li class="cv-item"><figure class="cv-video"><video controls muted playsinline preload="none" poster="/video/es/garabatear.webp" width="874" height="644" data-clip="garabatear" aria-describedby="cv-texto-3"><source src="/video/es/garabatear.mp4" type="video/mp4"></video></figure><p class="cv-texto" id="cv-texto-3"><span lang="es">Garabatea encima de lo escrito para borrarlo. Si te equivocas, deshacer lo devuelve.</span><span lang="en">Scribble over your writing to erase it. If you change your mind, undo brings it back.</span><span lang="fr">Gribouillez sur ce que vous avez écrit pour l'effacer. En cas d'erreur, annuler le fait revenir.</span></p></li>
-        <li class="cv-item"><figure class="cv-video"><video controls muted playsinline preload="none" poster="/video/es/objeto_completo.webp" width="960" height="554" data-clip="objeto_completo" aria-describedby="cv-texto-4"><source src="/video/es/objeto_completo.mp4" type="video/mp4"></video></figure><p class="cv-texto" id="cv-texto-4"><span lang="es">Basta con rozar un trazo para borrarlo entero. Desactivado, borra solo por donde pasas.</span><span lang="en">Just brush a stroke to erase the whole thing. Turn it off to erase only where you go over.</span><span lang="fr">Il suffit d'effleurer un trait pour l'effacer en entier. Désactivé, la gomme n'efface que là où elle passe.</span></p></li>
-        <li class="cv-item"><figure class="cv-video"><video controls muted playsinline preload="none" poster="/video/es/alcance_goma.webp" width="960" height="402" data-clip="alcance_goma" aria-describedby="cv-texto-5"><source src="/video/es/alcance_goma.mp4" type="video/mp4"></video></figure><p class="cv-texto" id="cv-texto-5"><span lang="es">Elige qué borra la goma. Con solo el resaltador, quitas el resaltado sin tocar lo escrito.</span><span lang="en">Choose what the eraser removes. With only the highlighter, you can clear highlights without touching your writing.</span><span lang="fr">Choisissez ce que la gomme efface. Avec seulement le surligneur, vous retirez le surlignage sans toucher à l'écriture.</span></p></li>
-        <li class="cv-item"><figure class="cv-video"><video controls muted playsinline preload="none" poster="/video/es/lazo_seleccionar.webp" width="960" height="412" data-clip="lazo_seleccionar" aria-describedby="cv-texto-6"><source src="/video/es/lazo_seleccionar.mp4" type="video/mp4"></video></figure><p class="cv-texto" id="cv-texto-6"><span lang="es">Elige qué agarra el lazo. Así mueves un dibujo sin llevarte el texto de al lado.</span><span lang="en">Choose what the lasso picks up, so you can move a drawing without dragging along the text next to it.</span><span lang="fr">Choisissez ce que le lasso attrape : vous déplacez un dessin sans emporter le texte d'à côté.</span></p></li>
-        <li class="cv-item"><figure class="cv-video"><video controls muted playsinline preload="none" poster="/video/es/audio.webp" width="800" height="794" data-clip="audio" aria-describedby="cv-texto-7"><source src="/video/es/audio.mp4" type="video/mp4"></video></figure><p class="cv-texto" id="cv-texto-7"><span lang="es">Graba mientras escribes. Al escucharlo, tu letra se vuelve a escribir al ritmo del audio; toca una palabra para saltar a ese momento.</span><span lang="en">Record while you write. On playback, your writing redraws in sync with the audio; tap a word to jump to that moment.</span><span lang="fr">Enregistrez pendant que vous écrivez. À l'écoute, votre écriture se redessine au rythme de l'audio ; touchez un mot pour aller à ce moment-là.</span></p></li>
-      </ul>
+    <!-- Pestañas (assets/interaccion.js) con un carrusel de clips en cada panel (assets/carrusel-videos.{css,js}). Sin JS todo se ve apilado. -->
+    <div class="tabs">
+      <div class="tabs-lista" role="tablist" aria-labelledby="titulo-funciones">
+        <button class="tab" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="true" data-umami-event="ver-pestana" data-umami-event-pestana="write"><span lang="es">Escribir</span><span lang="en">Write</span><span lang="fr">Écrire</span></button>
+        <button class="tab" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" data-umami-event="ver-pestana" data-umami-event-pestana="erase"><span lang="es">Borrar</span><span lang="en">Erase</span><span lang="fr">Effacer</span></button>
+        <button class="tab" role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false" data-umami-event="ver-pestana" data-umami-event-pestana="select"><span lang="es">Seleccionar</span><span lang="en">Select</span><span lang="fr">Sélectionner</span></button>
+        <button class="tab" role="tab" id="tab-4" aria-controls="panel-4" aria-selected="false" data-umami-event="ver-pestana" data-umami-event-pestana="audio"><span lang="es">Audio</span><span lang="en">Audio</span><span lang="fr">Audio</span></button>
+        <button class="tab" role="tab" id="tab-5" aria-controls="panel-5" aria-selected="false" data-umami-event="ver-pestana" data-umami-event-pestana="pdf"><span lang="es">PDF y lienzo</span><span lang="en">PDF & canvas</span><span lang="fr">PDF et canevas</span></button>
+      </div>
+      <div class="tab-panel" role="tabpanel" id="panel-1" aria-labelledby="tab-1">
+        <div class="carrusel" role="region" aria-roledescription="carrusel" aria-labelledby="tab-1">
+          <ul class="cv-lista">
+          <li class="cv-item"><figure class="cv-video"><video controls muted playsinline preload="none" poster="/video/es/forma_perfecta.webp" width="960" height="558" data-clip="forma_perfecta" aria-describedby="cv-texto-1"><source src="/video/es/forma_perfecta.mp4" type="video/mp4"></video></figure><p class="cv-texto" id="cv-texto-1"><span lang="es">Al terminar un trazo, deja el lápiz quieto un momento y se convierte en una forma perfecta.</span><span lang="en">When you finish a stroke, hold the pen still for a moment and it turns into a perfect shape.</span><span lang="fr">À la fin d'un trait, gardez le stylet immobile un instant et il devient une forme parfaite.</span></p></li>
+          <li class="cv-item"><figure class="cv-video"><video controls muted playsinline preload="none" poster="/video/es/linea_recta.webp" width="960" height="402" data-clip="linea_recta" aria-describedby="cv-texto-2"><source src="/video/es/linea_recta.mp4" type="video/mp4"></video></figure><p class="cv-texto" id="cv-texto-2"><span lang="es">Manteniendo: deja el lápiz quieto al final y el trazo se endereza. Siempre: sale recto directamente.</span><span lang="en">Holding: pause at the end of the stroke and it straightens out. Always: it comes out straight right away.</span><span lang="fr">En maintenant : gardez le stylet immobile à la fin et le trait se redresse. Toujours : il sort droit directement.</span></p></li>
+          </ul>
+        </div>
+      </div>
+      <div class="tab-panel" role="tabpanel" id="panel-2" aria-labelledby="tab-2">
+        <div class="carrusel" role="region" aria-roledescription="carrusel" aria-labelledby="tab-2">
+          <ul class="cv-lista">
+          <li class="cv-item"><figure class="cv-video"><video controls muted playsinline preload="none" poster="/video/es/garabatear.webp" width="874" height="644" data-clip="garabatear" aria-describedby="cv-texto-3"><source src="/video/es/garabatear.mp4" type="video/mp4"></video></figure><p class="cv-texto" id="cv-texto-3"><span lang="es">Garabatea encima de lo escrito para borrarlo. Si te equivocas, deshacer lo devuelve.</span><span lang="en">Scribble over your writing to erase it. If you change your mind, undo brings it back.</span><span lang="fr">Gribouillez sur ce que vous avez écrit pour l'effacer. En cas d'erreur, annuler le fait revenir.</span></p></li>
+          <li class="cv-item"><figure class="cv-video"><video controls muted playsinline preload="none" poster="/video/es/objeto_completo.webp" width="960" height="554" data-clip="objeto_completo" aria-describedby="cv-texto-4"><source src="/video/es/objeto_completo.mp4" type="video/mp4"></video></figure><p class="cv-texto" id="cv-texto-4"><span lang="es">Basta con rozar un trazo para borrarlo entero. Desactivado, borra solo por donde pasas.</span><span lang="en">Just brush a stroke to erase the whole thing. Turn it off to erase only where you go over.</span><span lang="fr">Il suffit d'effleurer un trait pour l'effacer en entier. Désactivé, la gomme n'efface que là où elle passe.</span></p></li>
+          <li class="cv-item"><figure class="cv-video"><video controls muted playsinline preload="none" poster="/video/es/alcance_goma.webp" width="960" height="402" data-clip="alcance_goma" aria-describedby="cv-texto-5"><source src="/video/es/alcance_goma.mp4" type="video/mp4"></video></figure><p class="cv-texto" id="cv-texto-5"><span lang="es">Elige qué borra la goma. Con solo el resaltador, quitas el resaltado sin tocar lo escrito.</span><span lang="en">Choose what the eraser removes. With only the highlighter, you can clear highlights without touching your writing.</span><span lang="fr">Choisissez ce que la gomme efface. Avec seulement le surligneur, vous retirez le surlignage sans toucher à l'écriture.</span></p></li>
+          </ul>
+        </div>
+      </div>
+      <div class="tab-panel" role="tabpanel" id="panel-3" aria-labelledby="tab-3">
+        <div class="carrusel" role="region" aria-roledescription="carrusel" aria-labelledby="tab-3">
+          <ul class="cv-lista">
+          <li class="cv-item"><figure class="cv-video"><video controls muted playsinline preload="none" poster="/video/es/lazo_seleccionar.webp" width="960" height="412" data-clip="lazo_seleccionar" aria-describedby="cv-texto-6"><source src="/video/es/lazo_seleccionar.mp4" type="video/mp4"></video></figure><p class="cv-texto" id="cv-texto-6"><span lang="es">Elige qué agarra el lazo. Así mueves un dibujo sin llevarte el texto de al lado.</span><span lang="en">Choose what the lasso picks up, so you can move a drawing without dragging along the text next to it.</span><span lang="fr">Choisissez ce que le lasso attrape : vous déplacez un dessin sans emporter le texte d'à côté.</span></p></li>
+          </ul>
+        </div>
+      </div>
+      <div class="tab-panel" role="tabpanel" id="panel-4" aria-labelledby="tab-4">
+        <div class="carrusel" role="region" aria-roledescription="carrusel" aria-labelledby="tab-4">
+          <ul class="cv-lista">
+          <li class="cv-item"><figure class="cv-video"><video controls muted playsinline preload="none" poster="/video/es/audio.webp" width="800" height="794" data-clip="audio" aria-describedby="cv-texto-7"><source src="/video/es/audio.mp4" type="video/mp4"></video></figure><p class="cv-texto" id="cv-texto-7"><span lang="es">Graba mientras escribes. Al escucharlo, tu letra se vuelve a escribir al ritmo del audio; toca una palabra para saltar a ese momento.</span><span lang="en">Record while you write. On playback, your writing redraws in sync with the audio; tap a word to jump to that moment.</span><span lang="fr">Enregistrez pendant que vous écrivez. À l'écoute, votre écriture se redessine au rythme de l'audio ; touchez un mot pour aller à ce moment-là.</span></p></li>
+          </ul>
+        </div>
+      </div>
+      <div class="tab-panel" role="tabpanel" id="panel-5" aria-labelledby="tab-5">
+        <div class="carrusel" role="region" aria-roledescription="carrusel" aria-labelledby="tab-5">
+          <ul class="cv-lista">
+          <li class="cv-item"><figure class="cv-video"><picture lang="es"><source srcset="/img/lienzo-dark-es.webp?v=7" media="(prefers-color-scheme: dark)"><img src="/img/lienzo-es.webp?v=7" width="1600" height="1000" alt="Un mapa mental de un viaje a Japón en el lienzo infinito." loading="lazy"></picture><picture lang="en"><source srcset="/img/lienzo-dark-en.webp?v=7" media="(prefers-color-scheme: dark)"><img src="/img/lienzo-en.webp?v=7" width="1600" height="1000" alt="A mind map of a trip to Japan on the infinite canvas." loading="lazy"></picture><picture lang="fr"><source srcset="/img/lienzo-dark-en.webp?v=7" media="(prefers-color-scheme: dark)"><img src="/img/lienzo-en.webp?v=7" width="1600" height="1000" alt="Une carte mentale d'un voyage au Japon sur le canevas infini." loading="lazy"></picture></figure><p class="cv-texto" id="cv-texto-8"><span lang="es">Importa apuntes o exámenes y anótalos como una página más. Y para las ideas que no caben en una hoja, un lienzo sin bordes que crece hacia donde haga falta.</span><span lang="en">Bring in lecture notes or past exams and mark them up like any page. And for ideas that won't fit on a page, a canvas with no edges that grows in any direction.</span><span lang="fr">Importez vos cours ou d'anciens examens et annotez-les comme n'importe quelle page. Et pour les idées qui ne tiennent pas sur une page, un canevas sans bords qui s'étend dans toutes les directions.</span></p></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -160,6 +203,8 @@
   </div>
 </footer>
 
-<script src="/assets/carrusel-videos.js"></script>
+<!-- El carrusel va antes que las pestañas: interaccion.js mide los paneles y deben estar ya montados. -->
+<script src="/assets/carrusel-videos.js?v=2"></script>
+<script src="/assets/interaccion.js"></script>
 </body>
 </html>
