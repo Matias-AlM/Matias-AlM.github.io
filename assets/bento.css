@@ -174,4 +174,5 @@ html:not(.js) .bento-tabs .tab-panel + .tab-panel { margin-top: var(--e5); }
 .cierre .resalte { background: linear-gradient(90deg, #a9c8ff, #ffc2f2); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .cierre .avisame-titulo { color: #ffd2f6; }
 .cierre .avisame-consentimiento a { color: #ffd2f6; }
-.marca img { border-radius: 9px; }
+.pie-grande .pie-logo { min-height: 0; margin-bottom: var(--e2); }
+.pie-logo img { height: 34px; width: auto; }
