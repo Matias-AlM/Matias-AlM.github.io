@@ -180,3 +180,23 @@ html:not(.js) .bento-tabs .tab-panel + .tab-panel { margin-top: var(--e5); }
 /* Barra: el boton de aviso no se parte en dos lineas; en pantallas muy estrechas, mas compacto */
 .barra .cta { white-space: nowrap; }
 @media (max-width: 380px) { .barra .cta { padding: 8px 12px; font-size: 14px; } .barra .contenedor { gap: 6px; padding-inline: 12px; } }
+
+/* ---------- Celda abierta: solo crece la pulsada, las vecinas no cambian de tamano ni de sitio ----------
+ * Escritorio: el detalle es una tarjeta superpuesta pegada bajo el titulo (no altera la altura de la fila).
+ * Movil: la tarjeta crece en su sitio y las demas del carrusel conservan su alto (align-items: flex-start). */
+.bento-tools { align-items: start; }
+.bc { overflow: visible; }
+@media (min-width: 760px) {
+  .bc[open] { z-index: 6; box-shadow: var(--shadow); }
+  .bc[open] > summary { border-radius: var(--radio-grande) var(--radio-grande) 0 0; }
+  .bc[open] .bc-detalle {
+    position: absolute; left: -1px; right: -1px; top: calc(100% - 1px); padding: var(--e3);
+    background: var(--surface); border: 1px solid var(--border); border-top: 0; border-radius: 0 0 var(--radio-grande) var(--radio-grande); box-shadow: var(--shadow);
+  }
+  .bc.grande[open] .bc-detalle { padding: var(--e3) var(--e4) var(--e4); }
+}
+@media (max-width: 759px) {
+  .bc-pequenas { align-items: flex-start; }
+  .bc[open] { box-shadow: var(--shadow); }
+}
+.bc > summary:focus-visible { outline-offset: -3px; }
