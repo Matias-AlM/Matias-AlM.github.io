@@ -11,7 +11,7 @@
 <link rel="icon" href="/favicon.png">
 <link rel="preload" href="/assets/fuentes/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/rediseno.css">
-<link rel="stylesheet" href="/assets/carrusel-videos.css?v=2">
+<link rel="stylesheet" href="/assets/carrusel-videos.css?v=6">
 <style>
 /* Solo de esta pagina (hero y funciones). Lo comun vive en assets/rediseno.css. */
 .hero-rejilla { display: grid; gap: var(--e5); align-items: center; }
@@ -49,11 +49,17 @@
 .seccion-pantalla > .contenedor { width: 100%; }
 #funciones .titulo { font-size: clamp(1.9rem, 2.4vw + 1rem, 2.75rem); }
 /* Tabs: los paneles miden lo mismo en los 3 idiomas (suelo medido a mano, ver informe). */
-.tabs { --alto-min: 386px; }
-@media (max-width: 759px) { .tabs { --alto-min: 385px; } }
+.tabs { --alto-min: calc(var(--cv-ancho, 420px) * .625 + 124px); }
+@media (max-width: 759px) { .tabs { --alto-min: calc(var(--cv-ancho, 280px) * .625 + 219px); } }
 .tab-panel { min-height: max(var(--alto-panel, 0px), var(--alto-min)); }
 html:not(.js) .tabs-lista { display: none; }
 html:not(.js) .tab-panel + .tab-panel { margin-top: var(--e5); }
+/* Menos margen lateral: contenedor mas ancho en barra, secciones y pie */
+.barra .contenedor, .seccion-pantalla > .contenedor, .pie .contenedor { max-width: 1360px; }
+@media (min-width: 720px) { .barra .contenedor, .seccion-pantalla > .contenedor, .pie .contenedor { padding-inline: 24px; } }
+.hero-texto .titular { font-size: clamp(2.3rem, 4.8vw + .5rem, 4.75rem); }
+.hero-texto .subtitulo { max-width: 38rem; }
+#funciones .tabs-lista { margin-bottom: var(--e1); }
 </style>
 <script src="/assets/idioma.js"></script>
 <!-- Estadisticas sin cookies ni datos personales (ver la politica de privacidad). Solo en getswiftpen.com: las vistas previas y las pruebas locales no cuentan. Sin la parte ?... de la direccion. -->
@@ -204,7 +210,7 @@ html:not(.js) .tab-panel + .tab-panel { margin-top: var(--e5); }
 </footer>
 
 <!-- El carrusel va antes que las pestañas: interaccion.js mide los paneles y deben estar ya montados. -->
-<script src="/assets/carrusel-videos.js?v=2"></script>
+<script src="/assets/carrusel-videos.js?v=6"></script>
 <script src="/assets/interaccion.js"></script>
 </body>
 </html>

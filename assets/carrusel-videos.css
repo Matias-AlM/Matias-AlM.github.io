@@ -1,8 +1,9 @@
 /* Carrusel de videos de ayuda (S2 de la home nueva). Marcado y comportamiento en
  * carrusel-videos.js. Sin JS: los videos se ven apilados, cada uno con su texto
  * (.carrusel sin .cv-activo). Usa los tokens de rediseno.css. */
-.carrusel { --cv-ancho: min(420px, 40vw); --cv-paso: .9; }
-@media (max-width: 759px) { .carrusel { --cv-ancho: 74vw; --cv-paso: .82; } }
+/* Tambien en .tabs: la altura minima de los paneles se calcula con el mismo ancho */
+.carrusel, .tabs { --cv-ancho: max(340px, min(580px, 46vw, calc((100svh - 460px) * 1.6))); --cv-paso: .9; }
+@media (max-width: 759px) { .carrusel, .tabs { --cv-ancho: 84vw; --cv-paso: .88; } }
 
 /* ---------- Sin JS ---------- */
 .cv-lista { display: grid; gap: var(--e5); margin: 0; padding: 0; list-style: none; }
@@ -20,6 +21,8 @@
 .carrusel.cv-activo .cv-lista {
   display: block; position: relative; max-width: none;
   height: calc(var(--cv-ancho) * 10 / 16); overflow-x: clip; touch-action: pan-y;
+  /* A todo el ancho de la pantalla: los vecinos llegan hasta los bordes */
+  width: 100vw; margin-left: calc(50% - 50vw);
 }
 .cv-activo .cv-item {
   position: absolute; top: 0; left: 50%; width: var(--cv-ancho); max-width: none; margin: 0;
@@ -27,6 +30,7 @@
   opacity: var(--op, 1); z-index: var(--z, 1); cursor: pointer; user-select: none;
   transition: transform .55s cubic-bezier(.22, .8, .3, 1), opacity .55s ease;
 }
+.cv-clon img { width: 100%; height: 100%; object-fit: contain; }
 .cv-activo .cv-item[data-d="0"] { cursor: default; }
 .cv-activo .cv-item[data-d="3"] { pointer-events: none; }
 
