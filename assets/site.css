@@ -504,8 +504,11 @@ svg.lleno { fill: currentColor; stroke: none; }
 .etiqueta.nov { color: #1f7a45; background: rgba(46, 160, 100, .14); }
 .etiqueta.mej { color: #2c5fd0; background: rgba(61, 111, 224, .14); }
 .etiqueta.cor { color: #b5601a; background: rgba(230, 140, 40, .16); }
+.documento li.hecho { color: var(--muted); }
+.documento li.hecho::marker { content: "\2713  "; color: #1f7a45; font-weight: 700; }
 @media (prefers-color-scheme: dark) {
   .etiqueta.nov { color: #6fdc9f; }
   .etiqueta.mej { color: #8db4ff; }
   .etiqueta.cor { color: #ffb066; }
+  .documento li.hecho::marker { color: #6fdc9f; }
 }
