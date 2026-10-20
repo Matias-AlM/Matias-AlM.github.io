@@ -1,0 +1,335 @@
+/* Sistema visual del rediseno de la web (issue #54). Independiente de site.css:
+ * las paginas nuevas cargan solo este fichero. Componentes: .barra, .tabs,
+ * .acordeon, .bento, .video-caja, .seccion-pantalla y .pie. Ejemplos de marcado
+ * en sitio/nuevo/componentes.html. */
+
+/* Inter, servida desde la propia web (SIL OFL 1.1). Variable: pesos 400 a 800. */
+@font-face {
+  font-family: "Inter"; font-style: normal; font-weight: 400 800; font-display: swap;
+  src: url("/assets/fuentes/inter-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Inter"; font-style: normal; font-weight: 400 800; font-display: swap;
+  src: url("/assets/fuentes/inter-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ---------- Tokens ---------- */
+:root {
+  /* Color (claro). Los mismos nombres y valores que site.css. */
+  --bg: #f7f7fb;
+  --surface: #ffffff;
+  --surface-2: #f0f1f7;
+  --border: rgba(22, 22, 40, 0.09);
+  --text: #16161d;
+  --muted: #5b5e70;
+  --faint: #6b6e80;          /* AA sobre --bg (4.9:1); en site.css era #8a8da0 */
+  --accent: #7a3fe0;
+  --blue: #3d6fe0;
+  --purple: #a33fd4;
+  --grad: linear-gradient(90deg, #3d6fe0, #a33fd4);
+  --sobre-grad: #ffffff;
+  --glow-a: rgba(61, 111, 224, 0.18);
+  --glow-b: rgba(163, 63, 212, 0.16);
+  --shadow: 0 30px 80px -30px rgba(40, 30, 90, 0.35), 0 8px 24px -12px rgba(40, 30, 90, 0.18);
+  --shadow-suave: 0 10px 30px -14px rgba(40, 30, 90, 0.28);
+  --bezel: #16161d;
+  --foco: #5b2bc4;
+
+  /* Escala de espaciado 4/8/16/24/40/64/96 */
+  --e1: 4px; --e2: 8px; --e3: 16px; --e4: 24px; --e5: 40px; --e6: 64px; --e7: 96px;
+
+  /* Tipografia fluida */
+  --fuente: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --t-titular: clamp(2.5rem, 6vw + 1rem, 5.5rem);
+  --t-titulo: clamp(1.9rem, 3.4vw + 1rem, 3.4rem);
+  --t-subtitulo: clamp(1.05rem, 1vw + .9rem, 1.35rem);
+  --t-cuerpo: clamp(1.0625rem, .15vw + 1rem, 1.125rem);
+  --t-pequeno: .875rem;
+
+  /* Forma y ritmo */
+  --radio: 20px; --radio-grande: 24px; --radio-pildora: 999px;
+  --ancho: 1120px;
+  --alto-barra: 64px;
+  --tactil: 44px;
+  --seccion-v: clamp(48px, 8vh, 96px);
+  --rapido: 150ms; --normal: 250ms;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b0c12;
+    --surface: #141620;
+    --surface-2: #1b1e2b;
+    --border: rgba(255, 255, 255, 0.08);
+    --text: #f2f2f5;
+    --muted: #a3a6b8;
+    --faint: #8588a0;        /* AA sobre --bg oscuro */
+    --accent: #c45cf6;
+    --blue: #5b93ff;
+    --purple: #c45cf6;
+    --grad: linear-gradient(90deg, #5b93ff, #c45cf6);
+    --sobre-grad: #0b0c12;   /* texto oscuro sobre el degradado claro: AA */
+    --glow-a: rgba(91, 147, 255, 0.22);
+    --glow-b: rgba(196, 92, 246, 0.2);
+    --shadow: 0 40px 100px -30px rgba(0, 0, 0, 0.8), 0 10px 30px -12px rgba(0, 0, 0, 0.6);
+    --shadow-suave: 0 10px 30px -14px rgba(0, 0, 0, 0.7);
+    --bezel: #05060a;
+    --foco: #d9a2ff;
+    color-scheme: dark;
+  }
+}
+
+/* ---------- Base ---------- */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: var(--t-cuerpo)/1.6 var(--fuente);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img, video { max-width: 100%; height: auto; display: block; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+:focus-visible { outline: 3px solid var(--foco); outline-offset: 3px; border-radius: 6px; }
+.solo-lectores { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Idioma: el texto de los tres idiomas esta en el HTML; se ve el activo (idioma.js pone data-lang). */
+html[data-lang="es"] [lang="en"]:not(html),
+html[data-lang="es"] [lang="fr"]:not(html),
+html[data-lang="en"] [lang="es"]:not(html),
+html[data-lang="en"] [lang="fr"]:not(html),
+html[data-lang="fr"] [lang="es"]:not(html),
+html[data-lang="fr"] [lang="en"]:not(html) { display: none !important; }
+
+.contenedor { max-width: var(--ancho); margin: 0 auto; padding: 0 var(--e3); }
+@media (min-width: 720px) { .contenedor { padding: 0 32px; } }
+
+/* ---------- Tipografia ---------- */
+.titular { margin: 0; font-size: var(--t-titular); font-weight: 800; line-height: 1.02; letter-spacing: -.03em; text-wrap: balance; }
+.titulo { margin: 0; font-size: var(--t-titulo); font-weight: 800; line-height: 1.08; letter-spacing: -.025em; text-wrap: balance; }
+.subtitulo { margin: var(--e3) 0 0; font-size: var(--t-subtitulo); line-height: 1.5; color: var(--muted); text-wrap: pretty; }
+.degradado { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.etiqueta { margin: 0 0 var(--e2); font-size: var(--t-pequeno); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+
+/* ---------- Botones ---------- */
+.boton {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--e2);
+  min-height: var(--tactil); padding: 10px 22px; cursor: pointer;
+  font: 600 1rem/1.2 var(--fuente); color: var(--text); text-decoration: none;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radio-pildora);
+}
+.boton:hover { text-decoration: none; border-color: color-mix(in srgb, var(--accent) 40%, var(--border)); }
+.boton.principal { background: var(--grad); color: var(--sobre-grad); border: 0; }
+.boton svg { width: 20px; height: 20px; flex: none; }
+
+/* ---------- Barra superior ---------- */
+.barra {
+  position: sticky; top: 0; z-index: 10;
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  border-bottom: 1px solid var(--border);
+}
+.barra .contenedor { display: flex; align-items: center; height: var(--alto-barra); gap: var(--e3); }
+.marca { display: flex; align-items: center; min-height: var(--tactil); margin-right: auto; }
+.marca { flex: none; }
+.marca img { height: 30px; width: auto; max-width: none; flex: none; object-fit: contain; }
+.marca .oscuro { display: none; }
+@media (prefers-color-scheme: dark) {
+  .marca .claro { display: none; }
+  .marca .oscuro { display: block; }
+}
+.menu { display: flex; align-items: center; gap: var(--e2) var(--e4); }
+.navegacion { display: flex; align-items: center; gap: var(--e1) var(--e2); font-size: 15px; }
+.navegacion a { display: inline-flex; align-items: center; min-height: var(--tactil); padding: 0 12px; color: var(--muted); border-radius: var(--radio-pildora); }
+.navegacion a:hover, .navegacion a[aria-current="page"] { color: var(--text); text-decoration: none; }
+.barra .cta { min-height: var(--tactil); padding: 8px 20px; font-size: 15px; }
+.menu-boton { display: none; order: 3; }
+.barra .cta { order: 2; }
+
+.idioma-sel { position: relative; }
+.idioma-boton {
+  display: inline-flex; align-items: center; gap: 7px; cursor: pointer; min-height: var(--tactil);
+  font: 600 13px/1 var(--fuente); letter-spacing: .02em;
+  color: var(--muted); background: transparent; border: 1px solid var(--border);
+  border-radius: var(--radio-pildora); padding: 0 14px;
+}
+.idioma-boton:hover, .idioma-sel.abierto .idioma-boton { color: var(--text); background: var(--surface-2); }
+.idioma-boton svg { width: 16px; height: 16px; }
+.idioma-boton::after {
+  content: ""; width: 6px; height: 6px; margin: -3px 1px 0;
+  border: solid currentColor; border-width: 0 1.5px 1.5px 0; transform: rotate(45deg); transition: transform var(--normal) ease;
+}
+.idioma-sel.abierto .idioma-boton::after { transform: rotate(-135deg); margin-top: 3px; }
+.idioma-lista { list-style: none; margin: 0; padding: 6px; min-width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); }
+.idioma-lista button {
+  display: flex; align-items: center; justify-content: space-between; gap: 18px; width: 100%; min-height: var(--tactil);
+  font: 500 15px/1.2 var(--fuente); color: var(--text); text-align: left;
+  background: transparent; border: 0; border-radius: 9px; padding: 0 12px; cursor: pointer;
+}
+.idioma-lista button:hover { background: var(--surface-2); }
+.idioma-lista button[aria-current="true"] { font-weight: 700; }
+.idioma-lista button[aria-current="true"]::after { content: ""; width: 5px; height: 10px; margin-right: 3px; border: solid var(--accent); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+html.js .idioma-lista {
+  position: absolute; right: 0; top: calc(100% + 8px); z-index: 2; min-width: 160px;
+  opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: opacity var(--normal) ease, transform var(--normal) ease, visibility 0s var(--normal);
+}
+html.js .idioma-sel.abierto .idioma-lista { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+/* Sin JS no hay boton de menu ni de idioma desplegable: todo a la vista, en filas que se parten. */
+html:not(.js) .barra .contenedor { flex-wrap: wrap; height: auto; padding-top: 10px; padding-bottom: 10px; }
+html:not(.js) .menu { flex-wrap: wrap; }
+html:not(.js) .idioma-boton { display: none; }
+html:not(.js) .idioma-lista { display: flex; gap: 4px; padding: 3px; border-radius: var(--radio-pildora); box-shadow: none; }
+
+/* Movil: logo + CTA + boton de menu; los enlaces y el idioma, en un panel a pantalla completa. */
+@media (max-width: 1099px) {
+  .barra .contenedor { gap: var(--e2); }
+  .barra .cta { padding: 8px 16px; }
+  html.js .menu-boton {
+    display: inline-flex; align-items: center; justify-content: center; width: var(--tactil); height: var(--tactil);
+    margin-right: -10px; padding: 0; background: transparent; border: 0; color: var(--text); cursor: pointer;
+  }
+  .menu-icono { width: 26px; height: 26px; overflow: visible; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .menu-icono path { transform-box: view-box; transition: transform .3s ease, opacity .2s ease; }
+  .menu-icono .a { transform-origin: 12px 7px; }
+  .menu-icono .b { transform-origin: 14.5px 12px; }
+  .menu-icono .c { transform-origin: 17px 17px; }
+  .menu-boton[aria-expanded="true"] .a { transform: translateY(5px) rotate(-45deg) scaleX(.75); }
+  .menu-boton[aria-expanded="true"] .b { transform: scaleX(0); opacity: 0; }
+  .menu-boton[aria-expanded="true"] .c { transform: translate(-5px, -5px) rotate(45deg) scaleX(2); }
+  html.menu-abierto { overflow: hidden; }
+  html.js .menu {
+    position: absolute; left: 0; right: 0; top: 100%; height: calc(100dvh - var(--alto-barra)); z-index: 5;
+    flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 0;
+    padding: var(--e2) var(--e3) 32px; overflow-y: auto; overscroll-behavior: contain;
+    background: var(--bg); opacity: 0; visibility: hidden; transform: translateY(-8px);
+    transition: opacity var(--normal) ease, transform var(--normal) ease, visibility 0s var(--normal);
+  }
+  html.js .menu.abierto { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+  html.js .navegacion { flex-direction: column; align-items: stretch; gap: 0; font-size: 26px; font-weight: 600; letter-spacing: -.01em; }
+  html.js .navegacion a { padding: 12px 0; color: var(--text); border-bottom: 1px solid var(--border); border-radius: 0; }
+  html.js .idioma-sel { margin-top: 20px; }
+  html.js .idioma-boton { width: 100%; justify-content: flex-start; font-size: 15px; padding: 0 16px; border-radius: 14px; }
+  html.js .idioma-boton::after { margin-left: auto; }
+  html.js .idioma-lista { position: static; display: none; opacity: 1; visibility: visible; transform: none; margin-top: var(--e2); box-shadow: none; }
+  html.js .idioma-sel.abierto .idioma-lista { display: block; }
+}
+@media (min-width: 1100px) { .menu-boton { display: none !important; } }
+
+/* ---------- Seccion de una pantalla ----------
+ * Una idea por seccion. Alto minimo suave (nunca fijo, sin scroll-snap vertical):
+ * si el contenido no cabe, la seccion crece. */
+.seccion-pantalla {
+  display: flex; flex-direction: column; justify-content: center;
+  padding-block: var(--seccion-v);
+  scroll-margin-top: var(--alto-barra);
+}
+@media (min-width: 760px) and (min-height: 600px) {
+  .seccion-pantalla { min-height: calc(100svh - var(--alto-barra)); }
+}
+@supports (content-visibility: auto) {
+  .seccion-pantalla.bajo-el-pliegue { content-visibility: auto; contain-intrinsic-size: auto 90svh; }
+}
+.cabecera-seccion { max-width: 46rem; margin: 0 auto var(--e5); text-align: center; }
+
+/* ---------- Video-caja ---------- */
+.video-caja {
+  position: relative; overflow: hidden; margin: 0;
+  aspect-ratio: var(--proporcion, 16 / 10);
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: var(--radio-grande); box-shadow: var(--shadow);
+}
+.video-caja video, .video-caja img { width: 100%; height: 100%; object-fit: cover; }
+.video-caja figcaption { position: absolute; left: var(--e3); bottom: var(--e3); padding: 4px 12px; font-size: var(--t-pequeno); font-weight: 600; color: var(--text); background: color-mix(in srgb, var(--bg) 85%, transparent); border-radius: var(--radio-pildora); }
+.video-caja .video-pausa {
+  position: absolute; right: var(--e2); bottom: var(--e2); width: var(--tactil); height: var(--tactil);
+  display: inline-flex; align-items: center; justify-content: center; padding: 0; cursor: pointer;
+  color: var(--text); background: color-mix(in srgb, var(--bg) 85%, transparent); border: 1px solid var(--border); border-radius: 50%;
+}
+.video-caja .video-pausa svg { width: 20px; height: 20px; fill: currentColor; }
+.video-caja.vertical { --proporcion: 9 / 16; max-width: 320px; margin-inline: auto; }
+
+/* ---------- Tabs (patron APG: tablist > button[role=tab] + [role=tabpanel]) ---------- */
+.tabs-lista {
+  position: relative; display: flex; gap: var(--e2); margin: 0 0 var(--e4); padding: 0 0 var(--e2);
+  overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; justify-content: center;
+}
+.tabs-lista::-webkit-scrollbar { display: none; }
+@media (max-width: 759px) { .tabs-lista { justify-content: flex-start; margin-inline: calc(var(--e3) * -1); padding-inline: var(--e3); } }
+.tab {
+  flex: none; min-height: var(--tactil); padding: 0 20px; cursor: pointer;
+  font: 600 1rem/1 var(--fuente); color: var(--muted);
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radio-pildora);
+  transition: color var(--rapido) ease, background-color var(--rapido) ease, border-color var(--rapido) ease;
+}
+.tab:hover { color: var(--text); }
+.tab[aria-selected="true"] { color: var(--sobre-grad); background: var(--grad); border-color: transparent; }
+.tab-panel { min-height: var(--alto-panel, 0); }
+.tab-panel[hidden] { display: none; }
+.tab-panel-contenido { display: grid; gap: var(--e4); align-items: center; }
+@media (min-width: 760px) { .tab-panel-contenido { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--e5); } }
+
+/* ---------- Acordeon (sobre <details>/<summary>: accesible sin JS) ---------- */
+.acordeon { display: grid; gap: var(--e2); width: 100%; max-width: 46rem; margin-inline: auto; }
+.acordeon details { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radio); }
+.acordeon summary {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--e3);
+  min-height: var(--tactil); padding: 14px var(--e4); cursor: pointer; list-style: none;
+  font-weight: 600; border-radius: var(--radio);
+}
+.acordeon summary::-webkit-details-marker { display: none; }
+.acordeon summary::after {
+  content: ""; flex: none; width: 9px; height: 9px; margin-right: 4px;
+  border: solid var(--muted); border-width: 0 2px 2px 0; transform: rotate(45deg);
+  transition: transform var(--normal) ease;
+}
+.acordeon details[open] > summary::after { transform: rotate(-135deg); }
+.acordeon .acordeon-cuerpo { padding: 0 var(--e4) var(--e4); color: var(--muted); }
+.acordeon .acordeon-cuerpo > :first-child { margin-top: 0; }
+.acordeon .acordeon-cuerpo > :last-child { margin-bottom: 0; }
+
+/* ---------- Bento ---------- */
+.bento { display: grid; gap: 12px; grid-template-columns: 1fr; }
+.bento-celda {
+  position: relative; display: flex; flex-direction: column; gap: var(--e2); min-width: 0;
+  padding: var(--e4); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radio-grande);
+  color: var(--text); text-align: left; font: inherit; box-shadow: var(--shadow-suave);
+}
+button.bento-celda, a.bento-celda { cursor: pointer; min-height: var(--tactil); }
+a.bento-celda:hover { text-decoration: none; }
+.bento-celda h3 { margin: 0; font-size: 1.2rem; line-height: 1.25; letter-spacing: -.01em; }
+.bento-celda p { margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.5; }
+.bento-celda > svg { width: 28px; height: 28px; fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.bento-celda.grande { background: var(--surface-2); }
+@media (min-width: 600px) { .bento { grid-template-columns: repeat(2, 1fr); gap: var(--e3); } }
+@media (min-width: 960px) {
+  .bento { grid-template-columns: repeat(3, 1fr); gap: var(--e4); }
+  .bento-celda.grande { grid-column: span 1; grid-row: span 2; justify-content: flex-end; padding: var(--e5) var(--e4); }
+}
+
+/* ---------- Pie ---------- */
+.pie { background: var(--bg); border-top: 1px solid var(--border); padding: var(--e5) 0 var(--e6); color: var(--faint); font-size: var(--t-pequeno); }
+.pie .contenedor { display: flex; flex-wrap: wrap; gap: var(--e3) var(--e4); justify-content: space-between; align-items: center; }
+.pie nav { display: flex; flex-wrap: wrap; gap: 0 var(--e2); }
+.pie a { display: inline-flex; align-items: center; min-height: var(--tactil); padding: 0 var(--e2); color: var(--muted); }
+
+/* ---------- Movimiento ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .tab-panel:not([hidden]) { animation: panel-entra var(--normal) ease both; }
+  .bento-celda { transition: transform var(--rapido) ease, box-shadow var(--rapido) ease; }
+  button.bento-celda:hover, a.bento-celda:hover { transform: scale(1.01); }
+  button.bento-celda:active, a.bento-celda:active { transform: scale(.99); }
+  .boton { transition: transform var(--rapido) ease; }
+  .boton:active { transform: scale(.98); }
+}
+@keyframes panel-entra { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
