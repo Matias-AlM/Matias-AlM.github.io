@@ -28,7 +28,7 @@
     var clip = caja.dataset.video;
     var video = document.createElement("video");
     video.muted = true;
-    video.loop = true;
+    // Sin loop: al acabar vuelve a empezar a mano, asi el carrusel sabe que ha terminado.
     video.playsInline = true;
     video.preload = "none";
     video.setAttribute("aria-hidden", "true");
@@ -74,6 +74,7 @@
       pausadoPorUsuario = !video.paused;
       if (video.paused) reproducir(); else video.pause();
     });
+    video.addEventListener("ended", function () { video.currentTime = 0; video.play().catch(function () {}); });
     video.addEventListener("play", pintarBoton);
     video.addEventListener("pause", pintarBoton);
 
@@ -90,13 +91,13 @@
   }
 
   // ---------- Carrusel de funciones ----------
-  // .h-carrusel > .h-pestanas (botones, hidden sin JS) + .h-pista > .h-diapo
-  // (captura + texto). Sin JS la pista es un scroll horizontal con scroll-snap.
+  // .h-carrusel > .h-pista > .h-diapo (captura + texto); el JS anade debajo el boton de pausa. Sin JS la pista es un scroll horizontal con scroll-snap.
   // Con JS (clase .listo), al estilo de notability.com: la diapositiva actual centrada y las
   // vecinas asomando a los lados, mas pequenas (ESCALA) y atenuadas; se mueven con transform.
-  // Se cambia tocando una vecina, deslizando o con las pestanas (y sus flechas del teclado).
-  // Avanza solo cada AVANCE ms mientras esta en pantalla (cambiar a mano reinicia la cuenta),
-  // salvo con prefers-reduced-motion o con el foco del teclado dentro; el boton de la fila lo pausa y reanuda.
+  // Se cambia tocando una vecina, deslizando o con las flechas del teclado sobre el boton de pausa.
+  // Avanza solo cada AVANCE ms mientras esta en pantalla (cambiar a mano reinicia la cuenta);
+  // en la diapositiva con video, cuando el video termina (empieza desde el principio al llegar),
+  // salvo con prefers-reduced-motion o con el foco del teclado dentro; el boton de pausa lo para y reanuda.
   var AVANCE = 6000;
   var ESCALA = 0.72;
   var HUECO = 20;
@@ -110,9 +111,7 @@
 
   function iniciarCarrusel(carrusel) {
     var pista = carrusel.querySelector(".h-pista");
-    var fila = carrusel.querySelector(".h-pestanas");
     var diapos = Array.prototype.slice.call(pista.querySelectorAll(".h-diapo"));
-    var pestanas = Array.prototype.slice.call(fila.querySelectorAll(".h-pestana"));
     var total = diapos.length;
     var actual = 0, enVista = false, conFoco = false, detenido = sinMovimiento.matches, temporizador;
 
@@ -124,8 +123,10 @@
       return b;
     }
     var pausa = boton("h-pausa", "");
-    fila.appendChild(pausa);
-    fila.hidden = false;
+    var controles = document.createElement("div");
+    controles.className = "h-controles";
+    controles.appendChild(pausa);
+    pista.after(controles);
     pista.removeAttribute("tabindex");
     carrusel.classList.add("listo");
 
@@ -178,24 +179,32 @@
     function ir(n) {
       actual = (n + total) % total;
       colocar();
-      pestanas.forEach(function (p, i) { p.setAttribute("aria-current", String(i === actual)); });
-      var p = pestanas[actual];
-      fila.scrollTo({ left: p.offsetLeft - (fila.clientWidth - p.offsetWidth) / 2, behavior: "smooth" });
+      var video = diapos[actual].querySelector("video");
+      if (video) video.currentTime = 0;
     }
 
     function programar() {
-      clearInterval(temporizador);
-      if (!detenido && enVista && !conFoco) temporizador = setInterval(function () { ir(actual + 1); }, AVANCE);
+      clearTimeout(temporizador);
+      if (detenido || !enVista || conFoco) return;
+      // Con el video en marcha se espera a que acabe ("ended"); parado, cuenta como una captura.
+      var video = diapos[actual].querySelector("video");
+      if (video && !video.paused) return;
+      temporizador = setTimeout(function () { mover(actual + 1); }, AVANCE);
     }
     function mover(n) { ir(n); programar(); }
 
-    pestanas.forEach(function (p, i) { p.addEventListener("click", function () { mover(i); }); });
+    diapos.forEach(function (d, i) {
+      var video = d.querySelector("video");
+      if (!video) return;
+      video.addEventListener("ended", function () { if (i === actual && !detenido && enVista && !conFoco) mover(actual + 1); });
+      video.addEventListener("play", function () { if (i === actual) programar(); });
+      video.addEventListener("pause", function () { if (i === actual) programar(); });
+    });
     pausa.addEventListener("click", function () { detenido = !detenido; pintarPausa(); programar(); });
-    carrusel.addEventListener("keydown", function (e) {
-      if (e.target.closest(".h-pestanas") && (e.key === "ArrowLeft" || e.key === "ArrowRight")) {
+    pausa.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
         e.preventDefault();
         mover(actual + (e.key === "ArrowRight" ? 1 : -1));
-        pestanas[actual].focus();
       }
     });
 
@@ -229,6 +238,8 @@
     textos();
     alCambiarIdioma(function () { textos(); colocar(); });
     ir(0);
+    // Ya colocadas sin animar; desde el siguiente fotograma, los cambios se animan.
+    requestAnimationFrame(function () { requestAnimationFrame(function () { carrusel.classList.add("anima"); }); });
   }
 
   // Primero los videos: el carrusel deja inert el boton de pausa de las diapositivas ocultas.
