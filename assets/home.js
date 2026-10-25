@@ -20,7 +20,7 @@
     var clip = caja.dataset.video;
     var video = document.createElement("video");
     video.muted = true;
-    // Sin loop: el carrusel avanza en "ended" y, si esta parado, vuelve a empezar el.
+    // Sin loop: el carrusel avanza en "ended" (con un temporizador de respaldo) y, si esta parado, vuelve a empezar el.
     video.playsInline = true;
     video.preload = "none";
     video.setAttribute("aria-hidden", "true");
@@ -64,9 +64,11 @@
   // vecinas asomando a los lados, mas pequenas (ESCALA) y atenuadas; se mueven con transform.
   // Se cambia tocando una vecina, deslizando o con las flechas del teclado con el foco dentro.
   // Avanza solo cada AVANCE ms mientras esta en pantalla (cambiar a mano reinicia la cuenta);
-  // en las diapositivas con video, cuando el video acaba una vuelta (todos duran 8-10 s, asi se ve
-  // entero), salvo con prefers-reduced-motion o con el foco del teclado dentro; sin boton de pausa (WCAG 2.2.2), se para con el raton encima o con el dedo puesto.
+  // en las diapositivas con video, cuando el video acaba una vuelta (asi se ve entero; con un tope
+  // de TOPE_VIDEO por si no avanza), salvo con prefers-reduced-motion o con el foco del teclado dentro; sin boton de pausa (WCAG 2.2.2), se para con el raton encima o con el dedo puesto.
   var AVANCE = 6000;
+  var MARGEN_VIDEO = 500;
+  var TOPE_VIDEO = 25000;
   var ESCALA = 0.72;
   var HUECO = 20;
   var TEXTOS_CARRUSEL = {
@@ -142,10 +144,16 @@
     function programar() {
       clearTimeout(temporizador);
       if (detenido || !enVista || conFoco || encima) return;
-      // Con el video en marcha se espera a que acabe ("ended"); parado, cuenta como una captura.
+      // Con el video en marcha avanza al acabar una vuelta ("ended", el video no tiene loop); este
+      // temporizador es la red de seguridad si "ended" no llega (video atascado, sin cargar, bloqueado...),
+      // asi que nunca pasa de TOPE_VIDEO. Parado o sin video, cuenta como una captura.
       var video = diapos[actual].querySelector("video");
-      if (video && !video.paused) return;
-      temporizador = setTimeout(function () { mover(actual + 1); }, AVANCE);
+      var espera = AVANCE;
+      if (video && !video.paused) {
+        var vuelta = isFinite(video.duration) ? video.duration * 1000 + MARGEN_VIDEO : TOPE_VIDEO;
+        espera = Math.min(TOPE_VIDEO, Math.max(AVANCE, vuelta));
+      }
+      temporizador = setTimeout(function () { mover(actual + 1); }, espera);
     }
     function mover(n) { ir(n); programar(); }
 
@@ -158,6 +166,7 @@
         else { video.currentTime = 0; video.play().catch(function () {}); }
       });
       video.addEventListener("play", function () { if (i === actual) programar(); });
+      video.addEventListener("loadedmetadata", function () { if (i === actual) programar(); });
       video.addEventListener("pause", function () { if (i === actual) programar(); });
     });
     carrusel.addEventListener("keydown", function (e) {
