@@ -1,11 +1,9 @@
 /* Home (sitio/index.html). Solo lo propio de la home; lo comun esta en site.css.
  * Prefijo h- salvo .video-caja/.video-pausa, que son las de assets/home.js. */
 
-/* Hero: la tableta lleva el video en vez de una captura. La pantalla tiene la
- * proporcion del video (1766 x 1080); el poster (<picture>) queda debajo y el
- * video, cuando arranca, encima. Sin movil superpuesto. */
-.h-escena { padding-bottom: 0; }
-.h-pantalla { position: relative; aspect-ratio: 1766 / 1080; overflow: hidden; border-radius: calc(var(--radio) - var(--borde)); background: var(--surface-2); }
+/* Video de la diapositiva de escritura del carrusel: la captura tiene la proporcion del
+ * video (1766 x 1080); el poster (<picture>) queda debajo y el video, cuando arranca, encima. */
+.h-pantalla { position: relative; aspect-ratio: 1766 / 1080; background: var(--surface-2); }
 .h-pantalla img, .h-pantalla video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 0; }
 .h-pantalla video { z-index: 1; }
 .video-caja .video-pausa {
@@ -17,11 +15,11 @@
 .video-caja .video-pausa svg { width: 20px; height: 20px; fill: currentColor; }
 .hero .sellos { margin-top: 40px; }
 
-/* Funciones: carrusel (home.js). Pestanas con el nombre de cada funcion, la captura y el
+/* Funciones: carrusel en el hero (home.js). Pestanas con el nombre de cada funcion, la captura y el
  * texto debajo, que pasa con ella. La pista es un scroll
  * horizontal con scroll-snap, asi que sin JS se desliza a mano. */
 .h-cabecera { text-align: center; }
-.h-funciones .h-cabecera { margin-bottom: 32px; }
+.hero .h-carrusel { margin-top: 56px; }
 .h-pestanas { display: flex; gap: 8px; margin: 0 0 24px; padding: 4px 0; overflow-x: auto; scrollbar-width: none; }
 .h-pestanas::-webkit-scrollbar { display: none; }
 .h-pestanas[hidden] { display: none; }
@@ -77,8 +75,7 @@ html.js .h-pista::-webkit-scrollbar { display: none; }
 
 /* Carrusel con JS (.listo), al estilo de notability.com: home.js coloca cada diapositiva con
  * transform (la actual centrada, las vecinas a escala 0,72 asomando por los lados) y da a la
- * pista la altura de la actual. La seccion recorta lo que sale de la ventana. */
-.h-funciones { overflow-x: clip; }
+ * pista la altura de la actual. El hero (overflow: hidden) recorta lo que sale de la ventana. */
 .h-carrusel { --ancho-diapo: min(720px, 72vw); }
 .h-carrusel.listo .h-pista { display: block; position: relative; overflow: visible; padding: 0; touch-action: pan-y; transition: height .5s ease; }
 .h-carrusel.listo .h-diapo {

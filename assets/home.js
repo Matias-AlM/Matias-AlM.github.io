@@ -1,4 +1,4 @@
-// Home: video del hero (la parte .video-caja de interaccion.js, rama
+// Home: video de la diapositiva de escritura (la parte .video-caja de interaccion.js, rama
 // feat/home-bento-en-funciones) y carrusel de funciones.
 //
 // <div class="video-caja" data-video="hero" data-video-oscuro> usa
@@ -167,10 +167,10 @@
         d.style.transform = "translate(" + (k * paso) + "px, " + y + "px) scale(" + escala + ")";
         d.classList.toggle("actual", k === 0);
         d.classList.toggle("vecina", Math.abs(k) === 1);
-        // Las demas se ocultan a lectores y su texto (lo unico enfocable) queda inert; la
-        // captura de las vecinas sigue recibiendo el raton, para el cursor y el toque.
+        // Las demas se ocultan a lectores y lo enfocable (texto y boton del video) queda inert;
+        // la captura de las vecinas sigue recibiendo el raton, para el cursor y el toque.
         d.setAttribute("aria-hidden", String(k !== 0));
-        d.querySelector(".h-diapo-texto").inert = k !== 0;
+        d.querySelectorAll(".h-diapo-texto, .video-pausa").forEach(function (el) { el.inert = k !== 0; });
       });
       pista.style.height = diapos[actual].offsetHeight + "px";
     }
@@ -231,14 +231,16 @@
     ir(0);
   }
 
+  // Primero los videos: el carrusel deja inert el boton de pausa de las diapositivas ocultas.
   function iniciar() {
-    document.querySelectorAll(".h-carrusel").forEach(iniciarCarrusel);
     var videos = document.querySelectorAll(".video-caja[data-video]");
-    if (!videos.length || !("IntersectionObserver" in window)) return;
-    var observador = new IntersectionObserver(function (entradas) {
-      entradas.forEach(function (e) { e.target.cambioDeVista(e.isIntersecting); });
-    }, { threshold: 0.4 });
-    videos.forEach(function (caja) { iniciarVideo(caja, observador); });
+    if (videos.length && "IntersectionObserver" in window) {
+      var observador = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (e) { e.target.cambioDeVista(e.isIntersecting); });
+      }, { threshold: 0.4 });
+      videos.forEach(function (caja) { iniciarVideo(caja, observador); });
+    }
+    document.querySelectorAll(".h-carrusel").forEach(iniciarCarrusel);
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", iniciar);
