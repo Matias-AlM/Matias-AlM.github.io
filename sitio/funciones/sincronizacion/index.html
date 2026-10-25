@@ -1,0 +1,192 @@
+<!doctype html>
+<!--
+  PLANTILLA DE PAGINA DE FUNCION (/funciones/<slug>/). Esta del lazo es la de referencia:
+  para hacer otra, copia este fichero a sitio/funciones/<slug>/index.html y cambia solo esto
+  (en es, en y fr; fr usa las capturas en). Lo demas (estructura, clases, head) no se toca.
+
+   1. <html>: data-titulo-es/en/fr = "<Nombre> · Funciones | SwiftPen" (y lo mismo en <title> y og:title, en es).
+   2. <meta name="description">: una frase en es de 140-160 caracteres.
+   3. canonical y og:url: https://getswiftpen.com/funciones/<slug>/
+   4. og:image: https://getswiftpen.com/img/bento/<escena>-es-claro-1600.webp (o img/portada.jpg?v=3 si no hay escena).
+   5. Sprite: deja i-ok y los iconos de las 3 relacionadas (copialos de sitio/funciones/index.html).
+   6. Migas: el <span aria-current="page"> con el nombre corto de la funcion.
+   7. Cabecera: .etiqueta (nombre del grupo; si es Pro o BETA, añade <span class="pro">PRO</span> o
+      <span class="beta">BETA</span> dentro), h1 (el titular, corto), .entradilla (una o dos lineas).
+   8. Imagen de cabecera (.cabecera-imagen): los tres <picture lang> con la escena del bento
+      (img/bento/<escena>-<es|en>-<claro|oscuro>-<800|1600>.webp, 1600x1051). Sin escena: sustituye
+      el <figure> entero por
+        <div class="cabecera-imagen captura-pendiente" style="--proporcion: 1600 / 1051" role="img" aria-label="Captura pendiente: <slug>-cabecera"><span>captura: <slug>-cabecera</span></div>
+   9. "Como se usa": 2 a 4 <li class="fn-paso"> (numero, h3, parrafo corto y captura). Captura real:
+      <figure class="fn-captura"> con <picture lang> como en la cabecera, sizes "(min-width: 900px) 600px, 100vw"
+      y loading="lazy". Sin captura: el .captura-pendiente con la etiqueta "captura: <slug>-<que>".
+  10. "Los detalles": 5 a 10 <li> (de las release notes y del mapa de funciones; nada inventado).
+  12. Relacionadas: 3 .tarjeta-funcion (icono, nombre, una linea; .pro o .beta si toca), las mismas
+      lineas que su tarjeta en /funciones/.
+  13. CTA: data-umami-event-lugar="funcion-<slug>".
+  Slugs: escritura, formas, lapiz, papel, lazo, pdf, imagenes-y-texto, lienzo-infinito, audio, busqueda, sincronizacion.
+-->
+<html lang="es" data-lang="es" data-titulo-es="Sincronización · Funciones | SwiftPen" data-titulo-en="Sync · Features | SwiftPen" data-titulo-fr="Synchro · Fonctions | SwiftPen">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sincronización · Funciones | SwiftPen</title>
+<meta name="description" content="Sincroniza SwiftPen con WebDAV o Google Drive: tus notas no pasan por servidores nuestros. Fusión si editas en dos sitios, cambios en segundos y sin internet.">
+<link rel="icon" href="/favicon.png">
+<link rel="canonical" href="https://getswiftpen.com/funciones/sincronizacion/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SwiftPen">
+<meta property="og:title" content="Sincronización · Funciones | SwiftPen">
+<meta property="og:url" content="https://getswiftpen.com/funciones/sincronizacion/">
+<meta property="og:image" content="https://getswiftpen.com/img/portada.jpg?v=3">
+<link rel="preload" href="/assets/fuentes/mona-sans-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css?v=4">
+<link rel="stylesheet" href="/assets/funciones.css?v=3">
+<link rel="stylesheet" href="/assets/sync-ilustracion.css?v=1">
+<script src="/assets/idioma.js?v=2"></script>
+<!-- Estadisticas sin cookies ni datos personales (ver la politica de privacidad). Solo en getswiftpen.com: las vistas previas y las pruebas locales no cuentan. Sin la parte ?... de la direccion. -->
+<script defer src="https://cloud.umami.is/script.js" data-website-id="8e72a64d-fc98-425b-8b24-4017cd4c6f43" data-domains="getswiftpen.com" data-exclude-search="true" data-do-not-track="true"></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-micro" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
+  <symbol id="i-lupa" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-plantilla" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></symbol>
+</svg>
+
+<!--#barra funciones-->
+
+<main>
+
+<header class="cabecera-pagina cabecera-aurora">
+  <div class="contenedor">
+    <nav class="migas" aria-label="Migas"><a href="/funciones/"><span lang="es">Funciones</span><span lang="en">Features</span><span lang="fr">Fonctions</span></a><span aria-current="page"><span lang="es">Sincronización</span><span lang="en">Sync</span><span lang="fr">Synchro</span></span></nav>
+    <p class="etiqueta"><span lang="es">Sincronización</span><span lang="en">Sync</span><span lang="fr">Synchro</span></p>
+    <h1><span lang="es">Tu nube, sin servidores.</span><span lang="en">Your cloud, no servers.</span><span lang="fr">Votre cloud, sans serveurs.</span></h1>
+    <p class="entradilla"><span lang="es">Sincroniza con WebDAV o Google Drive: tus notas no pasan por servidores nuestros.</span><span lang="en">Sync with WebDAV or Google Drive: your notes never touch servers of ours.</span><span lang="fr">Synchronisez avec WebDAV ou Google Drive : vos notes ne passent par aucun serveur à nous.</span></p>
+    <figure class="cabecera-imagen h-sync cabecera-aurora" role="img" aria-labelledby="sync-cab-nombre">
+      <span class="solo-lectores" id="sync-cab-nombre"><span lang="es">SwiftPen sincroniza tus notas con Google Drive o con un servidor WebDAV.</span><span lang="en">SwiftPen syncs your notes with Google Drive or a WebDAV server.</span><span lang="fr">SwiftPen synchronise vos notes avec Google Drive ou un serveur WebDAV.</span></span>
+      <div class="h-sync-fila" aria-hidden="true">
+        <div class="h-sync-nodo">
+          <span class="h-sync-icono"><svg viewBox="0 0 24 24"><path fill="#FFBA00" d="M12.01 1.485c-2.082 0-3.754.02-3.743.047.01.02 1.708 3.001 3.774 6.62l3.76 6.574h3.76c2.081 0 3.753-.02 3.742-.047-.005-.02-1.708-3.001-3.775-6.62l-3.76-6.574z"/><path fill="#00AC47" d="M7.25 3.215a789.828 789.861 0 0 0-3.63 6.319L0 15.868l1.89 3.298 1.885 3.297 3.62-6.335 3.618-6.33-1.88-3.287C8.1 4.704 7.255 3.22 7.25 3.214z"/><path fill="#2684FC" d="m9.509 15.868-.203.348c-.114.198-.96 1.672-1.88 3.287a423.93 423.948 0 0 1-1.698 2.97c-.01.026 3.24.042 7.222.042h7.244l1.796-3.157c.992-1.734 1.85-3.23 1.906-3.323l.104-.167z"/></svg></span>
+          <span class="h-sync-nombre">Google Drive</span>
+        </div>
+        <svg class="h-sync-flecha" viewBox="0 0 48 24" aria-hidden="true"><path d="M4 12h40M10 6l-6 6 6 6M38 6l6 6-6 6"/></svg>
+        <div class="h-sync-nodo">
+          <span class="h-sync-icono h-sync-app"><img src="/img/icon.png" width="192" height="192" alt="" draggable="false"></span>
+          <span class="h-sync-nombre">SwiftPen</span>
+        </div>
+        <svg class="h-sync-flecha" viewBox="0 0 48 24" aria-hidden="true"><path d="M4 12h40M10 6l-6 6 6 6M38 6l6 6-6 6"/></svg>
+        <div class="h-sync-nodo">
+          <span class="h-sync-icono"><svg viewBox="0 0 24 24" class="h-sync-webdav"><path d="M7 19a4.5 4.5 0 0 1-.8-8.93A6 6 0 0 1 17.7 9.2 4.9 4.9 0 0 1 17 19z"/><path d="M9 12.5h6M9 15.5h6"/></svg></span>
+          <span class="h-sync-nombre">WebDAV</span>
+        </div>
+      </div>
+    </figure>
+  </div>
+</header>
+
+<section class="fn-bloque" aria-labelledby="como-se-usa">
+  <div class="contenedor">
+    <h2 id="como-se-usa"><span lang="es">Cómo se usa</span><span lang="en">How it works</span><span lang="fr">Comment ça marche</span></h2>
+    <ol class="fn-pasos">
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">1</span>
+          <h3><span lang="es">Elige tu nube</span><span lang="en">Pick your cloud</span><span lang="fr">Choisissez votre cloud</span></h3>
+          <p><span lang="es">Conecta WebDAV o Google Drive desde los ajustes de sincronización y usa la nube que ya tienes.</span><span lang="en">Connect WebDAV or Google Drive from the sync settings and use the cloud you already have.</span><span lang="fr">Connectez WebDAV ou Google Drive depuis les réglages de synchronisation et utilisez le cloud que vous avez déjà.</span></p>
+        </div>
+        <figure class="marco h-sync cabecera-aurora" role="img" aria-labelledby="sync-paso1-nombre">
+          <span class="solo-lectores" id="sync-paso1-nombre"><span lang="es">SwiftPen sincroniza tus notas con Google Drive o con un servidor WebDAV.</span><span lang="en">SwiftPen syncs your notes with Google Drive or a WebDAV server.</span><span lang="fr">SwiftPen synchronise vos notes avec Google Drive ou un serveur WebDAV.</span></span>
+          <div class="h-sync-fila" aria-hidden="true">
+            <div class="h-sync-nodo">
+              <span class="h-sync-icono"><svg viewBox="0 0 24 24"><path fill="#FFBA00" d="M12.01 1.485c-2.082 0-3.754.02-3.743.047.01.02 1.708 3.001 3.774 6.62l3.76 6.574h3.76c2.081 0 3.753-.02 3.742-.047-.005-.02-1.708-3.001-3.775-6.62l-3.76-6.574z"/><path fill="#00AC47" d="M7.25 3.215a789.828 789.861 0 0 0-3.63 6.319L0 15.868l1.89 3.298 1.885 3.297 3.62-6.335 3.618-6.33-1.88-3.287C8.1 4.704 7.255 3.22 7.25 3.214z"/><path fill="#2684FC" d="m9.509 15.868-.203.348c-.114.198-.96 1.672-1.88 3.287a423.93 423.948 0 0 1-1.698 2.97c-.01.026 3.24.042 7.222.042h7.244l1.796-3.157c.992-1.734 1.85-3.23 1.906-3.323l.104-.167z"/></svg></span>
+              <span class="h-sync-nombre">Google Drive</span>
+            </div>
+            <svg class="h-sync-flecha" viewBox="0 0 48 24" aria-hidden="true"><path d="M4 12h40M10 6l-6 6 6 6M38 6l6 6-6 6"/></svg>
+            <div class="h-sync-nodo">
+              <span class="h-sync-icono h-sync-app"><img src="/img/icon.png" width="192" height="192" alt="" draggable="false"></span>
+              <span class="h-sync-nombre">SwiftPen</span>
+            </div>
+            <svg class="h-sync-flecha" viewBox="0 0 48 24" aria-hidden="true"><path d="M4 12h40M10 6l-6 6 6 6M38 6l6 6-6 6"/></svg>
+            <div class="h-sync-nodo">
+              <span class="h-sync-icono"><svg viewBox="0 0 24 24" class="h-sync-webdav"><path d="M7 19a4.5 4.5 0 0 1-.8-8.93A6 6 0 0 1 17.7 9.2 4.9 4.9 0 0 1 17 19z"/><path d="M9 12.5h6M9 15.5h6"/></svg></span>
+              <span class="h-sync-nombre">WebDAV</span>
+            </div>
+          </div>
+        </figure>
+      </li>
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">2</span>
+          <h3><span lang="es">Sincroniza</span><span lang="en">Sync</span><span lang="fr">Synchronisez</span></h3>
+          <p><span lang="es">Los cambios se suben poco después de guardar, o toca «Sincronizar ahora» y mira su progreso.</span><span lang="en">Changes are uploaded shortly after you save, or tap "Sync now" and watch its progress.</span><span lang="fr">Les modifications sont envoyées peu après l'enregistrement, ou touchez « Synchroniser maintenant » et suivez sa progression.</span></p>
+        </div>
+      </li>
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">3</span>
+          <h3><span lang="es">Sigue en otro dispositivo</span><span lang="en">Carry on on another device</span><span lang="fr">Continuez sur un autre appareil</span></h3>
+          <p><span lang="es">Abre la nota en otro dispositivo: si editas en dos sitios, los cambios se juntan. Y si no hay conexión, funciona igual.</span><span lang="en">Open the note on another device: if you edit in two places, the changes are merged. And with no connection, it works just the same.</span><span lang="fr">Ouvrez la note sur un autre appareil : si vous modifiez à deux endroits, les changements sont fusionnés. Et sans connexion, cela fonctionne aussi.</span></p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="fn-bloque" aria-labelledby="detalles">
+  <div class="contenedor">
+    <h2 id="detalles"><span lang="es">Los detalles</span><span lang="en">The details</span><span lang="fr">Les détails</span></h2>
+    <ul class="fn-detalles">
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Sincroniza con WebDAV o Google Drive: tus notas no pasan por servidores nuestros.</span><span lang="en">Sync with WebDAV or Google Drive: your notes never touch servers of ours.</span><span lang="fr">Synchronisez avec WebDAV ou Google Drive : vos notes ne passent par aucun serveur à nous.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Si editas en dos sitios, se juntan los cambios.</span><span lang="en">Edit in two places and the changes are merged.</span><span lang="fr">Si vous modifiez à deux endroits, les changements sont fusionnés.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">La nota abierta recibe los cambios de otro dispositivo en unos segundos, sin cortar tu trazo.</span><span lang="en">The open note receives changes from another device within seconds, without interrupting your stroke.</span><span lang="fr">La note ouverte reçoit les changements d'un autre appareil en quelques secondes, sans couper votre trait.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Funciona igual sin conexión.</span><span lang="en">Works just the same offline.</span><span lang="fr">Fonctionne aussi sans connexion.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">«Sincronizar ahora» muestra su progreso y reintenta cuando Drive pide esperar.</span><span lang="en">"Sync now" shows its progress and retries when Drive asks to wait.</span><span lang="fr">« Synchroniser maintenant » affiche sa progression et réessaie quand Drive demande d'attendre.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Si Drive rechaza el acceso, la app lo explica y te deja reconectar; «Desconectar» pide confirmación.</span><span lang="en">If Drive rejects access, the app explains it and lets you reconnect; "Disconnect" asks for confirmation.</span><span lang="fr">Si Drive refuse l'accès, l'app l'explique et vous laisse vous reconnecter ; « Déconnecter » demande confirmation.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Los fallos de sincronización se ven en una lista.</span><span lang="en">Sync failures show up in a list.</span><span lang="fr">Les échecs de synchronisation s'affichent dans une liste.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Sin cuentas, sin anuncios y bloqueo con huella.</span><span lang="en">No accounts, no ads, and fingerprint lock.</span><span lang="fr">Sans compte, sans publicité, avec verrouillage par empreinte.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="fn-bloque" aria-labelledby="relacionadas">
+  <div class="contenedor">
+    <h2 id="relacionadas"><span lang="es">Relacionadas</span><span lang="en">Related</span><span lang="fr">Voir aussi</span></h2>
+    <div class="tarjeta-funciones">
+      <a class="tarjeta-funcion" href="/funciones/audio/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-micro"/></svg></span>
+        <strong><span lang="es">Audio</span><span lang="en">Audio</span><span lang="fr">Audio</span> <span class="pro">PRO</span></strong>
+        <span><span lang="es">Graba la clase y toca una palabra para oír lo que sonaba al escribirla.</span><span lang="en">Record the lecture and tap a word to hear what was said as you wrote it.</span><span lang="fr">Enregistrez le cours et touchez un mot pour entendre ce qui se disait quand vous l'avez écrit.</span></span>
+      </a>
+      <a class="tarjeta-funcion" href="/funciones/busqueda/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-lupa"/></svg></span>
+        <strong><span lang="es">Búsqueda</span><span lang="en">Search</span><span lang="fr">Recherche</span> <span class="pro">PRO</span></strong>
+        <span><span lang="es">Encuentra lo que escribiste a mano, sin salir del dispositivo.</span><span lang="en">Find what you wrote by hand, without it leaving your device.</span><span lang="fr">Retrouvez ce que vous avez écrit à la main, sans quitter l'appareil.</span></span>
+      </a>
+      <a class="tarjeta-funcion" href="/funciones/papel/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-plantilla"/></svg></span>
+        <strong><span lang="es">Papel</span><span lang="en">Paper</span><span lang="fr">Papier</span></strong>
+        <span><span lang="es">Plantillas, tamaños y páginas a tu medida, sin límite de notas.</span><span lang="en">Templates, sizes and pages your way, with no limit on notes.</span><span lang="fr">Modèles, formats et pages à votre mesure, sans limite de notes.</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cierre">
+  <div class="contenedor">
+    <h2><span lang="es">Pruébalo en cuanto salga.</span><span lang="en">Try it as soon as it's out.</span><span lang="fr">Essayez-le dès sa sortie.</span></h2>
+    <p class="entradilla"><span lang="es">SwiftPen llega pronto a Google Play. Déjanos tu email y te avisamos.</span><span lang="en">SwiftPen is coming soon to Google Play. Leave your email and we'll let you know.</span><span lang="fr">SwiftPen arrive bientôt sur Google Play. Laissez votre e-mail et nous vous préviendrons.</span></p>
+    <div class="acciones">
+      <a class="boton principal" href="/#avisame" data-umami-event="ir-al-aviso" data-umami-event-lugar="funcion-sincronizacion"><span lang="es">Avísame cuando salga</span><span lang="en">Notify me at launch</span><span lang="fr">Prévenez-moi à la sortie</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!--#pie-->
+
+</body>
+</html>

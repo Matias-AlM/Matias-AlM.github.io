@@ -8,6 +8,8 @@
   var CLAVE = "idioma";
   var raiz = document.documentElement;
   raiz.classList.add("js");
+  // Tema forzado guardado (lo gestiona tema.js): se pone ya, en el <head>, para que no parpadee.
+  try { var tema = localStorage.getItem("tema"); if (tema === "claro" || tema === "oscuro") raiz.setAttribute("data-tema", tema); } catch (e) {}
 
   function guardado() {
     try { return localStorage.getItem(CLAVE); } catch (e) { return null; }

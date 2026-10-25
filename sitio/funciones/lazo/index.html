@@ -1,0 +1,210 @@
+<!doctype html>
+<!--
+  PLANTILLA DE PAGINA DE FUNCION (/funciones/<slug>/). Esta del lazo es la de referencia:
+  para hacer otra, copia este fichero a sitio/funciones/<slug>/index.html y cambia solo esto
+  (en es, en y fr; fr usa las capturas en). Lo demas (estructura, clases, head) no se toca.
+
+   1. <html>: data-titulo-es/en/fr = "<Nombre> · Funciones | SwiftPen" (y lo mismo en <title> y og:title, en es).
+   2. <meta name="description">: una frase en es de 140-160 caracteres.
+   3. canonical y og:url: https://getswiftpen.com/funciones/<slug>/
+   4. og:image: https://getswiftpen.com/img/bento/<escena>-es-claro-1600.webp (o img/portada.jpg?v=3 si no hay escena).
+   5. Sprite: deja i-ok y los iconos de las 3 relacionadas (copialos de sitio/funciones/index.html).
+   6. Migas: el <span aria-current="page"> con el nombre corto de la funcion.
+   7. Cabecera: .etiqueta (nombre del grupo; si es Pro o BETA, añade <span class="pro">PRO</span> o
+      <span class="beta">BETA</span> dentro), h1 (el titular, corto), .entradilla (una o dos lineas).
+   8. Imagen de cabecera (.cabecera-imagen): los tres <picture lang> con la escena del bento
+      (img/bento/<escena>-<es|en>-<claro|oscuro>-<800|1600>.webp, 1600x1051). Sin escena: sustituye
+      el <figure> entero por
+        <div class="cabecera-imagen captura-pendiente" style="--proporcion: 1600 / 1051" role="img" aria-label="Captura pendiente: <slug>-cabecera"><span>captura: <slug>-cabecera</span></div>
+   9. "Como se usa": 2 a 4 <li class="fn-paso"> (numero, h3, parrafo corto y captura). Captura real:
+      <figure class="fn-captura"> con <picture lang> como en la cabecera, sizes "(min-width: 900px) 600px, 100vw"
+      y loading="lazy". Sin captura: el .captura-pendiente con la etiqueta "captura: <slug>-<que>".
+  10. "Los detalles": 5 a 10 <li> (de las release notes y del mapa de funciones; nada inventado).
+  12. Relacionadas: 3 .tarjeta-funcion (icono, nombre, una linea; .pro o .beta si toca), las mismas
+      lineas que su tarjeta en /funciones/.
+  13. CTA: data-umami-event-lugar="funcion-<slug>".
+  Slugs: escritura, formas, lapiz, papel, lazo, pdf, imagenes-y-texto, lienzo-infinito, audio, busqueda, sincronizacion.
+-->
+<html lang="es" data-lang="es" data-titulo-es="Lazo · Funciones | SwiftPen" data-titulo-en="Lasso · Features | SwiftPen" data-titulo-fr="Lasso · Fonctions | SwiftPen">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lazo · Funciones | SwiftPen</title>
+<meta name="description" content="El lazo de SwiftPen: rodea lo que has escrito y muévelo a otra página o nota, filtra qué seleccionas, ordena en capas, gira, voltea y cambia el trazo sin reescribir.">
+<link rel="icon" href="/favicon.png">
+<link rel="canonical" href="https://getswiftpen.com/funciones/lazo/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SwiftPen">
+<meta property="og:title" content="Lazo · Funciones | SwiftPen">
+<meta property="og:url" content="https://getswiftpen.com/funciones/lazo/">
+<meta property="og:image" content="https://getswiftpen.com/img/bento/lazo-es-claro-1600.webp">
+<link rel="preload" href="/assets/fuentes/mona-sans-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css?v=4">
+<link rel="stylesheet" href="/assets/funciones.css?v=2">
+<script src="/assets/idioma.js?v=2"></script>
+<!-- Estadisticas sin cookies ni datos personales (ver la politica de privacidad). Solo en getswiftpen.com: las vistas previas y las pruebas locales no cuentan. Sin la parte ?... de la direccion. -->
+<script defer src="https://cloud.umami.is/script.js" data-website-id="8e72a64d-fc98-425b-8b24-4017cd4c6f43" data-domains="getswiftpen.com" data-exclude-search="true" data-do-not-track="true"></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-lapiz" viewBox="0 0 24 24"><path d="M17 3a2.8 2.8 0 0 1 4 4L7.5 20.5 2 22l1.5-5.5z"/><path d="m15 5 4 4"/></symbol>
+  <symbol id="i-formas" viewBox="0 0 24 24"><circle cx="8" cy="8" r="5"/><rect x="12" y="12" width="9" height="9" rx="1.5"/></symbol>
+  <symbol id="i-imagen" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></symbol>
+</svg>
+
+<!--#barra funciones-->
+
+<main>
+
+<header class="cabecera-pagina cabecera-aurora">
+  <div class="contenedor">
+    <nav class="migas" aria-label="Migas"><a href="/funciones/"><span lang="es">Funciones</span><span lang="en">Features</span><span lang="fr">Fonctions</span></a><span aria-current="page"><span lang="es">Lazo</span><span lang="en">Lasso</span><span lang="fr">Lasso</span></span></nav>
+    <p class="etiqueta"><span lang="es">Lazo</span><span lang="en">Lasso</span><span lang="fr">Lasso</span></p>
+    <h1><span lang="es">Rodea, mueve, reordena.</span><span lang="en">Circle it, move it, rearrange it.</span><span lang="fr">Entourez, déplacez, réorganisez.</span></h1>
+    <p class="entradilla"><span lang="es">Rodea un esquema y llévatelo a otro sitio, a otra página o a otra nota, sin borrar y volver a empezar.</span><span lang="en">Loop around a diagram and take it anywhere: another spot, page or note. No erasing and starting over.</span><span lang="fr">Entourez un schéma et emportez-le où vous voulez : ailleurs sur la page, sur une autre page ou dans une autre note. Sans tout effacer pour recommencer.</span></p>
+    <figure class="cabecera-imagen">
+      <picture lang="es">
+        <source media="(prefers-color-scheme: dark)" srcset="/img/bento/lazo-es-oscuro-800.webp 800w, /img/bento/lazo-es-oscuro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw">
+        <img src="/img/bento/lazo-es-claro-800.webp" srcset="/img/bento/lazo-es-claro-800.webp 800w, /img/bento/lazo-es-claro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw" width="1600" height="1051" loading="lazy" alt="Una planificación semanal escrita a mano con el bloque del martes rodeado con el lazo y su barra de acciones encima.">
+      </picture>
+      <picture lang="en">
+        <source media="(prefers-color-scheme: dark)" srcset="/img/bento/lazo-en-oscuro-800.webp 800w, /img/bento/lazo-en-oscuro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw">
+        <img src="/img/bento/lazo-en-claro-800.webp" srcset="/img/bento/lazo-en-claro-800.webp 800w, /img/bento/lazo-en-claro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw" width="1600" height="1051" loading="lazy" alt="A handwritten weekly planner with Tuesday's block circled with the lasso and its action bar above it.">
+      </picture>
+      <picture lang="fr">
+        <source media="(prefers-color-scheme: dark)" srcset="/img/bento/lazo-en-oscuro-800.webp 800w, /img/bento/lazo-en-oscuro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw">
+        <img src="/img/bento/lazo-en-claro-800.webp" srcset="/img/bento/lazo-en-claro-800.webp 800w, /img/bento/lazo-en-claro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw" width="1600" height="1051" loading="lazy" alt="Un planning hebdomadaire écrit à la main, le bloc du mardi entouré au lasso, avec sa barre d'actions au-dessus.">
+      </picture>
+    </figure>
+  </div>
+</header>
+
+<section class="fn-bloque" aria-labelledby="como-se-usa">
+  <div class="contenedor">
+    <h2 id="como-se-usa"><span lang="es">Cómo se usa</span><span lang="en">How it works</span><span lang="fr">Comment ça marche</span></h2>
+    <ol class="fn-pasos">
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">1</span>
+          <h3><span lang="es">Rodea y llévatelo</span><span lang="en">Circle it and take it</span><span lang="fr">Entourez et emportez</span></h3>
+          <p><span lang="es">Elige el lazo en la barra, rodea un esquema o un párrafo y arrástralo donde quieras, o llévalo a otra página o a otra nota.</span><span lang="en">Pick the lasso in the toolbar, circle a diagram or a paragraph and drag it wherever you like, or send it to another page or note.</span><span lang="fr">Choisissez le lasso dans la barre, entourez un schéma ou un paragraphe et faites-le glisser où vous voulez, ou envoyez-le sur une autre page ou dans une autre note.</span></p>
+        </div>
+        <figure class="fn-captura">
+          <picture lang="es">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/lazo-mover-es-oscuro-800.webp 800w, /img/funciones/lazo-mover-es-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/lazo-mover-es-claro-800.webp" srcset="/img/funciones/lazo-mover-es-claro-800.webp 800w, /img/funciones/lazo-mover-es-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="El bloque del martes de una planificación semanal rodeado con el lazo y arrastrado a la columna de la derecha.">
+          </picture>
+          <picture lang="en">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/lazo-mover-en-oscuro-800.webp 800w, /img/funciones/lazo-mover-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/lazo-mover-en-claro-800.webp" srcset="/img/funciones/lazo-mover-en-claro-800.webp 800w, /img/funciones/lazo-mover-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="Tuesday's block of a weekly planner circled with the lasso and dragged to the right-hand column.">
+          </picture>
+          <picture lang="fr">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/lazo-mover-en-oscuro-800.webp 800w, /img/funciones/lazo-mover-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/lazo-mover-en-claro-800.webp" srcset="/img/funciones/lazo-mover-en-claro-800.webp 800w, /img/funciones/lazo-mover-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="Le bloc du mardi d'un planning hebdomadaire entouré au lasso et déplacé dans la colonne de droite.">
+          </picture>
+        </figure>
+      </li>
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">2</span>
+          <h3><span lang="es">Elige qué se selecciona</span><span lang="en">Choose what gets selected</span><span lang="fr">Choisissez ce qui est sélectionné</span></h3>
+          <p><span lang="es">Con el filtro, el lazo coge solo la tinta, solo el resaltador, solo las formas o solo las imágenes. Así mueves un texto sin arrastrar su subrayado, o al revés.</span><span lang="en">With the filter, the lasso picks up just ink, just highlights, just shapes or just images. So you can move text without dragging its highlight along, or the other way round.</span><span lang="fr">Avec le filtre, le lasso ne prend que l'encre, que le surligneur, que les formes ou que les images. Vous déplacez ainsi un texte sans emporter son surlignage, ou l'inverse.</span></p>
+        </div>
+        <figure class="fn-captura">
+          <picture lang="es">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/lazo-filtro-es-oscuro-800.webp 800w, /img/funciones/lazo-filtro-es-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/lazo-filtro-es-claro-800.webp" srcset="/img/funciones/lazo-filtro-es-claro-800.webp 800w, /img/funciones/lazo-filtro-es-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="El panel del lazo con su forma (libre o rectangular) y el filtro de lo que selecciona: pluma, resaltador, formas, imágenes y texto.">
+          </picture>
+          <picture lang="en">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/lazo-filtro-en-oscuro-800.webp 800w, /img/funciones/lazo-filtro-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/lazo-filtro-en-claro-800.webp" srcset="/img/funciones/lazo-filtro-en-claro-800.webp 800w, /img/funciones/lazo-filtro-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="The lasso panel with its shape (free or rectangular) and the filter for what it selects: pen, highlighter, shapes, images and text.">
+          </picture>
+          <picture lang="fr">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/lazo-filtro-en-oscuro-800.webp 800w, /img/funciones/lazo-filtro-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/lazo-filtro-en-claro-800.webp" srcset="/img/funciones/lazo-filtro-en-claro-800.webp 800w, /img/funciones/lazo-filtro-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="Le panneau du lasso avec sa forme (libre ou rectangulaire) et le filtre de ce qu'il sélectionne : stylo, surligneur, formes, images et texte.">
+          </picture>
+        </figure>
+      </li>
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">3</span>
+          <h3><span lang="es">Ajusta lo seleccionado</span><span lang="en">Adjust the selection</span><span lang="fr">Ajustez la sélection</span></h3>
+          <p><span lang="es">Escálalo junto con el grosor del trazo, gíralo con el asa, voltéalo o cámbiale la herramienta, el grosor o el relleno sin volver a escribirlo.</span><span lang="en">Scale it along with the stroke width, rotate it with the handle, flip it, or change its tool, width or fill without rewriting it.</span><span lang="fr">Redimensionnez-la avec l'épaisseur du trait, faites-la pivoter avec la poignée, retournez-la ou changez son outil, son épaisseur ou son remplissage sans la réécrire.</span></p>
+        </div>
+        <figure class="fn-captura">
+          <picture lang="es">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/lazo-ajustes-es-oscuro-800.webp 800w, /img/funciones/lazo-ajustes-es-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/lazo-ajustes-es-claro-800.webp" srcset="/img/funciones/lazo-ajustes-es-claro-800.webp 800w, /img/funciones/lazo-ajustes-es-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="Una selección con el menú de más opciones: girar, voltear, cambiar la herramienta y traer al frente.">
+          </picture>
+          <picture lang="en">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/lazo-ajustes-en-oscuro-800.webp 800w, /img/funciones/lazo-ajustes-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/lazo-ajustes-en-claro-800.webp" srcset="/img/funciones/lazo-ajustes-en-claro-800.webp 800w, /img/funciones/lazo-ajustes-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="A selection with the more-options menu: rotate, flip, change the tool and bring to front.">
+          </picture>
+          <picture lang="fr">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/lazo-ajustes-en-oscuro-800.webp 800w, /img/funciones/lazo-ajustes-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/lazo-ajustes-en-claro-800.webp" srcset="/img/funciones/lazo-ajustes-en-claro-800.webp 800w, /img/funciones/lazo-ajustes-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="Une sélection avec le menu d'options : pivoter, retourner, changer l'outil et mettre au premier plan.">
+          </picture>
+        </figure>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="fn-bloque" aria-labelledby="detalles">
+  <div class="contenedor">
+    <h2 id="detalles"><span lang="es">Los detalles</span><span lang="en">The details</span><span lang="fr">Les détails</span></h2>
+    <ul class="fn-detalles">
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Mueve lo seleccionado a otra página o a otra nota.</span><span lang="en">Move a selection to another page or another note.</span><span lang="fr">Déplacez la sélection sur une autre page ou dans une autre note.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Filtro: solo tinta, solo resaltador, formas o imágenes.</span><span lang="en">Filter: just ink, just highlights, shapes or images.</span><span lang="fr">Filtre : encre seule, surligneur seul, formes ou images.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Copia, corta, duplica y pega con dos dedos.</span><span lang="en">Copy, cut, duplicate and paste with two fingers.</span><span lang="fr">Copiez, coupez, dupliquez et collez à deux doigts.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Ordena en capas: delante o detrás del resto.</span><span lang="en">Arrange in layers: in front of or behind everything else.</span><span lang="fr">Organisez en calques : devant ou derrière le reste.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Al escalar, el grosor del trazo escala con la selección; con «Mantener proporciones», nada se deforma.</span><span lang="en">When you scale, the stroke width scales with the selection; with "Keep proportions", nothing gets distorted.</span><span lang="fr">Au redimensionnement, l'épaisseur du trait suit la sélection ; avec « Conserver les proportions », rien ne se déforme.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Gira con el asa o desde el menú «···», y voltea.</span><span lang="en">Rotate with the handle or from the "···" menu, and flip.</span><span lang="fr">Faites pivoter avec la poignée ou depuis le menu « ··· », et retournez.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Cambia la herramienta, el grosor o el relleno de lo seleccionado.</span><span lang="en">Change the tool, width or fill of what you selected.</span><span lang="fr">Changez l'outil, l'épaisseur ou le remplissage de la sélection.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">La barra de acciones aparece junto a la selección, sin taparla.</span><span lang="en">The action bar sits next to the selection without covering it.</span><span lang="fr">La barre d'actions s'affiche à côté de la sélection, sans la masquer.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Sus propios ajustes, desde el engranaje de la herramienta.</span><span lang="en">Its own settings, from the tool's gear icon.</span><span lang="fr">Ses propres réglages, depuis la roue dentée de l'outil.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="fn-bloque" aria-labelledby="relacionadas">
+  <div class="contenedor">
+    <h2 id="relacionadas"><span lang="es">Relacionadas</span><span lang="en">Related</span><span lang="fr">Voir aussi</span></h2>
+    <div class="tarjeta-funciones">
+      <a class="tarjeta-funcion" href="/funciones/formas/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-formas"/></svg></span>
+        <strong><span lang="es">Formas</span><span lang="en">Shapes</span><span lang="fr">Formes</span></strong>
+        <span><span lang="es">Dibuja a mano alzada, deja el lápiz quieto y la forma sale perfecta.</span><span lang="en">Sketch freehand, hold the pen still and the shape comes out perfect.</span><span lang="fr">Dessinez à main levée, laissez le stylet immobile et la forme devient parfaite.</span></span>
+      </a>
+      <a class="tarjeta-funcion" href="/funciones/escritura/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-lapiz"/></svg></span>
+        <strong><span lang="es">Escritura</span><span lang="en">Writing</span><span lang="fr">Écriture</span></strong>
+        <span><span lang="es">Tinta sin retardo, plumas a tu medida y una goma que entiende lo que quieres borrar.</span><span lang="en">Lag-free ink, pens tuned to you and an eraser that knows what you mean to erase.</span><span lang="fr">Une encre sans latence, des stylos à votre mesure et une gomme qui comprend ce que vous voulez effacer.</span></span>
+      </a>
+      <a class="tarjeta-funcion" href="/funciones/imagenes-y-texto/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-imagen"/></svg></span>
+        <strong><span lang="es">Imágenes, texto y stickers</span><span lang="en">Images, text and stickers</span><span lang="fr">Images, texte et stickers</span></strong>
+        <span><span lang="es">Fotos y escáner con recorte, cajas de texto con formato y stickers.</span><span lang="en">Photos and scans you can crop, formatted text boxes and stickers.</span><span lang="fr">Photos et numérisations à recadrer, zones de texte mises en forme et stickers.</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cierre">
+  <div class="contenedor">
+    <h2><span lang="es">Pruébalo en cuanto salga.</span><span lang="en">Try it as soon as it's out.</span><span lang="fr">Essayez-le dès sa sortie.</span></h2>
+    <p class="entradilla"><span lang="es">SwiftPen llega pronto a Google Play. Déjanos tu email y te avisamos.</span><span lang="en">SwiftPen is coming soon to Google Play. Leave your email and we'll let you know.</span><span lang="fr">SwiftPen arrive bientôt sur Google Play. Laissez votre e-mail et nous vous préviendrons.</span></p>
+    <div class="acciones">
+      <a class="boton principal" href="/#avisame" data-umami-event="ir-al-aviso" data-umami-event-lugar="funcion-lazo"><span lang="es">Avísame cuando salga</span><span lang="en">Notify me at launch</span><span lang="fr">Prévenez-moi à la sortie</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!--#pie-->
+
+</body>
+</html>

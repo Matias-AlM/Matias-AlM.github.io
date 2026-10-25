@@ -1,0 +1,18 @@
+/* Ilustracion de sincronizacion (Drive <-> SwiftPen <-> WebDAV), propia, no captura. Compartida por la home
+ * (carrusel) y las paginas de funciones. Va sobre la aurora de .cabecera-aurora (site.css), estatica y sin el
+ * fundido inferior; proporcion 1600 / 1051 como las capturas. Todo escala con su ancho (cqw).
+ *   <figure class="marco h-sync cabecera-aurora" role="img" aria-labelledby="...">  (ver sitio/index.html) */
+
+.h-sync { aspect-ratio: 1600 / 1051; container-type: inline-size; display: flex; align-items: center; justify-content: center; --aurora-radio: 640px; color: var(--text); }
+.h-sync::before { -webkit-mask-image: none; mask-image: none; }
+.h-sync-fila { display: flex; align-items: center; justify-content: center; gap: 2cqw; width: 100%; }
+.h-sync-nodo { display: flex; flex-direction: column; align-items: center; gap: 2.4cqw; width: 24cqw; text-align: center; }
+.h-sync-icono {
+  display: grid; place-items: center; width: 20cqw; aspect-ratio: 1; border-radius: 22%; overflow: hidden;
+  background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow);
+}
+.h-sync-icono svg { width: 58%; height: 58%; }
+.h-sync-app img { width: 100%; height: 100%; display: block; }
+.h-sync-webdav { fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.h-sync-nombre { font-size: max(11px, 2.7cqw); font-weight: 650; line-height: 1.2; letter-spacing: -.005em; }
+.h-sync-flecha { flex: none; width: 6cqw; margin-bottom: 6cqw; fill: none; stroke: var(--text); opacity: .55; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
