@@ -14,7 +14,8 @@
 <meta property="og:image" content="https://getswiftpen.com/img/portada.jpg?v=3">
 <link rel="preload" href="/assets/fuentes/mona-sans-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/site.css?v=4">
-<link rel="stylesheet" href="/assets/funciones.css?v=2">
+<link rel="stylesheet" href="/assets/funciones.css?v=3">
+<link rel="stylesheet" href="/assets/sync-ilustracion.css?v=1">
 <script src="/assets/idioma.js?v=2"></script>
 <script defer src="/assets/funciones.js"></script>
 <!-- Estadisticas sin cookies ni datos personales (ver la politica de privacidad). Solo en getswiftpen.com: las vistas previas y las pruebas locales no cuentan. Sin la parte ?... de la direccion. -->
@@ -583,18 +584,25 @@
           <p><span lang="es">Sincroniza con WebDAV o Google Drive: tus notas no pasan por servidores nuestros.</span><span lang="en">Sync with WebDAV or Google Drive: your notes never touch servers of ours.</span><span lang="fr">Synchronisez avec WebDAV ou Google Drive : vos notes ne passent par aucun serveur à nous.</span></p>
         </div>
         <div class="fn-tesela-media">
-          <picture lang="es">
-            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/sync-ajustes-es-oscuro-800.webp 800w, /img/funciones/sync-ajustes-es-oscuro-1600.webp 1600w" sizes="(min-width: 960px) 620px, (min-width: 720px) calc(100vw - 64px), calc(100vw - 32px)">
-            <img src="/img/funciones/sync-ajustes-es-claro-800.webp" srcset="/img/funciones/sync-ajustes-es-claro-800.webp 800w, /img/funciones/sync-ajustes-es-claro-1600.webp 1600w" sizes="(min-width: 960px) 620px, (min-width: 720px) calc(100vw - 64px), calc(100vw - 32px)" width="1600" height="1051" loading="lazy" alt="Los ajustes de sincronización con un servidor WebDAV, el botón «Sincronizar ahora» y «hace instantes».">
-          </picture>
-          <picture lang="en">
-            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/sync-ajustes-en-oscuro-800.webp 800w, /img/funciones/sync-ajustes-en-oscuro-1600.webp 1600w" sizes="(min-width: 960px) 620px, (min-width: 720px) calc(100vw - 64px), calc(100vw - 32px)">
-            <img src="/img/funciones/sync-ajustes-en-claro-800.webp" srcset="/img/funciones/sync-ajustes-en-claro-800.webp 800w, /img/funciones/sync-ajustes-en-claro-1600.webp 1600w" sizes="(min-width: 960px) 620px, (min-width: 720px) calc(100vw - 64px), calc(100vw - 32px)" width="1600" height="1051" loading="lazy" alt="The sync settings with a WebDAV server, the “Sync now” button and “just now”.">
-          </picture>
-          <picture lang="fr">
-            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/sync-ajustes-en-oscuro-800.webp 800w, /img/funciones/sync-ajustes-en-oscuro-1600.webp 1600w" sizes="(min-width: 960px) 620px, (min-width: 720px) calc(100vw - 64px), calc(100vw - 32px)">
-            <img src="/img/funciones/sync-ajustes-en-claro-800.webp" srcset="/img/funciones/sync-ajustes-en-claro-800.webp 800w, /img/funciones/sync-ajustes-en-claro-1600.webp 1600w" sizes="(min-width: 960px) 620px, (min-width: 720px) calc(100vw - 64px), calc(100vw - 32px)" width="1600" height="1051" loading="lazy" alt="Les réglages de synchronisation avec un serveur WebDAV, le bouton « Synchroniser maintenant » et « à l'instant ».">
-          </picture>
+        <figure class="marco h-sync cabecera-aurora" role="img" aria-labelledby="fn-sync-nombre">
+          <span class="solo-lectores" id="fn-sync-nombre"><span lang="es">SwiftPen sincroniza tus notas con Google Drive o con un servidor WebDAV.</span><span lang="en">SwiftPen syncs your notes with Google Drive or a WebDAV server.</span><span lang="fr">SwiftPen synchronise vos notes avec Google Drive ou un serveur WebDAV.</span></span>
+          <div class="h-sync-fila" aria-hidden="true">
+            <div class="h-sync-nodo">
+              <span class="h-sync-icono"><svg viewBox="0 0 24 24"><path fill="#FFBA00" d="M12.01 1.485c-2.082 0-3.754.02-3.743.047.01.02 1.708 3.001 3.774 6.62l3.76 6.574h3.76c2.081 0 3.753-.02 3.742-.047-.005-.02-1.708-3.001-3.775-6.62l-3.76-6.574z"/><path fill="#00AC47" d="M7.25 3.215a789.828 789.861 0 0 0-3.63 6.319L0 15.868l1.89 3.298 1.885 3.297 3.62-6.335 3.618-6.33-1.88-3.287C8.1 4.704 7.255 3.22 7.25 3.214z"/><path fill="#2684FC" d="m9.509 15.868-.203.348c-.114.198-.96 1.672-1.88 3.287a423.93 423.948 0 0 1-1.698 2.97c-.01.026 3.24.042 7.222.042h7.244l1.796-3.157c.992-1.734 1.85-3.23 1.906-3.323l.104-.167z"/></svg></span>
+              <span class="h-sync-nombre">Google Drive</span>
+            </div>
+            <svg class="h-sync-flecha" viewBox="0 0 48 24" aria-hidden="true"><path d="M4 12h40M10 6l-6 6 6 6M38 6l6 6-6 6"/></svg>
+            <div class="h-sync-nodo">
+              <span class="h-sync-icono h-sync-app"><img src="/img/icon.png" width="192" height="192" alt="" draggable="false"></span>
+              <span class="h-sync-nombre">SwiftPen</span>
+            </div>
+            <svg class="h-sync-flecha" viewBox="0 0 48 24" aria-hidden="true"><path d="M4 12h40M10 6l-6 6 6 6M38 6l6 6-6 6"/></svg>
+            <div class="h-sync-nodo">
+              <span class="h-sync-icono"><svg viewBox="0 0 24 24" class="h-sync-webdav"><path d="M7 19a4.5 4.5 0 0 1-.8-8.93A6 6 0 0 1 17.7 9.2 4.9 4.9 0 0 1 17 19z"/><path d="M9 12.5h6M9 15.5h6"/></svg></span>
+              <span class="h-sync-nombre">WebDAV</span>
+            </div>
+          </div>
+        </figure>
         </div>
       </article>
       <article class="fn-tesela">

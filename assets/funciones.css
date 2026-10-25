@@ -97,6 +97,9 @@ html:not(.js) .fn-panel + .fn-panel { padding-top: 64px; }
 .fn-tesela-media picture { display: block; border-radius: 16px 16px 0 0; overflow: hidden; border: 1px solid var(--border); border-bottom: 0; }
 .fn-tesela-media img { width: 100%; height: auto; }
 .fn-tesela-media .captura-pendiente { border-radius: 16px 16px 0 0; border-bottom: 0; }
+/* Ilustracion de sincronizacion (assets/sync-ilustracion.css) en la tesela y en los pasos. */
+.fn-tesela-media .h-sync { margin: 0; border-radius: 16px 16px 0 0; border-bottom: 0; box-shadow: none; }
+.fn-paso .h-sync { margin: 0; }
 @media (max-width: 599px) {
   .fn-tesela:not(.fn-tesela-grande) { padding: 18px 20px; }
   .fn-tesela:not(.fn-tesela-grande)::before { margin-bottom: 10px; font-size: 1.5rem; }
