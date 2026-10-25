@@ -90,29 +90,31 @@
   }
 
   // ---------- Carrusel de funciones ----------
-  // .h-carrusel > .h-pestanas (botones, hidden sin JS) + .h-carrusel-marco > .h-pista > .h-diapo.
-  // La pista es un scroll horizontal con scroll-snap: sin JS se desliza a mano. Con JS se
-  // anaden flechas y pausa, y avanza solo cada AVANCE ms mientras esta en pantalla, salvo con
-  // prefers-reduced-motion, con el raton o el foco encima, o en cuanto alguien lo toca.
+  // .h-carrusel > .h-pestanas (botones, hidden sin JS) + .h-pista > .h-diapo
+  // (captura + texto). Sin JS la pista es un scroll horizontal con scroll-snap.
+  // Con JS (clase .listo), al estilo de notability.com: la diapositiva actual centrada y las
+  // vecinas asomando a los lados, mas pequenas (ESCALA) y atenuadas; se mueven con transform.
+  // Se cambia tocando una vecina, deslizando o con las pestanas (y sus flechas del teclado).
+  // Avanza solo cada AVANCE ms mientras esta en pantalla (cambiar a mano reinicia la cuenta),
+  // salvo con prefers-reduced-motion o con el foco del teclado dentro; el boton de la fila lo pausa y reanuda.
   var AVANCE = 6000;
+  var ESCALA = 0.72;
+  var HUECO = 20;
   var TEXTOS_CARRUSEL = {
     region: { es: "Funciones", en: "Features", fr: "Fonctions" },
     diapo: { es: "diapositiva", en: "slide", fr: "diapositive" },
     de: { es: "de", en: "of", fr: "sur" },
-    anterior: { es: "Función anterior", en: "Previous feature", fr: "Fonction précédente" },
-    siguiente: { es: "Función siguiente", en: "Next feature", fr: "Fonction suivante" },
     pausa: { es: "Detener el paso automático", en: "Stop automatic rotation", fr: "Arrêter le défilement automatique" },
     play: { es: "Pasar solas las funciones", en: "Rotate features automatically", fr: "Faire défiler automatiquement" }
   };
-  var FLECHAS = { anterior: "M15 5l-7 7 7 7", siguiente: "M9 5l7 7-7 7" };
 
   function iniciarCarrusel(carrusel) {
     var pista = carrusel.querySelector(".h-pista");
-    var marco = carrusel.querySelector(".h-carrusel-marco");
     var fila = carrusel.querySelector(".h-pestanas");
     var diapos = Array.prototype.slice.call(pista.querySelectorAll(".h-diapo"));
     var pestanas = Array.prototype.slice.call(fila.querySelectorAll(".h-pestana"));
-    var actual = 0, enVista = false, encima = false, detenido = sinMovimiento.matches, temporizador;
+    var total = diapos.length;
+    var actual = 0, enVista = false, conFoco = false, detenido = sinMovimiento.matches, temporizador;
 
     function boton(clase, d) {
       var b = document.createElement("button");
@@ -121,13 +123,11 @@
       b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + d + '"></path></svg>';
       return b;
     }
-    var atras = boton("h-flecha h-flecha-atras", FLECHAS.anterior);
-    var alante = boton("h-flecha h-flecha-alante", FLECHAS.siguiente);
     var pausa = boton("h-pausa", "");
-    marco.appendChild(atras);
-    marco.appendChild(alante);
     fila.appendChild(pausa);
     fila.hidden = false;
+    pista.removeAttribute("tabindex");
+    carrusel.classList.add("listo");
 
     function textos() {
       var l = idioma();
@@ -137,10 +137,8 @@
       diapos.forEach(function (d, i) {
         d.setAttribute("role", "group");
         d.setAttribute("aria-roledescription", TEXTOS_CARRUSEL.diapo[l]);
-        d.setAttribute("aria-label", (i + 1) + " " + TEXTOS_CARRUSEL.de[l] + " " + diapos.length);
+        d.setAttribute("aria-label", (i + 1) + " " + TEXTOS_CARRUSEL.de[l] + " " + total);
       });
-      atras.setAttribute("aria-label", TEXTOS_CARRUSEL.anterior[l]);
-      alante.setAttribute("aria-label", TEXTOS_CARRUSEL.siguiente[l]);
       pintarPausa();
     }
 
@@ -150,55 +148,87 @@
       pausa.querySelector("path").setAttribute("d", ICONOS[estado]);
     }
 
-    // Marca la diapositiva visible; las demas quedan inert para que el tabulador no se vaya fuera de vista.
-    function marcar(n) {
-      actual = n;
-      diapos.forEach(function (d, i) { d.inert = i !== n; });
-      pestanas.forEach(function (p, i) { p.setAttribute("aria-current", String(i === n)); });
-      var p = pestanas[n];
-      fila.scrollTo({ left: p.offsetLeft - (fila.clientWidth - p.offsetWidth) / 2, behavior: "smooth" });
+    // Distancia circular de la diapositiva i a la actual: de -3 a 3 con 7 diapositivas.
+    function distancia(i) {
+      var d = ((i - actual) % total + total) % total;
+      return d > total / 2 ? d - total : d;
+    }
+
+    // Coloca cada diapositiva. Las vecinas se centran en vertical sobre la captura de la actual;
+    // las que quedan a 2 o mas no se ven (asi, al dar la vuelta, el salto no se nota).
+    function colocar() {
+      var ancho = diapos[0].offsetWidth;
+      var captura = diapos[actual].querySelector(".h-captura, .captura-pendiente").offsetHeight;
+      var paso = ancho * (1 + ESCALA) / 2 + HUECO;
+      diapos.forEach(function (d, i) {
+        var k = distancia(i);
+        var escala = k === 0 ? 1 : ESCALA;
+        var y = k === 0 ? 0 : captura * (1 - ESCALA) / 2;
+        d.style.transform = "translate(" + (k * paso) + "px, " + y + "px) scale(" + escala + ")";
+        d.classList.toggle("actual", k === 0);
+        d.classList.toggle("vecina", Math.abs(k) === 1);
+        d.inert = k !== 0;
+      });
+      pista.style.height = diapos[actual].offsetHeight + "px";
     }
 
     function ir(n) {
-      n = (n + diapos.length) % diapos.length;
-      pista.scrollTo({ left: n * pista.clientWidth, behavior: sinMovimiento.matches ? "auto" : "smooth" });
-      marcar(n);
+      actual = (n + total) % total;
+      colocar();
+      pestanas.forEach(function (p, i) { p.setAttribute("aria-current", String(i === actual)); });
+      var p = pestanas[actual];
+      fila.scrollTo({ left: p.offsetLeft - (fila.clientWidth - p.offsetWidth) / 2, behavior: "smooth" });
     }
 
     function programar() {
       clearInterval(temporizador);
-      if (!detenido && enVista && !encima) temporizador = setInterval(function () { ir(actual + 1); }, AVANCE);
+      if (!detenido && enVista && !conFoco) temporizador = setInterval(function () { ir(actual + 1); }, AVANCE);
     }
-    function detener() { detenido = true; pintarPausa(); programar(); }
+    function mover(n) { ir(n); programar(); }
 
-    atras.addEventListener("click", function () { detener(); ir(actual - 1); });
-    alante.addEventListener("click", function () { detener(); ir(actual + 1); });
-    pestanas.forEach(function (p, i) { p.addEventListener("click", function () { detener(); ir(i); }); });
+    pestanas.forEach(function (p, i) { p.addEventListener("click", function () { mover(i); }); });
     pausa.addEventListener("click", function () { detenido = !detenido; pintarPausa(); programar(); });
-    pista.addEventListener("pointerdown", detener);
-    pista.addEventListener("keydown", function (e) {
-      if (e.key === "ArrowLeft" || e.key === "ArrowRight") { e.preventDefault(); detener(); ir(actual + (e.key === "ArrowRight" ? 1 : -1)); }
+    carrusel.addEventListener("keydown", function (e) {
+      if (e.target.closest(".h-pestanas") && (e.key === "ArrowLeft" || e.key === "ArrowRight")) {
+        e.preventDefault();
+        mover(actual + (e.key === "ArrowRight" ? 1 : -1));
+        pestanas[actual].focus();
+      }
     });
-    carrusel.addEventListener("mouseenter", function () { encima = true; programar(); });
-    carrusel.addEventListener("mouseleave", function () { encima = false; programar(); });
-    carrusel.addEventListener("focusin", function () { encima = true; programar(); });
-    carrusel.addEventListener("focusout", function (e) { if (!carrusel.contains(e.relatedTarget)) { encima = false; programar(); } });
 
-    // Al deslizar a mano, la diapositiva que queda encajada pasa a ser la actual.
-    var espera;
-    pista.addEventListener("scroll", function () {
-      clearTimeout(espera);
-      espera = setTimeout(function () {
-        var n = Math.round(pista.scrollLeft / pista.clientWidth);
-        if (n !== actual) marcar(n);
-      }, 100);
+    // Deslizar con el dedo o el raton; un toque sin deslizar fuera de la actual lleva a la
+    // vecina de ese lado. Se escucha en la seccion: las vecinas son inert y asoman fuera de la
+    // pista, asi que el toque llega a lo que hay debajo; vale si cae a la altura de la pista.
+    var zona = carrusel.closest("section") || carrusel;
+    var inicioX = null, inicioY = 0;
+    zona.addEventListener("pointerdown", function (e) {
+      var caja = pista.getBoundingClientRect();
+      inicioX = e.clientY >= caja.top && e.clientY <= caja.bottom ? e.clientX : null;
+      inicioY = e.clientY;
     });
-    window.addEventListener("resize", function () { pista.scrollLeft = actual * pista.clientWidth; });
+    zona.addEventListener("pointerup", function (e) {
+      if (inicioX === null) return;
+      var dx = e.clientX - inicioX, dy = e.clientY - inicioY;
+      inicioX = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { mover(actual + (dx < 0 ? 1 : -1)); return; }
+      if (Math.abs(dx) > 8 || e.target.closest(".h-diapo.actual, button, a")) return;
+      var caja = diapos[actual].getBoundingClientRect();
+      if (e.clientX < caja.left) mover(actual - 1);
+      else if (e.clientX > caja.right) mover(actual + 1);
+    });
+    zona.addEventListener("pointercancel", function () { inicioX = null; });
+    pista.querySelectorAll("img").forEach(function (img) { img.draggable = false; });
 
+    carrusel.addEventListener("focusin", function (e) { conFoco = e.target.matches(":focus-visible"); programar(); });
+    carrusel.addEventListener("focusout", function (e) { if (!carrusel.contains(e.relatedTarget)) { conFoco = false; programar(); } });
+
+    window.addEventListener("resize", colocar);
+    // Las capturas son lazy: al cargar puede cambiar la altura.
+    diapos.forEach(function (d) { d.querySelectorAll("img").forEach(function (img) { img.addEventListener("load", colocar); }); });
     new IntersectionObserver(function (e) { enVista = e[0].isIntersecting; programar(); }, { threshold: 0.5 }).observe(pista);
     textos();
-    alCambiarIdioma(textos);
-    marcar(0);
+    alCambiarIdioma(function () { textos(); colocar(); });
+    ir(0);
   }
 
   function iniciar() {
