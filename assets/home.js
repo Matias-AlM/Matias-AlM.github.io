@@ -43,7 +43,8 @@
 
     // Con data-video-oscuro hay una variante «<clip>-oscuro» para el tema oscuro.
     var oscuro = window.matchMedia("(prefers-color-scheme: dark)");
-    function nombreClip() { return clip + (caja.hasAttribute("data-video-oscuro") && oscuro.matches ? "-oscuro" : ""); }
+    function esOscuro() { return raiz.dataset.tema ? raiz.dataset.tema === "oscuro" : oscuro.matches; }
+    function nombreClip() { return clip + (caja.hasAttribute("data-video-oscuro") && esOscuro() ? "-oscuro" : ""); }
     function ruta(extension) { return "/video/" + idioma() + "/" + nombreClip() + "." + extension; }
 
     function pintarBoton() {
@@ -84,9 +85,7 @@
 
     aplicarIdioma();
     alCambiarIdioma(aplicarIdioma);
-    if (caja.hasAttribute("data-video-oscuro")) {
-      if (oscuro.addEventListener) oscuro.addEventListener("change", aplicarIdioma); else if (oscuro.addListener) oscuro.addListener(aplicarIdioma);
-    }
+    if (caja.hasAttribute("data-video-oscuro")) document.addEventListener("cambiotema", aplicarIdioma);
     observador.observe(caja);
   }
 
