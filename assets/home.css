@@ -17,17 +17,53 @@
 .video-caja .video-pausa svg { width: 20px; height: 20px; fill: currentColor; }
 .hero .sellos { margin-top: 40px; }
 
-/* Funciones: una seccion .dueto por funcion (texto + captura, alternando lados), como
- * en la web original, con un enlace a su pagina. Menos aire entre ellas que el de section. */
-.h-funcion { padding: 64px 0; }
-.h-funcion .etiqueta .pro, .h-funcion .etiqueta .beta { margin-left: 8px; }
-.h-captura { margin: 0; }
-.h-captura img { width: 100%; height: auto; display: block; }
-.h-enlace { margin: 24px 0 0; font-weight: 600; }
-.h-enlace a { display: inline-flex; align-items: center; min-height: 44px; }
-.h-todas { padding: 32px 0 64px; }
-.h-mas { margin: 0; text-align: center; }
+/* Funciones: carrusel (home.js). Pestanas con el nombre de cada funcion, la captura con
+ * flechas a los lados y el texto debajo, que pasa con ella. La pista es un scroll
+ * horizontal con scroll-snap, asi que sin JS se desliza a mano. */
 .h-cabecera { text-align: center; }
+.h-funciones .h-cabecera { margin-bottom: 32px; }
+.h-pestanas { display: flex; gap: 8px; margin: 0 0 24px; padding: 4px 0; overflow-x: auto; scrollbar-width: none; }
+.h-pestanas::-webkit-scrollbar { display: none; }
+.h-pestanas[hidden] { display: none; }
+.h-pestanas > :first-child { margin-left: auto; }
+.h-pestanas > :last-child { margin-right: auto; }
+.h-pestana, .h-pausa {
+  flex: none; min-height: 44px; padding: 0 16px; border-radius: 999px; cursor: pointer;
+  font: 600 15px/1 var(--fuente-texto); color: var(--muted); background: var(--surface); border: 1px solid var(--border);
+}
+.h-pestana:hover { color: var(--text); }
+.h-pestana[aria-current="true"] { color: var(--text); border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, var(--surface)); }
+.h-pausa { width: 44px; padding: 0; display: inline-flex; align-items: center; justify-content: center; }
+.h-pausa svg { width: 18px; height: 18px; fill: currentColor; }
+.h-pestana:focus-visible, .h-pausa:focus-visible, .h-flecha:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.h-carrusel-marco { position: relative; container-type: inline-size; }
+.h-pista { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; padding-bottom: 8px; }
+html.js .h-pista { scrollbar-width: none; }
+html.js .h-pista::-webkit-scrollbar { display: none; }
+.h-pista:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: var(--radio-grande); }
+.h-diapo { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; display: flex; flex-direction: column; align-items: center; }
+.h-diapo .h-captura, .h-diapo .captura-pendiente { width: 100%; max-width: 720px; margin: 0; }
+.h-captura img { width: 100%; height: auto; display: block; }
+.h-diapo-texto { max-width: 40rem; margin-top: 28px; text-align: center; }
+.h-diapo-texto .etiqueta { margin-bottom: 8px; }
+.h-diapo-texto .pro, .h-diapo-texto .beta { margin-left: 8px; }
+.h-diapo-texto h3 { font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -.015em; line-height: 1.15; }
+.h-diapo-texto > p:not(.etiqueta):not(.h-enlace) { margin: 10px 0 0; color: var(--muted); font-size: 1.05rem; }
+.h-enlace { margin: 12px 0 0; font-weight: 600; }
+.h-enlace a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Flechas centradas en la altura de la captura (max. 720 px de ancho, proporcion 1600/1051):
+ * fuera de la imagen si hay sitio, encima de su borde en movil. */
+.h-flecha {
+  position: absolute; z-index: 1; top: calc(min(100cqw, 720px) * 1051 / 1600 / 2 - 22px); width: 44px; height: 44px; padding: 0;
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 50%;
+  color: var(--text); background: color-mix(in srgb, var(--surface) 92%, transparent); border: 1px solid var(--border); box-shadow: var(--shadow-suave);
+}
+.h-flecha svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.h-flecha-atras { left: max(6px, calc(50% - 360px - 64px)); }
+.h-flecha-alante { right: max(6px, calc(50% - 360px - 64px)); }
+.h-mas { margin: 32px 0 0; text-align: center; }
 
 /* Franja de precio: una tarjeta con las dos cifras y los enlaces a /precios/. */
 .h-precio { padding-top: 0; }
