@@ -167,7 +167,10 @@
         d.style.transform = "translate(" + (k * paso) + "px, " + y + "px) scale(" + escala + ")";
         d.classList.toggle("actual", k === 0);
         d.classList.toggle("vecina", Math.abs(k) === 1);
-        d.inert = k !== 0;
+        // Las demas se ocultan a lectores y su texto (lo unico enfocable) queda inert; la
+        // captura de las vecinas sigue recibiendo el raton, para el cursor y el toque.
+        d.setAttribute("aria-hidden", String(k !== 0));
+        d.querySelector(".h-diapo-texto").inert = k !== 0;
       });
       pista.style.height = diapos[actual].offsetHeight + "px";
     }
@@ -196,9 +199,8 @@
       }
     });
 
-    // Deslizar con el dedo o el raton; un toque sin deslizar fuera de la actual lleva a la
-    // vecina de ese lado. Se escucha en la seccion: las vecinas son inert y asoman fuera de la
-    // pista, asi que el toque llega a lo que hay debajo; vale si cae a la altura de la pista.
+    // Deslizar con el dedo o el raton, o tocar una vecina para ir a ella. Se escucha en la
+    // seccion porque las vecinas asoman fuera de la pista; vale si cae a la altura de la pista.
     var zona = carrusel.closest("section") || carrusel;
     var inicioX = null, inicioY = 0;
     zona.addEventListener("pointerdown", function (e) {
@@ -211,10 +213,8 @@
       var dx = e.clientX - inicioX, dy = e.clientY - inicioY;
       inicioX = null;
       if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { mover(actual + (dx < 0 ? 1 : -1)); return; }
-      if (Math.abs(dx) > 8 || e.target.closest(".h-diapo.actual, button, a")) return;
-      var caja = diapos[actual].getBoundingClientRect();
-      if (e.clientX < caja.left) mover(actual - 1);
-      else if (e.clientX > caja.right) mover(actual + 1);
+      var vecina = Math.abs(dx) <= 8 && e.target.closest(".h-diapo.vecina");
+      if (vecina) mover(diapos.indexOf(vecina));
     });
     zona.addEventListener("pointercancel", function () { inicioX = null; });
     pista.querySelectorAll("img").forEach(function (img) { img.draggable = false; });
