@@ -17,15 +17,17 @@
 .video-caja .video-pausa svg { width: 20px; height: 20px; fill: currentColor; }
 .hero .sellos { margin-top: 40px; }
 
-/* Bento de funciones: cabecera centrada y enlace a /funciones/ debajo. */
-.h-cabecera { text-align: center; margin-bottom: 40px; }
-.h-cabecera .entradilla { margin-inline: auto; }
-.bn-t .pro, .bn-t .beta { margin-left: 8px; vertical-align: 3px; }
-/* La tira del lienzo, menos apaisada que la tira por defecto (4,75), para que se vea el mapa. */
-@media (min-width: 600px) { .bn-tira.h-tira-alta .bn-media { aspect-ratio: 2.4; } }
-/* Sincronizacion aun sin captura: el placeholder rellena el hueco de la imagen. */
-.bn-media > .captura-pendiente { position: absolute; inset: 0; aspect-ratio: auto; height: 100%; border: 0; border-radius: 0; }
-.h-mas { margin: 32px 0 0; text-align: center; }
+/* Funciones: una seccion .dueto por funcion (texto + captura, alternando lados), como
+ * en la web original, con un enlace a su pagina. Menos aire entre ellas que el de section. */
+.h-funcion { padding: 64px 0; }
+.h-funcion .etiqueta .pro, .h-funcion .etiqueta .beta { margin-left: 8px; }
+.h-captura { margin: 0; }
+.h-captura img { width: 100%; height: auto; display: block; }
+.h-enlace { margin: 24px 0 0; font-weight: 600; }
+.h-enlace a { display: inline-flex; align-items: center; min-height: 44px; }
+.h-todas { padding: 32px 0 64px; }
+.h-mas { margin: 0; text-align: center; }
+.h-cabecera { text-align: center; }
 
 /* Franja de precio: una tarjeta con las dos cifras y los enlaces a /precios/. */
 .h-precio { padding-top: 0; }
