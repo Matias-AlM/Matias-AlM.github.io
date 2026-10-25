@@ -45,10 +45,9 @@ html.js .h-pista::-webkit-scrollbar { display: none; }
 .h-diapo .h-captura, .h-diapo .captura-pendiente { width: 100%; max-width: 720px; margin: 0; }
 .h-captura img { width: 100%; height: auto; display: block; }
 .h-diapo-texto { max-width: 40rem; margin-top: 28px; text-align: center; }
-.h-diapo-texto .etiqueta { margin-bottom: 8px; }
 .h-diapo-texto .pro, .h-diapo-texto .beta { margin-left: 8px; }
 .h-diapo-texto h3 { font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -.015em; line-height: 1.15; }
-.h-diapo-texto > p:not(.etiqueta):not(.h-enlace) { margin: 10px 0 0; color: var(--muted); font-size: 1.05rem; }
+.h-diapo-texto > p:not(.h-enlace) { margin: 10px 0 0; color: var(--muted); font-size: 1.05rem; }
 .h-enlace { margin: 12px 0 0; font-weight: 600; }
 .h-enlace a { display: inline-flex; align-items: center; min-height: 44px; }
 
