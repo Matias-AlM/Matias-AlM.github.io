@@ -1,22 +1,12 @@
-// Home: video de la diapositiva de escritura (la parte .video-caja de interaccion.js, rama
-// feat/home-bento-en-funciones) y carrusel de funciones.
+// Home: carrusel de funciones, con un video por diapositiva (excepto sincronizacion).
 //
-// <div class="video-caja" data-video="hero" data-video-oscuro> usa
-// /video/<idioma>/hero.mp4 (o hero-oscuro.mp4 en tema oscuro) y su .webp de poster.
-// El video no se descarga hasta que la caja entra en pantalla; con
-// prefers-reduced-motion no arranca solo, pero el boton deja reproducirlo.
-// Sin JS (o sin IntersectionObserver) se queda el poster. Cargar despues de idioma.js.
+// <figure class="video-caja" data-video="carrusel-pdf"> usa /video/<idioma>/carrusel-pdf.mp4
+// (o carrusel-pdf-oscuro.mp4 en tema oscuro) y su .webp de poster. Solo se descarga y
+// reproduce el video de la diapositiva actual con el carrusel en pantalla; con
+// prefers-reduced-motion o sin JS se queda el poster. Cargar despues de idioma.js.
 (function () {
   var raiz = document.documentElement;
   var sinMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)");
-  var TEXTOS = {
-    pausa: { es: "Pausar el vídeo", en: "Pause the video", fr: "Mettre la vidéo en pause" },
-    play: { es: "Reproducir el vídeo", en: "Play the video", fr: "Lire la vidéo" }
-  };
-  var ICONOS = {
-    pausa: "M7 5h3.5v14H7zM13.5 5H17v14h-3.5z",
-    play: "M8 5v14l11-7z"
-  };
 
   function idioma() { return raiz.dataset.lang || "es"; }
 
@@ -24,70 +14,48 @@
     new MutationObserver(fn).observe(raiz, { attributes: true, attributeFilter: ["data-lang"] });
   }
 
-  function iniciarVideo(caja, observador) {
+  // Cada .video-caja del carrusel: la reproduce el carrusel (cambioDeVista) solo si es la
+  // diapositiva actual y esta en pantalla; el resto queda en poster, sin descargar nada.
+  function iniciarVideo(caja) {
     var clip = caja.dataset.video;
     var video = document.createElement("video");
     video.muted = true;
-    // Sin loop: al acabar vuelve a empezar a mano, asi el carrusel sabe que ha terminado.
+    // Sin loop: el carrusel avanza en "ended" y, si esta parado, vuelve a empezar el.
     video.playsInline = true;
     video.preload = "none";
     video.setAttribute("aria-hidden", "true");
     caja.appendChild(video);
+    caja.video = video;
 
-    var boton = document.createElement("button");
-    boton.type = "button";
-    boton.className = "video-pausa";
-    boton.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path></path></svg>';
-    caja.appendChild(boton);
-    var pausadoPorUsuario = false;
-
-    // Con data-video-oscuro hay una variante «<clip>-oscuro» para el tema oscuro.
+    // Siempre hay una variante «<clip>-oscuro» para el tema oscuro.
     var oscuro = window.matchMedia("(prefers-color-scheme: dark)");
     function esOscuro() { return raiz.dataset.tema ? raiz.dataset.tema === "oscuro" : oscuro.matches; }
-    function nombreClip() { return clip + (caja.hasAttribute("data-video-oscuro") && esOscuro() ? "-oscuro" : ""); }
-    function ruta(extension) { return "/video/" + idioma() + "/" + nombreClip() + "." + extension; }
-
-    function pintarBoton() {
-      var estado = video.paused ? "play" : "pausa";
-      boton.setAttribute("aria-label", TEXTOS[estado][idioma()]);
-      boton.querySelector("path").setAttribute("d", ICONOS[estado]);
-    }
+    function ruta(extension) { return "/video/" + idioma() + "/" + clip + (esOscuro() ? "-oscuro" : "") + "." + extension; }
 
     function reproducir() {
       var origen = ruta("mp4");
       if (video.getAttribute("src") !== origen) video.src = origen;
-      // Si el navegador la rechaza (ahorro de datos...) el boton sigue mostrando play.
+      // Si el navegador la rechaza (ahorro de datos...) se queda en el poster.
       video.play().catch(function () {});
     }
 
-    function aplicarIdioma() {
+    // Idioma o tema cambiados: el poster se actualiza; el video solo se recarga si esta sonando
+    // (los demas pierden el src, para no bajar la otra variante hasta que les toque).
+    function aplicarVariante() {
       video.poster = ruta("webp");
-      if (video.getAttribute("src")) {
-        var sonaba = !video.paused;
-        video.src = ruta("mp4");
-        if (sonaba) reproducir();
-      }
-      pintarBoton();
+      if (!video.getAttribute("src")) return;
+      if (video.paused) { video.removeAttribute("src"); video.load(); }
+      else reproducir();
     }
 
-    boton.addEventListener("click", function () {
-      pausadoPorUsuario = !video.paused;
-      if (video.paused) reproducir(); else video.pause();
-    });
-    video.addEventListener("ended", function () { video.currentTime = 0; video.play().catch(function () {}); });
-    video.addEventListener("play", pintarBoton);
-    video.addEventListener("pause", pintarBoton);
-
-    // Lo llama el observador al entrar o salir de vista.
-    caja.cambioDeVista = function (enVista) {
-      if (!enVista) video.pause();
-      else if (!sinMovimiento.matches && !pausadoPorUsuario) reproducir();
+    caja.cambioDeVista = function (activa) {
+      if (!activa) video.pause();
+      else if (!sinMovimiento.matches) reproducir();
     };
 
-    aplicarIdioma();
-    alCambiarIdioma(aplicarIdioma);
-    if (caja.hasAttribute("data-video-oscuro")) document.addEventListener("cambiotema", aplicarIdioma);
-    observador.observe(caja);
+    aplicarVariante();
+    alCambiarIdioma(aplicarVariante);
+    document.addEventListener("cambiotema", aplicarVariante);
   }
 
   // ---------- Carrusel de funciones ----------
@@ -96,8 +64,8 @@
   // vecinas asomando a los lados, mas pequenas (ESCALA) y atenuadas; se mueven con transform.
   // Se cambia tocando una vecina, deslizando o con las flechas del teclado con el foco dentro.
   // Avanza solo cada AVANCE ms mientras esta en pantalla (cambiar a mano reinicia la cuenta);
-  // en la diapositiva con video, cuando el video termina (empieza desde el principio al llegar),
-  // salvo con prefers-reduced-motion o con el foco del teclado dentro; sin boton de pausa (WCAG 2.2.2), se para con el raton encima o con el dedo puesto.
+  // en las diapositivas con video, cuando el video acaba una vuelta (todos duran 8-10 s, asi se ve
+  // entero), salvo con prefers-reduced-motion o con el foco del teclado dentro; sin boton de pausa (WCAG 2.2.2), se para con el raton encima o con el dedo puesto.
   var AVANCE = 6000;
   var ESCALA = 0.72;
   var HUECO = 20;
@@ -147,10 +115,10 @@
         d.style.transform = "translate(" + (k * paso) + "px, " + y + "px) scale(" + escala + ")";
         d.classList.toggle("actual", k === 0);
         d.classList.toggle("vecina", Math.abs(k) === 1);
-        // Las demas se ocultan a lectores y lo enfocable (texto y boton del video) queda inert;
+        // Las demas se ocultan a lectores y lo enfocable (el texto) queda inert;
         // la captura de las vecinas sigue recibiendo el raton, para el cursor y el toque.
         d.setAttribute("aria-hidden", String(k !== 0));
-        d.querySelectorAll(".h-diapo-texto, .video-pausa").forEach(function (el) { el.inert = k !== 0; });
+        d.querySelectorAll(".h-diapo-texto").forEach(function (el) { el.inert = k !== 0; });
       });
       pista.style.height = diapos[actual].offsetHeight + "px";
     }
@@ -160,6 +128,15 @@
       colocar();
       var video = diapos[actual].querySelector("video");
       if (video) video.currentTime = 0;
+      sincronizarVideos();
+    }
+
+    // Solo suena el video de la diapositiva actual y con el carrusel en pantalla.
+    function sincronizarVideos() {
+      diapos.forEach(function (d, i) {
+        var caja = d.querySelector(".video-caja");
+        if (caja) caja.cambioDeVista(i === actual && enVista);
+      });
     }
 
     function programar() {
@@ -175,7 +152,11 @@
     diapos.forEach(function (d, i) {
       var video = d.querySelector("video");
       if (!video) return;
-      video.addEventListener("ended", function () { if (i === actual && !detenido && enVista && !conFoco && !encima) mover(actual + 1); });
+      video.addEventListener("ended", function () {
+        if (i !== actual) return;
+        if (!detenido && enVista && !conFoco && !encima) mover(actual + 1);
+        else { video.currentTime = 0; video.play().catch(function () {}); }
+      });
       video.addEventListener("play", function () { if (i === actual) programar(); });
       video.addEventListener("pause", function () { if (i === actual) programar(); });
     });
@@ -217,7 +198,7 @@
     window.addEventListener("resize", colocar);
     // Las capturas son lazy: al cargar puede cambiar la altura.
     diapos.forEach(function (d) { d.querySelectorAll("img").forEach(function (img) { img.addEventListener("load", colocar); }); });
-    new IntersectionObserver(function (e) { enVista = e[0].isIntersecting; programar(); }, { threshold: 0.5 }).observe(pista);
+    new IntersectionObserver(function (e) { enVista = e[0].isIntersecting; sincronizarVideos(); programar(); }, { threshold: 0.5 }).observe(pista);
     textos();
     alCambiarIdioma(function () { textos(); colocar(); });
     ir(0);
@@ -225,15 +206,9 @@
     requestAnimationFrame(function () { requestAnimationFrame(function () { carrusel.classList.add("anima"); }); });
   }
 
-  // Primero los videos: el carrusel deja inert el boton de pausa de las diapositivas ocultas.
+  // Primero los videos: el carrusel los arranca al colocarse.
   function iniciar() {
-    var videos = document.querySelectorAll(".video-caja[data-video]");
-    if (videos.length && "IntersectionObserver" in window) {
-      var observador = new IntersectionObserver(function (entradas) {
-        entradas.forEach(function (e) { e.target.cambioDeVista(e.isIntersecting); });
-      }, { threshold: 0.4 });
-      videos.forEach(function (caja) { iniciarVideo(caja, observador); });
-    }
+    document.querySelectorAll(".video-caja[data-video]").forEach(iniciarVideo);
     document.querySelectorAll(".h-carrusel").forEach(iniciarCarrusel);
   }
 

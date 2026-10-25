@@ -1,18 +1,13 @@
 /* Home (sitio/index.html). Solo lo propio de la home; lo comun esta en site.css.
- * Prefijo h- salvo .video-caja/.video-pausa, que son las de assets/home.js. */
+ * Prefijo h- salvo .video-caja, que es la de assets/home.js. */
 
-/* Video de la diapositiva de escritura del carrusel: la captura tiene la proporcion del
- * video (1766 x 1080); el poster (<picture>) queda debajo y el video, cuando arranca, encima. */
-.h-pantalla { position: relative; aspect-ratio: 1766 / 1080; background: var(--surface-2); }
-.h-pantalla img, .h-pantalla video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 0; }
-.h-pantalla video { z-index: 1; }
-.video-caja .video-pausa {
-  position: absolute; z-index: 2; right: 12px; bottom: 12px; width: 44px; height: 44px; padding: 0;
-  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
-  color: var(--text); background: color-mix(in srgb, var(--bg) 85%, transparent); border: 1px solid var(--border); border-radius: 50%;
-}
-.video-caja .video-pausa:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.video-caja .video-pausa svg { width: 20px; height: 20px; fill: currentColor; }
+/* Video de las diapositivas del carrusel: la captura tiene la proporcion del video
+ * (.h-pantalla 1766 x 1080, .h-video 1600 x 1051); el poster (<picture>) queda debajo y el video, cuando arranca, encima. */
+.video-caja { position: relative; background: var(--surface-2); }
+.h-pantalla { aspect-ratio: 1766 / 1080; }
+.h-video { aspect-ratio: 1600 / 1051; }
+.video-caja img, .video-caja video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 0; }
+.video-caja video { z-index: 1; }
 .hero .sellos { margin-top: 40px; }
 
 /* Funciones: carrusel en el hero (home.js). La captura y el texto debajo, que pasa con
