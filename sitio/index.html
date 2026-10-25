@@ -20,12 +20,12 @@
 <link rel="icon" href="/favicon.png">
 <link rel="preload" href="/assets/fuentes/mona-sans-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/site.css?v=4">
-<link rel="stylesheet" href="/assets/home.css?v=8">
+<link rel="stylesheet" href="/assets/home.css?v=9">
 <script src="/assets/idioma.js?v=2"></script>
 <!-- Estadisticas sin cookies ni datos personales (ver la politica de privacidad). Solo en getswiftpen.com: las vistas previas y las pruebas locales no cuentan. Sin la parte ?... de la direccion. -->
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8e72a64d-fc98-425b-8b24-4017cd4c6f43" data-domains="getswiftpen.com" data-exclude-search="true" data-do-not-track="true"></script>
 <script src="/assets/avisame.js" defer></script>
-<script src="/assets/home.js?v=8" defer></script>
+<script src="/assets/home.js?v=9" defer></script>
 </head>
 <body>
 
@@ -55,18 +55,18 @@
     <div class="h-carrusel" id="funciones">
     <div class="h-pista" tabindex="0">
       <div class="h-diapo" id="diapo-escritura">
-        <figure class="marco h-captura h-pantalla video-caja" data-video="carrusel-escritura">
+        <figure class="marco h-captura h-pantalla video-caja" data-video="hero">
           <picture lang="es">
-            <source srcset="/video/es/carrusel-escritura-oscuro.webp" media="(prefers-color-scheme: dark)">
-            <img src="/video/es/carrusel-escritura.webp" width="1766" height="1080" loading="lazy" alt="Una nota escrita a mano en SwiftPen, en una tableta.">
+            <source srcset="/video/es/hero-oscuro.webp" media="(prefers-color-scheme: dark)">
+            <img src="/video/es/hero.webp" width="1766" height="1080" loading="lazy" alt="Una nota escrita a mano en SwiftPen, en una tableta.">
           </picture>
           <picture lang="en">
-            <source srcset="/video/en/carrusel-escritura-oscuro.webp" media="(prefers-color-scheme: dark)">
-            <img src="/video/en/carrusel-escritura.webp" width="1766" height="1080" loading="lazy" alt="A handwritten note in SwiftPen, on a tablet.">
+            <source srcset="/video/en/hero-oscuro.webp" media="(prefers-color-scheme: dark)">
+            <img src="/video/en/hero.webp" width="1766" height="1080" loading="lazy" alt="A handwritten note in SwiftPen, on a tablet.">
           </picture>
           <picture lang="fr">
-            <source srcset="/video/fr/carrusel-escritura-oscuro.webp" media="(prefers-color-scheme: dark)">
-            <img src="/video/fr/carrusel-escritura.webp" width="1766" height="1080" loading="lazy" alt="Une note manuscrite dans SwiftPen, sur une tablette.">
+            <source srcset="/video/fr/hero-oscuro.webp" media="(prefers-color-scheme: dark)">
+            <img src="/video/fr/hero.webp" width="1766" height="1080" loading="lazy" alt="Une note manuscrite dans SwiftPen, sur une tablette.">
           </picture>
         </figure>
         <div class="h-diapo-texto">
@@ -160,7 +160,25 @@
         </div>
       </div>
       <div class="h-diapo" id="diapo-sincronizacion">
-        <div class="captura-pendiente" style="--proporcion: 1600 / 1051" role="img" aria-label="Captura pendiente: sync-biblioteca"><span>captura: sync-biblioteca</span></div>
+        <figure class="marco h-captura h-video h-sync cabecera-aurora" role="img" aria-labelledby="sync-nombre">
+          <span class="solo-lectores" id="sync-nombre"><span lang="es">SwiftPen sincroniza tus notas con Google Drive o con un servidor WebDAV.</span><span lang="en">SwiftPen syncs your notes with Google Drive or a WebDAV server.</span><span lang="fr">SwiftPen synchronise vos notes avec Google Drive ou un serveur WebDAV.</span></span>
+          <div class="h-sync-fila" aria-hidden="true">
+            <div class="h-sync-nodo">
+              <span class="h-sync-icono"><svg viewBox="0 0 24 24"><path fill="#FFBA00" d="M12.01 1.485c-2.082 0-3.754.02-3.743.047.01.02 1.708 3.001 3.774 6.62l3.76 6.574h3.76c2.081 0 3.753-.02 3.742-.047-.005-.02-1.708-3.001-3.775-6.62l-3.76-6.574z"/><path fill="#00AC47" d="M7.25 3.215a789.828 789.861 0 0 0-3.63 6.319L0 15.868l1.89 3.298 1.885 3.297 3.62-6.335 3.618-6.33-1.88-3.287C8.1 4.704 7.255 3.22 7.25 3.214z"/><path fill="#2684FC" d="m9.509 15.868-.203.348c-.114.198-.96 1.672-1.88 3.287a423.93 423.948 0 0 1-1.698 2.97c-.01.026 3.24.042 7.222.042h7.244l1.796-3.157c.992-1.734 1.85-3.23 1.906-3.323l.104-.167z"/></svg></span>
+              <span class="h-sync-nombre">Google Drive</span>
+            </div>
+            <svg class="h-sync-flecha" viewBox="0 0 48 24" aria-hidden="true"><path d="M4 12h40M10 6l-6 6 6 6M38 6l6 6-6 6"/></svg>
+            <div class="h-sync-nodo">
+              <span class="h-sync-icono h-sync-app"><img src="/img/icon.png" width="192" height="192" alt="" draggable="false"></span>
+              <span class="h-sync-nombre">SwiftPen</span>
+            </div>
+            <svg class="h-sync-flecha" viewBox="0 0 48 24" aria-hidden="true"><path d="M4 12h40M10 6l-6 6 6 6M38 6l6 6-6 6"/></svg>
+            <div class="h-sync-nodo">
+              <span class="h-sync-icono"><svg viewBox="0 0 24 24" class="h-sync-webdav"><path d="M7 19a4.5 4.5 0 0 1-.8-8.93A6 6 0 0 1 17.7 9.2 4.9 4.9 0 0 1 17 19z"/><path d="M9 12.5h6M9 15.5h6"/></svg></span>
+              <span class="h-sync-nombre">WebDAV</span>
+            </div>
+          </div>
+        </figure>
         <div class="h-diapo-texto">
           <h3><span lang="es">Tu nube, sin servidores.</span><span lang="en">Your cloud, no servers.</span><span lang="fr">Votre cloud, sans serveurs.</span></h3>
           <p><span lang="es">Empieza en la tableta y repasa en el móvil, todo en tu propia nube. SwiftPen no tiene servidores.</span><span lang="en">Start on your tablet and review on your phone, all in your own cloud. SwiftPen has no servers.</span><span lang="fr">Commencez sur la tablette et révisez sur le téléphone, le tout dans votre propre cloud. SwiftPen n'a pas de serveurs.</span></p>

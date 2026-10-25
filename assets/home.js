@@ -1,4 +1,4 @@
-// Home: carrusel de funciones, con un video por diapositiva (excepto sincronizacion).
+// Home: carrusel de funciones, con un video por diapositiva (excepto sincronizacion, que es una ilustracion).
 //
 // <figure class="video-caja" data-video="carrusel-pdf"> usa /video/<idioma>/carrusel-pdf.mp4
 // (o carrusel-pdf-oscuro.mp4 en tema oscuro) y su .webp de poster. Solo se descarga y
@@ -106,7 +106,7 @@
     // las que quedan a 2 o mas no se ven (asi, al dar la vuelta, el salto no se nota).
     function colocar() {
       var ancho = diapos[0].offsetWidth;
-      var captura = diapos[actual].querySelector(".h-captura, .captura-pendiente").offsetHeight;
+      var captura = diapos[actual].querySelector(".h-captura").offsetHeight;
       var paso = ancho * (1 + ESCALA) / 2 + HUECO;
       diapos.forEach(function (d, i) {
         var k = distancia(i);
