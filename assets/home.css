@@ -1,0 +1,50 @@
+/* Home (sitio/index.html). Solo lo propio de la home; lo comun esta en site.css.
+ * Prefijo h- salvo .video-caja/.video-pausa, que son las de assets/home.js. */
+
+/* Hero: la tableta lleva el video en vez de una captura. La pantalla tiene la
+ * proporcion del video (1766 x 1080); el poster (<picture>) queda debajo y el
+ * video, cuando arranca, encima. Sin movil superpuesto. */
+.h-escena { padding-bottom: 0; }
+.h-pantalla { position: relative; aspect-ratio: 1766 / 1080; overflow: hidden; border-radius: calc(var(--radio) - var(--borde)); background: var(--surface-2); }
+.h-pantalla img, .h-pantalla video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 0; }
+.h-pantalla video { z-index: 1; }
+.video-caja .video-pausa {
+  position: absolute; z-index: 2; right: 12px; bottom: 12px; width: 44px; height: 44px; padding: 0;
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+  color: var(--text); background: color-mix(in srgb, var(--bg) 85%, transparent); border: 1px solid var(--border); border-radius: 50%;
+}
+.video-caja .video-pausa:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.video-caja .video-pausa svg { width: 20px; height: 20px; fill: currentColor; }
+.hero .sellos { margin-top: 40px; }
+
+/* Bento de funciones: cabecera centrada y enlace a /funciones/ debajo. */
+.h-cabecera { text-align: center; margin-bottom: 40px; }
+.h-cabecera .entradilla { margin-inline: auto; }
+.bn-t .pro, .bn-t .beta { margin-left: 8px; vertical-align: 3px; }
+/* La tira del lienzo, menos apaisada que la tira por defecto (4,75), para que se vea el mapa. */
+@media (min-width: 600px) { .bn-tira.h-tira-alta .bn-media { aspect-ratio: 2.4; } }
+/* Sincronizacion aun sin captura: el placeholder rellena el hueco de la imagen. */
+.bn-media > .captura-pendiente { position: absolute; inset: 0; aspect-ratio: auto; height: 100%; border: 0; border-radius: 0; }
+.h-mas { margin: 32px 0 0; text-align: center; }
+
+/* Franja de precio: una tarjeta con las dos cifras y los enlaces a /precios/. */
+.h-precio { padding-top: 0; }
+.h-franja {
+  display: grid; gap: 24px 40px; align-items: center; padding: 32px 28px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radio-grande); box-shadow: var(--shadow-suave);
+}
+.h-franja h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+.h-cifras { display: flex; flex-wrap: wrap; gap: 16px 40px; margin: 0; }
+.h-cifras div { display: flex; flex-direction: column; }
+.h-cifras dt { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.h-cifras .h-cifra { margin: 2px 0 0; color: var(--text);font-size: clamp(2rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
+.h-cifras dd { margin: 0; color: var(--muted); font-size: 15px; }
+.h-enlaces { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 0; font-weight: 600; }
+.h-enlaces a { display: inline-flex; align-items: center; min-height: 44px; }
+@media (min-width: 900px) {
+  .h-franja { grid-template-columns: 1fr auto; padding: 40px 48px; }
+  .h-enlaces { grid-column: 1 / -1; }
+}
+
+.h-preguntas .preguntas { margin-inline: auto; }
+.h-preguntas .h-cabecera { margin-bottom: 0; }
