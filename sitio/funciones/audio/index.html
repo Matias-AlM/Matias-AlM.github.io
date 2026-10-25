@@ -20,7 +20,6 @@
       <figure class="fn-captura"> con <picture lang> como en la cabecera, sizes "(min-width: 900px) 600px, 100vw"
       y loading="lazy". Sin captura: el .captura-pendiente con la etiqueta "captura: <slug>-<que>".
   10. "Los detalles": 5 a 10 <li> (de las release notes y del mapa de funciones; nada inventado).
-  11. "¿Gratis o Pro?": una frase. Si es Pro, cuenta que hace falta Pro (y lo que se puede probar gratis).
   12. Relacionadas: 3 .tarjeta-funcion (icono, nombre, una linea; .pro o .beta si toca), las mismas
       lineas que su tarjeta en /funciones/.
   13. CTA: data-umami-event-lugar="funcion-<slug>".
@@ -91,6 +90,7 @@
           <span class="fn-num" aria-hidden="true">1</span>
           <h3><span lang="es">Graba mientras escribes</span><span lang="en">Record while you write</span><span lang="fr">Enregistrez pendant que vous écrivez</span></h3>
           <p><span lang="es">Empieza a grabar en la nota y sigue escribiendo como siempre. Lo que graba queda unido a lo que escribes.</span><span lang="en">Start recording in the note and keep writing as usual. What you record is tied to what you write.</span><span lang="fr">Lancez l'enregistrement dans la note et continuez d'écrire comme d'habitude. Ce que vous enregistrez reste lié à ce que vous écrivez.</span></p>
+          <span class="pro">PRO</span>
         </div>
         <figure class="fn-captura"><div class="captura-pendiente" style="--proporcion: 1600 / 1051" role="img" aria-label="Captura pendiente: audio-grabar"><span>captura: audio-grabar</span></div></figure>
       </li>
@@ -99,6 +99,7 @@
           <span class="fn-num" aria-hidden="true">2</span>
           <h3><span lang="es">Toca una palabra</span><span lang="en">Tap a word</span><span lang="fr">Touchez un mot</span></h3>
           <p><span lang="es">Más tarde, toca cualquier palabra de tus apuntes y el audio salta al minuto en que la escribías.</span><span lang="en">Later, tap any word in your notes and the audio jumps to the moment you wrote it.</span><span lang="fr">Plus tard, touchez n'importe quel mot de vos notes et l'audio saute au moment où vous l'avez écrit.</span></p>
+          <span class="pro">PRO</span>
         </div>
         <figure class="fn-captura"><div class="captura-pendiente" style="--proporcion: 1600 / 1051" role="img" aria-label="Captura pendiente: audio-tocar"><span>captura: audio-tocar</span></div></figure>
       </li>
@@ -107,6 +108,7 @@
           <span class="fn-num" aria-hidden="true">3</span>
           <h3><span lang="es">Borra lo que no necesites</span><span lang="en">Delete what you don't need</span><span lang="fr">Supprimez ce qui est superflu</span></h3>
           <p><span lang="es">Al borrar una grabación puedes borrar también lo que escribiste mientras sonaba, o conservarlo.</span><span lang="en">When you delete a recording you can also delete what you wrote while it played, or keep it.</span><span lang="fr">En supprimant un enregistrement, vous pouvez aussi supprimer ce que vous avez écrit pendant qu'il tournait, ou le garder.</span></p>
+          <span class="pro">PRO</span>
         </div>
         <figure class="fn-captura"><div class="captura-pendiente" style="--proporcion: 1600 / 1051" role="img" aria-label="Captura pendiente: audio-borrar"><span>captura: audio-borrar</span></div></figure>
       </li>
@@ -118,25 +120,13 @@
   <div class="contenedor">
     <h2 id="detalles"><span lang="es">Los detalles</span><span lang="en">The details</span><span lang="fr">Les détails</span></h2>
     <ul class="fn-detalles">
-      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Audio unido a lo que escribes: sabe qué sonaba cuando escribiste cada palabra.</span><span lang="en">Audio tied to what you write: it knows what was playing when you wrote each word.</span><span lang="fr">Un audio lié à ce que vous écrivez : il sait ce qui se disait quand vous avez écrit chaque mot.</span></li>
-      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Toca una palabra y el audio salta a ese minuto.</span><span lang="en">Tap a word and the audio jumps to that moment.</span><span lang="fr">Touchez un mot et l'audio saute à ce moment-là.</span></li>
-      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Al borrar una grabación, borra también lo que se escribió mientras sonaba, si quieres.</span><span lang="en">When deleting a recording, delete what was written while it played too, if you like.</span><span lang="fr">En supprimant un enregistrement, supprimez aussi ce qui a été écrit pendant, si vous le souhaitez.</span></li>
-      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">El diálogo de borrar una grabación es más sencillo.</span><span lang="en">The dialog for deleting a recording is simpler.</span><span lang="fr">La boîte de dialogue pour supprimer un enregistrement est plus simple.</span></li>
-      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">La notificación de grabación sigue el idioma que elijas en Ajustes.</span><span lang="en">The recording notification follows the language you choose in Settings.</span><span lang="fr">La notification d'enregistrement suit la langue choisie dans les Réglages.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Audio unido a lo que escribes: sabe qué sonaba cuando escribiste cada palabra.</span><span lang="en">Audio tied to what you write: it knows what was playing when you wrote each word.</span><span lang="fr">Un audio lié à ce que vous écrivez : il sait ce qui se disait quand vous avez écrit chaque mot.</span> <span class="pro">PRO</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Toca una palabra y el audio salta a ese minuto.</span><span lang="en">Tap a word and the audio jumps to that moment.</span><span lang="fr">Touchez un mot et l'audio saute à ce moment-là.</span> <span class="pro">PRO</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Al borrar una grabación, borra también lo que se escribió mientras sonaba, si quieres.</span><span lang="en">When deleting a recording, delete what was written while it played too, if you like.</span><span lang="fr">En supprimant un enregistrement, supprimez aussi ce qui a été écrit pendant, si vous le souhaitez.</span> <span class="pro">PRO</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">El diálogo de borrar una grabación es más sencillo.</span><span lang="en">The dialog for deleting a recording is simpler.</span><span lang="fr">La boîte de dialogue pour supprimer un enregistrement est plus simple.</span> <span class="pro">PRO</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">La notificación de grabación sigue el idioma que elijas en Ajustes.</span><span lang="en">The recording notification follows the language you choose in Settings.</span><span lang="fr">La notification d'enregistrement suit la langue choisie dans les Réglages.</span> <span class="pro">PRO</span></li>
       <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Las 3 primeras grabaciones son gratis y se quedan en tus notas.</span><span lang="en">The first 3 recordings are free and stay in your notes.</span><span lang="fr">Les 3 premiers enregistrements sont gratuits et restent dans vos notes.</span></li>
     </ul>
-  </div>
-</section>
-
-<section class="fn-bloque" aria-labelledby="gratis-o-pro">
-  <div class="contenedor">
-    <div class="fn-banda">
-      <div>
-        <h2 id="gratis-o-pro"><span lang="es">¿Gratis o Pro?</span><span lang="en">Free or Pro?</span><span lang="fr">Gratuit ou Pro ?</span></h2>
-        <p><span lang="es">Audio es una función Pro. Puedes probarlo con 3 grabaciones gratis, que se quedan en tus notas. Pro es un pago único opcional que también suma búsqueda en tu letra y exportar como texto.</span><span lang="en">Audio is a Pro feature. You can try it with 3 free recordings, which stay in your notes. Pro is an optional one-time purchase that also adds handwriting search and text export.</span><span lang="fr">L'audio est une fonction Pro. Vous pouvez l'essayer avec 3 enregistrements gratuits, qui restent dans vos notes. Pro est un achat unique facultatif qui ajoute aussi la recherche dans l'écriture et l'export en texte.</span></p>
-      </div>
-      <a class="boton" href="/precios/"><span lang="es">Ver precios</span><span lang="en">See pricing</span><span lang="fr">Voir les tarifs</span></a>
-    </div>
   </div>
 </section>
 

@@ -20,7 +20,6 @@
       <figure class="fn-captura"> con <picture lang> como en la cabecera, sizes "(min-width: 900px) 600px, 100vw"
       y loading="lazy". Sin captura: el .captura-pendiente con la etiqueta "captura: <slug>-<que>".
   10. "Los detalles": 5 a 10 <li> (de las release notes y del mapa de funciones; nada inventado).
-  11. "¿Gratis o Pro?": una frase. Si es Pro, cuenta que hace falta Pro (y lo que se puede probar gratis).
   12. Relacionadas: 3 .tarjeta-funcion (icono, nombre, una linea; .pro o .beta si toca), las mismas
       lineas que su tarjeta en /funciones/.
   13. CTA: data-umami-event-lugar="funcion-<slug>".
@@ -91,6 +90,7 @@
           <span class="fn-num" aria-hidden="true">1</span>
           <h3><span lang="es">Escribe como siempre</span><span lang="en">Write as usual</span><span lang="fr">Écrivez comme d'habitude</span></h3>
           <p><span lang="es">No hay nada que activar ni que corregir: tu letra se reconoce en el dispositivo, sin IA en la nube.</span><span lang="en">There is nothing to switch on or fix: your handwriting is recognized on the device, with no cloud AI.</span><span lang="fr">Rien à activer ni à corriger : votre écriture est reconnue sur l'appareil, sans IA dans le cloud.</span></p>
+          <span class="pro">PRO</span>
         </div>
         <figure class="fn-captura"><div class="captura-pendiente" style="--proporcion: 1600 / 1051" role="img" aria-label="Captura pendiente: busqueda-escribir"><span>captura: busqueda-escribir</span></div></figure>
       </li>
@@ -99,6 +99,7 @@
           <span class="fn-num" aria-hidden="true">2</span>
           <h3><span lang="es">Busca una palabra</span><span lang="en">Search for a word</span><span lang="fr">Cherchez un mot</span></h3>
           <p><span lang="es">Escribe la palabra en el buscador y encuentra las notas donde la escribiste a mano. El reconocimiento no es perfecto: una letra muy difícil puede no encontrarse.</span><span lang="en">Type the word in the search box and find the notes where you handwrote it. Recognition isn't perfect: very hard-to-read writing may not be found.</span><span lang="fr">Saisissez le mot dans la recherche et retrouvez les notes où vous l'avez écrit à la main. La reconnaissance n'est pas parfaite : une écriture très difficile à lire peut ne pas être trouvée.</span></p>
+          <span class="pro">PRO</span>
         </div>
       </li>
       <li class="fn-paso">
@@ -106,6 +107,7 @@
           <span class="fn-num" aria-hidden="true">3</span>
           <h3><span lang="es">Exporta lo escrito como texto</span><span lang="en">Export your writing as text</span><span lang="fr">Exportez votre écriture en texte</span></h3>
           <p><span lang="es">Convierte lo que escribiste en texto ordenado y llévatelo donde lo necesites.</span><span lang="en">Turn what you wrote into clean text and take it wherever you need it.</span><span lang="fr">Transformez ce que vous avez écrit en texte ordonné et emportez-le où vous en avez besoin.</span></p>
+          <span class="pro">PRO</span>
         </div>
         <figure class="fn-captura"><div class="captura-pendiente" style="--proporcion: 1600 / 1051" role="img" aria-label="Captura pendiente: busqueda-exportar"><span>captura: busqueda-exportar</span></div></figure>
       </li>
@@ -117,25 +119,13 @@
   <div class="contenedor">
     <h2 id="detalles"><span lang="es">Los detalles</span><span lang="en">The details</span><span lang="fr">Les détails</span></h2>
     <ul class="fn-detalles">
-      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Encuentra palabras escritas a mano en tus notas.</span><span lang="en">Find handwritten words in your notes.</span><span lang="fr">Retrouvez des mots écrits à la main dans vos notes.</span></li>
-      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Tu letra se reconoce en el dispositivo, sin IA en la nube.</span><span lang="en">Your handwriting is recognized on the device, no cloud AI.</span><span lang="fr">Votre écriture est reconnue sur l'appareil, sans IA dans le cloud.</span></li>
-      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">La búsqueda no reanaliza la nota mientras sigues escribiendo, para gastar menos batería.</span><span lang="en">Search doesn't re-scan the note while you keep writing, to use less battery.</span><span lang="fr">La recherche ne réanalyse pas la note pendant que vous continuez d'écrire, pour économiser la batterie.</span></li>
-      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">La búsqueda y el .txt incluyen también el texto de las cajas de texto.</span><span lang="en">Search and the .txt also include the text in text boxes.</span><span lang="fr">La recherche et le .txt incluent aussi le texte des zones de texte.</span></li>
-      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Exporta lo escrito como texto ordenado.</span><span lang="en">Export your writing as clean text.</span><span lang="fr">Exportez votre écriture en texte ordonné.</span></li>
-      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">El reconocimiento no es perfecto: no esperes encontrar el cien por cien de las palabras.</span><span lang="en">Recognition isn't perfect: don't expect to find every single word.</span><span lang="fr">La reconnaissance n'est pas parfaite : ne comptez pas retrouver chaque mot.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Encuentra palabras escritas a mano en tus notas.</span><span lang="en">Find handwritten words in your notes.</span><span lang="fr">Retrouvez des mots écrits à la main dans vos notes.</span> <span class="pro">PRO</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Tu letra se reconoce en el dispositivo, sin IA en la nube.</span><span lang="en">Your handwriting is recognized on the device, no cloud AI.</span><span lang="fr">Votre écriture est reconnue sur l'appareil, sans IA dans le cloud.</span> <span class="pro">PRO</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">La búsqueda no reanaliza la nota mientras sigues escribiendo, para gastar menos batería.</span><span lang="en">Search doesn't re-scan the note while you keep writing, to use less battery.</span><span lang="fr">La recherche ne réanalyse pas la note pendant que vous continuez d'écrire, pour économiser la batterie.</span> <span class="pro">PRO</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">La búsqueda y el .txt incluyen también el texto de las cajas de texto.</span><span lang="en">Search and the .txt also include the text in text boxes.</span><span lang="fr">La recherche et le .txt incluent aussi le texte des zones de texte.</span> <span class="pro">PRO</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Exporta lo escrito como texto ordenado.</span><span lang="en">Export your writing as clean text.</span><span lang="fr">Exportez votre écriture en texte ordonné.</span> <span class="pro">PRO</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">El reconocimiento no es perfecto: no esperes encontrar el cien por cien de las palabras.</span><span lang="en">Recognition isn't perfect: don't expect to find every single word.</span><span lang="fr">La reconnaissance n'est pas parfaite : ne comptez pas retrouver chaque mot.</span> <span class="pro">PRO</span></li>
     </ul>
-  </div>
-</section>
-
-<section class="fn-bloque" aria-labelledby="gratis-o-pro">
-  <div class="contenedor">
-    <div class="fn-banda">
-      <div>
-        <h2 id="gratis-o-pro"><span lang="es">¿Gratis o Pro?</span><span lang="en">Free or Pro?</span><span lang="fr">Gratuit ou Pro ?</span></h2>
-        <p><span lang="es">La búsqueda en tu letra y exportar como texto son funciones Pro. Pro es un pago único opcional que también suma audio (con 3 grabaciones gratis para probarlo).</span><span lang="en">Handwriting search and text export are Pro features. Pro is an optional one-time purchase that also adds audio (with 3 free recordings to try it).</span><span lang="fr">La recherche dans l'écriture et l'export en texte sont des fonctions Pro. Pro est un achat unique facultatif qui ajoute aussi l'audio (avec 3 enregistrements gratuits pour l'essayer).</span></p>
-      </div>
-      <a class="boton" href="/precios/"><span lang="es">Ver precios</span><span lang="en">See pricing</span><span lang="fr">Voir les tarifs</span></a>
-    </div>
   </div>
 </section>
 

@@ -84,7 +84,9 @@ html:not(.js) .fn-panel + .fn-panel { padding-top: 64px; }
 }
 .fn-tesela h3 { font-size: 1.2rem; }
 .fn-tesela:not(.fn-tesela-grande) h3 { margin-top: auto; }
-.fn-tesela h3 .beta { font-size: 10px; padding: 1px 6px; }
+/* PRO y BETA, a la derecha de la tesela (la grande lo lleva junto a su etiqueta). */
+.fn-tesela .pro, .fn-tesela .beta { position: absolute; top: 24px; right: 24px; margin: 0; }
+.fn-tesela-grande .pro, .fn-tesela-grande .beta { top: 28px; right: 28px; }
 .fn-tesela p { color: var(--muted); margin: 6px 0 0; font-size: 15.5px; line-height: 1.5; }
 .fn-tesela-grande { padding: 0; overflow: clip; }
 .fn-tesela-texto { padding: 28px 28px 24px; }
@@ -99,7 +101,8 @@ html:not(.js) .fn-panel + .fn-panel { padding-top: 64px; }
   .fn-tesela:not(.fn-tesela-grande) { padding: 18px 20px; }
   .fn-tesela:not(.fn-tesela-grande)::before { margin-bottom: 10px; font-size: 1.5rem; }
 }
-@media (max-width: 479px) { .fn-tesela-texto { padding: 22px 20px 20px; } .fn-tesela-media { padding: 0 20px; } }
+@media (max-width: 599px) { .fn-tesela:not(.fn-tesela-grande) .pro, .fn-tesela:not(.fn-tesela-grande) .beta { top: 18px; right: 20px; } }
+@media (max-width: 479px) { .fn-tesela-grande .pro, .fn-tesela-grande .beta { top: 22px; right: 20px; } .fn-tesela-texto { padding: 22px 20px 20px; } .fn-tesela-media { padding: 0 20px; } }
 .fn-panel-pie { margin: 16px 0 0; text-align: right; font-size: 15px; font-weight: 600; }
 .fn-panel-pie a { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; }
 .fn-panel-pie svg { width: 16px; height: 16px; }
@@ -109,17 +112,6 @@ html:not(.js) .fn-panel + .fn-panel { padding-top: 64px; }
 .fn-toda-app { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 32px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: 15px; }
 .fn-toda-app li:first-child { font-weight: 700; color: var(--text); margin-right: 4px; }
 .fn-toda-app li + li:not(:nth-child(2))::before { content: "\00B7"; margin-right: 10px; color: var(--faint); }
-
-/* Franja "¿Gratis o Pro?": texto y boton a /precios/, con el borde degradado de Pro. */
-.fn-banda {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 32px; padding: 28px 32px;
-  border-radius: var(--radio-grande); border: 1px solid transparent;
-  background: linear-gradient(var(--surface), var(--surface)) padding-box, var(--grad) border-box;
-}
-.fn-banda h2 { font-size: clamp(1.4rem, 2.6vw, 1.8rem); }
-.fn-banda p { color: var(--muted); margin: 8px 0 0; max-width: 40rem; }
-.fn-banda .boton { flex: none; }
-@media (max-width: 479px) { .fn-banda { padding: 24px 20px; } }
 
 /* Pagina de funcion: "Como se usa", pasos de texto + captura que alternan de lado.
  *   <ol class="fn-pasos">
@@ -136,6 +128,8 @@ html:not(.js) .fn-panel + .fn-panel { padding-top: 64px; }
   .fn-paso:nth-child(even) { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
   .fn-paso:nth-child(even) .fn-paso-texto { order: 2; }
 }
+.fn-paso-texto { position: relative; }
+.fn-paso-texto .pro { position: absolute; top: 8px; right: 0; margin: 0; }
 .fn-num {
   display: grid; place-items: center; width: 36px; height: 36px; margin-bottom: 14px; border-radius: 50%;
   font: 700 16px/1 var(--fuente-titulo); color: #fff; background: var(--grad);
@@ -149,6 +143,7 @@ html:not(.js) .fn-panel + .fn-panel { padding-top: 64px; }
 .fn-detalles { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 14px 40px; }
 @media (min-width: 720px) { .fn-detalles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .fn-detalles li { display: flex; gap: 12px; color: var(--muted); }
+.fn-detalles li .pro, .fn-detalles li .beta { flex: none; margin: 2px 0 0 auto; align-self: flex-start; }
 .fn-detalles svg { width: 20px; height: 20px; color: var(--accent); flex: none; margin-top: 4px; }
 
 /* Relacionadas: la rejilla .tarjeta-funciones de site.css, con aire arriba. */
