@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es" data-lang="es" data-titulo-es="Formas · Funciones | SwiftPen" data-titulo-en="Shapes · Features | SwiftPen" data-titulo-fr="Formes · Fonctions | SwiftPen">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Formas · Funciones | SwiftPen</title>
+<meta name="description" content="Formas en SwiftPen: dibuja a mano alzada, deja el lápiz quieto y la forma sale perfecta. Rectas, estrellas, ajuste a ángulos y un lápiz de formas con proporciones.">
+<link rel="icon" href="/favicon.png">
+<link rel="canonical" href="https://getswiftpen.com/funciones/formas/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SwiftPen">
+<meta property="og:title" content="Formas · Funciones | SwiftPen">
+<meta property="og:url" content="https://getswiftpen.com/funciones/formas/">
+<meta property="og:image" content="https://getswiftpen.com/img/portada.jpg?v=3">
+<link rel="preload" href="/assets/fuentes/mona-sans-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css?v=3">
+<link rel="stylesheet" href="/assets/funciones.css?v=1">
+<script src="/assets/idioma.js"></script>
+<!-- Estadisticas sin cookies ni datos personales (ver la politica de privacidad). Solo en getswiftpen.com: las vistas previas y las pruebas locales no cuentan. Sin la parte ?... de la direccion. -->
+<script defer src="https://cloud.umami.is/script.js" data-website-id="8e72a64d-fc98-425b-8b24-4017cd4c6f43" data-domains="getswiftpen.com" data-exclude-search="true" data-do-not-track="true"></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-pluma" viewBox="0 0 24 24"><path d="m12 19 7-7 3 3-7 7z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18z"/><path d="m2 2 7.6 7.6"/><circle cx="11" cy="11" r="2"/></symbol>
+  <symbol id="i-lapiz" viewBox="0 0 24 24"><path d="M17 3a2.8 2.8 0 0 1 4 4L7.5 20.5 2 22l1.5-5.5z"/><path d="m15 5 4 4"/></symbol>
+  <symbol id="i-lazo" viewBox="0 0 24 24"><path d="M5.2 16.8C3.2 15.4 2 13.8 2 12c0-4.4 4.5-8 10-8s10 3.6 10 8-4.5 8-10 8c-1.4 0-2.7-.2-3.9-.6"/><circle cx="6.5" cy="18" r="2"/><path d="M5.6 19.8c-.3 1-1 1.7-2 2.2"/></symbol>
+</svg>
+
+<!--#barra funciones-->
+
+<main>
+
+<header class="cabecera-pagina cabecera-aurora">
+  <div class="contenedor">
+    <nav class="migas" aria-label="Migas"><a href="/funciones/"><span lang="es">Funciones</span><span lang="en">Features</span><span lang="fr">Fonctions</span></a><span aria-current="page"><span lang="es">Formas</span><span lang="en">Shapes</span><span lang="fr">Formes</span></span></nav>
+    <p class="etiqueta"><span lang="es">Formas</span><span lang="en">Shapes</span><span lang="fr">Formes</span></p>
+    <h1><span lang="es">Formas perfectas, a mano.</span><span lang="en">Perfect shapes, by hand.</span><span lang="fr">Des formes parfaites, à la main.</span></h1>
+    <p class="entradilla"><span lang="es">Dibuja a mano alzada, deja el lápiz quieto y la forma sale perfecta.</span><span lang="en">Sketch freehand, hold the pen still and the shape comes out perfect.</span><span lang="fr">Dessinez à main levée, laissez le stylet immobile et la forme devient parfaite.</span></p>
+    <div class="cabecera-imagen captura-pendiente" style="--proporcion: 1600 / 1051" role="img" aria-label="Captura pendiente: formas-estrella"><span>captura: formas-estrella</span></div>
+  </div>
+</header>
+
+<section class="fn-bloque" aria-labelledby="como-se-usa">
+  <div class="contenedor">
+    <h2 id="como-se-usa"><span lang="es">Cómo se usa</span><span lang="en">How it works</span><span lang="fr">Comment ça marche</span></h2>
+    <ol class="fn-pasos">
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">1</span>
+          <h3><span lang="es">Dibuja y deja el lápiz quieto</span><span lang="en">Draw and hold the pen still</span><span lang="fr">Dessinez et laissez le stylet immobile</span></h3>
+          <p><span lang="es">Traza una forma a mano alzada y mantén el lápiz quieto al final: la forma sale limpia. Una línea se queda recta, y también se reconocen estrellas, con una pequeña vibración.</span><span lang="en">Draw a shape freehand and hold the pen still at the end: it comes out clean. A line snaps straight, and stars are recognized too, with a little vibration.</span><span lang="fr">Tracez une forme à main levée et laissez le stylet immobile à la fin : elle devient nette. Une ligne se redresse, et les étoiles sont aussi reconnues, avec une petite vibration.</span></p>
+        </div>
+        <figure class="fn-captura"><div class="captura-pendiente" style="--proporcion: 1600 / 1051" role="img" aria-label="Captura pendiente: formas-estrella"><span>captura: formas-estrella</span></div></figure>
+      </li>
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">2</span>
+          <h3><span lang="es">Dibuja formas directamente</span><span lang="en">Draw shapes directly</span><span lang="fr">Dessinez des formes directement</span></h3>
+          <p><span lang="es">Con el lápiz de formas, un toque selecciona y deslizar dibuja. Si quieres, mantén las proporciones de la forma.</span><span lang="en">With the shape pen, a tap selects and a swipe draws. If you like, keep the shape's proportions.</span><span lang="fr">Avec le stylo à formes, un toucher sélectionne et un glissement dessine. Si vous voulez, conservez les proportions de la forme.</span></p>
+        </div>
+        <figure class="fn-captura"><div class="captura-pendiente" style="--proporcion: 1600 / 1051" role="img" aria-label="Captura pendiente: formas-lapiz"><span>captura: formas-lapiz</span></div></figure>
+      </li>
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">3</span>
+          <h3><span lang="es">Ajusta a ángulos exactos</span><span lang="en">Snap to exact angles</span><span lang="fr">Aimantez à des angles exacts</span></h3>
+          <p><span lang="es">Activa «Ajustar a ángulos» y las líneas encajan en ángulos exactos. Ajústalo desde el engranaje de la herramienta.</span><span lang="en">Turn on "Snap to angles" and lines lock to exact angles. Adjust it from the tool's gear icon.</span><span lang="fr">Activez « Aimanter aux angles » et les lignes se calent sur des angles exacts. Réglez-le depuis la roue dentée de l'outil.</span></p>
+        </div>
+        <figure class="fn-captura"><div class="captura-pendiente" style="--proporcion: 1600 / 1051" role="img" aria-label="Captura pendiente: formas-angulos"><span>captura: formas-angulos</span></div></figure>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="fn-bloque" aria-labelledby="detalles">
+  <div class="contenedor">
+    <h2 id="detalles"><span lang="es">Los detalles</span><span lang="en">The details</span><span lang="fr">Les détails</span></h2>
+    <ul class="fn-detalles">
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Forma perfecta: dibuja y deja el lápiz quieto.</span><span lang="en">Perfect shape: draw and hold the pen still.</span><span lang="fr">Forme parfaite : dessinez et laissez le stylet immobile.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Se activa con más facilidad y es más fiel al trazo.</span><span lang="en">It triggers more easily and stays truer to your stroke.</span><span lang="fr">Elle se déclenche plus facilement et reste plus fidèle au tracé.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Línea recta: traza una línea y se queda recta.</span><span lang="en">Straight line: draw a line and it snaps straight.</span><span lang="fr">Ligne droite : tracez une ligne et elle se redresse.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Reconoce estrellas, con una vibración al hacerlo, y salen uniformes.</span><span lang="en">Recognizes stars, with a vibration when it does, and they come out even.</span><span lang="fr">Reconnaît les étoiles, avec une vibration, et elles sont uniformes.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Ajustar a ángulos: las líneas encajan en ángulos exactos.</span><span lang="en">Snap to angles: lines lock to exact angles.</span><span lang="fr">Aimanter aux angles : les lignes se calent sur des angles exacts.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Lápiz de formas: un toque selecciona y deslizar dibuja.</span><span lang="en">Shape pen: a tap selects and a swipe draws.</span><span lang="fr">Stylo à formes : un toucher sélectionne et un glissement dessine.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Rectas y flechas se seleccionan por la línea.</span><span lang="en">Straight lines and arrows are selected by the line.</span><span lang="fr">Les droites et les flèches se sélectionnent par leur ligne.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Mantén las proporciones de la forma si quieres.</span><span lang="en">Keep the shape's proportions if you like.</span><span lang="fr">Conservez les proportions de la forme si vous voulez.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Las formas tienen su propio menú de tres puntos.</span><span lang="en">Shapes have their own three-dot menu.</span><span lang="fr">Les formes ont leur propre menu à trois points.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Sus propios ajustes, desde el engranaje de la herramienta.</span><span lang="en">Its own settings, from the tool's gear icon.</span><span lang="fr">Ses propres réglages, depuis la roue dentée de l'outil.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="fn-bloque" aria-labelledby="gratis-o-pro">
+  <div class="contenedor">
+    <div class="fn-banda">
+      <div>
+        <h2 id="gratis-o-pro"><span lang="es">¿Gratis o Pro?</span><span lang="en">Free or Pro?</span><span lang="fr">Gratuit ou Pro ?</span></h2>
+        <p><span lang="es">Las formas son gratis y sin límites. Pro es un pago único opcional que suma audio, búsqueda en tu letra y exportar como texto.</span><span lang="en">Shapes are free, with no limits. Pro is an optional one-time purchase that adds audio, handwriting search and text export.</span><span lang="fr">Les formes sont gratuites et sans limite. Pro est un achat unique facultatif qui ajoute l'audio, la recherche dans l'écriture et l'export en texte.</span></p>
+      </div>
+      <a class="boton" href="/precios/"><span lang="es">Ver precios</span><span lang="en">See pricing</span><span lang="fr">Voir les tarifs</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="fn-bloque" aria-labelledby="relacionadas">
+  <div class="contenedor">
+    <h2 id="relacionadas"><span lang="es">Relacionadas</span><span lang="en">Related</span><span lang="fr">Voir aussi</span></h2>
+    <div class="tarjeta-funciones">
+      <a class="tarjeta-funcion" href="/funciones/escritura/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-pluma"/></svg></span>
+        <strong><span lang="es">Escritura</span><span lang="en">Writing</span><span lang="fr">Écriture</span></strong>
+        <span><span lang="es">Tinta sin retardo, plumas a tu medida y una goma que entiende lo que quieres borrar.</span><span lang="en">Lag-free ink, pens tuned to you and an eraser that knows what you mean to erase.</span><span lang="fr">Une encre sans latence, des stylos à votre mesure et une gomme qui comprend ce que vous voulez effacer.</span></span>
+      </a>
+      <a class="tarjeta-funcion" href="/funciones/lapiz/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-lapiz"/></svg></span>
+        <strong><span lang="es">Lápiz</span><span lang="en">Pen</span><span lang="fr">Stylet</span></strong>
+        <span><span lang="es">Funciona con lápices activos de cualquier marca, con doble toque y botón.</span><span lang="en">Works with active pens from any brand, with double-tap and button.</span><span lang="fr">Compatible avec les stylets actifs de toutes marques, avec double tape et bouton.</span></span>
+      </a>
+      <a class="tarjeta-funcion" href="/funciones/lazo/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-lazo"/></svg></span>
+        <strong><span lang="es">Lazo</span><span lang="en">Lasso</span><span lang="fr">Lasso</span></strong>
+        <span><span lang="es">Rodea un esquema y llévatelo a otro sitio, a otra página o a otra nota.</span><span lang="en">Loop around a diagram and take it anywhere: another spot, page or note.</span><span lang="fr">Entourez un schéma et emportez-le ailleurs, sur une autre page ou dans une autre note.</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cierre">
+  <div class="contenedor">
+    <h2><span lang="es">Pruébalo en cuanto salga.</span><span lang="en">Try it as soon as it's out.</span><span lang="fr">Essayez-le dès sa sortie.</span></h2>
+    <p class="entradilla"><span lang="es">SwiftPen llega pronto a Google Play. Déjanos tu email y te avisamos.</span><span lang="en">SwiftPen is coming soon to Google Play. Leave your email and we'll let you know.</span><span lang="fr">SwiftPen arrive bientôt sur Google Play. Laissez votre e-mail et nous vous préviendrons.</span></p>
+    <div class="acciones">
+      <a class="boton principal" href="/#avisame" data-umami-event="ir-al-aviso" data-umami-event-lugar="funcion-formas"><span lang="es">Avísame cuando salga</span><span lang="en">Notify me at launch</span><span lang="fr">Prévenez-moi à la sortie</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!--#pie-->
+
+</body>
+</html>
