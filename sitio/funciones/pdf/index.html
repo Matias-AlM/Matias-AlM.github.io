@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es" data-lang="es" data-titulo-es="PDF · Funciones | SwiftPen" data-titulo-en="PDF · Features | SwiftPen" data-titulo-fr="PDF · Fonctions | SwiftPen">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PDF · Funciones | SwiftPen</title>
+<meta name="description" content="Importa un PDF en SwiftPen y escribe encima como en papel: subraya, dibuja, toca sus enlaces, mantén el tamaño de cada página y expórtalo con tus anotaciones.">
+<link rel="icon" href="/favicon.png">
+<link rel="canonical" href="https://getswiftpen.com/funciones/pdf/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SwiftPen">
+<meta property="og:title" content="PDF · Funciones | SwiftPen">
+<meta property="og:url" content="https://getswiftpen.com/funciones/pdf/">
+<meta property="og:image" content="https://getswiftpen.com/img/bento/pdf-es-claro-1600.webp">
+<link rel="preload" href="/assets/fuentes/mona-sans-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css?v=3">
+<link rel="stylesheet" href="/assets/funciones.css?v=1">
+<script src="/assets/idioma.js"></script>
+<!-- Estadisticas sin cookies ni datos personales (ver la politica de privacidad). Solo en getswiftpen.com: las vistas previas y las pruebas locales no cuentan. Sin la parte ?... de la direccion. -->
+<script defer src="https://cloud.umami.is/script.js" data-website-id="8e72a64d-fc98-425b-8b24-4017cd4c6f43" data-domains="getswiftpen.com" data-exclude-search="true" data-do-not-track="true"></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-imagen" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></symbol>
+  <symbol id="i-plantilla" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></symbol>
+  <symbol id="i-lupa" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+</svg>
+
+<!--#barra funciones-->
+
+<main>
+
+<header class="cabecera-pagina cabecera-aurora">
+  <div class="contenedor">
+    <nav class="migas" aria-label="Migas"><a href="/funciones/"><span lang="es">Funciones</span><span lang="en">Features</span><span lang="fr">Fonctions</span></a><span aria-current="page"><span lang="es">PDF</span><span lang="en">PDF</span><span lang="fr">PDF</span></span></nav>
+    <p class="etiqueta"><span lang="es">PDF</span><span lang="en">PDF</span><span lang="fr">PDF</span></p>
+    <h1><span lang="es">Escribe encima de tus PDF.</span><span lang="en">Write right on your PDFs.</span><span lang="fr">Écrivez directement sur vos PDF.</span></h1>
+    <p class="entradilla"><span lang="es">Importa un PDF y anótalo como en papel: escribe, subraya y dibuja, y cada página conserva su propio tamaño.</span><span lang="en">Import a PDF and mark it up like on paper: write, highlight and draw, and each page keeps its own size.</span><span lang="fr">Importez un PDF et annotez-le comme sur papier : écrivez, surlignez et dessinez, et chaque page garde son propre format.</span></p>
+    <figure class="cabecera-imagen">
+      <picture lang="es">
+        <source media="(prefers-color-scheme: dark)" srcset="/img/bento/pdf-es-oscuro-800.webp 800w, /img/bento/pdf-es-oscuro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw">
+        <img src="/img/bento/pdf-es-claro-800.webp" srcset="/img/bento/pdf-es-claro-800.webp 800w, /img/bento/pdf-es-claro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw" width="1600" height="1051" loading="lazy" alt="Un PDF anotado a mano en SwiftPen.">
+      </picture>
+      <picture lang="en">
+        <source media="(prefers-color-scheme: dark)" srcset="/img/bento/pdf-en-oscuro-800.webp 800w, /img/bento/pdf-en-oscuro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw">
+        <img src="/img/bento/pdf-en-claro-800.webp" srcset="/img/bento/pdf-en-claro-800.webp 800w, /img/bento/pdf-en-claro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw" width="1600" height="1051" loading="lazy" alt="A PDF annotated by hand in SwiftPen.">
+      </picture>
+      <picture lang="fr">
+        <source media="(prefers-color-scheme: dark)" srcset="/img/bento/pdf-en-oscuro-800.webp 800w, /img/bento/pdf-en-oscuro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw">
+        <img src="/img/bento/pdf-en-claro-800.webp" srcset="/img/bento/pdf-en-claro-800.webp 800w, /img/bento/pdf-en-claro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw" width="1600" height="1051" loading="lazy" alt="Un PDF annoté à la main dans SwiftPen.">
+      </picture>
+    </figure>
+  </div>
+</header>
+
+<section class="fn-bloque" aria-labelledby="como-se-usa">
+  <div class="contenedor">
+    <h2 id="como-se-usa"><span lang="es">Cómo se usa</span><span lang="en">How it works</span><span lang="fr">Comment ça marche</span></h2>
+    <ol class="fn-pasos">
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">1</span>
+          <h3><span lang="es">Importa tu PDF</span><span lang="en">Import your PDF</span><span lang="fr">Importez votre PDF</span></h3>
+          <p><span lang="es">Añade el PDF a una nota. Cada página mantiene el tamaño de su propio papel y su orientación, sin recortes ni márgenes de un A4.</span><span lang="en">Add the PDF to a note. Each page keeps the size of its own paper and its orientation, with no A4 cropping or margins.</span><span lang="fr">Ajoutez le PDF à une note. Chaque page garde le format de son propre papier et son orientation, sans recadrage ni marges A4.</span></p>
+        </div>
+        <figure class="fn-captura"><div class="captura-pendiente" style="--proporcion: 1600 / 1051" role="img" aria-label="Captura pendiente: pdf-importar"><span>captura: pdf-importar</span></div></figure>
+      </li>
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">2</span>
+          <h3><span lang="es">Escribe, subraya y dibuja</span><span lang="en">Write, highlight and draw</span><span lang="fr">Écrivez, surlignez et dessinez</span></h3>
+          <p><span lang="es">Anota con tus plumas y el resaltador como en cualquier nota. Los enlaces del PDF funcionan, también tocándolos con el lápiz (ajuste opcional).</span><span lang="en">Mark it up with your pens and the highlighter as in any note. PDF links work, even when tapped with the pen (optional setting).</span><span lang="fr">Annotez avec vos stylos et le surligneur comme dans n'importe quelle note. Les liens du PDF fonctionnent, même touchés au stylet (réglage facultatif).</span></p>
+        </div>
+        <figure class="fn-captura"><div class="captura-pendiente" style="--proporcion: 1600 / 1051" role="img" aria-label="Captura pendiente: pdf-anotar"><span>captura: pdf-anotar</span></div></figure>
+      </li>
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">3</span>
+          <h3><span lang="es">Ordena y expórtalo</span><span lang="en">Organize and export it</span><span lang="fr">Organisez et exportez-le</span></h3>
+          <p><span lang="es">Desde la vista de todas las páginas puedes seleccionar varias a la vez o quitar el PDF entero. Al terminar, expórtalo a PDF o a imagen con tus anotaciones.</span><span lang="en">From the all-pages view you can select several pages at once or remove the whole PDF. When you're done, export it to PDF or image with your notes on it.</span><span lang="fr">Depuis la vue de toutes les pages, vous pouvez en sélectionner plusieurs à la fois ou retirer le PDF entier. Une fois terminé, exportez-le en PDF ou en image avec vos annotations.</span></p>
+        </div>
+        <figure class="fn-captura"><div class="captura-pendiente" style="--proporcion: 1600 / 1051" role="img" aria-label="Captura pendiente: pdf-exportar"><span>captura: pdf-exportar</span></div></figure>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="fn-bloque" aria-labelledby="detalles">
+  <div class="contenedor">
+    <h2 id="detalles"><span lang="es">Los detalles</span><span lang="en">The details</span><span lang="fr">Les détails</span></h2>
+    <ul class="fn-detalles">
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Escribe, subraya y dibuja sobre cualquier PDF.</span><span lang="en">Write, highlight and draw on any PDF.</span><span lang="fr">Écrivez, surlignez et dessinez sur n'importe quel PDF.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Cada página conserva el tamaño de su propio papel y su orientación.</span><span lang="en">Each page keeps its own paper size and orientation.</span><span lang="fr">Chaque page garde le format de son propre papier et son orientation.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Los PDF apaisados dejan pasar de página.</span><span lang="en">Landscape PDFs let you turn pages.</span><span lang="fr">Les PDF au format paysage permettent de tourner les pages.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Los hipervínculos se pueden tocar, y también abrir con el lápiz (ajuste opcional).</span><span lang="en">Hyperlinks are tappable, and can also be opened with the pen (optional setting).</span><span lang="fr">Les hyperliens sont cliquables, et peuvent aussi s'ouvrir au stylet (réglage facultatif).</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Los enlaces internos, como un índice, funcionan en Android 15 y 16.</span><span lang="en">Internal links, like a table of contents, work on Android 15 and 16.</span><span lang="fr">Les liens internes, comme une table des matières, fonctionnent sur Android 15 et 16.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Los enlaces se ven con su color original.</span><span lang="en">Links show their original color.</span><span lang="fr">Les liens affichent leur couleur d'origine.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Los PDF pesados cargan más rápido, sin parpadeos ni hojas en blanco al desplazarte.</span><span lang="en">Heavy PDFs load faster, with no flicker or blank sheets while you scroll.</span><span lang="fr">Les PDF lourds se chargent plus vite, sans scintillement ni feuilles blanches lors du défilement.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">En la vista de todas las páginas, selecciona varias a la vez o quita un PDF entero.</span><span lang="en">In the all-pages view, select several pages at once or remove a whole PDF.</span><span lang="fr">Dans la vue de toutes les pages, sélectionnez plusieurs pages à la fois ou retirez un PDF entier.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Exporta a PDF o a imagen, con tus anotaciones.</span><span lang="en">Export to PDF or image, with your notes on it.</span><span lang="fr">Exportez en PDF ou en image, avec vos annotations.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="fn-bloque" aria-labelledby="gratis-o-pro">
+  <div class="contenedor">
+    <div class="fn-banda">
+      <div>
+        <h2 id="gratis-o-pro"><span lang="es">¿Gratis o Pro?</span><span lang="en">Free or Pro?</span><span lang="fr">Gratuit ou Pro ?</span></h2>
+        <p><span lang="es">Anotar PDF es gratis y sin límites. Pro es un pago único opcional que suma audio, búsqueda en tu letra y exportar como texto.</span><span lang="en">Marking up PDFs is free, with no limits. Pro is an optional one-time purchase that adds audio, handwriting search and text export.</span><span lang="fr">Annoter des PDF est gratuit et sans limite. Pro est un achat unique facultatif qui ajoute l'audio, la recherche dans l'écriture et l'export en texte.</span></p>
+      </div>
+      <a class="boton" href="/precios/"><span lang="es">Ver precios</span><span lang="en">See pricing</span><span lang="fr">Voir les tarifs</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="fn-bloque" aria-labelledby="relacionadas">
+  <div class="contenedor">
+    <h2 id="relacionadas"><span lang="es">Relacionadas</span><span lang="en">Related</span><span lang="fr">Voir aussi</span></h2>
+    <div class="tarjeta-funciones">
+      <a class="tarjeta-funcion" href="/funciones/imagenes-y-texto/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-imagen"/></svg></span>
+        <strong><span lang="es">Imágenes, texto y stickers</span><span lang="en">Images, text and stickers</span><span lang="fr">Images, texte et stickers</span></strong>
+        <span><span lang="es">Mezcla la tinta con fotos, cajas de texto y stickers.</span><span lang="en">Mix ink with photos, text boxes and stickers.</span><span lang="fr">Mêlez l'encre aux photos, aux zones de texte et aux stickers.</span></span>
+      </a>
+      <a class="tarjeta-funcion" href="/funciones/papel/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-plantilla"/></svg></span>
+        <strong><span lang="es">Papel</span><span lang="en">Paper</span><span lang="fr">Papier</span></strong>
+        <span><span lang="es">Plantillas, tamaños y páginas a tu medida, sin límite de notas.</span><span lang="en">Templates, sizes and pages your way, with no limit on notes.</span><span lang="fr">Modèles, formats et pages à votre mesure, sans limite de notes.</span></span>
+      </a>
+      <a class="tarjeta-funcion" href="/funciones/busqueda/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-lupa"/></svg></span>
+        <strong><span lang="es">Búsqueda</span><span lang="en">Search</span><span lang="fr">Recherche</span> <span class="pro">PRO</span></strong>
+        <span><span lang="es">Encuentra lo que escribiste a mano, sin salir del dispositivo.</span><span lang="en">Find what you wrote by hand, without it leaving your device.</span><span lang="fr">Retrouvez ce que vous avez écrit à la main, sans quitter l'appareil.</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cierre">
+  <div class="contenedor">
+    <h2><span lang="es">Pruébalo en cuanto salga.</span><span lang="en">Try it as soon as it's out.</span><span lang="fr">Essayez-le dès sa sortie.</span></h2>
+    <p class="entradilla"><span lang="es">SwiftPen llega pronto a Google Play. Déjanos tu email y te avisamos.</span><span lang="en">SwiftPen is coming soon to Google Play. Leave your email and we'll let you know.</span><span lang="fr">SwiftPen arrive bientôt sur Google Play. Laissez votre e-mail et nous vous préviendrons.</span></p>
+    <div class="acciones">
+      <a class="boton principal" href="/#avisame" data-umami-event="ir-al-aviso" data-umami-event-lugar="funcion-pdf"><span lang="es">Avísame cuando salga</span><span lang="en">Notify me at launch</span><span lang="fr">Prévenez-moi à la sortie</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!--#pie-->
+
+</body>
+</html>
