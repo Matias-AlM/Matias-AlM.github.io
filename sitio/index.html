@@ -20,7 +20,7 @@
 <link rel="icon" href="/favicon.png">
 <link rel="preload" href="/assets/fuentes/mona-sans-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/site.css?v=4">
-<link rel="stylesheet" href="/assets/home.css?v=6">
+<link rel="stylesheet" href="/assets/home.css?v=7">
 <script src="/assets/idioma.js?v=2"></script>
 <!-- Estadisticas sin cookies ni datos personales (ver la politica de privacidad). Solo en getswiftpen.com: las vistas previas y las pruebas locales no cuentan. Sin la parte ?... de la direccion. -->
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8e72a64d-fc98-425b-8b24-4017cd4c6f43" data-domains="getswiftpen.com" data-exclude-search="true" data-do-not-track="true"></script>
@@ -201,20 +201,36 @@
 
 <section id="precio" class="h-precio">
   <div class="contenedor">
-    <div class="h-franja aparece">
-      <div>
-        <p class="etiqueta"><span lang="es">Precio</span><span lang="en">Pricing</span><span lang="fr">Tarifs</span></p>
-        <h2><span lang="es">Paga una vez, o nunca.</span><span lang="en">Pay once, or never.</span><span lang="fr">Payez une fois, ou jamais.</span></h2>
-      </div>
-      <dl class="h-cifras">
-        <div><dt>SwiftPen</dt><dd class="h-cifra"><span lang="es">0 €</span><span lang="en">$0</span><span lang="fr">0 €</span></dd><dd><span lang="es">para siempre</span><span lang="en">forever</span><span lang="fr">pour toujours</span></dd></div>
-        <div><dt><span class="degradado">SwiftPen Pro</span></dt><dd class="h-cifra"><span lang="es">9,99 €</span><span lang="en">$9.99</span><span lang="fr">9,99 €</span></dd><dd><span lang="es">pago único opcional</span><span lang="en">optional one-time</span><span lang="fr">achat unique facultatif</span></dd></div>
-      </dl>
-      <p class="h-enlaces">
-        <a href="/precios/" data-umami-event="ver-precios" data-umami-event-lugar="portada"><span lang="es">Qué incluye cada uno →</span><span lang="en">What each includes →</span><span lang="fr">Ce que comprend chaque formule →</span></a>
-        <a id="comparada" href="/precios/#comparada" data-umami-event="ver-comparativa" data-umami-event-lugar="portada"><span lang="es">Ver la comparación con otras apps →</span><span lang="en">See how it compares with other apps →</span><span lang="fr">Comparer avec d'autres applis →</span></a>
-      </p>
+    <div class="h-cabecera">
+      <p class="etiqueta"><span lang="es">Precio</span><span lang="en">Pricing</span><span lang="fr">Tarifs</span></p>
+      <h2><span lang="es">Paga una vez, o nunca.</span><span lang="en">Pay once, or never.</span><span lang="fr">Payez une fois, ou jamais.</span></h2>
     </div>
+    <div class="precios h-planes">
+      <div class="plan aparece">
+        <p class="etiqueta"><span lang="es">SwiftPen</span><span lang="en">SwiftPen</span><span lang="fr">SwiftPen</span></p>
+        <div class="cuanto"><span lang="es">Gratis</span><span lang="en">Free</span><span lang="fr">Gratuit</span><span class="unidad" lang="es">para siempre</span><span class="unidad" lang="en">forever</span><span class="unidad" lang="fr">pour toujours</span></div>
+        <ul>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Notas ilimitadas</span><span lang="en">Unlimited notes</span><span lang="fr">Notes illimitées</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Todas las plantillas de papel</span><span lang="en">Every paper template</span><span lang="fr">Tous les modèles de papier</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">PDF, fotos y hojas escaneadas</span><span lang="en">PDFs, photos and scanned pages</span><span lang="fr">PDF, photos et pages numérisées</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Lazo, formas y lienzo infinito</span><span lang="en">Lasso, shapes and the infinite canvas</span><span lang="fr">Lasso, formes et canevas infini</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Sincronización con WebDAV o Google Drive</span><span lang="en">Sync with WebDAV or Google Drive</span><span lang="fr">Synchronisation avec WebDAV ou Google Drive</span></li>
+        </ul>
+      </div>
+      <div class="plan destacado aparece">
+        <p class="etiqueta"><span class="degradado">SwiftPen Pro</span></p>
+        <span class="pro">PRO</span>
+        <div class="cuanto"><span lang="es">9,99 €</span><span lang="en">$9.99</span><span lang="fr">9,99 €</span><span class="unidad" lang="es">pago único opcional</span><span class="unidad" lang="en">optional one-time</span><span class="unidad" lang="fr">achat unique facultatif</span></div>
+        <ul>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Todo lo gratis, y además:</span><span lang="en">Everything in Free, plus:</span><span lang="fr">Tout le gratuit, et en plus :</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Audio sincronizado con lo que escribes (las 3 primeras grabaciones, gratis)</span><span lang="en">Audio synced to what you write (your first 3 recordings are free)</span><span lang="fr">Audio synchronisé avec ce que vous écrivez (vos 3 premiers enregistrements sont gratuits)</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Búsqueda en tu letra</span><span lang="en">Handwriting search</span><span lang="fr">Recherche dans votre écriture</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Exportar lo escrito como texto ordenado</span><span lang="en">Export handwriting as tidy text</span><span lang="fr">Export de votre écriture sous forme de texte propre</span></li>
+        </ul>
+        <p class="pie"><span lang="es">Sin suscripciones: pagas una vez y es tuyo. Impuestos incluidos; en Google Play el precio puede variar según el país.</span><span lang="en">No subscriptions: pay once and it's yours. Taxes included; the price on Google Play may vary by country.</span><span lang="fr">Pas d'abonnement : vous payez une fois et c'est à vous. Taxes comprises ; sur Google Play, le prix peut varier selon le pays.</span></p>
+      </div>
+    </div>
+    <p id="comparada" class="h-mas"><a href="/precios/" data-umami-event="ver-precios" data-umami-event-lugar="portada"><span lang="es">Ver precios y comparación →</span><span lang="en">See pricing and comparison →</span><span lang="fr">Voir les tarifs et le comparatif →</span></a></p>
   </div>
 </section>
 

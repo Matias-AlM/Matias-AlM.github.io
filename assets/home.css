@@ -46,24 +46,11 @@ html.js .h-pista::-webkit-scrollbar { display: none; }
 
 .h-mas { margin: 32px 0 0; text-align: center; }
 
-/* Franja de precio: una tarjeta con las dos cifras y los enlaces a /precios/. */
+/* Franja de precio: las mismas tarjetas que /precios/ (.precios y .plan de site.css). */
 .h-precio { padding-top: 0; }
-.h-franja {
-  display: grid; gap: 24px 40px; align-items: center; padding: 32px 28px;
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radio-grande); box-shadow: var(--shadow-suave);
-}
-.h-franja h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
-.h-cifras { display: flex; flex-wrap: wrap; gap: 16px 40px; margin: 0; }
-.h-cifras div { display: flex; flex-direction: column; }
-.h-cifras dt { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-.h-cifras .h-cifra { margin: 2px 0 0; color: var(--text);font-size: clamp(2rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
-.h-cifras dd { margin: 0; color: var(--muted); font-size: 15px; }
-.h-enlaces { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 0; font-weight: 600; }
-.h-enlaces a { display: inline-flex; align-items: center; min-height: 44px; }
-@media (min-width: 900px) {
-  .h-franja { grid-template-columns: 1fr auto; padding: 40px 48px; }
-  .h-enlaces { grid-column: 1 / -1; }
-}
+.h-planes { margin-top: 32px; }
+.h-planes .plan { padding: 28px; }
+.h-planes .plan .pro { position: absolute; top: 24px; right: 24px; margin: 0; }
 
 .h-preguntas .preguntas { margin-inline: auto; }
 .h-preguntas .h-cabecera { margin-bottom: 0; }
