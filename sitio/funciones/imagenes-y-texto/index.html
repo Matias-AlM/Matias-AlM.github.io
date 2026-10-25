@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es" data-lang="es" data-titulo-es="Imágenes y texto · Funciones | SwiftPen" data-titulo-en="Images & text · Features | SwiftPen" data-titulo-fr="Images et texte · Fonctions | SwiftPen">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Imágenes y texto · Funciones | SwiftPen</title>
+<meta name="description" content="Mezcla tu tinta con fotos, escáner, cajas de texto con formato y stickers en SwiftPen: recorta sobre la imagen, bloquéala con el candado y borra encima sin dañarla.">
+<link rel="icon" href="/favicon.png">
+<link rel="canonical" href="https://getswiftpen.com/funciones/imagenes-y-texto/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SwiftPen">
+<meta property="og:title" content="Imágenes y texto · Funciones | SwiftPen">
+<meta property="og:url" content="https://getswiftpen.com/funciones/imagenes-y-texto/">
+<meta property="og:image" content="https://getswiftpen.com/img/portada.jpg?v=3">
+<link rel="preload" href="/assets/fuentes/mona-sans-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css?v=3">
+<link rel="stylesheet" href="/assets/funciones.css?v=1">
+<script src="/assets/idioma.js"></script>
+<!-- Estadisticas sin cookies ni datos personales (ver la politica de privacidad). Solo en getswiftpen.com: las vistas previas y las pruebas locales no cuentan. Sin la parte ?... de la direccion. -->
+<script defer src="https://cloud.umami.is/script.js" data-website-id="8e72a64d-fc98-425b-8b24-4017cd4c6f43" data-domains="getswiftpen.com" data-exclude-search="true" data-do-not-track="true"></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></symbol>
+  <symbol id="i-lazo" viewBox="0 0 24 24"><path d="M5.2 16.8C3.2 15.4 2 13.8 2 12c0-4.4 4.5-8 10-8s10 3.6 10 8-4.5 8-10 8c-1.4 0-2.7-.2-3.9-.6"/><circle cx="6.5" cy="18" r="2"/><path d="M5.6 19.8c-.3 1-1 1.7-2 2.2"/></symbol>
+  <symbol id="i-lapiz" viewBox="0 0 24 24"><path d="M17 3a2.8 2.8 0 0 1 4 4L7.5 20.5 2 22l1.5-5.5z"/><path d="m15 5 4 4"/></symbol>
+</svg>
+
+<!--#barra funciones-->
+
+<main>
+
+<header class="cabecera-pagina cabecera-aurora">
+  <div class="contenedor">
+    <nav class="migas" aria-label="Migas"><a href="/funciones/"><span lang="es">Funciones</span><span lang="en">Features</span><span lang="fr">Fonctions</span></a><span aria-current="page"><span lang="es">Imágenes y texto</span><span lang="en">Images &amp; text</span><span lang="fr">Images et texte</span></span></nav>
+    <p class="etiqueta"><span lang="es">Imágenes y texto</span><span lang="en">Images &amp; text</span><span lang="fr">Images et texte</span></p>
+    <h1><span lang="es">Imágenes, texto y stickers.</span><span lang="en">Images, text and stickers.</span><span lang="fr">Images, texte et stickers.</span></h1>
+    <p class="entradilla"><span lang="es">Mezcla la tinta con fotos, cajas de texto y stickers, todo en la misma nota.</span><span lang="en">Mix ink with photos, text boxes and stickers, all in the same note.</span><span lang="fr">Mêlez l'encre aux photos, aux zones de texte et aux stickers, le tout dans la même note.</span></p>
+    <div class="cabecera-imagen captura-pendiente" style="--proporcion: 1600 / 1051" role="img" aria-label="Captura pendiente: imagenes-y-texto-cabecera"><span>captura: imagenes-y-texto-cabecera</span></div>
+  </div>
+</header>
+
+<section class="fn-bloque" aria-labelledby="como-se-usa">
+  <div class="contenedor">
+    <h2 id="como-se-usa"><span lang="es">Cómo se usa</span><span lang="en">How it works</span><span lang="fr">Comment ça marche</span></h2>
+    <ol class="fn-pasos">
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">1</span>
+          <h3><span lang="es">Añade una foto y recórtala</span><span lang="en">Add a photo and crop it</span><span lang="fr">Ajoutez une photo et recadrez-la</span></h3>
+          <p><span lang="es">Añade fotos o escanea una hoja con la cámara. Recorta sobre la propia imagen con la barra flotante: rectángulo, óvalo o libre.</span><span lang="en">Add photos or scan a sheet with the camera. Crop right on the image with the floating bar: rectangle, oval or freeform.</span><span lang="fr">Ajoutez des photos ou numérisez une feuille avec l'appareil photo. Recadrez directement sur l'image avec la barre flottante : rectangle, ovale ou libre.</span></p>
+        </div>
+        <figure class="fn-captura"><div class="captura-pendiente" style="--proporcion: 1600 / 1051" role="img" aria-label="Captura pendiente: imagen-recorte"><span>captura: imagen-recorte</span></div></figure>
+      </li>
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">2</span>
+          <h3><span lang="es">Escribe con formato</span><span lang="en">Write with formatting</span><span lang="fr">Écrivez avec mise en forme</span></h3>
+          <p><span lang="es">Crea una caja de texto y dale formato: el color, el tamaño y las fuentes están en la barra fija de arriba. Al exportar a PDF, el texto sigue siendo texto real.</span><span lang="en">Create a text box and format it: color, size and fonts are in the fixed bar at the top. When you export to PDF, the text stays real text.</span><span lang="fr">Créez une zone de texte et mettez-la en forme : la couleur, la taille et les polices sont dans la barre fixe du haut. À l'export en PDF, le texte reste du vrai texte.</span></p>
+        </div>
+        <figure class="fn-captura"><div class="captura-pendiente" style="--proporcion: 1600 / 1051" role="img" aria-label="Captura pendiente: texto-formato"><span>captura: texto-formato</span></div></figure>
+      </li>
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">3</span>
+          <h3><span lang="es">Decora con stickers</span><span lang="en">Decorate with stickers</span><span lang="fr">Décorez avec des stickers</span></h3>
+          <p><span lang="es">Los stickers son una herramienta aparte, con los 8 recientes a mano y el menú completo al tocarla otra vez.</span><span lang="en">Stickers are a tool of their own, with the 8 most recent at hand and the full menu when you tap it again.</span><span lang="fr">Les stickers sont un outil à part, avec les 8 récents sous la main et le menu complet en le touchant à nouveau.</span></p>
+        </div>
+        <figure class="fn-captura"><div class="captura-pendiente" style="--proporcion: 1600 / 1051" role="img" aria-label="Captura pendiente: stickers"><span>captura: stickers</span></div></figure>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="fn-bloque" aria-labelledby="detalles">
+  <div class="contenedor">
+    <h2 id="detalles"><span lang="es">Los detalles</span><span lang="en">The details</span><span lang="fr">Les détails</span></h2>
+    <ul class="fn-detalles">
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Añade fotos o escanea una hoja con la cámara.</span><span lang="en">Add photos or scan a sheet with the camera.</span><span lang="fr">Ajoutez des photos ou numérisez une feuille avec l'appareil photo.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Recorte sobre la propia imagen, con barra flotante: rectángulo, óvalo o libre.</span><span lang="en">Crop right on the image, with a floating bar: rectangle, oval or freeform.</span><span lang="fr">Recadrage directement sur l'image, avec barre flottante : rectangle, ovale ou libre.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Al reabrir un recorte ves la imagen original entera.</span><span lang="en">Reopening a crop shows the whole original image.</span><span lang="fr">En rouvrant un recadrage, vous voyez l'image originale entière.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">«Recortar» y el candado, directos en la barra de selección.</span><span lang="en">"Crop" and the lock, right in the selection bar.</span><span lang="fr">« Recadrer » et le verrou, directement dans la barre de sélection.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">El candado fija una imagen para escribir encima sin moverla.</span><span lang="en">The lock fixes an image so you can write over it without moving it.</span><span lang="fr">Le verrou fixe une image pour écrire dessus sans la déplacer.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">La goma tapa partes de una imagen sin estropearla.</span><span lang="en">The eraser hides parts of an image without damaging it.</span><span lang="fr">La gomme masque des parties d'une image sans l'abîmer.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Cajas de texto con formato: muévelas y estíralas incluso mientras las editas.</span><span lang="en">Formatted text boxes: move and stretch them even while editing.</span><span lang="fr">Zones de texte mises en forme : déplacez-les et étirez-les même pendant la modification.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Al seleccionar una caja, una barra mínima la borra; duplicar, girar o bloquear, desde «···».</span><span lang="en">Select a box and a minimal bar lets you delete it; duplicate, rotate or lock from "···".</span><span lang="fr">En sélectionnant une zone, une barre minimale permet de la supprimer ; dupliquer, pivoter ou verrouiller, depuis « ··· ».</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Al pegar texto se crea una caja; la búsqueda y el .txt incluyen su texto.</span><span lang="en">Pasting text creates a box; search and the .txt include its text.</span><span lang="fr">Coller du texte crée une zone ; la recherche et le .txt incluent son texte.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Las cajas de texto se exportan a PDF con texto real.</span><span lang="en">Text boxes export to PDF as real text.</span><span lang="fr">Les zones de texte s'exportent en PDF avec du vrai texte.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="fn-bloque" aria-labelledby="gratis-o-pro">
+  <div class="contenedor">
+    <div class="fn-banda">
+      <div>
+        <h2 id="gratis-o-pro"><span lang="es">¿Gratis o Pro?</span><span lang="en">Free or Pro?</span><span lang="fr">Gratuit ou Pro ?</span></h2>
+        <p><span lang="es">Imágenes, texto y stickers son gratis y sin límites. Pro es un pago único opcional que suma audio, búsqueda en tu letra y exportar como texto.</span><span lang="en">Images, text and stickers are free, with no limits. Pro is an optional one-time purchase that adds audio, handwriting search and text export.</span><span lang="fr">Images, texte et stickers sont gratuits et sans limite. Pro est un achat unique facultatif qui ajoute l'audio, la recherche dans l'écriture et l'export en texte.</span></p>
+      </div>
+      <a class="boton" href="/precios/"><span lang="es">Ver precios</span><span lang="en">See pricing</span><span lang="fr">Voir les tarifs</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="fn-bloque" aria-labelledby="relacionadas">
+  <div class="contenedor">
+    <h2 id="relacionadas"><span lang="es">Relacionadas</span><span lang="en">Related</span><span lang="fr">Voir aussi</span></h2>
+    <div class="tarjeta-funciones">
+      <a class="tarjeta-funcion" href="/funciones/pdf/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-pdf"/></svg></span>
+        <strong><span lang="es">PDF</span><span lang="en">PDF</span><span lang="fr">PDF</span></strong>
+        <span><span lang="es">Importa un PDF y escribe encima como en papel.</span><span lang="en">Import a PDF and write on it like on paper.</span><span lang="fr">Importez un PDF et écrivez dessus comme sur papier.</span></span>
+      </a>
+      <a class="tarjeta-funcion" href="/funciones/lazo/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-lazo"/></svg></span>
+        <strong><span lang="es">Lazo</span><span lang="en">Lasso</span><span lang="fr">Lasso</span></strong>
+        <span><span lang="es">Rodea un esquema y llévatelo a otro sitio, a otra página o a otra nota.</span><span lang="en">Loop around a diagram and take it anywhere: another spot, page or note.</span><span lang="fr">Entourez un schéma et emportez-le ailleurs, sur une autre page ou dans une autre note.</span></span>
+      </a>
+      <a class="tarjeta-funcion" href="/funciones/escritura/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-lapiz"/></svg></span>
+        <strong><span lang="es">Escritura</span><span lang="en">Writing</span><span lang="fr">Écriture</span></strong>
+        <span><span lang="es">Tinta sin retardo, plumas a tu medida y una goma que entiende lo que quieres borrar.</span><span lang="en">Lag-free ink, pens tuned to you and an eraser that knows what you mean to erase.</span><span lang="fr">Une encre sans latence, des stylos à votre mesure et une gomme qui comprend ce que vous voulez effacer.</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cierre">
+  <div class="contenedor">
+    <h2><span lang="es">Pruébalo en cuanto salga.</span><span lang="en">Try it as soon as it's out.</span><span lang="fr">Essayez-le dès sa sortie.</span></h2>
+    <p class="entradilla"><span lang="es">SwiftPen llega pronto a Google Play. Déjanos tu email y te avisamos.</span><span lang="en">SwiftPen is coming soon to Google Play. Leave your email and we'll let you know.</span><span lang="fr">SwiftPen arrive bientôt sur Google Play. Laissez votre e-mail et nous vous préviendrons.</span></p>
+    <div class="acciones">
+      <a class="boton principal" href="/#avisame" data-umami-event="ir-al-aviso" data-umami-event-lugar="funcion-imagenes-y-texto"><span lang="es">Avísame cuando salga</span><span lang="en">Notify me at launch</span><span lang="fr">Prévenez-moi à la sortie</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!--#pie-->
+
+</body>
+</html>
