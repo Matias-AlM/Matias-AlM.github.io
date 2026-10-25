@@ -91,42 +91,28 @@
   }
 
   // ---------- Carrusel de funciones ----------
-  // .h-carrusel > .h-pista > .h-diapo (captura + texto); el JS anade debajo el boton de pausa. Sin JS la pista es un scroll horizontal con scroll-snap.
+  // .h-carrusel > .h-pista > .h-diapo (captura + texto); Sin JS la pista es un scroll horizontal con scroll-snap.
   // Con JS (clase .listo), al estilo de notability.com: la diapositiva actual centrada y las
   // vecinas asomando a los lados, mas pequenas (ESCALA) y atenuadas; se mueven con transform.
-  // Se cambia tocando una vecina, deslizando o con las flechas del teclado sobre el boton de pausa.
+  // Se cambia tocando una vecina, deslizando o con las flechas del teclado con el foco dentro.
   // Avanza solo cada AVANCE ms mientras esta en pantalla (cambiar a mano reinicia la cuenta);
   // en la diapositiva con video, cuando el video termina (empieza desde el principio al llegar),
-  // salvo con prefers-reduced-motion o con el foco del teclado dentro; el boton de pausa lo para y reanuda.
+  // salvo con prefers-reduced-motion o con el foco del teclado dentro; sin boton de pausa (WCAG 2.2.2), se para con el raton encima o con el dedo puesto.
   var AVANCE = 6000;
   var ESCALA = 0.72;
   var HUECO = 20;
   var TEXTOS_CARRUSEL = {
     region: { es: "Funciones", en: "Features", fr: "Fonctions" },
     diapo: { es: "diapositiva", en: "slide", fr: "diapositive" },
-    de: { es: "de", en: "of", fr: "sur" },
-    pausa: { es: "Detener el paso automático", en: "Stop automatic rotation", fr: "Arrêter le défilement automatique" },
-    play: { es: "Pasar solas las funciones", en: "Rotate features automatically", fr: "Faire défiler automatiquement" }
+    de: { es: "de", en: "of", fr: "sur" }
   };
 
   function iniciarCarrusel(carrusel) {
     var pista = carrusel.querySelector(".h-pista");
     var diapos = Array.prototype.slice.call(pista.querySelectorAll(".h-diapo"));
     var total = diapos.length;
-    var actual = 0, enVista = false, conFoco = false, detenido = sinMovimiento.matches, temporizador;
+    var actual = 0, enVista = false, conFoco = false, encima = false, detenido = sinMovimiento.matches, temporizador;
 
-    function boton(clase, d) {
-      var b = document.createElement("button");
-      b.type = "button";
-      b.className = clase;
-      b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + d + '"></path></svg>';
-      return b;
-    }
-    var pausa = boton("h-pausa", "");
-    var controles = document.createElement("div");
-    controles.className = "h-controles";
-    controles.appendChild(pausa);
-    pista.after(controles);
     pista.removeAttribute("tabindex");
     carrusel.classList.add("listo");
 
@@ -140,13 +126,6 @@
         d.setAttribute("aria-roledescription", TEXTOS_CARRUSEL.diapo[l]);
         d.setAttribute("aria-label", (i + 1) + " " + TEXTOS_CARRUSEL.de[l] + " " + total);
       });
-      pintarPausa();
-    }
-
-    function pintarPausa() {
-      var estado = detenido ? "play" : "pausa";
-      pausa.setAttribute("aria-label", TEXTOS_CARRUSEL[estado][idioma()]);
-      pausa.querySelector("path").setAttribute("d", ICONOS[estado]);
     }
 
     // Distancia circular de la diapositiva i a la actual: de -3 a 3 con 7 diapositivas.
@@ -185,7 +164,7 @@
 
     function programar() {
       clearTimeout(temporizador);
-      if (detenido || !enVista || conFoco) return;
+      if (detenido || !enVista || conFoco || encima) return;
       // Con el video en marcha se espera a que acabe ("ended"); parado, cuenta como una captura.
       var video = diapos[actual].querySelector("video");
       if (video && !video.paused) return;
@@ -196,28 +175,32 @@
     diapos.forEach(function (d, i) {
       var video = d.querySelector("video");
       if (!video) return;
-      video.addEventListener("ended", function () { if (i === actual && !detenido && enVista && !conFoco) mover(actual + 1); });
+      video.addEventListener("ended", function () { if (i === actual && !detenido && enVista && !conFoco && !encima) mover(actual + 1); });
       video.addEventListener("play", function () { if (i === actual) programar(); });
       video.addEventListener("pause", function () { if (i === actual) programar(); });
     });
-    pausa.addEventListener("click", function () { detenido = !detenido; pintarPausa(); programar(); });
-    pausa.addEventListener("keydown", function (e) {
+    carrusel.addEventListener("keydown", function (e) {
       if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
         e.preventDefault();
         mover(actual + (e.key === "ArrowRight" ? 1 : -1));
       }
     });
+    // Pausa con el raton encima o el dedo puesto; al soltar vuelve a contar.
+    carrusel.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") { encima = true; programar(); } });
+    carrusel.addEventListener("pointerleave", function () { encima = false; programar(); });
 
     // Deslizar con el dedo o el raton, o tocar una vecina para ir a ella. Se escucha en la
     // seccion porque las vecinas asoman fuera de la pista; vale si cae a la altura de la pista.
     var zona = carrusel.closest("section") || carrusel;
     var inicioX = null, inicioY = 0;
     zona.addEventListener("pointerdown", function (e) {
+      if (e.pointerType !== "mouse") { encima = true; programar(); }
       var caja = pista.getBoundingClientRect();
       inicioX = e.clientY >= caja.top && e.clientY <= caja.bottom ? e.clientX : null;
       inicioY = e.clientY;
     });
     zona.addEventListener("pointerup", function (e) {
+      if (e.pointerType !== "mouse") { encima = false; programar(); }
       if (inicioX === null) return;
       var dx = e.clientX - inicioX, dy = e.clientY - inicioY;
       inicioX = null;
@@ -225,7 +208,7 @@
       var vecina = Math.abs(dx) <= 8 && e.target.closest(".h-diapo.vecina");
       if (vecina) mover(diapos.indexOf(vecina));
     });
-    zona.addEventListener("pointercancel", function () { inicioX = null; });
+    zona.addEventListener("pointercancel", function () { inicioX = null; encima = false; programar(); });
     pista.querySelectorAll("img").forEach(function (img) { img.draggable = false; });
 
     carrusel.addEventListener("focusin", function (e) { conFoco = e.target.matches(":focus-visible"); programar(); });
