@@ -95,8 +95,9 @@ html[data-lang="en"] [lang="fr"]:not(html),
 html[data-lang="fr"] [lang="es"]:not(html),
 html[data-lang="fr"] [lang="en"]:not(html) { display: none !important; }
 
-.contenedor { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
-@media (min-width: 720px) { .contenedor { padding: 0 32px; } }
+.contenedor { max-width: 1520px; margin: 0 auto; padding: 0 20px; }
+@media (min-width: 720px) { .contenedor { padding: 0 24px; } }
+@media (min-width: 1100px) { .contenedor { padding: 0 32px; } }
 
 /* Barra de arriba */
 .barra {
