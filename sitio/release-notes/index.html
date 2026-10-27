@@ -11,36 +11,25 @@
 <meta property="og:title" content="Notas de actualización | SwiftPen">
 <meta property="og:url" content="https://getswiftpen.com/release-notes/">
 <meta property="og:image" content="https://getswiftpen.com/img/portada.jpg?v=3">
-<link rel="preload" href="/assets/fuentes/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css">
-<script src="/assets/idioma.js"></script>
+<link rel="preload" href="/assets/fuentes/mona-sans-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css?v=4">
+<!-- Las notas de cada version van por triplicado, una vez por idioma (ver
+     el comentario de mas abajo), y site.css oculta los idiomas inactivos.
+     Si esa hoja de estilos no llega a cargar (por ejemplo al previsualizar
+     sitio/ sin su assets/ al lado), que como minimo no se repita el texto
+     de las notas en los tres idiomas: por defecto solo se ve el espanol. -->
+<style>
+article[lang="en"], article[lang="fr"] { display: none; }
+html[data-lang="en"] article[lang="en"],
+html[data-lang="fr"] article[lang="fr"] { display: block; }
+</style>
+<script src="/assets/idioma.js?v=2"></script>
 <!-- Estadisticas sin cookies ni datos personales (ver la politica de privacidad). Solo en getswiftpen.com: las vistas previas y las pruebas locales no cuentan. Sin la parte ?... de la direccion. -->
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8e72a64d-fc98-425b-8b24-4017cd4c6f43" data-domains="getswiftpen.com" data-exclude-search="true" data-do-not-track="true"></script>
 </head>
 <body>
 
-<header class="barra">
-  <div class="contenedor">
-    <a class="marca" href="../" aria-label="SwiftPen">
-      <img class="claro" src="../img/wordmark-light.webp" alt="SwiftPen" width="680" height="185">
-      <img class="oscuro" src="../img/wordmark-dark.webp" alt="SwiftPen" width="680" height="185">
-    </a>
-    <button class="menu-boton" type="button" aria-expanded="false" aria-controls="menu"><span class="solo-lectores"><span lang="es">Menú</span><span lang="en">Menu</span><span lang="fr">Menu</span></span><svg class="menu-icono" viewBox="0 0 24 24" aria-hidden="true"><path class="a" d="M4 7h16"/><path class="b" d="M9 12h11"/><path class="c" d="M14 17h6"/></svg></button>
-    <div class="menu" id="menu">
-      <nav class="navegacion">
-        <a class="enlace" href="../"><span lang="es">Volver a SwiftPen</span><span lang="en">Back to SwiftPen</span><span lang="fr">Retour à SwiftPen</span></a>
-      </nav>
-      <div class="idioma-sel">
-        <button class="idioma-boton" type="button" aria-expanded="false" aria-controls="idioma-lista"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 3.9 5.7 3.9 9s-1.3 6.3-3.9 9c-2.6-2.7-3.9-5.7-3.9-9S9.4 5.7 12 3z"/></svg><span class="idioma-actual">ES</span><span class="solo-lectores"><span lang="es">Idioma</span><span lang="en">Language</span><span lang="fr">Langue</span></span></button>
-        <ul class="idioma-lista" id="idioma-lista">
-          <li><button type="button" data-idioma="es" aria-current="true">Español</button></li>
-          <li><button type="button" data-idioma="en" aria-current="false">English</button></li>
-          <li><button type="button" data-idioma="fr" aria-current="false">Français</button></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</header>
+<!--#barra novedades-->
 
 <main class="documento">
 
@@ -51,6 +40,140 @@
 
 <article lang="es">
 <!-- Una version nueva: copia el bloque <section class="novedad"> de abajo (en los dos idiomas), cambiale el numero (titulo y .version de la imagen), la fecha y las notas, y ponlo ARRIBA, justo despues de este comentario. Cada version lleva su propia imagen. -->
+<section class="novedad" id="v1-4-0">
+  <div class="novedad-cabecera">
+    <img src="../img/novedades-cabecera.jpg" alt="SwiftPen" width="1800" height="1013">
+    <div class="version" aria-hidden="true">Actualización 1.4.0</div>
+  </div>
+  <div class="novedad-cuerpo">
+<div class="version-titulo"><h2>SwiftPen 1.4.0</h2></div>
+<p class="fecha">25 de octubre de 2026</p>
+<p>SwiftPen 1.4.0 renueva todo su aspecto: iconos propios, menús y transiciones suaves, plantillas de planificación, portadas para tus notas y una introducción nueva.</p>
+<h3 class="etiqueta nov">Novedades</h3>
+<ul>
+  <li>Nuevo conjunto de iconos propio de SwiftPen y rediseño de la interfaz: menús, diálogos, avisos, interruptores y barras de progreso con el estilo de la app.</li>
+  <li>Portadas para tus notas: 12 diseños propios, una página de la propia nota o una foto tuya (Pro). La portada viaja con la nota y se sincroniza.</li>
+  <li>Pantalla de nota nueva: elige nombre, carpeta, papel y portada antes de empezar a escribir.</li>
+  <li>14 plantillas de planificación con texto (mapa mental, mensual, semanal, diario, tareas y hábitos) y un selector de plantilla nuevo, con Cancelar y Aplicar, que enseña cómo queda con cada tamaño y orientación.</li>
+  <li>Introducción nueva en seis pasos: idioma y tema, cómo escribes, papel, lo mejor de SwiftPen, sincronización y ajustes finales. Todo se puede saltar.</li>
+  <li>Vídeos de ayuda en las pistas de la barra, los stickers, las imágenes y las carpetas, y una pista breve la primera vez que usas cada herramienta. Puedes volver a verlas desde Ajustes &gt; Acerca de.</li>
+  <li>Diez formas nuevas en el menú de formas, varias de ellas reconocidas al dibujarlas a mano, y una curva que puedes doblar.</li>
+  <li>Selecciona tu letra y conviértela en una caja de texto con el botón Tt.</li>
+  <li>Exportar en un solo diálogo: PDF, imagen o texto (.txt o .md).</li>
+  <li>La grabación y los ajustes de la barra son herramientas de la barra, y la fila de opciones de la herramienta se puede plegar.</li>
+  <li>Menú de grabaciones rediseñado, con velocidad de reproducción y saltos de 10 segundos.</li>
+  <li>Sincronización: botón «Sincronizar ahora» en la nube, desliza hacia abajo en la biblioteca para sincronizar al momento, y el icono cambia de color según el estado.</li>
+  <li>Cada nota recuerda la hoja en la que te quedaste.</li>
+</ul>
+<h3 class="etiqueta mej">Mejoras</h3>
+<ul>
+  <li>Todo va más fluido: lo que aparece, desaparece o cambia de tamaño se acomoda suave, los menús se abren sin saltos ni sombras grises y un menú se cierra al volver a tocar su botón.</li>
+  <li>«Ajustar a la pantalla» es un zoom animado hacia el centro, y la píldora de zoom se desvanece cuando no mueves la hoja.</li>
+  <li>Grosor: botones − y + en todos los deslizadores, y la vista previa del grosor ya no depende del zoom.</li>
+  <li>Biblioteca con estilo Cuaderno y vista compacta, carpetas en dos tonos, Recientes con «Ver todas» y la fecha de la última apertura.</li>
+  <li>La app arranca más rápido y enseña tus notas antes de empezar a sincronizar; la pantalla de arranque lleva el logo nítido.</li>
+  <li>La interfaz se adapta a cada tamaño de pantalla, aprovecha mejor el móvil y funciona con la fuente o la pantalla aumentadas.</li>
+  <li>Fondo del editor renovado y, en el tema oscuro, la hoja se distingue mejor del fondo.</li>
+  <li>«Hacer hueco»: mantén pulsado y arrastra una barra con asa para abrir o cerrar espacio en la hoja.</li>
+  <li>La búsqueda dentro de la nota se ve con el estilo de la app y funciona mejor en horizontal y con fuente grande.</li>
+  <li>La búsqueda de la biblioteca filtra por todo, solo por nombre o por contenido (Pro).</li>
+  <li>Una nota que solo está en la nube y aún no tiene miniatura enseña una nube con una flecha de descarga.</li>
+</ul>
+<h3 class="etiqueta cor">Correcciones</h3>
+<ul>
+  <li>Abrir el diálogo de portada ya no cierra la app.</li>
+  <li>El botón del S Pen funciona en la Galaxy Tab S7.</li>
+  <li>La sincronización con Drive sube bien los cambios y explica los errores con claridad; cambiar la portada en dos dispositivos ya no duplica la nota.</li>
+  <li>El resaltador partido con la goma se ve igual que entero.</li>
+  <li>Un corazón o una nube dibujados a mano ya no se convierten en otra forma, y la estrella se reconoce dibujada de un solo trazo.</li>
+  <li>Hacer hueco ya no se cierra al desplazar o hacer zoom, y Atrás cierra primero el menú abierto.</li>
+  <li>Tocar otra vez la herramienta Texto ya no abre un panel vacío.</li>
+</ul>
+  </div>
+</section>
+<section class="novedad" id="v1-3-2">
+  <div class="novedad-cabecera">
+    <img src="../img/novedades-cabecera.jpg" alt="SwiftPen" width="1800" height="1013">
+    <div class="version" aria-hidden="true">Actualización 1.3.2</div>
+  </div>
+  <div class="novedad-cuerpo">
+<div class="version-titulo"><h2>SwiftPen 1.3.2</h2></div>
+<p class="fecha">20 de octubre de 2026</p>
+<p>Esta versión mejora la barra del editor en el móvil.</p>
+<h3 class="etiqueta mej">Mejoras</h3>
+<ul>
+  <li>La barra de herramientas del editor ya no se recorta en el móvil: todas las herramientas, incluida la goma, se alcanzan desplazándola.</li>
+  <li>Los colores y grosores también se desplazan, y el engranaje de ajustes queda dentro de la barra.</li>
+  <li>«Notas recientes» pasa al menú «…» del editor en el móvil.</li>
+  <li>La barra abajo queda solo para tablets; en el móvil siempre va arriba (tu preferencia guardada se conserva).</li>
+</ul>
+  </div>
+</section>
+<section class="novedad" id="v1-3-1">
+  <div class="novedad-cabecera">
+    <img src="../img/novedades-cabecera.jpg" alt="SwiftPen" width="1800" height="1013">
+    <div class="version" aria-hidden="true">Actualización 1.3.1</div>
+  </div>
+  <div class="novedad-cuerpo">
+<div class="version-titulo"><h2>SwiftPen 1.3.1</h2></div>
+<p class="fecha">19 de octubre de 2026</p>
+<p>Esta versión estrena el recorte de imagen sobre la propia imagen y los stickers como herramienta, y te deja ordenar las herramientas de la barra.</p>
+<h3 class="etiqueta nov">Novedades</h3>
+<ul>
+  <li>Recorte de imagen directamente sobre la imagen, con barra flotante (rectángulo, óvalo o libre); «Recortar» y el candado, directos en la barra de selección. Al reabrir un recorte ves la imagen original entera.</li>
+  <li>Stickers como herramienta propia, con los 8 recientes y el menú completo al tocarla otra vez.</li>
+  <li>Ajustes > Escritura > «Orden de las herramientas»: reordénalas arrastrando o con flechas, y restaura el orden original.</li>
+  <li>Engranaje de ajustes en cada herramienta (lápiz, resaltador, goma, formas y lazo) y botones +/- en los presets.</li>
+</ul>
+<h3 class="etiqueta mej">Mejoras</h3>
+<ul>
+  <li>La forma perfecta se activa con más facilidad y es más fiel al trazo; el resaltador conserva color, opacidad y grosor.</li>
+  <li>Lápiz de formas: rectas y flechas se seleccionan por la línea, un toque selecciona y deslizar dibuja, la estrella sale uniforme y puedes mantener las proporciones.</li>
+  <li>La muestra del grosor de la pluma usa el zoom real y cabe entera con el grosor máximo.</li>
+  <li>«Seleccionar» pasa a llamarse «Lazo» en la barra.</li>
+  <li>El carril lateral de Inicio respeta la barra de navegación.</li>
+  <li>Las miniaturas de la biblioteca aparecen mucho más rápido, también las de notas con lápiz o muy pesadas.</li>
+  <li>Los botones del editor responden visualmente al tocarlos.</li>
+  <li>El menú de tres puntos se cierra al volver a tocar el botón y sale por encima de los paneles flotantes.</li>
+  <li>Sincronización: «Sincronizar ahora» muestra su progreso y reintenta cuando Drive pide esperar; si Drive rechaza el acceso, la app lo explica y te deja reconectar, y «Desconectar» pide confirmación.</li>
+  <li>Sincronización: la nota abierta recibe los cambios de otro dispositivo en unos segundos sin cortar tu trazo, los cambios se suben poco después de guardar y los fallos de sincronización se ven en una lista.</li>
+</ul>
+<h3 class="etiqueta cor">Correcciones</h3>
+<ul>
+  <li>Traer una nota de la nube ya no pisa lo que guardaste mientras se descargaba.</li>
+  <li>El popup nativo de texto ya no tapa la barra de formato.</li>
+  <li>Los nombres vacíos se ven como «Sin título» y la fecha de la tarjeta tiene letra grande.</li>
+  <li>Stickers: la flecha curva ya no lleva pelota y un toque con Stickers pone un cuadrado con +.</li>
+  <li>Más estabilidad al guardar y abrir notas con muchísimos trazos: duplicarlos ya no congela la hoja ni deja la nota sin abrir.</li>
+</ul>
+  </div>
+</section>
+<section class="novedad" id="v1-3-0">
+  <div class="novedad-cabecera">
+    <img src="../img/novedades-cabecera.jpg" alt="SwiftPen" width="1800" height="1013">
+    <div class="version" aria-hidden="true">Actualización 1.3.0</div>
+  </div>
+  <div class="novedad-cuerpo">
+<div class="version-titulo"><h2>SwiftPen 1.3.0</h2></div>
+<p class="fecha">18 de octubre de 2026</p>
+<p>Esta versión estrena las cajas de texto, mejora mucho el lápiz y las imágenes, y deja la barra del editor donde tú quieras.</p>
+<h3 class="etiqueta nov">Novedades</h3>
+<ul>
+  <li>Cajas de texto en las notas: créalas, edítalas y expórtalas a PDF con texto real. Hay también un menú de stickers para insertar.</li>
+  <li>Mientras escribes, una barra fija reúne el formato (negrita, cursiva, subrayado, tachado), el mismo selector de color del lápiz y un menú de fuentes propio. El formato va solo a lo que sombreas.</li>
+  <li>Al seleccionar una caja, una barra mínima permite borrarla (y duplicarla, girarla o bloquearla desde «···»); el color, el tamaño y las fuentes están en la barra fija de arriba. Muévela y estírala incluso mientras la editas; al pegar texto se crea una caja, y la búsqueda y el .txt incluyen su texto.</li>
+  <li>El borrador tapa partes de una imagen sin estropearla, el recorte de imagen se hace en un panel y un candado claro bloquea las imágenes.</li>
+  <li>Lápiz de trazo lleno, estrella reconocida con vibración, grosor del trazo que se mantiene al escalar y, al mantener pulsado un acceso de grosor, se fija. Las formas tienen menú de tres puntos y el lazo, asa de giro y una barra que no la tapa.</li>
+  <li>Zoom rápido «Ajustar a la pantalla» (no aparece en el lienzo infinito), pellizco y scroll más finos, y puedes insertar espacio vertical en el lienzo infinito.</li>
+  <li>La barra del editor se puede mover abajo, hay un modo sin distracciones, más margen en las pills, y papel y tinta siguen el tema oscuro. Las notas recientes admiten fijadas, con miniaturas cuadradas, y tienen botón en el editor.</li>
+  <li>Carpetas: elige color al crearlas, «Mover a carpeta» funciona como un explorador, en vertical arrastras una nota a una carpeta y el diálogo de nueva carpeta es nuevo.</li>
+</ul>
+<h3 class="etiqueta cor">Correcciones</h3>
+<ul>
+  <li>La sincronización ya no pisa una nota que acabas de guardar, y abrir una nota ya no cierra la app.</li>
+</ul>
+  </div>
+</section>
 <section class="novedad" id="v1-2-1">
   <div class="novedad-cabecera">
     <img src="../img/novedades-cabecera.jpg" alt="SwiftPen" width="1800" height="1013">
@@ -100,7 +223,7 @@
 <h3 class="etiqueta mej">Mejoras</h3>
 <ul>
   <li>Notas, Papelera, carpetas y Ajustes comparten el aspecto de Inicio, y botones y superficies usan la paleta de SwiftPen en lugar de gris.</li>
-  <li>Las <strong>vistas previas</strong> de las notas son más bajas (4:3) en lugar de una página A4 entera.</li>
+  <li>Las <strong>vistas previas</strong> de las notas son un ajuste: por defecto, 4:3 en móvil y página completa en tablet, y puedes elegir cualquiera de las dos.</li>
   <li>La biblioteca va más fluida y la aplicación arranca más rápido, con miniaturas más ligeras y ajustes en memoria.</li>
   <li>«Mantener la pantalla encendida» funciona en toda la aplicación.</li>
   <li>La pantalla de bloqueo usa la paleta de SwiftPen, y el panel de la pluma se llama ahora «Pluma».</li>
@@ -210,6 +333,140 @@
 
 <article lang="en">
 <!-- Una version nueva: copia el bloque <section class="novedad"> de abajo (en los dos idiomas), cambiale el numero (titulo y .version de la imagen), la fecha y las notas, y ponlo ARRIBA, justo despues de este comentario. Cada version lleva su propia imagen. -->
+<section class="novedad" id="v1-4-0">
+  <div class="novedad-cabecera">
+    <img src="../img/novedades-cabecera.jpg" alt="SwiftPen" width="1800" height="1013">
+    <div class="version" aria-hidden="true">Update 1.4.0</div>
+  </div>
+  <div class="novedad-cuerpo">
+<div class="version-titulo"><h2>SwiftPen 1.4.0</h2></div>
+<p class="fecha">October 25, 2026</p>
+<p>SwiftPen 1.4.0 brings a completely refreshed look: its own icons, smooth menus and transitions, planner templates, covers for your notes and a new introduction.</p>
+<h3 class="etiqueta nov">What's New</h3>
+<ul>
+  <li>A new SwiftPen icon set and a redesigned interface: menus, dialogs, notices, switches and progress bars in the app's own style.</li>
+  <li>Covers for your notes: 12 built-in designs, a page from the note itself or your own photo (Pro). The cover travels with the note and syncs.</li>
+  <li>New note screen: pick the name, folder, paper and cover before you start writing.</li>
+  <li>14 planner templates with text (mind map, monthly, weekly, daily, to-do and habits) and a new template picker, with Cancel and Apply, that shows how each size and orientation looks.</li>
+  <li>A new six-step introduction: language and theme, how you write, paper, the best of SwiftPen, sync and final settings. Every step can be skipped.</li>
+  <li>Help videos in the toolbar, sticker, image and folder tips, plus a short tip the first time you use each tool. You can watch them again from Settings &gt; About.</li>
+  <li>Ten new shapes in the shapes menu, several of them recognised when you draw them by hand, and a curve you can bend.</li>
+  <li>Select your handwriting and turn it into a text box with the Tt button.</li>
+  <li>Export from a single dialog: PDF, image or text (.txt or .md).</li>
+  <li>Recording and toolbar settings are now toolbar tools, and the tool options row can be collapsed.</li>
+  <li>Redesigned recordings menu, with playback speed and 10-second skips.</li>
+  <li>Sync: a «Sync now» button in the cloud menu, pull down in the library to sync right away, and the icon changes colour with the sync status.</li>
+  <li>Each note remembers the page you were on.</li>
+</ul>
+<h3 class="etiqueta mej">Improvements</h3>
+<ul>
+  <li>Everything feels smoother: whatever appears, disappears or changes size settles in gently, menus open without jumps or grey shadows, and a menu closes when you tap its button again.</li>
+  <li>«Fit to screen» is an animated zoom towards the centre, and the zoom pill fades out when you are not moving the page.</li>
+  <li>Thickness: − and + buttons on every slider, and the thickness preview no longer depends on the zoom.</li>
+  <li>Library in Notebook style with a compact view, two-tone folders, and Recent with «See all» and the last time you opened each note.</li>
+  <li>The app starts faster and shows your notes before syncing; the splash screen shows a sharp logo.</li>
+  <li>The interface adapts to each screen size, makes better use of phones and works with larger font or display sizes.</li>
+  <li>A refreshed editor background, and in dark mode the page stands out better from it.</li>
+  <li>«Make room»: long-press and drag a bar with a handle to open or close space on the page.</li>
+  <li>Search inside a note matches the app's style and works better in landscape and with large fonts.</li>
+  <li>Library search can look in everything, names only or note content (Pro).</li>
+  <li>A note that is only in the cloud and has no thumbnail yet shows a cloud with a download arrow.</li>
+</ul>
+<h3 class="etiqueta cor">Bug Fixes</h3>
+<ul>
+  <li>Opening the cover dialog no longer closes the app.</li>
+  <li>The S Pen button works on the Galaxy Tab S7.</li>
+  <li>Google Drive sync uploads changes reliably and explains errors clearly; changing the cover on two devices no longer duplicates the note.</li>
+  <li>A highlighter stroke split by the eraser looks the same as a whole one.</li>
+  <li>A hand-drawn heart or cloud no longer turns into another shape, and a star drawn in a single stroke is recognised.</li>
+  <li>Insert space no longer closes when you scroll or zoom, and Back closes the open menu first.</li>
+  <li>Tapping the Text tool again no longer opens an empty panel.</li>
+</ul>
+  </div>
+</section>
+<section class="novedad" id="v1-3-2">
+  <div class="novedad-cabecera">
+    <img src="../img/novedades-cabecera.jpg" alt="SwiftPen" width="1800" height="1013">
+    <div class="version" aria-hidden="true">Update 1.3.2</div>
+  </div>
+  <div class="novedad-cuerpo">
+<div class="version-titulo"><h2>SwiftPen 1.3.2</h2></div>
+<p class="fecha">October 20, 2026</p>
+<p>This release improves the editor toolbar on phones.</p>
+<h3 class="etiqueta mej">Improvements</h3>
+<ul>
+  <li>The editor toolbar is no longer cut off on phones: every tool, including the eraser, is reachable by scrolling it.</li>
+  <li>Colours and thicknesses scroll too, and the settings gear sits inside the toolbar.</li>
+  <li>«Recent notes» moves to the editor's «…» menu on phones.</li>
+  <li>The bottom toolbar is now for tablets only; on phones it always stays on top (your saved preference is kept).</li>
+</ul>
+  </div>
+</section>
+<section class="novedad" id="v1-3-1">
+  <div class="novedad-cabecera">
+    <img src="../img/novedades-cabecera.jpg" alt="SwiftPen" width="1800" height="1013">
+    <div class="version" aria-hidden="true">Update 1.3.1</div>
+  </div>
+  <div class="novedad-cuerpo">
+<div class="version-titulo"><h2>SwiftPen 1.3.1</h2></div>
+<p class="fecha">October 19, 2026</p>
+<p>This release brings image crop directly on the image and stickers as their own tool, and lets you reorder the toolbar tools.</p>
+<h3 class="etiqueta nov">What's New</h3>
+<ul>
+  <li>Crop an image right on the image, with a floating bar (rectangle, oval or freeform); «Crop» and the lock are now direct in the selection bar. Reopening a crop shows the whole original image.</li>
+  <li>Stickers as their own tool, with the 8 most recent and the full menu when you tap it again.</li>
+  <li>Settings > Writing > «Tool order»: reorder the tools by dragging or with arrows, and restore the original order.</li>
+  <li>A settings gear on every tool (pen, highlighter, eraser, shapes and lasso) and +/- buttons on the presets.</li>
+</ul>
+<h3 class="etiqueta mej">Improvements</h3>
+<ul>
+  <li>Perfect shape is easier to trigger and truer to your stroke; the highlighter keeps its colour, opacity and thickness.</li>
+  <li>Shape pen: lines and arrows are selected by the line itself, a tap selects and a swipe draws, the star comes out even and you can keep proportions.</li>
+  <li>The pen thickness preview uses the real zoom and fits entirely at maximum thickness.</li>
+  <li>«Select» is now called «Lasso» in the toolbar.</li>
+  <li>The side rail on Home respects the navigation bar.</li>
+  <li>Library thumbnails appear much faster, including those of pencil notes and very heavy notes.</li>
+  <li>Editor buttons now give visible feedback when you tap them.</li>
+  <li>The three-dot menu closes when you tap its button again and shows above the floating panels.</li>
+  <li>Sync: «Sync now» shows its progress and retries when Drive asks to wait; if Drive rejects access, the app explains it and lets you reconnect, and «Disconnect» asks for confirmation.</li>
+  <li>Sync: the open note receives changes from another device within seconds without interrupting your stroke, changes upload shortly after saving, and sync failures are shown in a list.</li>
+</ul>
+<h3 class="etiqueta cor">Bug Fixes</h3>
+<ul>
+  <li>Fetching a note from the cloud no longer overwrites what you saved while it was downloading.</li>
+  <li>The native text popup no longer covers the formatting bar.</li>
+  <li>Empty names show as «Untitled» and the card date now has a larger font.</li>
+  <li>Stickers: the curved arrow no longer has a ball, and a tap with Stickers places a square with a +.</li>
+  <li>More stability when saving and opening notes with a huge number of strokes: duplicating them no longer freezes the page or leaves the note unable to open.</li>
+</ul>
+  </div>
+</section>
+<section class="novedad" id="v1-3-0">
+  <div class="novedad-cabecera">
+    <img src="../img/novedades-cabecera.jpg" alt="SwiftPen" width="1800" height="1013">
+    <div class="version" aria-hidden="true">Update 1.3.0</div>
+  </div>
+  <div class="novedad-cuerpo">
+<div class="version-titulo"><h2>SwiftPen 1.3.0</h2></div>
+<p class="fecha">October 18, 2026</p>
+<p>This release brings text boxes, a much better pen and image tools, and lets you put the editor toolbar wherever you like.</p>
+<h3 class="etiqueta nov">What's New</h3>
+<ul>
+  <li>Text boxes in your notes: create them, edit them and export them to PDF with real text. There is also a sticker menu to insert from.</li>
+  <li>While you type, a fixed bar holds the formatting (bold, italic, underline, strikethrough), the same colour picker as the pen and its own font menu. Formatting applies only to what you highlight.</li>
+  <li>Select a box and a minimal bar lets you delete it (and duplicate, rotate or lock it from «···»); colour, size and fonts are in the fixed bar on top. Move and stretch it even while editing; pasting text creates a box, and search and the .txt include its text.</li>
+  <li>The eraser hides parts of an image without damaging it, image cropping happens in a panel, and a clear lock keeps images from moving.</li>
+  <li>Solid-stroke pen, star recognised with a vibration, stroke width that stays fixed when you scale, and holding a width shortcut pins it. Shapes get a three-dot menu, and the lasso gets a rotate handle and a bar that no longer covers it.</li>
+  <li>Quick zoom «Fit to screen» (not shown on the infinite canvas), finer pinch and scroll, and you can insert vertical space on the infinite canvas.</li>
+  <li>The editor toolbar can move to the bottom, there is a distraction-free mode, more margin on the pills, and paper and ink follow the dark theme. Recent notes support pinned ones, with square thumbnails, and have a button in the editor.</li>
+  <li>Folders: pick a colour when you create one, «Move to folder» works like an explorer, in portrait you drag a note onto a folder, and the new folder dialog is redesigned.</li>
+</ul>
+<h3 class="etiqueta cor">Bug Fixes</h3>
+<ul>
+  <li>Sync no longer overwrites a note you just saved, and opening a note no longer closes the app.</li>
+</ul>
+  </div>
+</section>
 <section class="novedad" id="v1-2-1">
   <div class="novedad-cabecera">
     <img src="../img/novedades-cabecera.jpg" alt="SwiftPen" width="1800" height="1013">
@@ -259,7 +516,7 @@
 <h3 class="etiqueta mej">Improvements</h3>
 <ul>
   <li>Notes, Trash, folders and Settings share the look of Home, and buttons and surfaces use the SwiftPen palette instead of gray.</li>
-  <li>Note <strong>previews</strong> are shorter (4:3) instead of a whole A4 page.</li>
+  <li><strong>Previews</strong> of notes are a setting: 4:3 by default on phones and a full page on tablets, and you can choose either one.</li>
   <li>The library is smoother and the app starts faster, with lighter thumbnails and settings kept in memory.</li>
   <li>"Keep screen on" now works across the whole app.</li>
   <li>The lock screen uses the SwiftPen palette, and the pen panel is now titled "Pen".</li>
@@ -369,6 +626,140 @@
 
 <article lang="fr">
 <!-- Une version nueva: copia el bloque <section class="novedad"> de abajo (en los tres idiomas), cambiale el numero (titulo y .version de la imagen), la fecha y las notas, y ponlo ARRIBA, justo despues de este comentario. Cada version lleva su propia imagen. -->
+<section class="novedad" id="v1-4-0">
+  <div class="novedad-cabecera">
+    <img src="../img/novedades-cabecera.jpg" alt="SwiftPen" width="1800" height="1013">
+    <div class="version" aria-hidden="true">Mise à jour 1.4.0</div>
+  </div>
+  <div class="novedad-cuerpo">
+<div class="version-titulo"><h2>SwiftPen 1.4.0</h2></div>
+<p class="fecha">25 octobre 2026</p>
+<p>SwiftPen 1.4.0 renouvelle toute son apparence : ses propres icônes, des menus et des transitions fluides, des modèles de planification, des couvertures pour vos notes et une nouvelle introduction.</p>
+<h3 class="etiqueta nov">Nouveautés</h3>
+<ul>
+  <li>Un nouveau jeu d'icônes SwiftPen et une interface repensée : menus, boîtes de dialogue, avis, interrupteurs et barres de progression au style de l'application.</li>
+  <li>Des couvertures pour vos notes : 12 motifs intégrés, une page de la note elle-même ou votre propre photo (Pro). La couverture accompagne la note et se synchronise.</li>
+  <li>Nouvel écran de note : choisissez le nom, le dossier, le papier et la couverture avant de commencer à écrire.</li>
+  <li>14 modèles de planification avec texte (carte mentale, mensuel, hebdomadaire, quotidien, tâches et habitudes) et un nouveau sélecteur de modèle, avec Annuler et Appliquer, qui montre le rendu dans chaque format et orientation.</li>
+  <li>Une nouvelle introduction en six étapes : langue et thème, votre façon d'écrire, papier, le meilleur de SwiftPen, synchronisation et derniers réglages. Chaque étape peut être passée.</li>
+  <li>Des vidéos d'aide dans les astuces de la barre, des stickers, des images et des dossiers, et une courte astuce la première fois que vous utilisez chaque outil. Vous pouvez les revoir dans Réglages &gt; À propos.</li>
+  <li>Dix nouvelles formes dans le menu des formes, dont plusieurs reconnues quand vous les dessinez à la main, et une courbe que vous pouvez plier.</li>
+  <li>Sélectionnez votre écriture et transformez-la en zone de texte avec le bouton Tt (Pro).</li>
+  <li>Exportez depuis une seule boîte de dialogue : PDF, image ou texte (.txt ou .md).</li>
+  <li>L'enregistrement et les réglages de la barre deviennent des outils de la barre, et la rangée d'options de l'outil peut se replier.</li>
+  <li>Menu des enregistrements repensé, avec la vitesse de lecture et des sauts de 10 secondes.</li>
+  <li>Synchronisation : un bouton « Synchroniser » dans le menu du nuage, tirez vers le bas dans la bibliothèque pour synchroniser tout de suite, et l'icône change de couleur selon l'état.</li>
+  <li>Chaque note se souvient de la page où vous en étiez.</li>
+</ul>
+<h3 class="etiqueta mej">Améliorations</h3>
+<ul>
+  <li>Tout est plus fluide : ce qui apparaît, disparaît ou change de taille se place en douceur, les menus s'ouvrent sans à-coups ni ombres grises, et un menu se ferme quand vous touchez à nouveau son bouton.</li>
+  <li>« Ajuster à l'écran » est un zoom animé vers le centre, et la pastille de zoom s'estompe quand vous ne déplacez pas la page.</li>
+  <li>Épaisseur : boutons − et + sur tous les curseurs, et l'aperçu de l'épaisseur ne dépend plus du zoom.</li>
+  <li>Bibliothèque au style Cahier avec une vue compacte, dossiers en deux tons, et Récentes avec « Tout voir » et la date de dernière ouverture.</li>
+  <li>L'application démarre plus vite et affiche vos notes avant de synchroniser ; l'écran de démarrage montre un logo net.</li>
+  <li>L'interface s'adapte à chaque taille d'écran, tire mieux parti des téléphones et fonctionne avec une police ou un affichage agrandis.</li>
+  <li>Fond de l'éditeur renouvelé et, en thème sombre, la page se distingue mieux du fond.</li>
+  <li>« Faire de la place » : appui long puis faites glisser une barre avec poignée pour ouvrir ou fermer de l'espace sur la page.</li>
+  <li>La recherche dans une note adopte le style de l'application et fonctionne mieux en paysage et avec une grande police.</li>
+  <li>La recherche de la bibliothèque cherche partout, seulement dans les noms ou dans le contenu (Pro).</li>
+  <li>Une note qui n'est que dans le nuage et n'a pas encore de miniature affiche un nuage avec une flèche de téléchargement.</li>
+</ul>
+<h3 class="etiqueta cor">Corrections</h3>
+<ul>
+  <li>Ouvrir la boîte de dialogue de couverture ne ferme plus l'application.</li>
+  <li>Le bouton du S Pen fonctionne sur la Galaxy Tab S7.</li>
+  <li>La synchronisation Google Drive envoie bien les modifications et explique clairement les erreurs ; changer la couverture sur deux appareils ne duplique plus la note.</li>
+  <li>Un trait de surligneur coupé par la gomme a le même aspect qu'un trait entier.</li>
+  <li>Un cœur ou un nuage dessiné à la main ne se transforme plus en une autre forme, et une étoile dessinée d'un seul trait est reconnue.</li>
+  <li>« Faire de la place » ne se ferme plus quand vous faites défiler ou zoomez, et Retour ferme d'abord le menu ouvert.</li>
+  <li>Toucher à nouveau l'outil Texte n'ouvre plus de panneau vide.</li>
+</ul>
+  </div>
+</section>
+<section class="novedad" id="v1-3-2">
+  <div class="novedad-cabecera">
+    <img src="../img/novedades-cabecera.jpg" alt="SwiftPen" width="1800" height="1013">
+    <div class="version" aria-hidden="true">Mise à jour 1.3.2</div>
+  </div>
+  <div class="novedad-cuerpo">
+<div class="version-titulo"><h2>SwiftPen 1.3.2</h2></div>
+<p class="fecha">20 octobre 2026</p>
+<p>Cette version améliore la barre de l'éditeur sur mobile.</p>
+<h3 class="etiqueta mej">Améliorations</h3>
+<ul>
+  <li>La barre d'outils de l'éditeur n'est plus coupée sur mobile : tous les outils, gomme comprise, sont accessibles en la faisant défiler.</li>
+  <li>Les couleurs et les épaisseurs défilent aussi, et l'engrenage de réglages reste dans la barre.</li>
+  <li>« Notes récentes » passe dans le menu « … » de l'éditeur sur mobile.</li>
+  <li>La barre en bas est réservée aux tablettes ; sur mobile, elle reste toujours en haut (votre préférence enregistrée est conservée).</li>
+</ul>
+  </div>
+</section>
+<section class="novedad" id="v1-3-1">
+  <div class="novedad-cabecera">
+    <img src="../img/novedades-cabecera.jpg" alt="SwiftPen" width="1800" height="1013">
+    <div class="version" aria-hidden="true">Mise à jour 1.3.1</div>
+  </div>
+  <div class="novedad-cuerpo">
+<div class="version-titulo"><h2>SwiftPen 1.3.1</h2></div>
+<p class="fecha">19 octobre 2026</p>
+<p>Cette version apporte le recadrage directement sur l'image et les stickers comme outil à part, et vous laisse réordonner les outils de la barre.</p>
+<h3 class="etiqueta nov">Nouveautés</h3>
+<ul>
+  <li>Recadrage d'une image directement sur l'image, avec une barre flottante (rectangle, ovale ou libre) ; « Recadrer » et le cadenas sont directs dans la barre de sélection. Rouvrir un recadrage montre l'image d'origine entière.</li>
+  <li>Les stickers deviennent un outil à part, avec les 8 récents et le menu complet en le touchant à nouveau.</li>
+  <li>Réglages > Écriture > « Ordre des outils » : réordonnez les outils en glissant ou avec les flèches, et rétablissez l'ordre d'origine.</li>
+  <li>Un engrenage de réglages sur chaque outil (stylo, surligneur, gomme, formes et lasso) et des boutons +/- sur les préréglages.</li>
+</ul>
+<h3 class="etiqueta mej">Améliorations</h3>
+<ul>
+  <li>La forme parfaite s'active plus facilement et reste plus fidèle au tracé ; le surligneur garde sa couleur, son opacité et son épaisseur.</li>
+  <li>Stylo de formes : les droites et les flèches se sélectionnent par la ligne, un appui sélectionne et un glissement dessine, l'étoile est régulière et vous pouvez garder les proportions.</li>
+  <li>L'aperçu de l'épaisseur du stylo utilise le zoom réel et tient en entier à l'épaisseur maximale.</li>
+  <li>« Sélectionner » s'appelle désormais « Lasso » dans la barre.</li>
+  <li>Le rail latéral de l'accueil respecte la barre de navigation.</li>
+  <li>Les miniatures de la bibliothèque apparaissent bien plus vite, y compris celles des notes au crayon ou très lourdes.</li>
+  <li>Les boutons de l'éditeur réagissent visuellement au toucher.</li>
+  <li>Le menu à trois points se ferme en touchant à nouveau son bouton et s'affiche au-dessus des panneaux flottants.</li>
+  <li>Synchronisation : « Synchroniser maintenant » affiche sa progression et réessaie quand Drive demande d'attendre ; si Drive refuse l'accès, l'app l'explique et vous laisse vous reconnecter, et « Déconnecter » demande confirmation.</li>
+  <li>Synchronisation : la note ouverte reçoit en quelques secondes les changements d'un autre appareil sans couper votre tracé, les changements sont envoyés peu après l'enregistrement et les échecs de synchronisation s'affichent dans une liste.</li>
+</ul>
+<h3 class="etiqueta cor">Corrections</h3>
+<ul>
+  <li>Récupérer une note depuis le cloud n'écrase plus ce que vous avez enregistré pendant le téléchargement.</li>
+  <li>Le menu contextuel natif du texte ne cache plus la barre de mise en forme.</li>
+  <li>Les noms vides s'affichent comme « Sans titre » et la date de la carte a une grande police.</li>
+  <li>Stickers : la flèche courbe n'a plus de balle, et un appui avec Stickers place un carré avec un +.</li>
+  <li>Plus de stabilité à l'enregistrement et à l'ouverture des notes avec énormément de tracés : les dupliquer ne fige plus la page et la note s'ouvre toujours.</li>
+</ul>
+  </div>
+</section>
+<section class="novedad" id="v1-3-0">
+  <div class="novedad-cabecera">
+    <img src="../img/novedades-cabecera.jpg" alt="SwiftPen" width="1800" height="1013">
+    <div class="version" aria-hidden="true">Mise à jour 1.3.0</div>
+  </div>
+  <div class="novedad-cuerpo">
+<div class="version-titulo"><h2>SwiftPen 1.3.0</h2></div>
+<p class="fecha">18 octobre 2026</p>
+<p>Cette version apporte les zones de texte, un stylet et des outils d'image bien meilleurs, et vous laisse placer la barre de l'éditeur où vous voulez.</p>
+<h3 class="etiqueta nov">Nouveautés</h3>
+<ul>
+  <li>Des zones de texte dans les notes : créez-les, modifiez-les et exportez-les en PDF avec du vrai texte. Un menu de stickers permet aussi d'en insérer.</li>
+  <li>Pendant la saisie, une barre fixe réunit la mise en forme (gras, italique, souligné, barré), le même sélecteur de couleur que le stylo et un menu de polices à part. La mise en forme ne s'applique qu'à ce que vous surlignez.</li>
+  <li>En sélectionnant une zone, une barre minimale permet de la supprimer (et de la dupliquer, la pivoter ou la verrouiller depuis « ··· ») ; la couleur, la taille et les polices sont dans la barre fixe du haut. Déplacez-la et étirez-la même en la modifiant ; coller du texte crée une zone, et la recherche et le .txt incluent son texte.</li>
+  <li>La gomme masque des parties d'une image sans l'abîmer, le recadrage se fait dans un panneau et un cadenas clair verrouille les images.</li>
+  <li>Stylo à trait plein, étoile reconnue avec une vibration, épaisseur du trait conservée au redimensionnement, et un appui long sur un raccourci d'épaisseur la fixe. Les formes ont un menu à trois points, et le lasso une poignée de rotation et une barre qui ne la cache plus.</li>
+  <li>Zoom rapide « Ajuster à l'écran » (absent du canevas infini), pincement et défilement plus précis, et insertion d'espace vertical dans le canevas infini.</li>
+  <li>La barre de l'éditeur peut passer en bas, un mode sans distraction existe, les pills ont plus de marge, et papier et encre suivent le thème sombre. Les notes récentes gèrent les notes épinglées, avec des miniatures carrées, et ont un bouton dans l'éditeur.</li>
+  <li>Dossiers : choisissez une couleur à la création, « Déplacer vers un dossier » fonctionne comme un explorateur, en portrait on glisse une note sur un dossier et le dialogue de nouveau dossier est repensé.</li>
+</ul>
+<h3 class="etiqueta cor">Corrections</h3>
+<ul>
+  <li>La synchronisation n'écrase plus une note qui vient d'être enregistrée, et ouvrir une note ne ferme plus l'application.</li>
+</ul>
+  </div>
+</section>
 <section class="novedad" id="v1-2-1">
   <div class="novedad-cabecera">
     <img src="../img/novedades-cabecera.jpg" alt="SwiftPen" width="1800" height="1013">
@@ -418,7 +809,7 @@
 <h3 class="etiqueta mej">Améliorations</h3>
 <ul>
   <li>Notes, Corbeille, dossiers et Réglages partagent l'apparence d'Accueil, et les boutons et surfaces utilisent la palette SwiftPen au lieu du gris.</li>
-  <li>Les <strong>aperçus</strong> des notes sont plus bas (4:3) au lieu d'une page A4 entière.</li>
+  <li>Les <strong>aperçus</strong> des notes sont un réglage : par défaut 4:3 sur téléphone et page entière sur tablette, au choix de chacun.</li>
   <li>La bibliothèque est plus fluide et l'application démarre plus vite, avec des miniatures plus légères et des réglages en mémoire.</li>
   <li>« Garder l'écran allumé » fonctionne dans toute l'application.</li>
   <li>L'écran de verrouillage utilise la palette SwiftPen, et le panneau du stylo s'appelle désormais « Stylo ».</li>
@@ -528,17 +919,6 @@
 
 </main>
 
-<footer>
-  <div class="contenedor">
-    <span>© 2026 SwiftPen</span>
-    <nav>
-      <a href="../"><span lang="es">SwiftPen</span><span lang="en">SwiftPen</span><span lang="fr">SwiftPen</span></a>
-      <a href="./"><span lang="es">Notas de actualización</span><span lang="en">Release notes</span><span lang="fr">Notes de mise à jour</span></a>
-      <a href="../privacidad/"><span lang="es">Privacidad</span><span lang="en">Privacy</span><span lang="fr">Confidentialité</span></a>
-      <a href="../aviso-legal/"><span lang="es">Aviso legal</span><span lang="en">Legal notice</span><span lang="fr">Mentions légales</span></a>
-      <a href="mailto:support@getswiftpen.com"><span lang="es">Contacto</span><span lang="en">Contact</span><span lang="fr">Contact</span></a>
-    </nav>
-  </div>
-</footer>
+<!--#pie-->
 </body>
 </html>

@@ -1,0 +1,63 @@
+/* Home (sitio/index.html). Solo lo propio de la home; lo comun esta en site.css.
+ * Prefijo h- salvo .video-caja, que es la de assets/home.js. */
+
+/* Video de las diapositivas del carrusel: la captura tiene la proporcion del video
+ * (.h-pantalla 1766 x 1080, .h-video 1600 x 1051); el poster (<picture>) queda debajo y el video, cuando arranca, encima. */
+.video-caja { position: relative; background: var(--surface-2); }
+.h-pantalla { aspect-ratio: 1766 / 1080; }
+.h-video { aspect-ratio: 1600 / 1051; }
+.video-caja img, .video-caja video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 0; }
+.video-caja video { z-index: 1; }
+.hero .sellos { margin-top: 40px; }
+
+/* Funciones: carrusel en el hero (home.js). La captura y el texto debajo, que pasa con
+ * ella. La pista es un scroll
+ * horizontal con scroll-snap, asi que sin JS se desliza a mano. */
+.h-cabecera { text-align: center; }
+.hero .h-carrusel { margin-top: 56px; }
+
+.h-pista { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; padding-bottom: 8px; }
+html.js .h-pista { scrollbar-width: none; }
+html.js .h-pista::-webkit-scrollbar { display: none; }
+.h-pista:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: var(--radio-grande); }
+.h-diapo { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; display: flex; flex-direction: column; align-items: center; }
+.h-diapo .h-captura, .h-diapo .captura-pendiente { width: 100%; max-width: 720px; margin: 0; }
+.h-captura img { width: 100%; height: auto; display: block; }
+.h-diapo-texto { max-width: 40rem; margin-top: 28px; text-align: center; }
+.h-diapo-texto .pro, .h-diapo-texto .beta { margin-left: 8px; }
+.h-diapo-texto h3 { font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -.015em; line-height: 1.15; }
+.h-diapo-texto > p:not(.h-enlace) { margin: 10px 0 0; color: var(--muted); font-size: 1.05rem; }
+.h-enlace { margin: 12px 0 0; font-weight: 600; }
+.h-enlace a { display: inline-flex; align-items: center; min-height: 44px; }
+
+.h-mas { margin: 32px 0 0; text-align: center; }
+
+/* Franja de precio: las mismas tarjetas que /precios/ (.precios y .plan de site.css). */
+.h-precio { padding-top: 0; }
+.h-planes { margin-top: 32px; }
+.h-planes .plan { padding: 28px; }
+.h-planes .plan .pro { position: absolute; top: 24px; right: 24px; margin: 0; }
+
+.h-preguntas .preguntas { margin-inline: auto; }
+.h-preguntas .h-cabecera { margin-bottom: 0; }
+
+/* Carrusel con JS (.listo), al estilo de notability.com: home.js coloca cada diapositiva con
+ * transform (la actual centrada, las vecinas a escala 0,72 asomando por los lados) y da a la
+ * pista la altura de la actual. El hero (overflow: hidden) recorta lo que sale de la ventana. */
+.h-carrusel { --ancho-diapo: min(720px, 72vw); }
+.h-carrusel.listo .h-pista { display: block; position: relative; overflow: visible; padding: 0; touch-action: pan-y; }
+.h-carrusel.listo .h-diapo {
+  position: absolute; top: 0; left: 50%; width: var(--ancho-diapo); margin-left: calc(var(--ancho-diapo) / -2);
+  transform-origin: 50% 0;
+}
+.h-carrusel.listo .h-diapo.vecina { opacity: .6; cursor: pointer; }
+.h-carrusel.listo .h-diapo:not(.actual):not(.vecina) { opacity: 0; visibility: hidden; }
+/* Las transiciones, solo despues de la primera colocacion (.anima): al entrar ya estan en su sitio. */
+.h-carrusel.anima .h-pista { transition: height .5s ease; }
+.h-carrusel.anima .h-diapo { transition: transform .55s cubic-bezier(.2, .7, .2, 1), opacity .45s ease; }
+.h-carrusel.anima .h-diapo-texto { transition: opacity .45s ease; }
+.h-carrusel.listo .h-diapo:not(.actual) .h-diapo-texto { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .h-carrusel.anima .h-pista, .h-carrusel.anima .h-diapo, .h-carrusel.anima .h-diapo-texto { transition: none; }
+}
+

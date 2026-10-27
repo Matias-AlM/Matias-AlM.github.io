@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="es" data-lang="es" data-titulo-es="Escritura · Funciones | SwiftPen" data-titulo-en="Writing · Features | SwiftPen" data-titulo-fr="Écriture · Fonctions | SwiftPen">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escritura · Funciones | SwiftPen</title>
+<meta name="description" content="Escritura en SwiftPen: tinta sin retardo, cuatro plumas con grosor propio, resaltador, colores a tu gusto, una goma con alcance ajustable y tu barra a tu manera.">
+<link rel="icon" href="/favicon.png">
+<link rel="canonical" href="https://getswiftpen.com/funciones/escritura/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SwiftPen">
+<meta property="og:title" content="Escritura · Funciones | SwiftPen">
+<meta property="og:url" content="https://getswiftpen.com/funciones/escritura/">
+<meta property="og:image" content="https://getswiftpen.com/img/bento/apuntes-es-claro-1600.webp">
+<link rel="preload" href="/assets/fuentes/mona-sans-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css?v=4">
+<link rel="stylesheet" href="/assets/funciones.css?v=2">
+<script src="/assets/idioma.js?v=2"></script>
+<!-- Estadisticas sin cookies ni datos personales (ver la politica de privacidad). Solo en getswiftpen.com: las vistas previas y las pruebas locales no cuentan. Sin la parte ?... de la direccion. -->
+<script defer src="https://cloud.umami.is/script.js" data-website-id="8e72a64d-fc98-425b-8b24-4017cd4c6f43" data-domains="getswiftpen.com" data-exclude-search="true" data-do-not-track="true"></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-formas" viewBox="0 0 24 24"><circle cx="8" cy="8" r="5"/><rect x="12" y="12" width="9" height="9" rx="1.5"/></symbol>
+  <symbol id="i-lapiz" viewBox="0 0 24 24"><path d="M17 3a2.8 2.8 0 0 1 4 4L7.5 20.5 2 22l1.5-5.5z"/><path d="m15 5 4 4"/></symbol>
+  <symbol id="i-lazo" viewBox="0 0 24 24"><path d="M5.2 16.8C3.2 15.4 2 13.8 2 12c0-4.4 4.5-8 10-8s10 3.6 10 8-4.5 8-10 8c-1.4 0-2.7-.2-3.9-.6"/><circle cx="6.5" cy="18" r="2"/><path d="M5.6 19.8c-.3 1-1 1.7-2 2.2"/></symbol>
+</svg>
+
+<!--#barra funciones-->
+
+<main>
+
+<header class="cabecera-pagina cabecera-aurora">
+  <div class="contenedor">
+    <nav class="migas" aria-label="Migas"><a href="/funciones/"><span lang="es">Funciones</span><span lang="en">Features</span><span lang="fr">Fonctions</span></a><span aria-current="page"><span lang="es">Escritura</span><span lang="en">Writing</span><span lang="fr">Écriture</span></span></nav>
+    <p class="etiqueta"><span lang="es">Escritura</span><span lang="en">Writing</span><span lang="fr">Écriture</span></p>
+    <h1><span lang="es">Escribe como en papel.</span><span lang="en">Write like on paper.</span><span lang="fr">Écrivez comme sur papier.</span></h1>
+    <p class="entradilla"><span lang="es">Tinta sin retardo, plumas a tu medida y una goma que entiende lo que quieres borrar.</span><span lang="en">Lag-free ink, pens tuned to you and an eraser that knows what you mean to erase.</span><span lang="fr">Une encre sans latence, des stylos à votre mesure et une gomme qui comprend ce que vous voulez effacer.</span></p>
+    <figure class="cabecera-imagen">
+      <picture lang="es">
+        <source media="(prefers-color-scheme: dark)" srcset="/img/bento/apuntes-es-oscuro-800.webp 800w, /img/bento/apuntes-es-oscuro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw">
+        <img src="/img/bento/apuntes-es-claro-800.webp" srcset="/img/bento/apuntes-es-claro-800.webp 800w, /img/bento/apuntes-es-claro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw" width="1600" height="1051" loading="lazy" alt="Apuntes escritos a mano en SwiftPen, con títulos de colores y resaltador.">
+      </picture>
+      <picture lang="en">
+        <source media="(prefers-color-scheme: dark)" srcset="/img/bento/apuntes-en-oscuro-800.webp 800w, /img/bento/apuntes-en-oscuro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw">
+        <img src="/img/bento/apuntes-en-claro-800.webp" srcset="/img/bento/apuntes-en-claro-800.webp 800w, /img/bento/apuntes-en-claro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw" width="1600" height="1051" loading="lazy" alt="Handwritten notes in SwiftPen, with colored headings and highlights.">
+      </picture>
+      <picture lang="fr">
+        <source media="(prefers-color-scheme: dark)" srcset="/img/bento/apuntes-en-oscuro-800.webp 800w, /img/bento/apuntes-en-oscuro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw">
+        <img src="/img/bento/apuntes-en-claro-800.webp" srcset="/img/bento/apuntes-en-claro-800.webp 800w, /img/bento/apuntes-en-claro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw" width="1600" height="1051" loading="lazy" alt="Des notes manuscrites dans SwiftPen, avec des titres en couleur et du surligneur.">
+      </picture>
+    </figure>
+  </div>
+</header>
+
+<section class="fn-bloque" aria-labelledby="como-se-usa">
+  <div class="contenedor">
+    <h2 id="como-se-usa"><span lang="es">Cómo se usa</span><span lang="en">How it works</span><span lang="fr">Comment ça marche</span></h2>
+    <ol class="fn-pasos">
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">1</span>
+          <h3><span lang="es">Elige tu pluma y su grosor</span><span lang="en">Pick your pen and its width</span><span lang="fr">Choisissez votre stylo et son épaisseur</span></h3>
+          <p><span lang="es">Bolígrafo, caligrafía, lápiz o trazo lleno. Cada pluma tiene su grosor propio, con botones −/+ junto al deslizador y presets.</span><span lang="en">Ballpoint, calligraphy, pencil or solid stroke. Each pen has its own width, with −/+ buttons next to the slider and presets.</span><span lang="fr">Stylo bille, calligraphie, crayon ou trait plein. Chaque stylo a sa propre épaisseur, avec des boutons −/+ à côté du curseur et des préréglages.</span></p>
+        </div>
+        <figure class="fn-captura"><picture lang="es"><source media="(prefers-color-scheme: dark)" srcset="/img/bento/plumas-es-oscuro-800.webp 800w, /img/bento/plumas-es-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw"><img src="/img/bento/plumas-es-claro-800.webp" srcset="/img/bento/plumas-es-claro-800.webp 800w, /img/bento/plumas-es-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="337" loading="lazy" alt="Los selectores de pluma Bolígrafo, Caligrafía y Lápiz, con la frase «Se hace camino al andar» escrita con cada una."></picture><picture lang="en"><source media="(prefers-color-scheme: dark)" srcset="/img/bento/plumas-en-oscuro-800.webp 800w, /img/bento/plumas-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw"><img src="/img/bento/plumas-en-claro-800.webp" srcset="/img/bento/plumas-en-claro-800.webp 800w, /img/bento/plumas-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="337" loading="lazy" alt="The Ballpoint, Calligraphy and Pencil pen selectors, with a handwritten sentence in each style."></picture><picture lang="fr"><source media="(prefers-color-scheme: dark)" srcset="/img/bento/plumas-en-oscuro-800.webp 800w, /img/bento/plumas-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw"><img src="/img/bento/plumas-en-claro-800.webp" srcset="/img/bento/plumas-en-claro-800.webp 800w, /img/bento/plumas-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="337" loading="lazy" alt="Les sélecteurs de stylo Bille, Calligraphie et Crayon, avec une phrase manuscrite dans chaque style."></picture></figure>
+      </li>
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">2</span>
+          <h3><span lang="es">Marca con color</span><span lang="en">Mark it with color</span><span lang="fr">Marquez en couleur</span></h3>
+          <p><span lang="es">Subraya con el resaltador y mantén pulsado un color para abrir el selector y crear el tuyo.</span><span lang="en">Highlight with the highlighter and press and hold a color to open the picker and make your own.</span><span lang="fr">Surlignez avec le surligneur et appuyez longuement sur une couleur pour ouvrir le sélecteur et créer la vôtre.</span></p>
+        </div>
+        <figure class="fn-captura">
+          <picture lang="es">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/escritura-colores-es-oscuro-800.webp 800w, /img/funciones/escritura-colores-es-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/escritura-colores-es-claro-800.webp" srcset="/img/funciones/escritura-colores-es-claro-800.webp 800w, /img/funciones/escritura-colores-es-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="Apuntes de cálculo con el resaltador y el selector de color para crear un color propio.">
+          </picture>
+          <picture lang="en">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/escritura-colores-en-oscuro-800.webp 800w, /img/funciones/escritura-colores-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/escritura-colores-en-claro-800.webp" srcset="/img/funciones/escritura-colores-en-claro-800.webp 800w, /img/funciones/escritura-colores-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="Calculus notes with the highlighter and the color picker to create your own color.">
+          </picture>
+          <picture lang="fr">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/escritura-colores-en-oscuro-800.webp 800w, /img/funciones/escritura-colores-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/escritura-colores-en-claro-800.webp" srcset="/img/funciones/escritura-colores-en-claro-800.webp 800w, /img/funciones/escritura-colores-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="Des notes d'analyse avec le surligneur et le sélecteur de couleur pour créer votre propre couleur.">
+          </picture>
+        </figure>
+      </li>
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">3</span>
+          <h3><span lang="es">Borra a tu manera</span><span lang="en">Erase your way</span><span lang="fr">Effacez à votre façon</span></h3>
+          <p><span lang="es">Ajusta el alcance de la goma, garabatea encima para borrar o usa el botón del lápiz para borrar al instante, sin cambiar de herramienta.</span><span lang="en">Adjust the eraser's reach, scribble over to erase or use the pen button to erase instantly, without switching tools.</span><span lang="fr">Réglez la portée de la gomme, gribouillez par-dessus pour effacer ou utilisez le bouton du stylet pour effacer aussitôt, sans changer d'outil.</span></p>
+        </div>
+        <figure class="fn-captura">
+          <picture lang="es">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/escritura-goma-es-oscuro-800.webp 800w, /img/funciones/escritura-goma-es-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/escritura-goma-es-claro-800.webp" srcset="/img/funciones/escritura-goma-es-claro-800.webp 800w, /img/funciones/escritura-goma-es-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="El panel de la goma con el tamaño, «Borrar objeto completo» y el alcance del borrado.">
+          </picture>
+          <picture lang="en">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/escritura-goma-en-oscuro-800.webp 800w, /img/funciones/escritura-goma-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/escritura-goma-en-claro-800.webp" srcset="/img/funciones/escritura-goma-en-claro-800.webp 800w, /img/funciones/escritura-goma-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="The eraser panel with its size, “Erase whole object” and the erase scope.">
+          </picture>
+          <picture lang="fr">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/escritura-goma-en-oscuro-800.webp 800w, /img/funciones/escritura-goma-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/escritura-goma-en-claro-800.webp" srcset="/img/funciones/escritura-goma-en-claro-800.webp 800w, /img/funciones/escritura-goma-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="Le panneau de la gomme avec la taille, « Effacer l'objet entier » et la portée de l'effacement.">
+          </picture>
+        </figure>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="fn-bloque" aria-labelledby="detalles">
+  <div class="contenedor">
+    <h2 id="detalles"><span lang="es">Los detalles</span><span lang="en">The details</span><span lang="fr">Les détails</span></h2>
+    <ul class="fn-detalles">
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Tinta sin retardo: el trazo sale pegado a la punta del lápiz.</span><span lang="en">Lag-free ink: the stroke stays glued to the pen tip.</span><span lang="fr">Encre sans latence : le trait colle à la pointe du stylet.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Cuatro plumas: Bolígrafo, Caligrafía, Lápiz y trazo lleno.</span><span lang="en">Four pens: Ballpoint, Calligraphy, Pencil and solid stroke.</span><span lang="fr">Quatre stylos : Bille, Calligraphie, Crayon et trait plein.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Grosor propio para cada pluma, con botones −/+ junto al deslizador.</span><span lang="en">Its own width for each pen, with −/+ buttons next to the slider.</span><span lang="fr">Une épaisseur propre à chaque stylo, avec des boutons −/+ à côté du curseur.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Presets de grosor: mantén pulsado un acceso de grosor y se fija.</span><span lang="en">Width presets: press and hold a width shortcut and it sticks.</span><span lang="fr">Préréglages d'épaisseur : appuyez longuement sur un raccourci d'épaisseur et il se fixe.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Resaltador que conserva color, opacidad y grosor.</span><span lang="en">A highlighter that keeps its color, opacity and width.</span><span lang="fr">Un surligneur qui conserve sa couleur, son opacité et son épaisseur.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Colores a tu gusto: mantén pulsado un color para abrir el selector personalizado.</span><span lang="en">Colors your way: press and hold a color to open the custom picker.</span><span lang="fr">Des couleurs à votre goût : appuyez longuement sur une couleur pour ouvrir le sélecteur personnalisé.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Goma con alcance ajustable, y garabatear encima para borrar.</span><span lang="en">Eraser with adjustable reach, and scribble over to erase.</span><span lang="fr">Gomme à portée réglable, et gribouillez par-dessus pour effacer.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Con el botón del lápiz se borra al instante, sin levantar el lápiz.</span><span lang="en">The pen button erases instantly, without lifting the pen.</span><span lang="fr">Avec le bouton du stylet, on efface aussitôt, sans lever le stylet.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Ordena las herramientas de la barra: arrastrando o con flechas, y restaura el orden original.</span><span lang="en">Reorder the toolbar tools: by dragging or with arrows, and restore the original order.</span><span lang="fr">Réorganisez les outils de la barre : en les faisant glisser ou avec les flèches, et rétablissez l'ordre d'origine.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">La barra se puede mover abajo, y hay un modo sin distracciones.</span><span lang="en">The toolbar can be moved to the bottom, and there is a distraction-free mode.</span><span lang="fr">La barre peut être déplacée vers le bas, et il existe un mode sans distraction.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="fn-bloque" aria-labelledby="relacionadas">
+  <div class="contenedor">
+    <h2 id="relacionadas"><span lang="es">Relacionadas</span><span lang="en">Related</span><span lang="fr">Voir aussi</span></h2>
+    <div class="tarjeta-funciones">
+      <a class="tarjeta-funcion" href="/funciones/formas/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-formas"/></svg></span>
+        <strong><span lang="es">Formas</span><span lang="en">Shapes</span><span lang="fr">Formes</span></strong>
+        <span><span lang="es">Dibuja a mano alzada, deja el lápiz quieto y la forma sale perfecta.</span><span lang="en">Sketch freehand, hold the pen still and the shape comes out perfect.</span><span lang="fr">Dessinez à main levée, laissez le stylet immobile et la forme devient parfaite.</span></span>
+      </a>
+      <a class="tarjeta-funcion" href="/funciones/lapiz/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-lapiz"/></svg></span>
+        <strong><span lang="es">Lápiz</span><span lang="en">Pen</span><span lang="fr">Stylet</span></strong>
+        <span><span lang="es">Funciona con lápices activos de cualquier marca, con doble toque y botón.</span><span lang="en">Works with active pens from any brand, with double-tap and button.</span><span lang="fr">Compatible avec les stylets actifs de toutes marques, avec double tape et bouton.</span></span>
+      </a>
+      <a class="tarjeta-funcion" href="/funciones/lazo/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-lazo"/></svg></span>
+        <strong><span lang="es">Lazo</span><span lang="en">Lasso</span><span lang="fr">Lasso</span></strong>
+        <span><span lang="es">Rodea un esquema y llévatelo a otro sitio, a otra página o a otra nota.</span><span lang="en">Loop around a diagram and take it anywhere: another spot, page or note.</span><span lang="fr">Entourez un schéma et emportez-le ailleurs, sur une autre page ou dans une autre note.</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cierre">
+  <div class="contenedor">
+    <h2><span lang="es">Pruébalo ya.</span><span lang="en">Try it now.</span><span lang="fr">Essayez-la maintenant.</span></h2>
+    <p class="entradilla"><span lang="es">SwiftPen ya está en Google Play. Descárgala gratis.</span><span lang="en">SwiftPen is on Google Play. Download it for free.</span><span lang="fr">SwiftPen est sur Google Play. Téléchargez-la gratuitement.</span></p>
+    <div class="acciones">
+      <a class="boton principal" href="https://play.google.com/store/apps/details?id=com.matiasalm.swiftpen" target="_blank" rel="noopener" data-umami-event="ir-a-play" data-umami-event-lugar="funcion-escritura"><span lang="es">Descargar SwiftPen</span><span lang="en">Download SwiftPen</span><span lang="fr">Télécharger SwiftPen</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!--#pie-->
+
+</body>
+</html>

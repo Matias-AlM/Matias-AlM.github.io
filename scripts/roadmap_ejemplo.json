@@ -1,0 +1,41 @@
+[
+  {
+    "number": 1, "state": "open", "closed_at": null,
+    "title": "Cajas de texto dentro de las notas",
+    "labels": [{"name": "enhancement"}, {"name": "roadmap:en-desarrollo"}],
+    "body": "Texto interno que no debe salir.\n\n<!-- roadmap\ntitulo-en: Text boxes inside notes\ntitulo-fr: Zones de texte dans les notes\ndesc: Escribe con teclado entre tus trazos.\ndesc-en: Type between your strokes.\ndesc-fr: Écrivez au clavier entre vos traits.\n-->"
+  },
+  {
+    "number": 2, "state": "open", "closed_at": null,
+    "title": "Más fuentes <b>para</b> el texto & \"menú propio\"",
+    "labels": [{"name": "roadmap:planeado"}],
+    "body": "Sin bloque roadmap: sale solo el titulo, en español en los tres idiomas."
+  },
+  {
+    "number": 3, "state": "open", "closed_at": null,
+    "title": "Plantillas compartidas por la comunidad",
+    "labels": [{"name": "roadmap:considerando"}],
+    "body": "<!-- roadmap\ntitulo-en: Community-shared templates\ntitulo-fr: Modèles partagés par la communauté\n-->"
+  },
+  {
+    "number": 4, "state": "closed", "closed_at": "2026-10-20T10:00:00Z",
+    "title": "Modo oscuro del papel",
+    "labels": [{"name": "roadmap:planeado"}],
+    "body": "<!-- roadmap\ntitulo-en: Dark mode for paper\ntitulo-fr: Mode sombre du papier\n-->"
+  },
+  {
+    "number": 5, "state": "closed", "closed_at": "2026-01-01T10:00:00Z",
+    "title": "Cerrado hace mucho: no sale",
+    "labels": [{"name": "roadmap:planeado"}], "body": ""
+  },
+  {
+    "number": 6, "state": "open", "closed_at": null,
+    "title": "Bug interno sin etiqueta de roadmap: no sale",
+    "labels": [{"name": "bug"}, {"name": "feedback"}], "body": ""
+  },
+  {
+    "number": 7, "state": "open", "closed_at": null, "pull_request": {},
+    "title": "Un PR con etiqueta: no sale",
+    "labels": [{"name": "roadmap:planeado"}], "body": ""
+  }
+]

@@ -1,0 +1,28 @@
+<script src="/assets/tema.js?v=1"></script>
+<header class="barra">
+  <div class="contenedor">
+    <a class="marca" href="/" aria-label="SwiftPen">
+      <img class="claro" src="/img/wordmark-light.webp" alt="SwiftPen" width="680" height="185">
+      <img class="oscuro" src="/img/wordmark-dark.webp" alt="SwiftPen" width="680" height="185">
+    </a>
+    <button class="menu-boton" type="button" aria-expanded="false" aria-controls="menu"><span class="solo-lectores"><span lang="es">Menú</span><span lang="en">Menu</span><span lang="fr">Menu</span></span><svg class="menu-icono" viewBox="0 0 24 24" aria-hidden="true"><path class="a" d="M4 7h16"/><path class="b" d="M9 12h11"/><path class="c" d="M14 17h6"/></svg></button>
+    <div class="menu" id="menu">
+      <nav class="navegacion">
+        <a class="enlace" href="/funciones/" data-pagina="funciones"><span lang="es">Funciones</span><span lang="en">Features</span><span lang="fr">Fonctions</span></a>
+        <a class="enlace" href="/precios/" data-pagina="precios"><span lang="es">Precios</span><span lang="en">Pricing</span><span lang="fr">Tarifs</span></a>
+        <a class="enlace" href="/release-notes/" data-pagina="novedades"><span lang="es">Novedades</span><span lang="en">What's new</span><span lang="fr">Nouveautés</span></a>
+        <a class="enlace" href="/roadmap/" data-pagina="roadmap"><span lang="es">Hoja de ruta</span><span lang="en">Roadmap</span><span lang="fr">Feuille de route</span></a>
+        <a class="enlace boton principal cta" href="https://play.google.com/store/apps/details?id=com.matiasalm.swiftpen" target="_blank" rel="noopener" data-umami-event="ir-a-play" data-umami-event-lugar="barra"><span lang="es">Descargar</span><span lang="en">Download</span><span lang="fr">Télécharger</span></a>
+      </nav>
+      <button class="tema-boton" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g class="t-auto"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17a8.5 8.5 0 0 0 0-17z" fill="currentColor"/></g><g class="t-claro"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></g><path class="t-oscuro" d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg><span class="tema-texto"></span></button>
+      <div class="idioma-sel">
+        <button class="idioma-boton" type="button" aria-expanded="false" aria-controls="idioma-lista"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 3.9 5.7 3.9 9s-1.3 6.3-3.9 9c-2.6-2.7-3.9-5.7-3.9-9S9.4 5.7 12 3z"/></svg><span class="idioma-actual">ES</span><span class="solo-lectores"><span lang="es">Idioma</span><span lang="en">Language</span><span lang="fr">Langue</span></span></button>
+        <ul class="idioma-lista" id="idioma-lista">
+          <li><button type="button" data-idioma="es" aria-current="true" data-umami-event="idioma" data-umami-event-idioma="es">Español</button></li>
+          <li><button type="button" data-idioma="en" aria-current="false" data-umami-event="idioma" data-umami-event-idioma="en">English</button></li>
+          <li><button type="button" data-idioma="fr" aria-current="false" data-umami-event="idioma" data-umami-event-idioma="fr">Français</button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>

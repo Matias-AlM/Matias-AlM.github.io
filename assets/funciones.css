@@ -1,0 +1,160 @@
+/* Paginas de funciones: el listado (/funciones/) y cada funcion (/funciones/<slug>/).
+ * Se carga despues de site.css y usa sus tokens y componentes (.cabecera-pagina,
+ * .cabecera-aurora, .migas, .cabecera-imagen, .tarjeta-funciones, .captura-pendiente,
+ * .pro, .beta, .boton, .cierre). Aqui solo lo propio de estas paginas (prefijo fn-). */
+
+/* Sobre la aurora, --faint no llega a 4,5:1: migas y etiqueta un tono mas oscuro. */
+.cabecera-aurora .etiqueta, .cabecera-aurora .migas, .cabecera-aurora .migas a::after { color: var(--muted); }
+.cabecera-aurora .migas [aria-current="page"] { color: var(--text); }
+
+/* Bloques de pagina: menos aire que section de site.css, porque van seguidos. */
+.fn-bloque { padding: 72px 0; }
+.fn-panel + .fn-bloque { padding-top: 56px; }
+.fn-bloque + .fn-bloque { padding-top: 0; }
+@media (max-width: 719px) { .fn-bloque { padding: 48px 0; } }
+.fn-bloque h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); }
+.fn-bloque .entradilla { margin-top: 10px; font-size: clamp(1rem, 1.4vw, 1.1rem); }
+
+/* Listado (/funciones/): una pestana por grupo y, en cada panel, un bento con todas
+ * sus funciones: una tesela grande (titular del grupo + captura) y una por funcion.
+ * Las dos primeras funciones van junto a la grande; el resto, en .fn-bento-resto,
+ * que reparte una fila con las que haya. Las pestanas las monta assets/funciones.js;
+ * sin JS no se ven y se muestran todos los paneles seguidos.
+ *   <section class="fn-panel" id="lazo" aria-labelledby="h-lazo"><div class="contenedor">
+ *     <div class="fn-bento">
+ *       <article class="fn-tesela fn-tesela-grande">
+ *         <div class="fn-tesela-texto"><p class="etiqueta">Lazo</p><h2 id="h-lazo">...</h2><p>...</p></div>
+ *         <div class="fn-tesela-media"><picture>...</picture></div>   (o un .captura-pendiente)
+ *       </article>
+ *       <article class="fn-tesela"><h3>...</h3><p>...</p></article> (x2)
+ *     </div>
+ *     <div class="fn-bento-resto"><article class="fn-tesela">...</article>...</div>
+ *   </div></section> */
+.fn-pestanas-barra {
+  position: sticky; top: 64px; z-index: 5; padding: 12px 0;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  -webkit-backdrop-filter: saturate(160%) blur(14px); backdrop-filter: saturate(160%) blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+html:not(.js) .fn-pestanas-barra { display: none; }
+.fn-pestanas { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: -4px; padding: 4px; }
+.fn-pestanas::-webkit-scrollbar { display: none; }
+.fn-pestana {
+  flex: none; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 14px;
+  font: 600 15px/1 var(--fuente-texto); color: var(--muted); white-space: nowrap; cursor: pointer;
+  background: transparent; border: 1px solid transparent; border-radius: 999px;
+  transition: background-color .2s ease, color .2s ease;
+}
+.fn-pestana svg { width: 18px; height: 18px; flex: none; }
+.fn-pestana:hover { color: var(--text); background: var(--surface-2); }
+.fn-pestana[aria-selected="true"] { color: #fff; background: var(--grad); }
+.fn-pestana:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* En escritorio caben las 11 en una fila solo sin iconos; en movil la fila se desplaza. */
+@media (min-width: 1100px) {
+  .fn-pestanas { justify-content: space-between; gap: 2px; }
+  .fn-pestana svg { display: none; }
+}
+
+.fn-panel { padding: 40px 0 0; scroll-margin-top: 140px; }
+.fn-panel:focus-visible { outline: none; }
+.fn-panel:focus-visible .fn-tesela-grande { outline: 2px solid var(--accent); outline-offset: 3px; }
+html:not(.js) .fn-panel + .fn-panel { padding-top: 64px; }
+.fn-bento, .fn-bento-resto { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.fn-bento-resto { margin-top: 12px; }
+@media (min-width: 600px) {
+  .fn-bento, .fn-bento-resto { gap: 16px; }
+  .fn-bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fn-bento-resto { margin-top: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .fn-tesela-grande { grid-column: 1 / -1; }
+}
+@media (min-width: 960px) {
+  .fn-bento { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+  .fn-tesela-grande { grid-column: 1; grid-row: span 2; }
+}
+.fn-tesela {
+  position: relative; display: flex; flex-direction: column; padding: 24px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radio-grande); box-shadow: var(--shadow-suave);
+}
+/* Numero decorativo (01, 02...) en degradado; "/ ''" lo oculta a los lectores de pantalla. */
+.fn-panel { counter-reset: fn; }
+.fn-tesela:not(.fn-tesela-grande)::before {
+  counter-increment: fn; content: counter(fn, decimal-leading-zero); content: counter(fn, decimal-leading-zero) / "";
+  align-self: flex-start; margin-bottom: 16px; font: 700 1.9rem/1 var(--fuente-titulo); letter-spacing: -0.02em;
+  background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.fn-tesela h3 { font-size: 1.2rem; }
+.fn-tesela:not(.fn-tesela-grande) h3 { margin-top: auto; }
+/* PRO y BETA, a la derecha de la tesela (la grande lo lleva junto a su etiqueta). */
+.fn-tesela .pro, .fn-tesela .beta { position: absolute; top: 24px; right: 24px; margin: 0; }
+.fn-tesela-grande .pro, .fn-tesela-grande .beta { top: 28px; right: 28px; }
+.fn-tesela p { color: var(--muted); margin: 6px 0 0; font-size: 15.5px; line-height: 1.5; }
+.fn-tesela-grande { padding: 0; overflow: clip; }
+.fn-tesela-texto { padding: 28px 28px 24px; }
+.fn-tesela-grande .etiqueta { margin-bottom: 10px; }
+.fn-tesela-grande h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+.fn-tesela-grande p:not(.etiqueta) { font-size: 1.05rem; max-width: 34rem; }
+.fn-tesela-media { margin-top: auto; padding: 0 28px; }
+.fn-tesela-media picture { display: block; border-radius: 16px 16px 0 0; overflow: hidden; border: 1px solid var(--border); border-bottom: 0; }
+.fn-tesela-media img { width: 100%; height: auto; }
+.fn-tesela-media .captura-pendiente { border-radius: 16px 16px 0 0; border-bottom: 0; }
+/* Ilustracion de sincronizacion (assets/sync-ilustracion.css) en la tesela y en los pasos. */
+.fn-tesela-media .h-sync { margin: 0; border-radius: 16px 16px 0 0; border-bottom: 0; box-shadow: none; }
+.fn-paso .h-sync { margin: 0; }
+@media (max-width: 599px) {
+  .fn-tesela:not(.fn-tesela-grande) { padding: 18px 20px; }
+  .fn-tesela:not(.fn-tesela-grande)::before { margin-bottom: 10px; font-size: 1.5rem; }
+}
+@media (max-width: 599px) { .fn-tesela:not(.fn-tesela-grande) .pro, .fn-tesela:not(.fn-tesela-grande) .beta { top: 18px; right: 20px; } }
+@media (max-width: 479px) { .fn-tesela-grande .pro, .fn-tesela-grande .beta { top: 22px; right: 20px; } .fn-tesela-texto { padding: 22px 20px 20px; } .fn-tesela-media { padding: 0 20px; } }
+.fn-panel-pie { margin: 16px 0 0; text-align: right; font-size: 15px; font-weight: 600; }
+.fn-panel-pie a { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; }
+.fn-panel-pie svg { width: 16px; height: 16px; }
+@media (prefers-reduced-motion: reduce) { .fn-pestana { transition: none; } }
+
+/* Lo que no tiene pagina propia: una linea de sellos bajo el listado. */
+.fn-toda-app { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 32px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: 15px; }
+.fn-toda-app li:first-child { font-weight: 700; color: var(--text); margin-right: 4px; }
+.fn-toda-app li + li:not(:nth-child(2))::before { content: "\00B7"; margin-right: 10px; color: var(--faint); }
+
+/* Pagina de funcion: "Como se usa", pasos de texto + captura que alternan de lado.
+ *   <ol class="fn-pasos">
+ *     <li class="fn-paso">
+ *       <div class="fn-paso-texto"><span class="fn-num" aria-hidden="true">1</span><h3>...</h3><p>...</p></div>
+ *       <figure class="fn-captura"><picture>...</picture></figure>   (o un .captura-pendiente dentro)
+ *     </li>
+ *   </ol> */
+.fn-pasos { list-style: none; padding: 0; margin: 40px 0 0; display: grid; gap: 56px; }
+.fn-paso { display: grid; gap: 24px 56px; align-items: center; }
+@media (min-width: 900px) {
+  .fn-pasos { gap: 80px; }
+  .fn-paso { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+  .fn-paso:nth-child(even) { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+  .fn-paso:nth-child(even) .fn-paso-texto { order: 2; }
+}
+.fn-paso-texto { position: relative; }
+.fn-paso-texto .pro { position: absolute; top: 8px; right: 0; margin: 0; }
+.fn-num {
+  display: grid; place-items: center; width: 36px; height: 36px; margin-bottom: 14px; border-radius: 50%;
+  font: 700 16px/1 var(--fuente-titulo); color: #fff; background: var(--grad);
+}
+.fn-paso h3 { font-size: clamp(1.35rem, 2.4vw, 1.75rem); letter-spacing: -0.015em; }
+.fn-paso p { color: var(--muted); margin: 10px 0 0; max-width: 32rem; }
+.fn-captura { margin: 0; }
+.fn-captura > picture { display: block; border-radius: var(--radio-grande); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); background: var(--surface); }
+
+/* "Los detalles": lista con check, en dos columnas desde tableta. */
+.fn-detalles { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 14px 40px; }
+@media (min-width: 720px) { .fn-detalles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.fn-detalles li { display: flex; gap: 12px; color: var(--muted); }
+.fn-detalles li .pro, .fn-detalles li .beta { flex: none; margin: 2px 0 0 auto; align-self: flex-start; }
+.fn-detalles svg { width: 20px; height: 20px; color: var(--accent); flex: none; margin-top: 4px; }
+
+/* Relacionadas: la rejilla .tarjeta-funciones de site.css, con aire arriba. */
+.fn-bloque .tarjeta-funciones { margin-top: 24px; }
+
+/* Cierre con CTA a /#avisame: la entradilla centrada bajo el titular. */
+.cierre .entradilla { margin-inline: auto; }
+
+/* Cabecera con vídeo (assets/fn-video.js): el póster (<picture>) queda debajo y el vídeo, al arrancar, encima. */
+.fn-video { position: relative; }
+.fn-video video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }

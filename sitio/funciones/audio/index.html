@@ -1,0 +1,211 @@
+<!doctype html>
+<!--
+  PLANTILLA DE PAGINA DE FUNCION (/funciones/<slug>/). Esta del lazo es la de referencia:
+  para hacer otra, copia este fichero a sitio/funciones/<slug>/index.html y cambia solo esto
+  (en es, en y fr; fr usa las capturas en). Lo demas (estructura, clases, head) no se toca.
+
+   1. <html>: data-titulo-es/en/fr = "<Nombre> · Funciones | SwiftPen" (y lo mismo en <title> y og:title, en es).
+   2. <meta name="description">: una frase en es de 140-160 caracteres.
+   3. canonical y og:url: https://getswiftpen.com/funciones/<slug>/
+   4. og:image: https://getswiftpen.com/img/bento/<escena>-es-claro-1600.webp (o img/portada.jpg?v=3 si no hay escena).
+   5. Sprite: deja i-ok y los iconos de las 3 relacionadas (copialos de sitio/funciones/index.html).
+   6. Migas: el <span aria-current="page"> con el nombre corto de la funcion.
+   7. Cabecera: .etiqueta (nombre del grupo; si es Pro o BETA, añade <span class="pro">PRO</span> o
+      <span class="beta">BETA</span> dentro), h1 (el titular, corto), .entradilla (una o dos lineas).
+   8. Imagen de cabecera (.cabecera-imagen): los tres <picture lang> con la escena del bento
+      (img/bento/<escena>-<es|en>-<claro|oscuro>-<800|1600>.webp, 1600x1051). Sin escena: sustituye
+      el <figure> entero por
+        <div class="cabecera-imagen captura-pendiente" style="--proporcion: 1600 / 1051" role="img" aria-label="Captura pendiente: <slug>-cabecera"><span>captura: <slug>-cabecera</span></div>
+   9. "Como se usa": 2 a 4 <li class="fn-paso"> (numero, h3, parrafo corto y captura). Captura real:
+      <figure class="fn-captura"> con <picture lang> como en la cabecera, sizes "(min-width: 900px) 600px, 100vw"
+      y loading="lazy". Sin captura: el .captura-pendiente con la etiqueta "captura: <slug>-<que>".
+  10. "Los detalles": 5 a 10 <li> (de las release notes y del mapa de funciones; nada inventado).
+  12. Relacionadas: 3 .tarjeta-funcion (icono, nombre, una linea; .pro o .beta si toca), las mismas
+      lineas que su tarjeta en /funciones/.
+  13. CTA: data-umami-event-lugar="funcion-<slug>".
+  Slugs: escritura, formas, lapiz, papel, lazo, pdf, imagenes-y-texto, lienzo-infinito, audio, busqueda, sincronizacion.
+-->
+<html lang="es" data-lang="es" data-titulo-es="Audio · Funciones | SwiftPen" data-titulo-en="Audio · Features | SwiftPen" data-titulo-fr="Audio · Fonctions | SwiftPen">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audio · Funciones | SwiftPen</title>
+<meta name="description" content="Audio en SwiftPen: graba la clase mientras escribes y toca una palabra de tus apuntes para oír lo que sonaba. Incluye 3 grabaciones gratis para probarlo.">
+<link rel="icon" href="/favicon.png">
+<link rel="canonical" href="https://getswiftpen.com/funciones/audio/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SwiftPen">
+<meta property="og:title" content="Audio · Funciones | SwiftPen">
+<meta property="og:url" content="https://getswiftpen.com/funciones/audio/">
+<meta property="og:image" content="https://getswiftpen.com/img/bento/audio-es-claro-1600.webp">
+<link rel="preload" href="/assets/fuentes/mona-sans-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css?v=4">
+<link rel="stylesheet" href="/assets/funciones.css?v=2">
+<script src="/assets/idioma.js?v=2"></script>
+<script defer src="/assets/fn-video.js"></script>
+<!-- Estadisticas sin cookies ni datos personales (ver la politica de privacidad). Solo en getswiftpen.com: las vistas previas y las pruebas locales no cuentan. Sin la parte ?... de la direccion. -->
+<script defer src="https://cloud.umami.is/script.js" data-website-id="8e72a64d-fc98-425b-8b24-4017cd4c6f43" data-domains="getswiftpen.com" data-exclude-search="true" data-do-not-track="true"></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-lupa" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-nube" viewBox="0 0 24 24"><path d="M17.5 19a4.5 4.5 0 1 0-1.4-8.8A6 6 0 0 0 4.5 12.5 3.5 3.5 0 0 0 6 19z"/></symbol>
+  <symbol id="i-plantilla" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></symbol>
+</svg>
+
+<!--#barra funciones-->
+
+<main>
+
+<header class="cabecera-pagina cabecera-aurora">
+  <div class="contenedor">
+    <nav class="migas" aria-label="Migas"><a href="/funciones/"><span lang="es">Funciones</span><span lang="en">Features</span><span lang="fr">Fonctions</span></a><span aria-current="page"><span lang="es">Audio</span><span lang="en">Audio</span><span lang="fr">Audio</span></span></nav>
+    <p class="etiqueta"><span lang="es">Audio</span><span lang="en">Audio</span><span lang="fr">Audio</span> <span class="pro">PRO</span></p>
+    <h1><span lang="es">Escucha lo que escribías.</span><span lang="en">Hear what you were writing.</span><span lang="fr">Réécoutez ce que vous écriviez.</span></h1>
+    <p class="entradilla"><span lang="es">Graba la clase mientras tomas apuntes. Después, toca una palabra y el audio salta a ese momento.</span><span lang="en">Record the lecture while you take notes. Later, tap a word and the audio jumps to that moment.</span><span lang="fr">Enregistrez le cours pendant que vous prenez des notes. Ensuite, touchez un mot et l'audio saute à ce moment-là.</span></p>
+    <figure class="cabecera-imagen fn-video" data-video="carrusel-audio">
+      <picture lang="es">
+        <source srcset="/video/es/carrusel-audio-oscuro.webp" media="(prefers-color-scheme: dark)">
+        <img src="/video/es/carrusel-audio.webp" width="1600" height="1051" loading="lazy" alt="Apuntes de clase con una grabación de audio sincronizada en SwiftPen.">
+      </picture>
+      <picture lang="en">
+        <source srcset="/video/en/carrusel-audio-oscuro.webp" media="(prefers-color-scheme: dark)">
+        <img src="/video/en/carrusel-audio.webp" width="1600" height="1051" loading="lazy" alt="Lecture notes with a synced audio recording in SwiftPen.">
+      </picture>
+      <picture lang="fr">
+        <source srcset="/video/fr/carrusel-audio-oscuro.webp" media="(prefers-color-scheme: dark)">
+        <img src="/video/fr/carrusel-audio.webp" width="1600" height="1051" loading="lazy" alt="Des notes de cours avec un enregistrement audio synchronisé dans SwiftPen.">
+      </picture>
+    </figure>
+  </div>
+</header>
+
+<section class="fn-bloque" aria-labelledby="como-se-usa">
+  <div class="contenedor">
+    <h2 id="como-se-usa"><span lang="es">Cómo se usa</span><span lang="en">How it works</span><span lang="fr">Comment ça marche</span></h2>
+    <ol class="fn-pasos">
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">1</span>
+          <h3><span lang="es">Graba mientras escribes</span><span lang="en">Record while you write</span><span lang="fr">Enregistrez pendant que vous écrivez</span></h3>
+          <p><span lang="es">Empieza a grabar en la nota y sigue escribiendo como siempre. Lo que graba queda unido a lo que escribes.</span><span lang="en">Start recording in the note and keep writing as usual. What you record is tied to what you write.</span><span lang="fr">Lancez l'enregistrement dans la note et continuez d'écrire comme d'habitude. Ce que vous enregistrez reste lié à ce que vous écrivez.</span></p>
+          <span class="pro">PRO</span>
+        </div>
+        <figure class="fn-captura">
+          <picture lang="es">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/audio-grabar-es-oscuro-800.webp 800w, /img/funciones/audio-grabar-es-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/audio-grabar-es-claro-800.webp" srcset="/img/funciones/audio-grabar-es-claro-800.webp 800w, /img/funciones/audio-grabar-es-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="Una nota de reunión mientras se graba audio: el contador en 0:04 con los botones de pausa y parar.">
+          </picture>
+          <picture lang="en">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/audio-grabar-en-oscuro-800.webp 800w, /img/funciones/audio-grabar-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/audio-grabar-en-claro-800.webp" srcset="/img/funciones/audio-grabar-en-claro-800.webp 800w, /img/funciones/audio-grabar-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="A meeting note while audio is being recorded: the counter at 0:04 with pause and stop buttons.">
+          </picture>
+          <picture lang="fr">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/audio-grabar-en-oscuro-800.webp 800w, /img/funciones/audio-grabar-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/audio-grabar-en-claro-800.webp" srcset="/img/funciones/audio-grabar-en-claro-800.webp 800w, /img/funciones/audio-grabar-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="Une note de réunion pendant l'enregistrement audio : le compteur à 0:04 avec les boutons pause et arrêt.">
+          </picture>
+        </figure>
+      </li>
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">2</span>
+          <h3><span lang="es">Toca una palabra</span><span lang="en">Tap a word</span><span lang="fr">Touchez un mot</span></h3>
+          <p><span lang="es">Más tarde, toca cualquier palabra de tus apuntes y el audio salta al minuto en que la escribías.</span><span lang="en">Later, tap any word in your notes and the audio jumps to the moment you wrote it.</span><span lang="fr">Plus tard, touchez n'importe quel mot de vos notes et l'audio saute au moment où vous l'avez écrit.</span></p>
+          <span class="pro">PRO</span>
+        </div>
+        <figure class="fn-captura">
+          <picture lang="es">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/audio-tocar-es-oscuro-800.webp 800w, /img/funciones/audio-tocar-es-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/audio-tocar-es-claro-800.webp" srcset="/img/funciones/audio-tocar-es-claro-800.webp 800w, /img/funciones/audio-tocar-es-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="Una nota de reunión reproduciendo su audio en 0:58: lo escrito hasta ese momento en su color y lo demás tenue.">
+          </picture>
+          <picture lang="en">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/audio-tocar-en-oscuro-800.webp 800w, /img/funciones/audio-tocar-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/audio-tocar-en-claro-800.webp" srcset="/img/funciones/audio-tocar-en-claro-800.webp 800w, /img/funciones/audio-tocar-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="A meeting note playing its audio at 0:58: what was written so far in full color and the rest faded.">
+          </picture>
+          <picture lang="fr">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/audio-tocar-en-oscuro-800.webp 800w, /img/funciones/audio-tocar-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/audio-tocar-en-claro-800.webp" srcset="/img/funciones/audio-tocar-en-claro-800.webp 800w, /img/funciones/audio-tocar-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="Une note de réunion qui lit son audio à 0:58 : ce qui était écrit jusque-là en couleur et le reste estompé.">
+          </picture>
+        </figure>
+      </li>
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">3</span>
+          <h3><span lang="es">Borra lo que no necesites</span><span lang="en">Delete what you don't need</span><span lang="fr">Supprimez ce qui est superflu</span></h3>
+          <p><span lang="es">Al borrar una grabación puedes borrar también lo que escribiste mientras sonaba, o conservarlo.</span><span lang="en">When you delete a recording you can also delete what you wrote while it played, or keep it.</span><span lang="fr">En supprimant un enregistrement, vous pouvez aussi supprimer ce que vous avez écrit pendant qu'il tournait, ou le garder.</span></p>
+          <span class="pro">PRO</span>
+        </div>
+        <figure class="fn-captura">
+          <picture lang="es">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/audio-borrar-es-oscuro-800.webp 800w, /img/funciones/audio-borrar-es-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/audio-borrar-es-claro-800.webp" srcset="/img/funciones/audio-borrar-es-claro-800.webp 800w, /img/funciones/audio-borrar-es-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="El aviso «¿Borrar esta grabación?» con las opciones de borrar solo el audio o el audio y lo escrito.">
+          </picture>
+          <picture lang="en">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/audio-borrar-en-oscuro-800.webp 800w, /img/funciones/audio-borrar-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/audio-borrar-en-claro-800.webp" srcset="/img/funciones/audio-borrar-en-claro-800.webp 800w, /img/funciones/audio-borrar-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="The “Delete this recording?” prompt with the options to delete only the audio or the audio and the writing.">
+          </picture>
+          <picture lang="fr">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/audio-borrar-en-oscuro-800.webp 800w, /img/funciones/audio-borrar-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/audio-borrar-en-claro-800.webp" srcset="/img/funciones/audio-borrar-en-claro-800.webp 800w, /img/funciones/audio-borrar-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="L'invite « Supprimer cet enregistrement ? » avec les options de supprimer seulement l'audio ou l'audio et l'écriture.">
+          </picture>
+        </figure>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="fn-bloque" aria-labelledby="detalles">
+  <div class="contenedor">
+    <h2 id="detalles"><span lang="es">Los detalles</span><span lang="en">The details</span><span lang="fr">Les détails</span></h2>
+    <ul class="fn-detalles">
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Audio unido a lo que escribes: sabe qué sonaba cuando escribiste cada palabra.</span><span lang="en">Audio tied to what you write: it knows what was playing when you wrote each word.</span><span lang="fr">Un audio lié à ce que vous écrivez : il sait ce qui se disait quand vous avez écrit chaque mot.</span> <span class="pro">PRO</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Toca una palabra y el audio salta a ese minuto.</span><span lang="en">Tap a word and the audio jumps to that moment.</span><span lang="fr">Touchez un mot et l'audio saute à ce moment-là.</span> <span class="pro">PRO</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Al borrar una grabación, borra también lo que se escribió mientras sonaba, si quieres.</span><span lang="en">When deleting a recording, delete what was written while it played too, if you like.</span><span lang="fr">En supprimant un enregistrement, supprimez aussi ce qui a été écrit pendant, si vous le souhaitez.</span> <span class="pro">PRO</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">El diálogo de borrar una grabación es más sencillo.</span><span lang="en">The dialog for deleting a recording is simpler.</span><span lang="fr">La boîte de dialogue pour supprimer un enregistrement est plus simple.</span> <span class="pro">PRO</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">La notificación de grabación sigue el idioma que elijas en Ajustes.</span><span lang="en">The recording notification follows the language you choose in Settings.</span><span lang="fr">La notification d'enregistrement suit la langue choisie dans les Réglages.</span> <span class="pro">PRO</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Las 3 primeras grabaciones son gratis y se quedan en tus notas.</span><span lang="en">The first 3 recordings are free and stay in your notes.</span><span lang="fr">Les 3 premiers enregistrements sont gratuits et restent dans vos notes.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="fn-bloque" aria-labelledby="relacionadas">
+  <div class="contenedor">
+    <h2 id="relacionadas"><span lang="es">Relacionadas</span><span lang="en">Related</span><span lang="fr">Voir aussi</span></h2>
+    <div class="tarjeta-funciones">
+      <a class="tarjeta-funcion" href="/funciones/busqueda/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-lupa"/></svg></span>
+        <strong><span lang="es">Búsqueda</span><span lang="en">Search</span><span lang="fr">Recherche</span> <span class="pro">PRO</span></strong>
+        <span><span lang="es">Encuentra lo que escribiste a mano, sin salir del dispositivo.</span><span lang="en">Find what you wrote by hand, without it leaving your device.</span><span lang="fr">Retrouvez ce que vous avez écrit à la main, sans quitter l'appareil.</span></span>
+      </a>
+      <a class="tarjeta-funcion" href="/funciones/sincronizacion/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-nube"/></svg></span>
+        <strong><span lang="es">Sincronización</span><span lang="en">Sync</span><span lang="fr">Synchro</span></strong>
+        <span><span lang="es">Sincroniza con WebDAV o Google Drive: tus notas no pasan por servidores nuestros.</span><span lang="en">Sync with WebDAV or Google Drive: your notes never touch servers of ours.</span><span lang="fr">Synchronisez avec WebDAV ou Google Drive : vos notes ne passent par aucun serveur à nous.</span></span>
+      </a>
+      <a class="tarjeta-funcion" href="/funciones/papel/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-plantilla"/></svg></span>
+        <strong><span lang="es">Papel</span><span lang="en">Paper</span><span lang="fr">Papier</span></strong>
+        <span><span lang="es">Plantillas, tamaños y páginas a tu medida, sin límite de notas.</span><span lang="en">Templates, sizes and pages your way, with no limit on notes.</span><span lang="fr">Modèles, formats et pages à votre mesure, sans limite de notes.</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cierre">
+  <div class="contenedor">
+    <h2><span lang="es">Pruébalo ya.</span><span lang="en">Try it now.</span><span lang="fr">Essayez-la maintenant.</span></h2>
+    <p class="entradilla"><span lang="es">SwiftPen ya está en Google Play. Descárgala gratis.</span><span lang="en">SwiftPen is on Google Play. Download it for free.</span><span lang="fr">SwiftPen est sur Google Play. Téléchargez-la gratuitement.</span></p>
+    <div class="acciones">
+      <a class="boton principal" href="https://play.google.com/store/apps/details?id=com.matiasalm.swiftpen" target="_blank" rel="noopener" data-umami-event="ir-a-play" data-umami-event-lugar="funcion-audio"><span lang="es">Descargar SwiftPen</span><span lang="en">Download SwiftPen</span><span lang="fr">Télécharger SwiftPen</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!--#pie-->
+
+</body>
+</html>

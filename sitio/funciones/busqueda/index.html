@@ -1,0 +1,196 @@
+<!doctype html>
+<!--
+  PLANTILLA DE PAGINA DE FUNCION (/funciones/<slug>/). Esta del lazo es la de referencia:
+  para hacer otra, copia este fichero a sitio/funciones/<slug>/index.html y cambia solo esto
+  (en es, en y fr; fr usa las capturas en). Lo demas (estructura, clases, head) no se toca.
+
+   1. <html>: data-titulo-es/en/fr = "<Nombre> · Funciones | SwiftPen" (y lo mismo en <title> y og:title, en es).
+   2. <meta name="description">: una frase en es de 140-160 caracteres.
+   3. canonical y og:url: https://getswiftpen.com/funciones/<slug>/
+   4. og:image: https://getswiftpen.com/img/bento/<escena>-es-claro-1600.webp (o img/portada.jpg?v=3 si no hay escena).
+   5. Sprite: deja i-ok y los iconos de las 3 relacionadas (copialos de sitio/funciones/index.html).
+   6. Migas: el <span aria-current="page"> con el nombre corto de la funcion.
+   7. Cabecera: .etiqueta (nombre del grupo; si es Pro o BETA, añade <span class="pro">PRO</span> o
+      <span class="beta">BETA</span> dentro), h1 (el titular, corto), .entradilla (una o dos lineas).
+   8. Imagen de cabecera (.cabecera-imagen): los tres <picture lang> con la escena del bento
+      (img/bento/<escena>-<es|en>-<claro|oscuro>-<800|1600>.webp, 1600x1051). Sin escena: sustituye
+      el <figure> entero por
+        <div class="cabecera-imagen captura-pendiente" style="--proporcion: 1600 / 1051" role="img" aria-label="Captura pendiente: <slug>-cabecera"><span>captura: <slug>-cabecera</span></div>
+   9. "Como se usa": 2 a 4 <li class="fn-paso"> (numero, h3, parrafo corto y captura). Captura real:
+      <figure class="fn-captura"> con <picture lang> como en la cabecera, sizes "(min-width: 900px) 600px, 100vw"
+      y loading="lazy". Sin captura: el .captura-pendiente con la etiqueta "captura: <slug>-<que>".
+  10. "Los detalles": 5 a 10 <li> (de las release notes y del mapa de funciones; nada inventado).
+  12. Relacionadas: 3 .tarjeta-funcion (icono, nombre, una linea; .pro o .beta si toca), las mismas
+      lineas que su tarjeta en /funciones/.
+  13. CTA: data-umami-event-lugar="funcion-<slug>".
+  Slugs: escritura, formas, lapiz, papel, lazo, pdf, imagenes-y-texto, lienzo-infinito, audio, busqueda, sincronizacion.
+-->
+<html lang="es" data-lang="es" data-titulo-es="Búsqueda · Funciones | SwiftPen" data-titulo-en="Search · Features | SwiftPen" data-titulo-fr="Recherche · Fonctions | SwiftPen">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Búsqueda · Funciones | SwiftPen</title>
+<meta name="description" content="Busca en tu letra con SwiftPen: encuentra palabras escritas a mano en tus notas, reconocidas en el dispositivo, sin IA en la nube. Y exporta lo escrito como texto.">
+<link rel="icon" href="/favicon.png">
+<link rel="canonical" href="https://getswiftpen.com/funciones/busqueda/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SwiftPen">
+<meta property="og:title" content="Búsqueda · Funciones | SwiftPen">
+<meta property="og:url" content="https://getswiftpen.com/funciones/busqueda/">
+<meta property="og:image" content="https://getswiftpen.com/img/bento/busqueda-es-claro-1600.webp">
+<link rel="preload" href="/assets/fuentes/mona-sans-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css?v=4">
+<link rel="stylesheet" href="/assets/funciones.css?v=2">
+<script src="/assets/idioma.js?v=2"></script>
+<!-- Estadisticas sin cookies ni datos personales (ver la politica de privacidad). Solo en getswiftpen.com: las vistas previas y las pruebas locales no cuentan. Sin la parte ?... de la direccion. -->
+<script defer src="https://cloud.umami.is/script.js" data-website-id="8e72a64d-fc98-425b-8b24-4017cd4c6f43" data-domains="getswiftpen.com" data-exclude-search="true" data-do-not-track="true"></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-micro" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
+  <symbol id="i-nube" viewBox="0 0 24 24"><path d="M17.5 19a4.5 4.5 0 1 0-1.4-8.8A6 6 0 0 0 4.5 12.5 3.5 3.5 0 0 0 6 19z"/></symbol>
+  <symbol id="i-plantilla" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></symbol>
+</svg>
+
+<!--#barra funciones-->
+
+<main>
+
+<header class="cabecera-pagina cabecera-aurora">
+  <div class="contenedor">
+    <nav class="migas" aria-label="Migas"><a href="/funciones/"><span lang="es">Funciones</span><span lang="en">Features</span><span lang="fr">Fonctions</span></a><span aria-current="page"><span lang="es">Búsqueda</span><span lang="en">Search</span><span lang="fr">Recherche</span></span></nav>
+    <p class="etiqueta"><span lang="es">Búsqueda</span><span lang="en">Search</span><span lang="fr">Recherche</span> <span class="pro">PRO</span></p>
+    <h1><span lang="es">Busca en tu letra.</span><span lang="en">Search your handwriting.</span><span lang="fr">Cherchez dans votre écriture.</span></h1>
+    <p class="entradilla"><span lang="es">Encuentra lo que escribiste a mano, sin que salga del dispositivo.</span><span lang="en">Find what you wrote by hand, without it leaving your device.</span><span lang="fr">Retrouvez ce que vous avez écrit à la main, sans que cela quitte l'appareil.</span></p>
+    <figure class="cabecera-imagen">
+      <picture lang="es">
+        <source media="(prefers-color-scheme: dark)" srcset="/img/bento/busqueda-es-oscuro-800.webp 800w, /img/bento/busqueda-es-oscuro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw">
+        <img src="/img/bento/busqueda-es-claro-800.webp" srcset="/img/bento/busqueda-es-claro-800.webp 800w, /img/bento/busqueda-es-claro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw" width="1600" height="1051" loading="lazy" alt="Una búsqueda en notas escritas a mano, con la palabra encontrada resaltada.">
+      </picture>
+      <picture lang="en">
+        <source media="(prefers-color-scheme: dark)" srcset="/img/bento/busqueda-en-oscuro-800.webp 800w, /img/bento/busqueda-en-oscuro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw">
+        <img src="/img/bento/busqueda-en-claro-800.webp" srcset="/img/bento/busqueda-en-claro-800.webp 800w, /img/bento/busqueda-en-claro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw" width="1600" height="1051" loading="lazy" alt="A search across handwritten notes, with the matching word highlighted.">
+      </picture>
+      <picture lang="fr">
+        <source media="(prefers-color-scheme: dark)" srcset="/img/bento/busqueda-en-oscuro-800.webp 800w, /img/bento/busqueda-en-oscuro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw">
+        <img src="/img/bento/busqueda-en-claro-800.webp" srcset="/img/bento/busqueda-en-claro-800.webp 800w, /img/bento/busqueda-en-claro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw" width="1600" height="1051" loading="lazy" alt="Une recherche dans des notes manuscrites, avec le mot trouvé mis en évidence.">
+      </picture>
+    </figure>
+  </div>
+</header>
+
+<section class="fn-bloque" aria-labelledby="como-se-usa">
+  <div class="contenedor">
+    <h2 id="como-se-usa"><span lang="es">Cómo se usa</span><span lang="en">How it works</span><span lang="fr">Comment ça marche</span></h2>
+    <ol class="fn-pasos">
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">1</span>
+          <h3><span lang="es">Escribe como siempre</span><span lang="en">Write as usual</span><span lang="fr">Écrivez comme d'habitude</span></h3>
+          <p><span lang="es">No hay nada que activar ni que corregir: tu letra se reconoce en el dispositivo, sin IA en la nube.</span><span lang="en">There is nothing to switch on or fix: your handwriting is recognized on the device, with no cloud AI.</span><span lang="fr">Rien à activer ni à corriger : votre écriture est reconnue sur l'appareil, sans IA dans le cloud.</span></p>
+          <span class="pro">PRO</span>
+        </div>
+        <figure class="fn-captura">
+          <picture lang="es">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/busqueda-escribir-es-oscuro-800.webp 800w, /img/funciones/busqueda-escribir-es-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/busqueda-escribir-es-claro-800.webp" srcset="/img/funciones/busqueda-escribir-es-claro-800.webp 800w, /img/funciones/busqueda-escribir-es-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="Los ajustes de reconocimiento de escritura con el interruptor activado y el idioma de tu letra; todo ocurre en el dispositivo.">
+          </picture>
+          <picture lang="en">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/busqueda-escribir-en-oscuro-800.webp 800w, /img/funciones/busqueda-escribir-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/busqueda-escribir-en-claro-800.webp" srcset="/img/funciones/busqueda-escribir-en-claro-800.webp 800w, /img/funciones/busqueda-escribir-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="The handwriting recognition settings with the switch on and the handwriting language; everything happens on the device.">
+          </picture>
+          <picture lang="fr">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/busqueda-escribir-en-oscuro-800.webp 800w, /img/funciones/busqueda-escribir-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/busqueda-escribir-en-claro-800.webp" srcset="/img/funciones/busqueda-escribir-en-claro-800.webp 800w, /img/funciones/busqueda-escribir-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="Les réglages de reconnaissance d'écriture avec l'interrupteur activé et la langue de l'écriture ; tout se passe sur l'appareil.">
+          </picture>
+        </figure>
+      </li>
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">2</span>
+          <h3><span lang="es">Busca una palabra</span><span lang="en">Search for a word</span><span lang="fr">Cherchez un mot</span></h3>
+          <p><span lang="es">Escribe la palabra en el buscador y encuentra las notas donde la escribiste a mano. El reconocimiento no es perfecto: una letra muy difícil puede no encontrarse.</span><span lang="en">Type the word in the search box and find the notes where you handwrote it. Recognition isn't perfect: very hard-to-read writing may not be found.</span><span lang="fr">Saisissez le mot dans la recherche et retrouvez les notes où vous l'avez écrit à la main. La reconnaissance n'est pas parfaite : une écriture très difficile à lire peut ne pas être trouvée.</span></p>
+          <span class="pro">PRO</span>
+        </div>
+      </li>
+      <li class="fn-paso">
+        <div class="fn-paso-texto">
+          <span class="fn-num" aria-hidden="true">3</span>
+          <h3><span lang="es">Exporta lo escrito como texto</span><span lang="en">Export your writing as text</span><span lang="fr">Exportez votre écriture en texte</span></h3>
+          <p><span lang="es">Convierte lo que escribiste en texto ordenado y llévatelo donde lo necesites.</span><span lang="en">Turn what you wrote into clean text and take it wherever you need it.</span><span lang="fr">Transformez ce que vous avez écrit en texte ordonné et emportez-le où vous en avez besoin.</span></p>
+          <span class="pro">PRO</span>
+        </div>
+        <figure class="fn-captura">
+          <picture lang="es">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/busqueda-exportar-es-oscuro-800.webp 800w, /img/funciones/busqueda-exportar-es-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/busqueda-exportar-es-claro-800.webp" srcset="/img/funciones/busqueda-exportar-es-claro-800.webp 800w, /img/funciones/busqueda-exportar-es-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="El diálogo de exportar con «Texto» elegido y los formatos de texto plano y Markdown.">
+          </picture>
+          <picture lang="en">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/busqueda-exportar-en-oscuro-800.webp 800w, /img/funciones/busqueda-exportar-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/busqueda-exportar-en-claro-800.webp" srcset="/img/funciones/busqueda-exportar-en-claro-800.webp 800w, /img/funciones/busqueda-exportar-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="The export dialog with “Text” chosen and the plain text and Markdown formats.">
+          </picture>
+          <picture lang="fr">
+            <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/busqueda-exportar-en-oscuro-800.webp 800w, /img/funciones/busqueda-exportar-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
+            <img src="/img/funciones/busqueda-exportar-en-claro-800.webp" srcset="/img/funciones/busqueda-exportar-en-claro-800.webp 800w, /img/funciones/busqueda-exportar-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="La boîte de dialogue d'exportation avec « Texte » choisi et les formats texte brut et Markdown.">
+          </picture>
+        </figure>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="fn-bloque" aria-labelledby="detalles">
+  <div class="contenedor">
+    <h2 id="detalles"><span lang="es">Los detalles</span><span lang="en">The details</span><span lang="fr">Les détails</span></h2>
+    <ul class="fn-detalles">
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Encuentra palabras escritas a mano en tus notas.</span><span lang="en">Find handwritten words in your notes.</span><span lang="fr">Retrouvez des mots écrits à la main dans vos notes.</span> <span class="pro">PRO</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Tu letra se reconoce en el dispositivo, sin IA en la nube.</span><span lang="en">Your handwriting is recognized on the device, no cloud AI.</span><span lang="fr">Votre écriture est reconnue sur l'appareil, sans IA dans le cloud.</span> <span class="pro">PRO</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">La búsqueda no reanaliza la nota mientras sigues escribiendo, para gastar menos batería.</span><span lang="en">Search doesn't re-scan the note while you keep writing, to use less battery.</span><span lang="fr">La recherche ne réanalyse pas la note pendant que vous continuez d'écrire, pour économiser la batterie.</span> <span class="pro">PRO</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">La búsqueda y el .txt incluyen también el texto de las cajas de texto.</span><span lang="en">Search and the .txt also include the text in text boxes.</span><span lang="fr">La recherche et le .txt incluent aussi le texte des zones de texte.</span> <span class="pro">PRO</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Exporta lo escrito como texto ordenado.</span><span lang="en">Export your writing as clean text.</span><span lang="fr">Exportez votre écriture en texte ordonné.</span> <span class="pro">PRO</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">El reconocimiento no es perfecto: no esperes encontrar el cien por cien de las palabras.</span><span lang="en">Recognition isn't perfect: don't expect to find every single word.</span><span lang="fr">La reconnaissance n'est pas parfaite : ne comptez pas retrouver chaque mot.</span> <span class="pro">PRO</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="fn-bloque" aria-labelledby="relacionadas">
+  <div class="contenedor">
+    <h2 id="relacionadas"><span lang="es">Relacionadas</span><span lang="en">Related</span><span lang="fr">Voir aussi</span></h2>
+    <div class="tarjeta-funciones">
+      <a class="tarjeta-funcion" href="/funciones/audio/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-micro"/></svg></span>
+        <strong><span lang="es">Audio</span><span lang="en">Audio</span><span lang="fr">Audio</span> <span class="pro">PRO</span></strong>
+        <span><span lang="es">Graba la clase y toca una palabra para oír lo que sonaba al escribirla.</span><span lang="en">Record the lecture and tap a word to hear what was said as you wrote it.</span><span lang="fr">Enregistrez le cours et touchez un mot pour entendre ce qui se disait quand vous l'avez écrit.</span></span>
+      </a>
+      <a class="tarjeta-funcion" href="/funciones/sincronizacion/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-nube"/></svg></span>
+        <strong><span lang="es">Sincronización</span><span lang="en">Sync</span><span lang="fr">Synchro</span></strong>
+        <span><span lang="es">Sincroniza con WebDAV o Google Drive: tus notas no pasan por servidores nuestros.</span><span lang="en">Sync with WebDAV or Google Drive: your notes never touch servers of ours.</span><span lang="fr">Synchronisez avec WebDAV ou Google Drive : vos notes ne passent par aucun serveur à nous.</span></span>
+      </a>
+      <a class="tarjeta-funcion" href="/funciones/papel/">
+        <span class="icono"><svg class="i" aria-hidden="true"><use href="#i-plantilla"/></svg></span>
+        <strong><span lang="es">Papel</span><span lang="en">Paper</span><span lang="fr">Papier</span></strong>
+        <span><span lang="es">Plantillas, tamaños y páginas a tu medida, sin límite de notas.</span><span lang="en">Templates, sizes and pages your way, with no limit on notes.</span><span lang="fr">Modèles, formats et pages à votre mesure, sans limite de notes.</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cierre">
+  <div class="contenedor">
+    <h2><span lang="es">Pruébalo ya.</span><span lang="en">Try it now.</span><span lang="fr">Essayez-la maintenant.</span></h2>
+    <p class="entradilla"><span lang="es">SwiftPen ya está en Google Play. Descárgala gratis.</span><span lang="en">SwiftPen is on Google Play. Download it for free.</span><span lang="fr">SwiftPen est sur Google Play. Téléchargez-la gratuitement.</span></p>
+    <div class="acciones">
+      <a class="boton principal" href="https://play.google.com/store/apps/details?id=com.matiasalm.swiftpen" target="_blank" rel="noopener" data-umami-event="ir-a-play" data-umami-event-lugar="funcion-busqueda"><span lang="es">Descargar SwiftPen</span><span lang="en">Download SwiftPen</span><span lang="fr">Télécharger SwiftPen</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!--#pie-->
+
+</body>
+</html>
