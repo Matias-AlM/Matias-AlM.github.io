@@ -67,7 +67,7 @@ body {
 }
 img { max-width: 100%; height: auto; display: block; }
 a { color: var(--accent); text-decoration: none; }
-a:hover { text-decoration: underline; }
+a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-decoration-skip-ink: none; }
 
 /* Idioma: el texto de los dos idiomas esta en el HTML; se ve el activo. */
 html[data-lang="es"] [lang="en"]:not(html),
