@@ -145,6 +145,10 @@ html:not(.js) .fn-panel + .fn-panel { padding-top: 64px; }
 .fn-captura { margin: 0; }
 .fn-captura > picture { display: block; border-radius: var(--radio-grande); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); background: var(--surface); }
 
+/* Captura con vídeo (assets/fn-video.js): el vídeo recorta con las esquinas del póster. */
+.fn-captura.fn-video { border-radius: var(--radio-grande); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); }
+.fn-captura.fn-video picture { border: 0; border-radius: 0; box-shadow: none; }
+
 /* "Los detalles": lista con check, en dos columnas desde tableta. */
 .fn-detalles { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 14px 40px; }
 @media (min-width: 720px) { .fn-detalles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
