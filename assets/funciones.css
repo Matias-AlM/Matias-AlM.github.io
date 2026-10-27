@@ -162,3 +162,6 @@ html:not(.js) .fn-panel + .fn-panel { padding-top: 64px; }
 /* Cabecera con vídeo (assets/fn-video.js): el póster (<picture>) queda debajo y el vídeo, al arrancar, encima. */
 .fn-video { position: relative; }
 .fn-video video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+
+/* "Experimental" con el estilo de BETA: contorno en mayusculas. */
+.beta.experimental { text-transform: uppercase; }
