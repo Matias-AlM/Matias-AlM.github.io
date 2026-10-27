@@ -2,7 +2,7 @@
 //
 // <figure class="cabecera-imagen fn-video" data-video="carrusel-audio"> usa
 // /video/<idioma>/carrusel-audio.mp4 (carrusel-audio-oscuro.mp4 en tema oscuro) y el <picture>
-// de dentro (su .webp) como póster. Con data-sin-oscuro no hay variante -oscuro (clips de ayuda). Solo se descarga y suena con la figura en pantalla; con
+// de dentro (su .webp) como póster. Solo se descarga y suena con la figura en pantalla; con
 // prefers-reduced-motion o sin JS se queda el póster. Cargar después de idioma.js.
 (function () {
   var raiz = document.documentElement;
@@ -23,7 +23,7 @@
     caja.appendChild(video);
 
     var visible = false;
-    function ruta(extension) { return "/video/" + idioma() + "/" + clip + (esOscuro() && !caja.hasAttribute("data-sin-oscuro") ? "-oscuro" : "") + "." + extension; }
+    function ruta(extension) { return "/video/" + idioma() + "/" + clip + (esOscuro() ? "-oscuro" : "") + "." + extension; }
     function reproducir() {
       var origen = ruta("mp4");
       if (video.getAttribute("src") !== origen) video.src = origen;

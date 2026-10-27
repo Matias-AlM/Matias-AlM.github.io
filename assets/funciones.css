@@ -96,10 +96,9 @@ html:not(.js) .fn-panel + .fn-panel { padding-top: 64px; }
 .fn-tesela-media { margin-top: auto; padding: 0 28px; }
 .fn-tesela-media picture { display: block; border-radius: 16px 16px 0 0; overflow: hidden; border: 1px solid var(--border); border-bottom: 0; }
 .fn-tesela-media img { width: 100%; height: auto; }
-/* Clip de la tesela numerada (assets/fn-video.js): entre el numero y el titulo; el poster fija el tamano. */
-.fn-tesela-clip { margin: 0 0 16px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: var(--surface); }
-.fn-tesela-clip img { display: block; width: 100%; height: auto; }
-@media (max-width: 599px) { .fn-tesela-clip { margin-bottom: 12px; } }
+/* Video de la tesela grande (assets/fn-video.js): recorta el video con las esquinas del poster. */
+.fn-tesela-media .fn-video { border-radius: 16px 16px 0 0; overflow: hidden; border: 1px solid var(--border); border-bottom: 0; }
+.fn-tesela-media .fn-video picture { border: 0; border-radius: 0; }
 .fn-tesela-media .captura-pendiente { border-radius: 16px 16px 0 0; border-bottom: 0; }
 /* Ilustracion de sincronizacion (assets/sync-ilustracion.css) en la tesela y en los pasos. */
 .fn-tesela-media .h-sync { margin: 0; border-radius: 16px 16px 0 0; border-bottom: 0; box-shadow: none; }
