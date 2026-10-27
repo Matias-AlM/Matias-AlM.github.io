@@ -283,6 +283,29 @@ section { padding: 96px 0; }
 }
 @media (prefers-reduced-motion: no-preference) { .hero::before { animation: aurora 14s linear infinite alternate; } }
 @keyframes aurora { from { --aurora: 0; } to { --aurora: 1; } }
+/* Aurora a pantalla completa (release-notes y roadmap): <body class="fondo-aurora">.
+ * Mismas manchas que .hero, mas suaves, estaticas y fijas al viewport (un
+ * pseudo-elemento fixed no se repinta al hacer scroll). Las tarjetas .novedad
+ * son translucidas para dejarla ver. */
+.fondo-aurora::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(circle 60vmax at 25% 25%, color-mix(in srgb, var(--blue) 26%, transparent), transparent),
+    radial-gradient(circle 60vmax at 75% 80%, color-mix(in srgb, var(--purple) 20%, transparent), transparent);
+}
+:root[data-tema="oscuro"] .fondo-aurora::before {
+  background:
+    radial-gradient(circle 55vmax at 25% 25%, color-mix(in srgb, var(--blue) 22%, transparent), transparent),
+    radial-gradient(circle 55vmax at 75% 80%, color-mix(in srgb, var(--purple) 22%, transparent), transparent);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema="claro"]) .fondo-aurora::before {
+    background:
+      radial-gradient(circle 55vmax at 25% 25%, color-mix(in srgb, var(--blue) 22%, transparent), transparent),
+      radial-gradient(circle 55vmax at 75% 80%, color-mix(in srgb, var(--purple) 22%, transparent), transparent);
+  }
+}
+.fondo-aurora .novedad { background: color-mix(in srgb, var(--surface) 80%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
 .hero-texto { text-align: center; display: flex; flex-direction: column; align-items: center; }
 .hero-texto .entradilla { text-align: center; }
 .acciones { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 32px; }
