@@ -260,8 +260,8 @@
     </div>
     <div class="preguntas">
       <details class="aparece">
-        <summary data-umami-event="faq" data-umami-event-pregunta="cuando-sale"><span lang="es">¿Cuándo sale?</span><span lang="en">When does it launch?</span><span lang="fr">Quand sort-elle ?</span></summary>
-        <p><span lang="es">Próximamente en Google Play. <a href="#avisame" data-umami-event="ir-al-aviso" data-umami-event-lugar="faq">Deja tu email</a> y recibirás un aviso el día del lanzamiento.</span><span lang="en">Coming soon to Google Play. <a href="#avisame">Leave your email</a> and you'll be notified on launch day.</span><span lang="fr">Bientôt sur Google Play. <a href="#avisame">Laissez votre e-mail</a> et vous serez prévenu le jour du lancement.</span></p>
+        <summary data-umami-event="faq" data-umami-event-pregunta="donde-descargar"><span lang="es">¿Dónde la descargo?</span><span lang="en">Where do I download it?</span><span lang="fr">Où la télécharger ?</span></summary>
+        <p><span lang="es">En <a href="https://play.google.com/store/apps/details?id=com.matiasalm.swiftpen" target="_blank" rel="noopener" data-umami-event="ir-a-play" data-umami-event-lugar="faq">Google Play</a>. Es gratis.</span><span lang="en">On <a href="https://play.google.com/store/apps/details?id=com.matiasalm.swiftpen" target="_blank" rel="noopener">Google Play</a>. It's free.</span><span lang="fr">Sur <a href="https://play.google.com/store/apps/details?id=com.matiasalm.swiftpen" target="_blank" rel="noopener">Google Play</a>. Elle est gratuite.</span></p>
       </details>
       <details class="aparece">
         <summary data-umami-event="faq" data-umami-event-pregunta="cuenta"><span lang="es">¿Necesito crear una cuenta?</span><span lang="en">Do I need an account?</span><span lang="fr">Dois-je créer un compte ?</span></summary>
@@ -282,7 +282,19 @@
 <section class="cierre">
   <div class="contenedor">
     <h2><span lang="es">Tu próximo cuaderno,<br><span class="degradado">en tu tableta y en tu bolsillo.</span></span><span lang="en">Your next notebook,<br><span class="degradado">on your tablet and in your pocket.</span></span><span lang="fr">Votre prochain carnet,<br><span class="degradado">sur votre tablette et dans votre poche.</span></span></h2>
-    <div id="avisame">
+    <div class="acciones">
+    <a class="boton principal" lang="es" href="https://play.google.com/store/apps/details?id=com.matiasalm.swiftpen" target="_blank" rel="noopener" data-umami-event="ir-a-play" data-umami-event-lugar="cierre">
+          <span class="dos-lineas"><small>Disponible en Google Play</small>Descargar SwiftPen</span>
+        </a>
+    <a class="boton principal" lang="en" href="https://play.google.com/store/apps/details?id=com.matiasalm.swiftpen" target="_blank" rel="noopener" data-umami-event="ir-a-play" data-umami-event-lugar="cierre">
+          <span class="dos-lineas"><small>Available on Google Play</small>Download SwiftPen</span>
+        </a>
+    <a class="boton principal" lang="fr" href="https://play.google.com/store/apps/details?id=com.matiasalm.swiftpen" target="_blank" rel="noopener" data-umami-event="ir-a-play" data-umami-event-lugar="cierre">
+          <span class="dos-lineas"><small>Disponible sur Google Play</small>Télécharger SwiftPen</span>
+        </a>
+    </div>
+    <!-- Formulario "avisame cuando salga": retirado de la vista al publicarse en Google Play. Se conserva (y assets/avisame.js, y el CSS) por si hiciera falta de nuevo. -->
+    <div id="avisame" hidden>
     <form class="avisame" lang="es" data-idioma="es" novalidate>
       <p class="avisame-titulo">Recibe un aviso cuando SwiftPen esté disponible.</p>
       <div class="avisame-fila">
