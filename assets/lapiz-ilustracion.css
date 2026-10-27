@@ -1,16 +1,21 @@
 /* Ilustracion de los lapices reconocidos, propia, no captura: misma base que la de sincronizacion
- * (.h-sync, sync-ilustracion.css: aurora estatica y proporcion 1600 / 1051). Rejilla de 4 x 2 con
- * monogramas propios (no son los logotipos de las marcas). Todo escala con su ancho (cqw).
+ * (.h-sync, sync-ilustracion.css: aurora estatica y proporcion 1600 / 1051). SwiftPen arriba y debajo
+ * los nombres de las marcas como texto (sin logotipos: ninguna marca los permite sin licencia).
+ * Todo escala con su ancho (cqw).
  *   <figure class="marco h-sync h-lapiz cabecera-aurora" role="img" aria-labelledby="...">  */
 
-.h-lapiz-rejilla { display: grid; grid-template-columns: repeat(4, 21cqw); gap: 5cqw 2.4cqw; justify-content: center; }
-.h-lapiz-nodo { display: flex; flex-direction: column; align-items: center; gap: 1.8cqw; text-align: center; }
-.h-lapiz-icono {
-  display: grid; place-items: center; width: 15cqw; aspect-ratio: 1; border-radius: 22%;
-  background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow);
-  font: 800 6.4cqw/1 var(--fuente-titulo); letter-spacing: -.02em; color: var(--accent);
+.h-lapiz { flex-direction: column; gap: 2.2cqw; }
+.h-lapiz-app { display: grid; place-items: center; width: 14cqw; aspect-ratio: 1; border-radius: 22%; overflow: hidden; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); }
+.h-lapiz-app img { width: 100%; height: 100%; display: block; }
+.h-lapiz-hilo { width: 2px; height: 3.4cqw; border-radius: 2px; background: linear-gradient(var(--accent), transparent); opacity: .6; margin-top: -.6cqw; }
+.h-lapiz-fila { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.6cqw 1.4cqw; width: 92cqw; }
+.h-lapiz-marca {
+  display: inline-flex; align-items: center; gap: 1.3cqw; padding: 1.2cqw 2.2cqw 1.2cqw 1.7cqw; border-radius: 999px;
+  background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-suave);
+  font-size: max(11px, 2.3cqw); font-weight: 650; line-height: 1; letter-spacing: -.005em; white-space: nowrap;
 }
-.h-lapiz-icono-corta { font-size: 4.6cqw; }
-.h-lapiz-icono svg { width: 54%; height: 54%; fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.h-lapiz-otro { border-style: dashed; }
-.h-lapiz-nombre { font-size: max(11px, 2.5cqw); font-weight: 650; line-height: 1.2; letter-spacing: -.005em; }
+.h-lapiz-marca svg { width: 3cqw; height: 3cqw; flex: none; fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.h-lapiz-otro { border-style: dashed; color: var(--muted); }
+
+/* Aviso de marcas bajo la ilustracion. */
+.aviso-marcas { margin: 12px 0 0; font-size: 13px; line-height: 1.5; color: var(--muted); max-width: 46rem; }
