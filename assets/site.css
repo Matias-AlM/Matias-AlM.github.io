@@ -281,6 +281,12 @@ section { padding: 96px 0; }
     radial-gradient(circle var(--aurora-radio) at calc(90% - 20% * var(--aurora)) calc(85% - 15% * var(--aurora)), color-mix(in srgb, var(--purple) var(--aurora-morado), transparent), transparent);
   -webkit-mask-image: linear-gradient(#000 78%, transparent); mask-image: linear-gradient(#000 78%, transparent);
 }
+/* Cabecera de pagina (funciones y precios): la aurora baja 64 px por debajo de la cabecera y se
+ * desvanece en un tramo largo, para que no acabe en un corte seco (sobre todo en claro). */
+.cabecera-pagina.cabecera-aurora::before {
+  bottom: -64px;
+  -webkit-mask-image: linear-gradient(#000 45%, transparent); mask-image: linear-gradient(#000 45%, transparent);
+}
 @media (prefers-reduced-motion: no-preference) { .hero::before { animation: aurora 14s linear infinite alternate; } }
 @keyframes aurora { from { --aurora: 0; } to { --aurora: 1; } }
 /* Aurora a pantalla completa (release-notes y roadmap): <body class="fondo-aurora">.
