@@ -6,9 +6,9 @@
 <title>Darse de baja | SwiftPen</title>
 <meta name="robots" content="noindex">
 <link rel="icon" href="/favicon.png">
-<link rel="preload" href="/assets/fuentes/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css">
-<script src="/assets/idioma.js"></script>
+<link rel="preload" href="/assets/fuentes/mona-sans-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css?v=4">
+<script src="/assets/idioma.js?v=2"></script>
 <style>
   /* Una tarjeta en medio, como la pagina de baja del script. */
   .baja { max-width: 480px; margin: 72px auto; padding: 0 16px; text-align: center; }
@@ -26,21 +26,7 @@
 </head>
 <body>
 
-<header class="barra">
-  <div class="contenedor">
-    <a class="marca" href="../" aria-label="SwiftPen">
-      <img class="claro" src="../img/wordmark-light.webp" alt="SwiftPen" width="680" height="185">
-      <img class="oscuro" src="../img/wordmark-dark.webp" alt="SwiftPen" width="680" height="185">
-    </a>
-    <nav class="navegacion">
-      <div class="idioma" role="group" aria-label="Idioma / Language">
-        <button type="button" data-idioma="es" aria-pressed="true">ES</button>
-        <button type="button" data-idioma="en" aria-pressed="false">EN</button>
-        <button type="button" data-idioma="fr" aria-pressed="false">FR</button>
-      </div>
-    </nav>
-  </div>
-</header>
+<!--#barra-->
 
 <main class="baja" data-estado-actual="confirmar">
   <div class="tarjeta">
@@ -64,6 +50,8 @@
     </div>
   </div>
 </main>
+
+<!--#pie-->
 
 <script>
 // La baja la hace el script del formulario (_correo/aviso.gs, doGet con
