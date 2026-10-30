@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es" data-lang="es" data-titulo-es="Visor de notas | SwiftPen" data-titulo-en="Notes viewer | SwiftPen" data-titulo-fr="Visionneuse de notes | SwiftPen">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visor de notas | SwiftPen</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<!-- Pagina aislada: sin red (connect-src 'none'), solo scripts y estilos propios, y sin Umami. Las
+     notas se leen en el navegador y no salen de el. frame-ancestors solo vale como cabecera:
+     firebase.json la pone. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' blob:; font-src 'self'; worker-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<link rel="icon" href="/favicon.png">
+<link rel="stylesheet" href="/assets/site.css?v=5">
+<link rel="stylesheet" href="/visor/visor.css">
+<script src="/assets/idioma.js?v=2"></script>
+<script type="module" src="/visor/visor.js"></script>
+</head>
+<body class="fondo-aurora pagina-visor">
+
+<!--#barra-->
+
+<main class="visor">
+
+<section id="inicio" class="visor-inicio">
+  <h1><span lang="es">Visor de notas</span><span lang="en">Notes viewer</span><span lang="fr">Visionneuse de notes</span></h1>
+  <p><span lang="es">Abre en tu ordenador la carpeta <code>SwiftPen</code> de tu sincronización y mira tus notas, solo para leer. Todo ocurre en este navegador: ninguna nota sale de tu equipo.</span><span lang="en">Open the <code>SwiftPen</code> folder of your sync on your computer and read your notes, view only. Everything happens in this browser: no note leaves your device.</span><span lang="fr">Ouvrez sur votre ordinateur le dossier <code>SwiftPen</code> de votre synchronisation et lisez vos notes, en lecture seule. Tout se passe dans ce navigateur : aucune note ne quitte votre appareil.</span></p>
+  <button id="elegir" class="boton principal" type="button"><span lang="es">Elegir carpeta</span><span lang="en">Choose folder</span><span lang="fr">Choisir le dossier</span></button>
+  <p class="nota-pequena"><span lang="es">O arrastra la carpeta a esta ventana.</span><span lang="en">Or drag the folder onto this window.</span><span lang="fr">Ou faites glisser le dossier dans cette fenêtre.</span></p>
+  <input id="entrada-carpeta" type="file" webkitdirectory multiple hidden>
+</section>
+
+<section id="biblioteca" hidden>
+  <div class="bib-cabecera">
+    <button id="carpeta-subir" class="bib-subir" type="button" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.25 5.75L7.75 12.25L14.25 18.75"/></svg></button>
+    <nav id="migas" class="bib-migas"></nav>
+    <label class="solo-lectores" for="busqueda"><span lang="es">Buscar</span><span lang="en">Search</span><span lang="fr">Rechercher</span></label>
+    <input id="busqueda" type="search" class="visor-campo" autocomplete="off" spellcheck="false" placeholder="">
+  </div>
+  <p id="aviso" class="nota-pequena" hidden></p>
+  <div id="carpetas" class="bib-carpetas" hidden></div>
+  <div id="lista" class="bib-lista"></div>
+</section>
+
+<section id="nota" class="visor-nota" hidden>
+  <div class="visor-nota-barra">
+    <button id="nota-volver" class="boton volver" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span class="texto-volver"><span lang="es">Volver</span><span lang="en">Back</span><span lang="fr">Retour</span></span></button>
+    <h2 id="nota-titulo"></h2>
+  </div>
+  <div class="visor-escenario">
+    <canvas id="lienzo" class="visor-lienzo" tabindex="0"></canvas>
+    <p id="nota-estado" class="visor-estado" role="status" hidden></p>
+    <p id="nota-bloqueada" class="visor-bloqueada" hidden><svg class="candado" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V8a5 5 0 0 1 10 0v2h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1zm2 0h6V8a3 3 0 0 0-6 0z"/></svg><span lang="es">Esta nota está bloqueada. Ábrela en la app.</span><span lang="en">This note is locked. Open it in the app.</span><span lang="fr">Cette note est verrouillée. Ouvrez-la dans l'application.</span></p>
+    <!-- La pildora de abajo a la izquierda del editor de la app: zoom | pagina anterior, contador, pagina siguiente. -->
+    <div id="nota-pildora" class="app-pildora oculta">
+      <button id="zoom-etiqueta" class="app-zoom" type="button"><span id="zoom-valor">100%</span><svg id="zoom-flecha" class="app-flecha" viewBox="0 0 10 6" aria-hidden="true"><path d="M0 0h10L5 6z" fill="currentColor"/></svg></button>
+      <span id="pagina-separador" class="app-divisor"></span>
+      <button id="pagina-anterior" class="app-icono giro-arriba" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.75 5.75L16.25 12.25L9.75 18.75"/></svg></button>
+      <button id="pagina-contador" class="app-contador" type="button"><span id="pagina-arriba">1</span><span id="pagina-raya" class="app-raya" hidden></span><span id="pagina-abajo" hidden></span></button>
+      <button id="pagina-siguiente" class="app-icono giro-abajo" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.75 5.75L16.25 12.25L9.75 18.75"/></svg></button>
+    </div>
+    <div id="menu-zoom" class="app-panel" hidden>
+      <button id="zoom-ajustar" class="app-fila" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.75 8.25V6.75A2 2 0 0 1 5.75 4.75H7.25M17.25 4.75H18.75A2 2 0 0 1 20.75 6.75V8.25M20.75 16.25V17.75A2 2 0 0 1 18.75 19.75H17.25M7.25 19.75H5.75A2 2 0 0 1 3.75 17.75V16.25M7.75 12.25H16.75M9.75 10.25L7.75 12.25L9.75 14.25M14.75 10.25L16.75 12.25L14.75 14.25"/></svg><span><span lang="es">Ajustar a la pantalla</span><span lang="en">Fit to screen</span><span lang="fr">Ajuster à l'écran</span></span></button>
+    </div>
+    <div id="menu-pagina" class="app-panel" hidden>
+      <p class="app-seccion"><span lang="es">Ir a la página</span><span lang="en">Go to page</span><span lang="fr">Aller à la page</span></p>
+      <input id="pagina-campo" class="app-campo" type="number" min="1" inputmode="numeric">
+      <div class="app-acciones">
+        <button id="pagina-cancelar" class="app-texto" type="button"><span lang="es">Cancelar</span><span lang="en">Cancel</span><span lang="fr">Annuler</span></button>
+        <button id="pagina-ir" class="app-principal" type="button"><span lang="es">Ir</span><span lang="en">Go</span><span lang="fr">Aller</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!--#pie-->
+</body>
+</html>
