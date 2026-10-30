@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es" data-lang="es" data-titulo-es="Visor de notas | SwiftPen" data-titulo-en="Notes viewer | SwiftPen" data-titulo-fr="Visionneuse de notes | SwiftPen">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visor de notas | SwiftPen</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<!-- Pagina aislada: sin red (connect-src 'none'), solo scripts y estilos propios, y sin Umami. Las
+     notas se leen en el navegador y no salen de el. frame-ancestors solo vale como cabecera:
+     firebase.json la pone. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' blob:; font-src 'self'; worker-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<link rel="icon" href="/favicon.png">
+<link rel="stylesheet" href="/assets/site.css?v=5">
+<link rel="stylesheet" href="/visor/visor.css">
+<script src="/assets/idioma.js?v=2"></script>
+<script type="module" src="/visor/visor.js"></script>
+</head>
+<body class="fondo-aurora pagina-visor">
+
+<!--#barra-->
+
+<main class="visor">
+
+<section id="inicio" class="visor-inicio">
+  <h1><span lang="es">Visor de notas</span><span lang="en">Notes viewer</span><span lang="fr">Visionneuse de notes</span></h1>
+  <p><span lang="es">Abre en tu ordenador la carpeta <code>SwiftPen</code> de tu sincronización y mira tus notas, solo para leer. Todo ocurre en este navegador: ninguna nota sale de tu equipo.</span><span lang="en">Open the <code>SwiftPen</code> folder of your sync on your computer and read your notes, view only. Everything happens in this browser: no note leaves your device.</span><span lang="fr">Ouvrez sur votre ordinateur le dossier <code>SwiftPen</code> de votre synchronisation et lisez vos notes, en lecture seule. Tout se passe dans ce navigateur : aucune note ne quitte votre appareil.</span></p>
+  <button id="elegir" class="boton principal" type="button"><span lang="es">Elegir carpeta</span><span lang="en">Choose folder</span><span lang="fr">Choisir le dossier</span></button>
+  <p class="nota-pequena"><span lang="es">O arrastra la carpeta a esta ventana.</span><span lang="en">Or drag the folder onto this window.</span><span lang="fr">Ou faites glisser le dossier dans cette fenêtre.</span></p>
+  <input id="entrada-carpeta" type="file" webkitdirectory multiple hidden>
+</section>
+
+<section id="biblioteca" hidden>
+  <div class="visor-barra">
+    <h1><span lang="es">Tus notas</span><span lang="en">Your notes</span><span lang="fr">Vos notes</span></h1>
+    <span id="cuenta" class="visor-cuenta" aria-live="polite"></span>
+    <label class="solo-lectores" for="busqueda"><span lang="es">Buscar</span><span lang="en">Search</span><span lang="fr">Rechercher</span></label>
+    <input id="busqueda" type="search" class="visor-campo" autocomplete="off" spellcheck="false" placeholder="">
+    <label class="solo-lectores" for="carpeta"><span lang="es">Carpeta</span><span lang="en">Folder</span><span lang="fr">Dossier</span></label>
+    <select id="carpeta" class="visor-campo"></select>
+  </div>
+  <p id="aviso" class="nota-pequena" hidden></p>
+  <div id="lista" class="visor-lista"></div>
+</section>
+
+<section id="nota" class="visor-nota" hidden>
+  <div class="visor-nota-barra">
+    <button id="nota-volver" class="boton" type="button"><span lang="es">← Volver</span><span lang="en">← Back</span><span lang="fr">← Retour</span></button>
+    <h2 id="nota-titulo"></h2>
+    <div id="nota-zoom" class="visor-zoom">
+      <button id="zoom-menos" class="boton" type="button" aria-label="−">−</button>
+      <button id="zoom-encajar" class="boton" type="button"><span lang="es">Ajustar</span><span lang="en">Fit</span><span lang="fr">Ajuster</span></button>
+      <button id="zoom-mas" class="boton" type="button" aria-label="+">+</button>
+    </div>
+  </div>
+  <canvas id="lienzo" class="visor-lienzo" tabindex="0"></canvas>
+  <p id="nota-bloqueada" class="visor-bloqueada" hidden><span lang="es">Esta nota está bloqueada. Ábrela en la app.</span><span lang="en">This note is locked. Open it in the app.</span><span lang="fr">Cette note est verrouillée. Ouvrez-la dans l'application.</span></p>
+  <p id="nota-error" class="visor-bloqueada" hidden></p>
+</section>
+
+</main>
+
+<!--#pie-->
+</body>
+</html>

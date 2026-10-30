@@ -1,0 +1,58 @@
+/* Visor de notas: sobre los tokens y la aurora de site.css. */
+.visor { max-width: 1520px; margin: 0 auto; padding: 40px 20px 80px; }
+.visor [hidden] { display: none !important; }
+.visor-inicio { max-width: 640px; margin: 8vh auto 0; text-align: center; }
+.visor-inicio p { color: var(--muted); }
+.visor-inicio .boton { margin: 12px 0 4px; }
+.visor h1 { font-family: var(--fuente-titulo); font-size: clamp(1.8rem, 5vw, 2.6rem); margin: 0 0 12px; }
+body.arrastrando .visor { outline: 2px dashed var(--accent); outline-offset: -8px; border-radius: 16px; }
+
+.visor-barra { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 16px; margin-bottom: 20px; }
+.visor-barra h1 { margin: 0; font-size: 1.8rem; }
+.visor-cuenta { color: var(--muted); font-size: 15px; flex: 1 1 auto; }
+.visor-campo {
+  font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 9px 12px; min-width: 0; max-width: 100%;
+}
+.visor-campo:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.visor-lista { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 16px; }
+.tarjeta {
+  position: relative; display: flex; flex-direction: column; gap: 4px; text-align: left; cursor: pointer;
+  font: inherit; color: var(--text); padding: 10px; border-radius: 16px; min-width: 0;
+  background: color-mix(in srgb, var(--surface) 80%, transparent); border: 1px solid var(--border);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: var(--shadow-suave);
+}
+.tarjeta:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--border)); }
+.tarjeta:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.miniatura {
+  display: block; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 10px;
+  background: var(--surface-2); border: 1px solid var(--border);
+}
+.miniatura-img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.miniatura.bloqueada { display: grid; place-items: center; }
+.candado { width: 44px; height: 44px; fill: var(--faint); }
+.tarjeta-titulo { font-weight: 650; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tarjeta-meta { display: flex; flex-direction: column; font-size: 13px; color: var(--muted); }
+.tarjeta-carpeta { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.etiqueta-bloqueada {
+  position: absolute; top: 16px; left: 16px; font-size: 11px; font-weight: 700; padding: 2px 8px;
+  border-radius: 999px; background: var(--surface); color: var(--muted); border: 1px solid var(--border);
+}
+
+/* Nota abierta: ocupa la ventana; el lienzo se lleva todo el alto que sobra. */
+.visor-nota { position: fixed; inset: 0; z-index: 50; display: flex; flex-direction: column; background: var(--bg); }
+.visor-nota-barra { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-bottom: 1px solid var(--border); background: var(--surface); }
+.visor-nota-barra h2 { flex: 1; margin: 0; font-size: 1.05rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.visor-zoom { display: flex; gap: 6px; }
+.visor-lienzo { flex: 1; min-height: 0; width: 100%; display: block; background: var(--surface-2); touch-action: none; cursor: grab; }
+.visor-lienzo:active { cursor: grabbing; }
+.visor-lienzo:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.visor-bloqueada { margin: 12vh auto; max-width: 28em; padding: 0 20px; text-align: center; font-size: 1.15rem; color: var(--muted); }
+body.con-nota { overflow: hidden; }
+@media (max-width: 520px) {
+  .visor-lista { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .visor-campo { flex: 1 1 100%; }
+  .visor-nota-barra { flex-wrap: wrap; }
+  .visor-nota-barra h2 { order: 3; flex: 1 1 100%; }
+}
