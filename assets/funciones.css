@@ -96,6 +96,9 @@ html:not(.js) .fn-panel + .fn-panel { padding-top: 64px; }
 .fn-tesela-media { margin-top: auto; padding: 0 28px; }
 .fn-tesela-media picture { display: block; border-radius: 16px 16px 0 0; overflow: hidden; border: 1px solid var(--border); border-bottom: 0; }
 .fn-tesela-media img { width: 100%; height: auto; }
+/* Video de la tesela grande (assets/fn-video.js): recorta el video con las esquinas del poster. */
+.fn-tesela-media .fn-video { border-radius: 16px 16px 0 0; overflow: hidden; border: 1px solid var(--border); border-bottom: 0; }
+.fn-tesela-media .fn-video picture { border: 0; border-radius: 0; }
 .fn-tesela-media .captura-pendiente { border-radius: 16px 16px 0 0; border-bottom: 0; }
 /* Ilustracion de sincronizacion (assets/sync-ilustracion.css) en la tesela y en los pasos. */
 .fn-tesela-media .h-sync { margin: 0; border-radius: 16px 16px 0 0; border-bottom: 0; box-shadow: none; }
@@ -158,3 +161,6 @@ html:not(.js) .fn-panel + .fn-panel { padding-top: 64px; }
 /* Cabecera con vídeo (assets/fn-video.js): el póster (<picture>) queda debajo y el vídeo, al arrancar, encima. */
 .fn-video { position: relative; }
 .fn-video video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+
+/* "Experimental" con el estilo de BETA: contorno en mayusculas. */
+.beta.experimental { text-transform: uppercase; }
