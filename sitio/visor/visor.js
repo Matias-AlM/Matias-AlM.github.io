@@ -13,21 +13,21 @@ const TEXTOS = {
     sinCarpeta: "Sin carpeta", todas: "Todas las carpetas", sinTitulo: "Sin título",
     ilegibles: (n) => `${n} ${n === 1 ? "fichero no se pudo leer" : "ficheros no se pudieron leer"}.`,
     vacia: "No hay notas de SwiftPen en esa carpeta.", sinResultados: "Ninguna nota coincide.",
-    bloqueada: "Bloqueada", noSeDibuja: "No se pudo dibujar esta nota.",
+    bloqueada: "Bloqueada", buscar: "Buscar por título", noSeDibuja: "No se pudo dibujar esta nota.",
   },
   en: {
     cargadas: (n) => `${n} ${n === 1 ? "note" : "notes"}`,
     sinCarpeta: "No folder", todas: "All folders", sinTitulo: "Untitled",
     ilegibles: (n) => `${n} ${n === 1 ? "file could not be read" : "files could not be read"}.`,
     vacia: "There are no SwiftPen notes in that folder.", sinResultados: "No note matches.",
-    bloqueada: "Locked", noSeDibuja: "This note could not be drawn.",
+    bloqueada: "Locked", buscar: "Search by title", noSeDibuja: "This note could not be drawn.",
   },
   fr: {
     cargadas: (n) => `${n} ${n === 1 ? "note" : "notes"}`,
     sinCarpeta: "Sans dossier", todas: "Tous les dossiers", sinTitulo: "Sans titre",
     ilegibles: (n) => `${n} ${n === 1 ? "fichier illisible" : "fichiers illisibles"}.`,
     vacia: "Aucune note SwiftPen dans ce dossier.", sinResultados: "Aucune note ne correspond.",
-    bloqueada: "Verrouillée", noSeDibuja: "Impossible de dessiner cette note.",
+    bloqueada: "Verrouillée", buscar: "Rechercher par titre", noSeDibuja: "Impossible de dessiner cette note.",
   },
 };
 const idioma = () => (TEXTOS[document.documentElement.dataset.lang] ? document.documentElement.dataset.lang : "es");
@@ -199,6 +199,7 @@ function tarjetaDe(nota) {
 }
 
 function pintarCarpetas() {
+  $("busqueda").placeholder = t().buscar;
   const selector = $("carpeta");
   const conCarpeta = new Set(estado.notas.map((n) => n.carpetaId).filter(Boolean));
   const opciones = [["", t().todas]];

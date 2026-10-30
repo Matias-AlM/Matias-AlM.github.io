@@ -1,5 +1,6 @@
 /* Visor de notas: sobre los tokens y la aurora de site.css. */
 .visor { max-width: 1520px; margin: 0 auto; padding: 40px 20px 80px; }
+.visor section { padding: 0; }
 .visor [hidden] { display: none !important; }
 .visor-inicio { max-width: 640px; margin: 8vh auto 0; text-align: center; }
 .visor-inicio p { color: var(--muted); }
