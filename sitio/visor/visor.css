@@ -41,19 +41,65 @@ body.arrastrando .visor { outline: 2px dashed var(--accent); outline-offset: -8p
   border-radius: 999px; background: var(--surface); color: var(--muted); border: 1px solid var(--border);
 }
 
-/* Nota abierta: ocupa la ventana; el lienzo se lleva todo el alto que sobra. */
+/* Nota abierta: ocupa la ventana; el escenario se lleva todo el alto que sobra. */
+:root { --hoja-sombra: rgba(40, 30, 90, 0.28); --hoja-borde: rgba(22, 22, 40, 0.14); }
+:root[data-tema="oscuro"] { --hoja-sombra: rgba(0, 0, 0, 0.7); --hoja-borde: rgba(255, 255, 255, 0.1); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema="claro"]) { --hoja-sombra: rgba(0, 0, 0, 0.7); --hoja-borde: rgba(255, 255, 255, 0.1); }
+}
 .visor-nota { position: fixed; inset: 0; z-index: 50; display: flex; flex-direction: column; background: var(--bg); }
-.visor-nota-barra { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-bottom: 1px solid var(--border); background: var(--surface); }
-.visor-nota-barra h2 { flex: 1; margin: 0; font-size: 1.05rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.visor-nota-barra {
+  display: flex; align-items: center; gap: 12px; padding: 8px 16px; z-index: 1;
+  background: color-mix(in srgb, var(--surface) 84%, transparent); border-bottom: 1px solid var(--border);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+}
+.visor-nota-barra h2 { flex: 1; min-width: 0; margin: 0; font-size: 1.05rem; font-weight: 650; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.visor-nota-barra .boton { padding: 8px 14px; min-height: 40px; }
+.volver { gap: 6px; }
+.volver svg { width: 18px; height: 18px; }
 .visor-zoom { display: flex; gap: 6px; }
-.visor-lienzo { flex: 1; min-height: 0; width: 100%; display: block; background: var(--surface-2); touch-action: none; cursor: grab; }
-.visor-lienzo:active { cursor: grabbing; }
-.visor-lienzo:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
-.visor-bloqueada { margin: 12vh auto; max-width: 28em; padding: 0 20px; text-align: center; font-size: 1.15rem; color: var(--muted); }
+.visor-escenario { position: relative; flex: 1; min-height: 0; background: var(--surface-2); }
+.visor-lienzo { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; outline: none; }
+.visor-lienzo.agarrando { cursor: grabbing; }
+
+/* Contador de pagina: una pastilla discreta abajo, centrada. */
+.visor-pagina {
+  position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 2;
+  display: flex; align-items: center; border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--muted);
+  background: color-mix(in srgb, var(--surface) 88%, transparent); border: 1px solid var(--border);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: var(--shadow-suave);
+}
+.visor-pagina button { font: inherit; color: inherit; background: none; border: 0; padding: 7px 16px; border-radius: 999px; cursor: pointer; font-variant-numeric: tabular-nums; }
+.visor-pagina button:hover { color: var(--text); }
+.visor-pagina button:focus-visible, .visor-pagina input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.visor-pagina-edicion { display: flex; align-items: center; gap: 6px; padding: 4px 14px; }
+.visor-pagina-edicion input {
+  width: 4.2em; font: inherit; color: var(--text); text-align: center; background: var(--surface-2);
+  border: 1px solid var(--border); border-radius: 8px; padding: 3px 4px;
+}
+
+/* Estados: cargando, nota vacia, error y nota bloqueada. */
+.visor-estado, .visor-bloqueada { margin: 0; color: var(--muted); text-align: center; }
+.visor-estado { position: absolute; left: 50%; z-index: 2; transform: translateX(-50%); max-width: calc(100% - 32px); }
+.visor-estado.cargando, .visor-estado.error { top: 14vh; font-size: 1.05rem; }
+.visor-estado.cargando::before {
+  content: ""; display: block; width: 28px; height: 28px; margin: 0 auto 12px; border-radius: 50%;
+  border: 3px solid var(--border); border-top-color: var(--accent); animation: visor-giro .9s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) { .visor-estado.cargando::before { animation: none; } }
+@keyframes visor-giro { to { transform: rotate(360deg); } }
+.visor-estado.vacia {
+  top: 76px; padding: 6px 14px; border-radius: 999px; font-size: 14px; pointer-events: none;
+  background: color-mix(in srgb, var(--surface) 88%, transparent); border: 1px solid var(--border);
+}
+.visor-bloqueada { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 0 24px; font-size: 1.15rem; }
+.visor-bloqueada .candado { width: 56px; height: 56px; }
 body.con-nota { overflow: hidden; }
 @media (max-width: 520px) {
   .visor-lista { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .visor-campo { flex: 1 1 100%; }
-  .visor-nota-barra { flex-wrap: wrap; }
-  .visor-nota-barra h2 { order: 3; flex: 1 1 100%; }
+  .visor-nota-barra { gap: 8px; padding: 8px 10px; }
+  .texto-volver { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .visor-nota-barra .boton { padding: 8px 12px; }
+  .visor-pagina { bottom: 14px; }
 }

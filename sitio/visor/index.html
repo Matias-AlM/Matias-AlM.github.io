@@ -45,7 +45,7 @@
 
 <section id="nota" class="visor-nota" hidden>
   <div class="visor-nota-barra">
-    <button id="nota-volver" class="boton" type="button"><span lang="es">← Volver</span><span lang="en">← Back</span><span lang="fr">← Retour</span></button>
+    <button id="nota-volver" class="boton volver" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span class="texto-volver"><span lang="es">Volver</span><span lang="en">Back</span><span lang="fr">Retour</span></span></button>
     <h2 id="nota-titulo"></h2>
     <div id="nota-zoom" class="visor-zoom">
       <button id="zoom-menos" class="boton" type="button" aria-label="−">−</button>
@@ -53,9 +53,15 @@
       <button id="zoom-mas" class="boton" type="button" aria-label="+">+</button>
     </div>
   </div>
-  <canvas id="lienzo" class="visor-lienzo" tabindex="0"></canvas>
-  <p id="nota-bloqueada" class="visor-bloqueada" hidden><span lang="es">Esta nota está bloqueada. Ábrela en la app.</span><span lang="en">This note is locked. Open it in the app.</span><span lang="fr">Cette note est verrouillée. Ouvrez-la dans l'application.</span></p>
-  <p id="nota-error" class="visor-bloqueada" hidden></p>
+  <div class="visor-escenario">
+    <canvas id="lienzo" class="visor-lienzo" tabindex="0"></canvas>
+    <p id="nota-estado" class="visor-estado" role="status" hidden></p>
+    <p id="nota-bloqueada" class="visor-bloqueada" hidden><svg class="candado" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V8a5 5 0 0 1 10 0v2h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1zm2 0h6V8a3 3 0 0 0-6 0z"/></svg><span lang="es">Esta nota está bloqueada. Ábrela en la app.</span><span lang="en">This note is locked. Open it in the app.</span><span lang="fr">Cette note est verrouillée. Ouvrez-la dans l'application.</span></p>
+    <div id="nota-pagina" class="visor-pagina" hidden>
+      <button id="pagina-boton" type="button"></button>
+      <label id="pagina-edicion" class="visor-pagina-edicion" hidden><span id="pagina-etiqueta"></span> <input id="pagina-campo" type="number" min="1" inputmode="numeric"> <span id="pagina-total"></span></label>
+    </div>
+  </div>
 </section>
 
 </main>

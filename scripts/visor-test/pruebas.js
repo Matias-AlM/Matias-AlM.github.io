@@ -5,6 +5,10 @@ import {
   ordenarNotas, filtrarNotas, nombreDeImagen,
 } from "/sitio/visor/formato.js";
 import { calcularHojas } from "/sitio/visor/maqueta.js";
+import {
+  cajaDeHojas, zoomDeAjuste, limitarZoom, zoomHaciaPunto, acotarVista, paginaActual, vistaDePagina, factorDeRueda,
+  ZOOM_MIN_RELATIVO, ZOOM_MAX_RELATIVO,
+} from "/sitio/visor/gestos.js";
 import { colorDe, prepararNota, dibujarMiniatura, dibujarRegion } from "/sitio/visor/pintar.js";
 
 const pruebas = [];
@@ -166,6 +170,79 @@ prueba("imagen presente se dibuja con su volteo", async () => {
   dibujarRegion(ctx, prep, new Map([["i", bitmap]]), 900, 900, 1, 200, 200);
   igual(pixel(ctx, 50, 100).slice(0, 3), [0, 0, 255], "izquierda: era la derecha (azul)");
   igual(pixel(ctx, 150, 100).slice(0, 3), [255, 0, 0], "derecha: roja");
+});
+
+// ---- paginas, zoom y gestos ----
+const cerca = (a, b, tol = 1e-6, msg = "") => { if (Math.abs(a - b) > tol) throw new Error(`${msg} esperado ${b}, salio ${a}`); };
+const hojasDe = (n, extra = {}) => calcularHojas(leerNota(JSON.stringify({ id: "n", dpi: 320, pageCount: n, ...extra })));
+prueba("parser de paginas: 12 hojas en vertical, separadas por 60 y centradas", () => {
+  const h = hojasDe(12);
+  igual(h.length, 12);
+  for (let i = 1; i < 12; i++) cerca(h[i].arriba, h[i - 1].arriba + h[i - 1].alto + 60, 1e-6, `hoja ${i}`);
+  igual(h.every((x) => Math.abs(x.izquierda - h[0].izquierda) < 1e-6), true);
+});
+prueba("paginas: una apaisada en medio se centra sobre la columna y desplaza las siguientes", () => {
+  const h = hojasDe(3, { pagePapers: { "1": { orientation: "HORIZONTAL" } } });
+  igual(h[1].ancho > h[1].alto, true);
+  cerca(h[1].izquierda + h[1].ancho / 2, h[0].izquierda + h[0].ancho / 2, 1e-6, "centro");
+  cerca(h[2].arriba, h[1].arriba + h[1].alto + 60);
+});
+prueba("paginas: el contenido mas abajo que pageCount amplia la nota", () => {
+  igual(hojasDe(2, { strokes: [[seg(0, 3802 * 4 + 100, 10, 3802 * 4 + 100)]] }).length, 5);
+});
+const vista = (extra = {}) => ({ zoom: 0.2, izquierda: 0, arriba: 0, ...extra });
+prueba("pagina actual: la que cruza la linea central; en el hueco, la de arriba", () => {
+  const h = hojasDe(12);
+  igual(paginaActual(h, vista({ arriba: 0 }), 500), 0);
+  igual(paginaActual(h, vista({ arriba: h[2].arriba - 100 }), 500), 2);
+  const hueco = h[0].arriba + h[0].alto + 30;
+  igual(paginaActual(h, vista({ arriba: hueco - 250 / 0.2 * 1 / 1 }), 500), 0, "centro en el hueco");
+  igual(paginaActual(h, vista({ arriba: h[11].arriba + 5000 }), 500), 11, "mas alla de la ultima");
+  igual(paginaActual(h, vista({ arriba: -5000 }), 500), 0, "antes de la primera");
+});
+prueba("salto de pagina: la hoja queda arriba y centrada", () => {
+  const h = hojasDe(12);
+  const v = vistaDePagina(h, 6, 800, 0.2);
+  cerca(v.izquierda + 800 / 0.2 / 2, h[6].izquierda + h[6].ancho / 2, 1e-6, "centrada");
+  igual(v.arriba <= h[6].arriba && h[6].arriba - v.arriba < 100, true);
+  igual(paginaActual(h, v, 600), 6);
+  igual(vistaDePagina(h, 99, 800, 0.2).arriba, vistaDePagina(h, 11, 800, 0.2).arriba, "se acota a la ultima");
+});
+prueba("limites de zoom: relativos al ajuste", () => {
+  cerca(limitarZoom(100, 0.2), 0.2 * ZOOM_MAX_RELATIVO);
+  cerca(limitarZoom(0.0001, 0.2), 0.2 * ZOOM_MIN_RELATIVO);
+  cerca(limitarZoom(0.3, 0.2), 0.3);
+});
+prueba("zoom hacia el cursor: el punto bajo el cursor no se mueve", () => {
+  const v0 = vista({ zoom: 0.2, izquierda: 100, arriba: 400 });
+  const v1 = zoomHaciaPunto(v0, 2, 300, 200, 0.2);
+  cerca(v1.zoom, 0.4);
+  cerca(v1.izquierda + 300 / v1.zoom, v0.izquierda + 300 / v0.zoom, 1e-9, "x");
+  cerca(v1.arriba + 200 / v1.zoom, v0.arriba + 200 / v0.zoom, 1e-9, "y");
+});
+prueba("zoom hacia el cursor: respeta el limite y el punto sigue fijo", () => {
+  const v0 = vista({ zoom: 1.5, izquierda: 10, arriba: 20 });
+  const v1 = zoomHaciaPunto(v0, 10, 100, 100, 0.2);
+  cerca(v1.zoom, 0.2 * ZOOM_MAX_RELATIVO);
+  cerca(v1.izquierda + 100 / v1.zoom, v0.izquierda + 100 / v0.zoom, 1e-9);
+});
+prueba("ajuste al ancho: cabe la caja con margen", () => {
+  const caja = cajaDeHojas(hojasDe(2));
+  cerca(zoomDeAjuste(caja, 824) * (caja.x1 - caja.x0), 800);
+});
+prueba("acotar: no se puede perder el contenido por ningun lado", () => {
+  const caja = cajaDeHojas(hojasDe(3));
+  const lejos = acotarVista(vista({ izquierda: 1e9, arriba: 1e9 }), caja, 800, 600);
+  igual(lejos.izquierda < caja.x1 && lejos.arriba < caja.y1, true);
+  const antes = acotarVista(vista({ izquierda: -1e9, arriba: -1e9 }), caja, 800, 600);
+  igual(antes.izquierda + 800 / 0.2 > caja.x0 && antes.arriba + 600 / 0.2 > caja.y0, true);
+  igual(acotarVista(vista({ izquierda: 10, arriba: 10 }), caja, 800, 600).izquierda, 10, "dentro: no cambia");
+});
+prueba("rueda con Ctrl: pellizco suave y clic de rueda acotado", () => {
+  cerca(factorDeRueda(0), 1);
+  igual(factorDeRueda(-5) > 1 && factorDeRueda(5) < 1, true);
+  igual(factorDeRueda(-100) === factorDeRueda(-60), true, "acotado");
+  igual(factorDeRueda(-3, 1) > factorDeRueda(-3, 0), true, "lineas pesan mas que pixeles");
 });
 
 // ---- ejecucion ----

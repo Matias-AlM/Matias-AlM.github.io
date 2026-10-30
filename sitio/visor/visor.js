@@ -13,6 +13,7 @@ const TEXTOS = {
     sinCarpeta: "Sin carpeta", todas: "Todas las carpetas", sinTitulo: "Sin título",
     ilegibles: (n) => `${n} ${n === 1 ? "fichero no se pudo leer" : "ficheros no se pudieron leer"}.`,
     vacia: "No hay notas de SwiftPen en esa carpeta.", sinResultados: "Ninguna nota coincide.",
+    cargando: "Cargando…", notaVacia: "Esta nota está vacía.", pagina: (a, b) => `Página ${a} de ${b}`, paginaPalabra: "Página", deTotal: (b) => `de ${b}`, irAPagina: "Ir a una página",
     bloqueada: "Bloqueada", buscar: "Buscar por título", noSeDibuja: "No se pudo dibujar esta nota.",
   },
   en: {
@@ -20,6 +21,7 @@ const TEXTOS = {
     sinCarpeta: "No folder", todas: "All folders", sinTitulo: "Untitled",
     ilegibles: (n) => `${n} ${n === 1 ? "file could not be read" : "files could not be read"}.`,
     vacia: "There are no SwiftPen notes in that folder.", sinResultados: "No note matches.",
+    cargando: "Loading…", notaVacia: "This note is empty.", pagina: (a, b) => `Page ${a} of ${b}`, paginaPalabra: "Page", deTotal: (b) => `of ${b}`, irAPagina: "Go to a page",
     bloqueada: "Locked", buscar: "Search by title", noSeDibuja: "This note could not be drawn.",
   },
   fr: {
@@ -27,6 +29,7 @@ const TEXTOS = {
     sinCarpeta: "Sans dossier", todas: "Tous les dossiers", sinTitulo: "Sans titre",
     ilegibles: (n) => `${n} ${n === 1 ? "fichier illisible" : "fichiers illisibles"}.`,
     vacia: "Aucune note SwiftPen dans ce dossier.", sinResultados: "Aucune note ne correspond.",
+    cargando: "Chargement…", notaVacia: "Cette note est vide.", pagina: (a, b) => `Page ${a} sur ${b}`, paginaPalabra: "Page", deTotal: (b) => `sur ${b}`, irAPagina: "Aller à une page",
     bloqueada: "Verrouillée", buscar: "Rechercher par titre", noSeDibuja: "Impossible de dessiner cette note.",
   },
 };
@@ -242,37 +245,87 @@ function pintarTodo() {
 // ---- Nota abierta ----
 
 let vistaActual = null;
+let aperturas = 0;                 // para descartar una lectura lenta si ya se abrio otra nota o se cerro
+let paginaMostrada = null;         // {actual, total}
+
+function mostrarEstado(clase, texto) {
+  const aviso = $("nota-estado");
+  aviso.hidden = texto === null;
+  aviso.className = `visor-estado ${clase}`;
+  aviso.textContent = texto ?? "";
+}
+
+function pintarContadorDePagina() {
+  const caja = $("nota-pagina");
+  caja.hidden = !paginaMostrada || paginaMostrada.total < 2;
+  if (caja.hidden) return;
+  $("pagina-boton").textContent = t().pagina(paginaMostrada.actual, paginaMostrada.total);
+  $("pagina-boton").setAttribute("aria-label", t().irAPagina);
+  $("pagina-etiqueta").textContent = t().paginaPalabra;
+  $("pagina-total").textContent = t().deTotal(paginaMostrada.total);
+  $("pagina-campo").max = String(paginaMostrada.total);
+}
+
+function editarPagina(editar) {
+  $("pagina-boton").hidden = editar;
+  $("pagina-edicion").hidden = !editar;
+  if (editar) {
+    const campo = $("pagina-campo");
+    campo.value = String(paginaMostrada.actual);
+    campo.focus();
+    campo.select();
+  }
+}
+
+function saltarAPagina() {
+  const campo = $("pagina-campo");
+  const n = Math.round(Number(campo.value));
+  if (vistaActual && Number.isFinite(n) && n >= 1) vistaActual.irAPagina(Math.min(n, vistaActual.total));
+  editarPagina(false);
+  $("lienzo").focus();
+}
 
 async function abrirNota(resumen) {
+  const apertura = ++aperturas;
   const panel = $("nota");
   $("nota-titulo").textContent = resumen.titulo || t().sinTitulo;
   const lienzo = $("lienzo");
-  const error = $("nota-error");
   panel.hidden = false;
   document.body.classList.add("con-nota");
   $("nota-volver").focus();
-  error.hidden = true;
+  paginaMostrada = null;
+  pintarContadorDePagina();
+  editarPagina(false);
   // Una nota bloqueada nunca se lee ni se dibuja: solo se avisa.
-  lienzo.hidden = resumen.bloqueada;
+  lienzo.hidden = true;
+  mostrarEstado("", null);
   $("nota-bloqueada").hidden = !resumen.bloqueada;
   $("nota-zoom").hidden = resumen.bloqueada;
   if (resumen.bloqueada) return;
+  mostrarEstado("cargando", t().cargando);
   try {
     const nota = leerNota(await estado.archivos.get(resumen.nombreDeFichero).text());
     const bitmaps = await cargarBitmaps(nota, (idImagen) => estado.archivos.get(nombreDeImagen(nota.id, idImagen)));
-    if (panel.hidden) return;
-    vistaActual = crearVista(lienzo, prepararNota(nota), bitmaps);
+    if (apertura !== aperturas) return;
+    lienzo.hidden = false;
+    const vacia = nota.trazos.every((trazo) => trazo.length === 0) && nota.imagenes.every((i) => i.esCajaDeTexto);
+    mostrarEstado("vacia", vacia ? t().notaVacia : null);
+    vistaActual = crearVista(lienzo, prepararNota(nota), bitmaps, {
+      alCambiarPagina: (actual, total) => { paginaMostrada = { actual, total }; pintarContadorDePagina(); },
+    });
     lienzo.focus();
   } catch (e) {
-    error.textContent = t().noSeDibuja;
-    error.hidden = false;
+    if (apertura !== aperturas) return;
+    mostrarEstado("error", t().noSeDibuja);
     lienzo.hidden = true;
   }
 }
 
 function cerrarNota() {
+  aperturas++;
   if (vistaActual) vistaActual.destruir();
   vistaActual = null;
+  paginaMostrada = null;
   $("nota").hidden = true;
   document.body.classList.remove("con-nota");
 }
@@ -315,10 +368,16 @@ function iniciar() {
   $("zoom-mas").addEventListener("click", () => vistaActual && vistaActual.acercar());
   $("zoom-menos").addEventListener("click", () => vistaActual && vistaActual.alejar());
   $("zoom-encajar").addEventListener("click", () => vistaActual && vistaActual.encajar());
+  $("pagina-boton").addEventListener("click", () => paginaMostrada && editarPagina(true));
+  $("pagina-campo").addEventListener("keydown", (ev) => {
+    if (ev.key === "Enter") { ev.preventDefault(); saltarAPagina(); }
+    else if (ev.key === "Escape") { ev.stopPropagation(); editarPagina(false); $("lienzo").focus(); }
+  });
+  $("pagina-campo").addEventListener("blur", () => editarPagina(false));
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("nota").hidden) cerrarNota(); });
 
   // Los textos que genera el JS siguen al selector de idioma de la barra.
-  new MutationObserver(() => { if (estado.archivos.size) { pintarCarpetas(); pintarLista(); } })
+  new MutationObserver(() => { if (estado.archivos.size) { pintarCarpetas(); pintarLista(); } pintarContadorDePagina(); })
     .observe(document.documentElement, { attributes: true, attributeFilter: ["data-lang"] });
 }
 
