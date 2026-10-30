@@ -9,17 +9,18 @@
 import { dibujarRegion } from "./pintar.js";
 import {
   cajaDeHojas, zoomDeAjuste, limitarZoom, zoomHaciaPunto, acotarVista, paginaActual, vistaDePagina, factorDeRueda,
+  porcentajeDeZoom, paginasALaVista,
 } from "./gestos.js";
 
 const ESPERA_REDIBUJO_MS = 140;
 
-export function crearVista(lienzo, preparada, bitmaps, { alCambiarPagina = () => {} } = {}) {
+export function crearVista(lienzo, preparada, bitmaps, { alCambiarVista = () => {} } = {}) {
   const ctx = lienzo.getContext("2d");
   const hojas = preparada.hojas;
   const caja = cajaDeHojas(hojas);
   let vista = { zoom: 1, izquierda: 0, arriba: 0 };
   let dibujada = { ...vista };   // la vista con la que se pinto el lienzo por ultima vez
-  let pendiente = false, temporizador = 0, ultimaPagina = -1;
+  let pendiente = false, temporizador = 0;
 
   const ancho = () => lienzo.clientWidth, alto = () => lienzo.clientHeight;
   const ajuste = () => zoomDeAjuste(caja, ancho());
@@ -57,16 +58,20 @@ export function crearVista(lienzo, preparada, bitmaps, { alCambiarPagina = () =>
     dibujada = { ...vista };
   }
 
-  function avisarPagina() {
-    const pagina = paginaActual(hojas, vista, alto());
-    if (pagina !== ultimaPagina) { ultimaPagina = pagina; alCambiarPagina(pagina + 1, hojas.length); }
+  // Avisa de la vista nueva (porcentaje de zoom y paginas visibles) en cada cambio: la pildora de
+  // la app aparece con cualquier movimiento y se esconde sola al rato.
+  function avisarVista() {
+    const { primera, ultima } = paginasALaVista(hojas, vista, alto());
+    alCambiarVista({
+      porcentaje: porcentajeDeZoom(vista.zoom, ajuste()), primera: primera + 1, ultima: ultima + 1, total: hojas.length,
+    });
   }
 
   // Aplica `vista`: si solo se desplazo, se redibuja ya (en el siguiente fotograma); si cambio el zoom,
   // se escala el lienzo ya dibujado con CSS y el redibujo nitido llega al acabar el gesto.
   function aplicar(nueva) {
     vista = acotarVista(nueva, caja, ancho(), alto());
-    avisarPagina();
+    avisarVista();
     if (vista.zoom === dibujada.zoom) {
       if (!pendiente) { pendiente = true; requestAnimationFrame(pintar); }
       return;
@@ -175,7 +180,7 @@ export function crearVista(lienzo, preparada, bitmaps, { alCambiarPagina = () =>
     if (acciones[e.key]) { e.preventDefault(); acciones[e.key](); }
   });
 
-  const observador = new ResizeObserver(() => { pendiente = true; requestAnimationFrame(pintar); avisarPagina(); });
+  const observador = new ResizeObserver(() => { pendiente = true; requestAnimationFrame(pintar); avisarVista(); });
   observador.observe(lienzo);
   encajar();
 

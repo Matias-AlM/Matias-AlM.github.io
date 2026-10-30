@@ -13,7 +13,7 @@ const TEXTOS = {
     sinCarpeta: "Sin carpeta", todas: "Todas las carpetas", sinTitulo: "Sin título",
     ilegibles: (n) => `${n} ${n === 1 ? "fichero no se pudo leer" : "ficheros no se pudieron leer"}.`,
     vacia: "No hay notas de SwiftPen en esa carpeta.", sinResultados: "Ninguna nota coincide.",
-    cargando: "Cargando…", notaVacia: "Esta nota está vacía.", pagina: (a, b) => `Página ${a} de ${b}`, paginaPalabra: "Página", deTotal: (b) => `de ${b}`, irAPagina: "Ir a una página",
+    cargando: "Cargando…", notaVacia: "Esta nota está vacía.", cdContador: "Página actual. Toca para ir a otra", cdAnterior: "Página anterior", cdSiguiente: "Página siguiente", zoomRapido: "Zoom rápido", rango: (n) => `Del 1 al ${n}`,
     bloqueada: "Bloqueada", buscar: "Buscar por título", noSeDibuja: "No se pudo dibujar esta nota.",
   },
   en: {
@@ -21,7 +21,7 @@ const TEXTOS = {
     sinCarpeta: "No folder", todas: "All folders", sinTitulo: "Untitled",
     ilegibles: (n) => `${n} ${n === 1 ? "file could not be read" : "files could not be read"}.`,
     vacia: "There are no SwiftPen notes in that folder.", sinResultados: "No note matches.",
-    cargando: "Loading…", notaVacia: "This note is empty.", pagina: (a, b) => `Page ${a} of ${b}`, paginaPalabra: "Page", deTotal: (b) => `of ${b}`, irAPagina: "Go to a page",
+    cargando: "Loading…", notaVacia: "This note is empty.", cdContador: "Current page. Tap to go to another", cdAnterior: "Previous page", cdSiguiente: "Next page", zoomRapido: "Quick zoom", rango: (n) => `1 to ${n}`,
     bloqueada: "Locked", buscar: "Search by title", noSeDibuja: "This note could not be drawn.",
   },
   fr: {
@@ -29,7 +29,7 @@ const TEXTOS = {
     sinCarpeta: "Sans dossier", todas: "Tous les dossiers", sinTitulo: "Sans titre",
     ilegibles: (n) => `${n} ${n === 1 ? "fichier illisible" : "fichiers illisibles"}.`,
     vacia: "Aucune note SwiftPen dans ce dossier.", sinResultados: "Aucune note ne correspond.",
-    cargando: "Chargement…", notaVacia: "Cette note est vide.", pagina: (a, b) => `Page ${a} sur ${b}`, paginaPalabra: "Page", deTotal: (b) => `sur ${b}`, irAPagina: "Aller à une page",
+    cargando: "Chargement…", notaVacia: "Cette note est vide.", cdContador: "Page actuelle. Touchez pour aller à une autre", cdAnterior: "Page précédente", cdSiguiente: "Page suivante", zoomRapido: "Zoom rapide", rango: (n) => `1 à ${n}`,
     bloqueada: "Verrouillée", buscar: "Rechercher par titre", noSeDibuja: "Impossible de dessiner cette note.",
   },
 };
@@ -246,7 +246,7 @@ function pintarTodo() {
 
 let vistaActual = null;
 let aperturas = 0;                 // para descartar una lectura lenta si ya se abrio otra nota o se cerro
-let paginaMostrada = null;         // {actual, total}
+let vistaMostrada = null;          // ultimo {porcentaje, primera, ultima, total} de la vista
 
 function mostrarEstado(clase, texto) {
   const aviso = $("nota-estado");
@@ -255,33 +255,65 @@ function mostrarEstado(clase, texto) {
   aviso.textContent = texto ?? "";
 }
 
-function pintarContadorDePagina() {
-  const caja = $("nota-pagina");
-  caja.hidden = !paginaMostrada || paginaMostrada.total < 2;
-  if (caja.hidden) return;
-  $("pagina-boton").textContent = t().pagina(paginaMostrada.actual, paginaMostrada.total);
-  $("pagina-boton").setAttribute("aria-label", t().irAPagina);
-  $("pagina-etiqueta").textContent = t().paginaPalabra;
-  $("pagina-total").textContent = t().deTotal(paginaMostrada.total);
-  $("pagina-campo").max = String(paginaMostrada.total);
+// ---- La pildora de zoom y pagina (la del editor de la app) ----
+
+const RETRASO_DE_LA_PILDORA_MS = 3000;   // RETRASO_DE_LA_ZOOM_MS en la app
+let temporizadorDePildora = 0;
+const paneles = () => [$("menu-zoom"), $("menu-pagina")];
+const hayPanelAbierto = () => paneles().some((p) => !p.hidden);
+
+// Vuelve de golpe con cualquier movimiento y se esconde a los 3 s; con un panel abierto se queda.
+function mostrarPildora() {
+  const pildora = $("nota-pildora");
+  pildora.classList.remove("oculta");
+  clearTimeout(temporizadorDePildora);
+  temporizadorDePildora = setTimeout(function esconder() {
+    if (hayPanelAbierto() || pildora.matches(":hover, :focus-within")) { temporizadorDePildora = setTimeout(esconder, RETRASO_DE_LA_PILDORA_MS); return; }
+    pildora.classList.add("oculta");
+  }, RETRASO_DE_LA_PILDORA_MS);
 }
 
-function editarPagina(editar) {
-  $("pagina-boton").hidden = editar;
-  $("pagina-edicion").hidden = !editar;
-  if (editar) {
-    const campo = $("pagina-campo");
-    campo.value = String(paginaMostrada.actual);
-    campo.focus();
-    campo.select();
-  }
+function cerrarPaneles() {
+  for (const p of paneles()) p.hidden = true;
 }
 
-function saltarAPagina() {
-  const campo = $("pagina-campo");
-  const n = Math.round(Number(campo.value));
-  if (vistaActual && Number.isFinite(n) && n >= 1) vistaActual.irAPagina(Math.min(n, vistaActual.total));
-  editarPagina(false);
+function pintarPildora() {
+  const v = vistaMostrada;
+  if (!v) return;
+  const hojas = !v.lienzoInfinito;
+  $("zoom-valor").textContent = `${v.porcentaje}%`;
+  // Sin hoja no hay "ajustar a la pantalla": en el lienzo infinito el porcentaje es solo informativo.
+  $("zoom-flecha").hidden = !hojas;
+  $("zoom-etiqueta").classList.toggle("sin-menu", !hojas);
+  $("zoom-etiqueta").setAttribute("aria-label", t().zoomRapido);
+  for (const id of ["pagina-separador", "pagina-anterior", "pagina-contador", "pagina-siguiente"]) $(id).hidden = !hojas;
+  if (!hojas) return;
+  const entreDos = v.primera !== v.ultima;
+  $("pagina-arriba").textContent = String(v.primera);
+  $("pagina-abajo").textContent = String(v.ultima);
+  $("pagina-raya").hidden = $("pagina-abajo").hidden = !entreDos;
+  $("pagina-contador").classList.toggle("entre-dos", entreDos);
+  $("pagina-contador").setAttribute("aria-label", t().cdContador);
+  $("pagina-anterior").setAttribute("aria-label", t().cdAnterior);
+  $("pagina-siguiente").setAttribute("aria-label", t().cdSiguiente);
+  $("pagina-anterior").disabled = v.primera <= 1;
+  $("pagina-siguiente").disabled = v.ultima >= v.total;
+  $("pagina-campo").placeholder = t().rango(v.total);
+  $("pagina-campo").max = String(v.total);
+}
+
+function abrirIrAPagina() {
+  cerrarPaneles();
+  $("menu-pagina").hidden = false;
+  $("pagina-campo").value = "";
+  $("pagina-campo").focus();
+}
+
+// Fuera de rango se va a la mas cercana: pedir la 40 de una nota de 12 es querer ir al final.
+function irAPagina() {
+  const n = Math.round(Number($("pagina-campo").value));
+  if (vistaActual && $("pagina-campo").value !== "" && Number.isFinite(n)) vistaActual.irAPagina(Math.min(Math.max(n, 1), vistaActual.total));
+  cerrarPaneles();
   $("lienzo").focus();
 }
 
@@ -293,14 +325,13 @@ async function abrirNota(resumen) {
   panel.hidden = false;
   document.body.classList.add("con-nota");
   $("nota-volver").focus();
-  paginaMostrada = null;
-  pintarContadorDePagina();
-  editarPagina(false);
+  vistaMostrada = null;
+  cerrarPaneles();
+  $("nota-pildora").classList.add("oculta");
   // Una nota bloqueada nunca se lee ni se dibuja: solo se avisa.
   lienzo.hidden = true;
   mostrarEstado("", null);
   $("nota-bloqueada").hidden = !resumen.bloqueada;
-  $("nota-zoom").hidden = resumen.bloqueada;
   if (resumen.bloqueada) return;
   mostrarEstado("cargando", t().cargando);
   try {
@@ -311,7 +342,7 @@ async function abrirNota(resumen) {
     const vacia = nota.trazos.every((trazo) => trazo.length === 0) && nota.imagenes.every((i) => i.esCajaDeTexto);
     mostrarEstado("vacia", vacia ? t().notaVacia : null);
     vistaActual = crearVista(lienzo, prepararNota(nota), bitmaps, {
-      alCambiarPagina: (actual, total) => { paginaMostrada = { actual, total }; pintarContadorDePagina(); },
+      alCambiarVista: (v) => { vistaMostrada = { ...v, lienzoInfinito: nota.lienzoInfinito }; pintarPildora(); mostrarPildora(); },
     });
     lienzo.focus();
   } catch (e) {
@@ -325,7 +356,9 @@ function cerrarNota() {
   aperturas++;
   if (vistaActual) vistaActual.destruir();
   vistaActual = null;
-  paginaMostrada = null;
+  vistaMostrada = null;
+  clearTimeout(temporizadorDePildora);
+  cerrarPaneles();
   $("nota").hidden = true;
   document.body.classList.remove("con-nota");
 }
@@ -365,19 +398,28 @@ function iniciar() {
   });
 
   $("nota-volver").addEventListener("click", cerrarNota);
-  $("zoom-mas").addEventListener("click", () => vistaActual && vistaActual.acercar());
-  $("zoom-menos").addEventListener("click", () => vistaActual && vistaActual.alejar());
-  $("zoom-encajar").addEventListener("click", () => vistaActual && vistaActual.encajar());
-  $("pagina-boton").addEventListener("click", () => paginaMostrada && editarPagina(true));
-  $("pagina-campo").addEventListener("keydown", (ev) => {
-    if (ev.key === "Enter") { ev.preventDefault(); saltarAPagina(); }
-    else if (ev.key === "Escape") { ev.stopPropagation(); editarPagina(false); $("lienzo").focus(); }
+  // Zoom rapido: tocar el porcentaje abre una fila, "Ajustar a la pantalla" (solo con hojas).
+  $("zoom-etiqueta").addEventListener("click", () => {
+    if (!vistaMostrada || vistaMostrada.lienzoInfinito) return;
+    const abrir = $("menu-zoom").hidden;
+    cerrarPaneles();
+    $("menu-zoom").hidden = !abrir;
   });
-  $("pagina-campo").addEventListener("blur", () => editarPagina(false));
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("nota").hidden) cerrarNota(); });
+  $("zoom-ajustar").addEventListener("click", () => { cerrarPaneles(); if (vistaActual) vistaActual.encajar(); $("lienzo").focus(); });
+  $("pagina-anterior").addEventListener("click", () => vistaActual && vistaActual.irAPagina(vistaActual.pagina() - 1));
+  $("pagina-siguiente").addEventListener("click", () => vistaActual && vistaActual.irAPagina(vistaActual.pagina() + 1));
+  $("pagina-contador").addEventListener("click", abrirIrAPagina);
+  $("pagina-ir").addEventListener("click", irAPagina);
+  $("pagina-cancelar").addEventListener("click", () => { cerrarPaneles(); $("lienzo").focus(); });
+  $("pagina-campo").addEventListener("keydown", (ev) => {
+    if (ev.key === "Enter") { ev.preventDefault(); irAPagina(); }
+  });
+  // Un toque fuera de un panel lo cierra.
+  $("lienzo").addEventListener("pointerdown", cerrarPaneles);
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("nota").hidden) { if (hayPanelAbierto()) { cerrarPaneles(); $("lienzo").focus(); } else cerrarNota(); } });
 
   // Los textos que genera el JS siguen al selector de idioma de la barra.
-  new MutationObserver(() => { if (estado.archivos.size) { pintarCarpetas(); pintarLista(); } pintarContadorDePagina(); })
+  new MutationObserver(() => { if (estado.archivos.size) { pintarCarpetas(); pintarLista(); } pintarPildora(); })
     .observe(document.documentElement, { attributes: true, attributeFilter: ["data-lang"] });
 }
 

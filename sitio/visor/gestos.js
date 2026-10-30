@@ -46,10 +46,11 @@ export function paginaActual(hojas, vista, altoPx) {
   return actual;
 }
 
-// Vista que pone la hoja `i` arriba, centrada en horizontal, al zoom dado.
+// Vista que pone la hoja `i` arriba, centrada en horizontal, al zoom dado. El aire de arriba cabe en
+// el hueco entre hojas (60): la hoja de encima no asoma y el contador no la cuenta.
 export function vistaDePagina(hojas, i, anchoPx, zoom) {
   const h = hojas[entre(i, 0, hojas.length - 1)];
-  return { zoom, izquierda: h.izquierda + h.ancho / 2 - anchoPx / zoom / 2, arriba: h.arriba - MARGEN_PX / zoom };
+  return { zoom, izquierda: h.izquierda + h.ancho / 2 - anchoPx / zoom / 2, arriba: h.arriba - Math.min(MARGEN_PX / zoom, 30) };
 }
 
 // Factor de zoom de un evento wheel con Ctrl (o de un pellizco de trackpad, que llega asi): los
@@ -58,4 +59,20 @@ export function vistaDePagina(hojas, i, anchoPx, zoom) {
 export function factorDeRueda(deltaY, deltaMode = 0) {
   const px = deltaMode === 1 ? deltaY * 16 : deltaY;
   return Math.exp(-entre(px, -60, 60) * 0.01);
+}
+
+// Zoom como lo muestra la app: 100 % = la hoja ajustada al ancho.
+export const porcentajeDeZoom = (zoom, ajuste) => Math.round((zoom / ajuste) * 100);
+
+// Primera y ultima pagina (0..n-1) que asoman en el lienzo, como el contador de la app
+// (FastRenderer.onPaginasALaVista). Si solo se ve un hueco entre hojas, la mas cercana de arriba.
+export function paginasALaVista(hojas, vista, altoPx) {
+  const abajo = vista.arriba + altoPx / vista.zoom;
+  let primera = -1, ultima = -1;
+  hojas.forEach((h, i) => {
+    if (h.arriba + h.alto > vista.arriba && h.arriba < abajo) { if (primera < 0) primera = i; ultima = i; }
+  });
+  if (primera >= 0) return { primera, ultima };
+  const actual = paginaActual(hojas, vista, altoPx);
+  return { primera: actual, ultima: actual };
 }

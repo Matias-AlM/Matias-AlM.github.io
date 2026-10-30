@@ -6,7 +6,7 @@ import {
 } from "/sitio/visor/formato.js";
 import { calcularHojas } from "/sitio/visor/maqueta.js";
 import {
-  cajaDeHojas, zoomDeAjuste, limitarZoom, zoomHaciaPunto, acotarVista, paginaActual, vistaDePagina, factorDeRueda,
+  cajaDeHojas, zoomDeAjuste, limitarZoom, zoomHaciaPunto, acotarVista, paginaActual, vistaDePagina, factorDeRueda, porcentajeDeZoom, paginasALaVista,
   ZOOM_MIN_RELATIVO, ZOOM_MAX_RELATIVO,
 } from "/sitio/visor/gestos.js";
 import { colorDe, prepararNota, dibujarMiniatura, dibujarRegion } from "/sitio/visor/pintar.js";
@@ -243,6 +243,23 @@ prueba("rueda con Ctrl: pellizco suave y clic de rueda acotado", () => {
   igual(factorDeRueda(-5) > 1 && factorDeRueda(5) < 1, true);
   igual(factorDeRueda(-100) === factorDeRueda(-60), true, "acotado");
   igual(factorDeRueda(-3, 1) > factorDeRueda(-3, 0), true, "lineas pesan mas que pixeles");
+});
+
+prueba("porcentaje de zoom: 100 % es la hoja ajustada al ancho", () => {
+  igual(porcentajeDeZoom(0.2, 0.2), 100);
+  igual(porcentajeDeZoom(0.3, 0.2), 150);
+  igual(porcentajeDeZoom(0.1, 0.2), 50);
+});
+prueba("paginas a la vista: primera y ultima que asoman, como el contador de la app", () => {
+  const h = hojasDe(12);
+  igual(paginasALaVista(h, vista({ arriba: 0 }), 500), { primera: 0, ultima: 0 });
+  // una vista alta que abarca el final de la hoja 3 y el principio de la 4 (indices 2 y 3)
+  const v = vista({ arriba: h[2].arriba + h[2].alto - 1000 });
+  igual(paginasALaVista(h, v, 1000 * 0.2 * 2), { primera: 2, ultima: 3 });
+  // solo el hueco entre hojas: la de arriba
+  const hueco = vista({ zoom: 1, arriba: h[4].arriba + h[4].alto + 10 });
+  igual(paginasALaVista(h, hueco, 20), { primera: 4, ultima: 4 });
+  igual(paginasALaVista(h, vista({ arriba: h[11].arriba + 1000 }), 400), { primera: 11, ultima: 11 });
 });
 
 // ---- ejecucion ----

@@ -47,19 +47,29 @@
   <div class="visor-nota-barra">
     <button id="nota-volver" class="boton volver" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span class="texto-volver"><span lang="es">Volver</span><span lang="en">Back</span><span lang="fr">Retour</span></span></button>
     <h2 id="nota-titulo"></h2>
-    <div id="nota-zoom" class="visor-zoom">
-      <button id="zoom-menos" class="boton" type="button" aria-label="−">−</button>
-      <button id="zoom-encajar" class="boton" type="button"><span lang="es">Ajustar</span><span lang="en">Fit</span><span lang="fr">Ajuster</span></button>
-      <button id="zoom-mas" class="boton" type="button" aria-label="+">+</button>
-    </div>
   </div>
   <div class="visor-escenario">
     <canvas id="lienzo" class="visor-lienzo" tabindex="0"></canvas>
     <p id="nota-estado" class="visor-estado" role="status" hidden></p>
     <p id="nota-bloqueada" class="visor-bloqueada" hidden><svg class="candado" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V8a5 5 0 0 1 10 0v2h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1zm2 0h6V8a3 3 0 0 0-6 0z"/></svg><span lang="es">Esta nota está bloqueada. Ábrela en la app.</span><span lang="en">This note is locked. Open it in the app.</span><span lang="fr">Cette note est verrouillée. Ouvrez-la dans l'application.</span></p>
-    <div id="nota-pagina" class="visor-pagina" hidden>
-      <button id="pagina-boton" type="button"></button>
-      <label id="pagina-edicion" class="visor-pagina-edicion" hidden><span id="pagina-etiqueta"></span> <input id="pagina-campo" type="number" min="1" inputmode="numeric"> <span id="pagina-total"></span></label>
+    <!-- La pildora de abajo a la izquierda del editor de la app: zoom | pagina anterior, contador, pagina siguiente. -->
+    <div id="nota-pildora" class="app-pildora oculta">
+      <button id="zoom-etiqueta" class="app-zoom" type="button"><span id="zoom-valor">100%</span><span id="zoom-flecha"> ▾</span></button>
+      <span id="pagina-separador" class="app-divisor"></span>
+      <button id="pagina-anterior" class="app-icono giro-arriba" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.75 5.75L16.25 12.25L9.75 18.75"/></svg></button>
+      <button id="pagina-contador" class="app-contador" type="button"><span id="pagina-arriba">1</span><span id="pagina-raya" class="app-raya" hidden></span><span id="pagina-abajo" hidden></span></button>
+      <button id="pagina-siguiente" class="app-icono giro-abajo" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.75 5.75L16.25 12.25L9.75 18.75"/></svg></button>
+    </div>
+    <div id="menu-zoom" class="app-panel" hidden>
+      <button id="zoom-ajustar" class="app-fila" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.75 8.25V6.75A2 2 0 0 1 5.75 4.75H7.25M17.25 4.75H18.75A2 2 0 0 1 20.75 6.75V8.25M20.75 16.25V17.75A2 2 0 0 1 18.75 19.75H17.25M7.25 19.75H5.75A2 2 0 0 1 3.75 17.75V16.25M7.75 12.25H16.75M9.75 10.25L7.75 12.25L9.75 14.25M14.75 10.25L16.75 12.25L14.75 14.25"/></svg><span><span lang="es">Ajustar a la pantalla</span><span lang="en">Fit to screen</span><span lang="fr">Ajuster à l'écran</span></span></button>
+    </div>
+    <div id="menu-pagina" class="app-panel" hidden>
+      <p class="app-seccion"><span lang="es">Ir a la página</span><span lang="en">Go to page</span><span lang="fr">Aller à la page</span></p>
+      <input id="pagina-campo" class="app-campo" type="number" min="1" inputmode="numeric">
+      <div class="app-acciones">
+        <button id="pagina-cancelar" class="app-texto" type="button"><span lang="es">Cancelar</span><span lang="en">Cancel</span><span lang="fr">Annuler</span></button>
+        <button id="pagina-ir" class="app-principal" type="button"><span lang="es">Ir</span><span lang="en">Go</span><span lang="fr">Aller</span></button>
+      </div>
     </div>
   </div>
 </section>

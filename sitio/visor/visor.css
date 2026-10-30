@@ -57,26 +57,84 @@ body.arrastrando .visor { outline: 2px dashed var(--accent); outline-offset: -8p
 .visor-nota-barra .boton { padding: 8px 14px; min-height: 40px; }
 .volver { gap: 6px; }
 .volver svg { width: 18px; height: 18px; }
-.visor-zoom { display: flex; gap: 6px; }
 .visor-escenario { position: relative; flex: 1; min-height: 0; background: var(--surface-2); }
 .visor-lienzo { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; outline: none; }
 .visor-lienzo.agarrando { cursor: grabbing; }
 
-/* Contador de pagina: una pastilla discreta abajo, centrada. */
-.visor-pagina {
-  position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 2;
-  display: flex; align-items: center; border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--muted);
-  background: color-mix(in srgb, var(--surface) 88%, transparent); border: 1px solid var(--border);
-  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: var(--shadow-suave);
+/* La pildora de zoom y pagina del editor de la app (NoteEditorActivity.kt: pildoraInferior, zoomLabel,
+ * contadorDePaginas; EditorPalette.kt; DesignTokens.kt). Los valores vienen de la app, en dp = px. */
+:root {
+  --app-superficie: #ffffff; --app-panel: #ffffff;
+  --app-texto: #000000; --app-texto-2: #444444; --app-icono: #1a1a1a;
+  --app-divisor: rgba(0, 0, 0, 0.133); --app-borde-pildora: transparent;
+  --app-acento: #a33fd4; --app-sobre-acento: #ffffff;
+  --app-sombra-pildora: 0 2px 5px rgba(58, 58, 58, 0.34), 0 5px 14px rgba(58, 58, 58, 0.2);
+  --app-pildora-alto: 40px; --app-pildora-relleno: 2px; --app-pildora-radio: 28px; --app-panel-radio: 20px;
+  --app-margen: 8px;
 }
-.visor-pagina button { font: inherit; color: inherit; background: none; border: 0; padding: 7px 16px; border-radius: 999px; cursor: pointer; font-variant-numeric: tabular-nums; }
-.visor-pagina button:hover { color: var(--text); }
-.visor-pagina button:focus-visible, .visor-pagina input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
-.visor-pagina-edicion { display: flex; align-items: center; gap: 6px; padding: 4px 14px; }
-.visor-pagina-edicion input {
-  width: 4.2em; font: inherit; color: var(--text); text-align: center; background: var(--surface-2);
-  border: 1px solid var(--border); border-radius: 8px; padding: 3px 4px;
+:root[data-tema="oscuro"] {
+  --app-superficie: #232935; --app-panel: #2c3342;
+  --app-texto: #e4e6ec; --app-texto-2: #c3c7d4; --app-icono: #e4e6ec;
+  --app-divisor: rgba(255, 255, 255, 0.133); --app-borde-pildora: rgba(255, 255, 255, 0.2);
+  --app-acento: #c45cf6; --app-sobre-acento: #1a0f24;
+  --app-sombra-pildora: 0 4px 10px rgba(0, 0, 0, 0.7), 0 8px 24px rgba(0, 0, 0, 0.55);
 }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema="claro"]) {
+    --app-superficie: #232935; --app-panel: #2c3342;
+    --app-texto: #e4e6ec; --app-texto-2: #c3c7d4; --app-icono: #e4e6ec;
+    --app-divisor: rgba(255, 255, 255, 0.133); --app-borde-pildora: rgba(255, 255, 255, 0.2);
+    --app-acento: #c45cf6; --app-sobre-acento: #1a0f24;
+    --app-sombra-pildora: 0 4px 10px rgba(0, 0, 0, 0.7), 0 8px 24px rgba(0, 0, 0, 0.55);
+  }
+}
+@media (max-width: 520px) { :root { --app-pildora-alto: 44px; } }   /* barra de movil: 36 + 4 + 2 * 2 */
+
+.app-pildora {
+  position: absolute; left: var(--app-margen); bottom: var(--app-margen); z-index: 2;
+  display: flex; align-items: center; height: var(--app-pildora-alto); padding: var(--app-pildora-relleno);
+  box-sizing: border-box; border-radius: var(--app-pildora-radio); font-size: 13px; color: var(--app-texto);
+  background: var(--app-superficie); border: 1px solid var(--app-borde-pildora); box-shadow: var(--app-sombra-pildora);
+}
+/* Se esconde sola si la hoja no se mueve (3 s, fundido de 0,4 s) y vuelve de golpe con cualquier movimiento. */
+.app-pildora.oculta { opacity: 0; visibility: hidden; transition: opacity .4s, visibility 0s .4s; }
+.app-pildora button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+.app-pildora button:focus-visible { outline: 2px solid var(--app-acento); outline-offset: -2px; border-radius: 999px; }
+.app-zoom { min-width: calc(6ch + 24px); padding: 0 12px !important; height: 100%; font-variant-numeric: tabular-nums; white-space: pre; }
+.app-zoom.sin-menu { cursor: default; }
+.app-divisor { width: 1px; height: 18px; background: var(--app-divisor); flex: none; }
+.app-icono { width: calc(var(--app-pildora-alto) - 8px); height: calc(var(--app-pildora-alto) - 8px); display: grid; place-items: center; color: var(--app-icono) !important; border-radius: 50% !important; }
+.app-icono svg { width: 24px; height: 24px; }
+.app-icono.giro-arriba svg { transform: rotate(270deg); }
+.app-icono.giro-abajo svg { transform: rotate(90deg); }
+.app-icono:disabled { opacity: .35; cursor: default; }
+.app-contador { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: calc(3ch + 24px); padding: 0 12px !important; height: 100%; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1; }
+.app-contador.entre-dos { font-size: 11px; }
+.app-raya { display: block; flex: none; width: 14px; height: 1px; margin: 2px 0; background: var(--app-texto-2); }
+
+/* Los paneles que cuelgan de la pildora: el zoom rapido y "ir a la pagina". */
+.app-panel {
+  position: absolute; left: var(--app-margen); bottom: calc(var(--app-margen) + var(--app-pildora-alto) + 8px); z-index: 3;
+  padding: 12px; border-radius: var(--app-panel-radio); background: var(--app-panel); color: var(--app-texto);
+  border: 1px solid var(--app-divisor); box-shadow: var(--app-sombra-pildora), 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+.app-fila { display: flex; align-items: center; gap: 12px; padding: 12px 0; font: inherit; font-size: 14px; color: var(--app-texto); background: none; border: 0; cursor: pointer; }
+.app-fila svg { width: 20px; height: 20px; flex: none; color: var(--app-icono); }
+.app-seccion { margin: 0; padding: 10px 0 4px; font-size: 12px; color: var(--app-texto-2); }
+.app-campo {
+  display: block; box-sizing: border-box; width: 220px; max-width: 100%; margin: 0 0 8px; padding: 8px 4px; font: inherit; font-size: 15px;
+  color: var(--app-texto); background: none; border: 0; border-bottom: 2px solid var(--app-acento); border-radius: 0; outline: none;
+  -moz-appearance: textfield; appearance: textfield;
+}
+.app-campo::-webkit-outer-spin-button, .app-campo::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.app-campo::placeholder { color: var(--app-texto-2); opacity: .8; }
+.app-acciones { display: flex; justify-content: flex-end; align-items: center; gap: 4px; }
+.app-texto { font: inherit; font-size: 14px; color: var(--app-texto-2); background: none; border: 0; padding: 10px 12px; cursor: pointer; }
+.app-principal {
+  font: inherit; font-size: 14px; font-weight: 700; min-height: 40px; padding: 10px 24px; border: 0; border-radius: 999px; cursor: pointer;
+  color: var(--app-sobre-acento); background: var(--app-acento);
+}
+.app-texto:focus-visible, .app-principal:focus-visible, .app-fila:focus-visible { outline: 2px solid var(--app-acento); outline-offset: 2px; }
 
 /* Estados: cargando, nota vacia, error y nota bloqueada. */
 .visor-estado, .visor-bloqueada { margin: 0; color: var(--muted); text-align: center; }
@@ -101,5 +159,4 @@ body.con-nota { overflow: hidden; }
   .visor-nota-barra { gap: 8px; padding: 8px 10px; }
   .texto-volver { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .visor-nota-barra .boton { padding: 8px 12px; }
-  .visor-pagina { bottom: 14px; }
 }
