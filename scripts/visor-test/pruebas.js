@@ -6,7 +6,7 @@ import {
 } from "/sitio/visor/formato.js";
 import { calcularHojas } from "/sitio/visor/maqueta.js";
 import {
-  cajaDeHojas, zoomDeAjuste, limitarZoom, zoomHaciaPunto, acotarVista, paginaActual, vistaDePagina, factorDeRueda, porcentajeDeZoom, paginasALaVista,
+  cajaDeHojas, zoomDeAjuste, limitarZoom, zoomHaciaPunto, acotarVista, paginaActual, vistaDePagina, factorDeRueda, porcentajeDeZoom, paginasALaVista, estadoDePastilla,
   ZOOM_MIN_RELATIVO, ZOOM_MAX_RELATIVO,
 } from "/sitio/visor/gestos.js";
 import { colorDe, prepararNota, dibujarMiniatura, dibujarRegion } from "/sitio/visor/pintar.js";
@@ -260,6 +260,24 @@ prueba("paginas a la vista: primera y ultima que asoman, como el contador de la 
   const hueco = vista({ zoom: 1, arriba: h[4].arriba + h[4].alto + 10 });
   igual(paginasALaVista(h, hueco, 20), { primera: 4, ultima: 4 });
   igual(paginasALaVista(h, vista({ arriba: h[11].arriba + 1000 }), 400), { primera: 11, ultima: 11 });
+});
+
+prueba("pastilla: con una sola hoja se muestra igual, con pagina 1 y flechas atenuadas", () => {
+  const una = hojasDe(1);
+  const v = paginasALaVista(una, vista({ arriba: 0 }), 500);
+  const p = estadoDePastilla({ porcentaje: 100, primera: v.primera + 1, ultima: v.ultima + 1, total: una.length });
+  igual(p, { zoom: "100%", arriba: "1", abajo: null, anteriorActiva: false, siguienteActiva: false });
+});
+prueba("pastilla: lienzo infinito (una hoja que abarca el contenido) tambien dice pagina 1", () => {
+  const hojas = calcularHojas(leerNota(JSON.stringify({ id: "n", lienzoInfinito: true, strokes: [[seg(-500, -500, 900, 700)]] })));
+  const v = paginasALaVista(hojas, { zoom: 0.1, izquierda: 5000, arriba: 5000 }, 400);   // mirando donde no hay nada
+  const p = estadoDePastilla({ porcentaje: 80, primera: v.primera + 1, ultima: v.ultima + 1, total: hojas.length });
+  igual([p.zoom, p.arriba, p.abajo], ["80%", "1", null]);
+});
+prueba("pastilla: varias hojas a la vista dan fraccion y activan las flechas", () => {
+  igual(estadoDePastilla({ porcentaje: 150, primera: 2, ultima: 3, total: 12 }),
+    { zoom: "150%", arriba: "2", abajo: "3", anteriorActiva: true, siguienteActiva: true });
+  igual(estadoDePastilla({ porcentaje: 100, primera: 12, ultima: 12, total: 12 }).siguienteActiva, false);
 });
 
 // ---- ejecucion ----

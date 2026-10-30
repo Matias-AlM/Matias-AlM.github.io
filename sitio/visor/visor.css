@@ -93,22 +93,23 @@ body.arrastrando .visor { outline: 2px dashed var(--accent); outline-offset: -8p
 .app-pildora {
   position: absolute; left: var(--app-margen); bottom: var(--app-margen); z-index: 2;
   display: flex; align-items: center; height: var(--app-pildora-alto); padding: var(--app-pildora-relleno);
-  box-sizing: border-box; border-radius: var(--app-pildora-radio); font-size: 13px; color: var(--app-texto);
+  box-sizing: border-box; border-radius: var(--app-pildora-radio); font-size: 13px; line-height: 1.25; color: var(--app-texto);
+  font-variant-numeric: normal; font-feature-settings: normal; overflow: visible;
   background: var(--app-superficie); border: 1px solid var(--app-borde-pildora); box-shadow: var(--app-sombra-pildora);
 }
 /* Se esconde sola si la hoja no se mueve (3 s, fundido de 0,4 s) y vuelve de golpe con cualquier movimiento. */
 .app-pildora.oculta { opacity: 0; visibility: hidden; transition: opacity .4s, visibility 0s .4s; }
 .app-pildora button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
 .app-pildora button:focus-visible { outline: 2px solid var(--app-acento); outline-offset: -2px; border-radius: 999px; }
-.app-zoom { min-width: calc(6ch + 24px); padding: 0 12px !important; height: 100%; font-variant-numeric: tabular-nums; white-space: pre; }
-.app-zoom.sin-menu { cursor: default; }
+.app-zoom { display: flex; align-items: center; gap: 5px; min-width: calc(6ch + 24px); padding: 0 12px !important; height: 100%; white-space: nowrap; }
+.app-flecha { width: 8px; height: 5px; flex: none; }
 .app-divisor { width: 1px; height: 18px; background: var(--app-divisor); flex: none; }
 .app-icono { width: calc(var(--app-pildora-alto) - 8px); height: calc(var(--app-pildora-alto) - 8px); display: grid; place-items: center; color: var(--app-icono) !important; border-radius: 50% !important; }
 .app-icono svg { width: 24px; height: 24px; }
 .app-icono.giro-arriba svg { transform: rotate(270deg); }
 .app-icono.giro-abajo svg { transform: rotate(90deg); }
 .app-icono:disabled { opacity: .35; cursor: default; }
-.app-contador { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: calc(3ch + 24px); padding: 0 12px !important; height: 100%; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1; }
+.app-contador { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: calc(3ch + 24px); padding: 0 12px !important; height: 100%; font-weight: 700; line-height: 1.1; }
 .app-contador.entre-dos { font-size: 11px; }
 .app-raya { display: block; flex: none; width: 14px; height: 1px; margin: 2px 0; background: var(--app-texto-2); }
 

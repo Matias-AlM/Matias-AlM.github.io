@@ -76,3 +76,16 @@ export function paginasALaVista(hojas, vista, altoPx) {
   const actual = paginaActual(hojas, vista, altoPx);
   return { primera: actual, ultima: actual };
 }
+
+// Lo que muestra la pastilla de zoom y pagina para una vista {porcentaje, primera, ultima, total}.
+// Es igual con una sola hoja, con el lienzo infinito (que cuenta como una pagina) y con varias:
+// el contador siempre dice la pagina, y las flechas se atenuan donde no hay adonde ir.
+export function estadoDePastilla({ porcentaje, primera, ultima, total }) {
+  return {
+    zoom: `${porcentaje}%`,
+    arriba: String(primera),
+    abajo: primera !== ultima ? String(ultima) : null,
+    anteriorActiva: primera > 1,
+    siguienteActiva: ultima < total,
+  };
+}

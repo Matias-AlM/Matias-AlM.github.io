@@ -6,6 +6,7 @@ import {
 } from "./formato.js";
 import { prepararNota, cargarBitmaps } from "./pintar.js";
 import { crearVista } from "./vista.js";
+import { estadoDePastilla } from "./gestos.js";
 
 const TEXTOS = {
   es: {
@@ -280,24 +281,18 @@ function cerrarPaneles() {
 function pintarPildora() {
   const v = vistaMostrada;
   if (!v) return;
-  const hojas = !v.lienzoInfinito;
-  $("zoom-valor").textContent = `${v.porcentaje}%`;
-  // Sin hoja no hay "ajustar a la pantalla": en el lienzo infinito el porcentaje es solo informativo.
-  $("zoom-flecha").hidden = !hojas;
-  $("zoom-etiqueta").classList.toggle("sin-menu", !hojas);
+  const p = estadoDePastilla(v);
+  $("zoom-valor").textContent = p.zoom;
   $("zoom-etiqueta").setAttribute("aria-label", t().zoomRapido);
-  for (const id of ["pagina-separador", "pagina-anterior", "pagina-contador", "pagina-siguiente"]) $(id).hidden = !hojas;
-  if (!hojas) return;
-  const entreDos = v.primera !== v.ultima;
-  $("pagina-arriba").textContent = String(v.primera);
-  $("pagina-abajo").textContent = String(v.ultima);
-  $("pagina-raya").hidden = $("pagina-abajo").hidden = !entreDos;
-  $("pagina-contador").classList.toggle("entre-dos", entreDos);
+  $("pagina-arriba").textContent = p.arriba;
+  $("pagina-abajo").textContent = p.abajo ?? "";
+  $("pagina-raya").hidden = $("pagina-abajo").hidden = p.abajo === null;
+  $("pagina-contador").classList.toggle("entre-dos", p.abajo !== null);
   $("pagina-contador").setAttribute("aria-label", t().cdContador);
   $("pagina-anterior").setAttribute("aria-label", t().cdAnterior);
   $("pagina-siguiente").setAttribute("aria-label", t().cdSiguiente);
-  $("pagina-anterior").disabled = v.primera <= 1;
-  $("pagina-siguiente").disabled = v.ultima >= v.total;
+  $("pagina-anterior").disabled = !p.anteriorActiva;
+  $("pagina-siguiente").disabled = !p.siguienteActiva;
   $("pagina-campo").placeholder = t().rango(v.total);
   $("pagina-campo").max = String(v.total);
 }
@@ -342,7 +337,7 @@ async function abrirNota(resumen) {
     const vacia = nota.trazos.every((trazo) => trazo.length === 0) && nota.imagenes.every((i) => i.esCajaDeTexto);
     mostrarEstado("vacia", vacia ? t().notaVacia : null);
     vistaActual = crearVista(lienzo, prepararNota(nota), bitmaps, {
-      alCambiarVista: (v) => { vistaMostrada = { ...v, lienzoInfinito: nota.lienzoInfinito }; pintarPildora(); mostrarPildora(); },
+      alCambiarVista: (v) => { vistaMostrada = v; pintarPildora(); mostrarPildora(); },
     });
     lienzo.focus();
   } catch (e) {
@@ -400,7 +395,7 @@ function iniciar() {
   $("nota-volver").addEventListener("click", cerrarNota);
   // Zoom rapido: tocar el porcentaje abre una fila, "Ajustar a la pantalla" (solo con hojas).
   $("zoom-etiqueta").addEventListener("click", () => {
-    if (!vistaMostrada || vistaMostrada.lienzoInfinito) return;
+    if (!vistaMostrada) return;
     const abrir = $("menu-zoom").hidden;
     cerrarPaneles();
     $("menu-zoom").hidden = !abrir;
@@ -416,6 +411,10 @@ function iniciar() {
   });
   // Un toque fuera de un panel lo cierra.
   $("lienzo").addEventListener("pointerdown", cerrarPaneles);
+  // Cualquier interaccion con la hoja la trae de vuelta (arrastrar, tocar, teclas), no el ratón suelto.
+  $("lienzo").addEventListener("pointerdown", () => vistaMostrada && mostrarPildora());
+  $("lienzo").addEventListener("pointermove", (ev) => { if (ev.buttons && vistaMostrada) mostrarPildora(); });
+  $("lienzo").addEventListener("keydown", () => vistaMostrada && mostrarPildora());
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("nota").hidden) { if (hayPanelAbierto()) { cerrarPaneles(); $("lienzo").focus(); } else cerrarNota(); } });
 
   // Los textos que genera el JS siguen al selector de idioma de la barra.
