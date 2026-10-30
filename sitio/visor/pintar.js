@@ -10,6 +10,28 @@
 
 import { calcularHojas } from "./maqueta.js";
 
+// Tema oscuro de la nota (TemaDeNota.kt): la tinta y el papel se espejan en luminosidad, el papel con
+// menos saturacion y sin pasar de oscuro, para que la nota siga al tema como en la app.
+const LUMINOSIDAD_MINIMA = 0.07, LUMINOSIDAD_MAXIMA = 0.93, LUMINOSIDAD_MINIMA_PAPEL = 0.16, SATURACION_MAXIMA_PAPEL = 0.12;
+
+function espejar(argb, minimo = LUMINOSIDAD_MINIMA, saturacionMaxima = 1) {
+  const n = argb >>> 0;
+  const alfa = n >>> 24, r = ((n >>> 16) & 255) / 255, g = ((n >>> 8) & 255) / 255, b = (n & 255) / 255;
+  const maximo = Math.max(r, g, b), minimoCanal = Math.min(r, g, b);
+  const luminosidad = (maximo + minimoCanal) / 2, delta = maximo - minimoCanal;
+  const saturacion = Math.min(delta === 0 ? 0 : delta / (1 - Math.abs(2 * luminosidad - 1)), saturacionMaxima);
+  const tono = delta === 0 ? 0 : maximo === r ? ((((g - b) / delta) % 6) + 6) % 6 : maximo === g ? (b - r) / delta + 2 : (r - g) / delta + 4;
+  const nueva = Math.min(Math.max(1 - luminosidad, minimo), LUMINOSIDAD_MAXIMA);
+  const croma = (1 - Math.abs(2 * nueva - 1)) * saturacion;
+  const x = croma * (1 - Math.abs((tono % 2) - 1));
+  const m = nueva - croma / 2;
+  const [r1, g1, b1] = [[croma, x, 0], [x, croma, 0], [0, croma, x], [0, x, croma], [x, 0, croma], [croma, 0, x]][Math.floor(tono) % 6];
+  const canal = (v) => Math.min(255, Math.max(0, Math.floor((v + m) * 255 + 0.5)));
+  return ((alfa << 24) | (canal(r1) << 16) | (canal(g1) << 8) | canal(b1)) | 0;
+}
+export const colorVisible = (argb, oscuro) => (oscuro ? espejar(argb) : argb);
+export const papelVisible = (argb, oscuro) => (oscuro ? espejar(argb, LUMINOSIDAD_MINIMA_PAPEL, SATURACION_MAXIMA_PAPEL) : argb);
+
 // ARGB entero con signo (Android) -> {css, alfa}.
 export function colorDe(argb) {
   const n = argb >>> 0;
@@ -17,7 +39,7 @@ export function colorDe(argb) {
 }
 
 // Todo lo que se calcula una vez por nota: las hojas y la caja de cada trazo.
-export function prepararNota(nota) {
+export function prepararNota(nota, { oscuro = false } = {}) {
   const cajas = nota.trazos.map((trazo) => {
     let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
     for (const s of trazo) {
@@ -27,7 +49,7 @@ export function prepararNota(nota) {
     }
     return { x0, y0, x1, y1 };
   });
-  return { nota, hojas: calcularHojas(nota), cajas, orden: ordenDeDibujo(nota) };
+  return { nota, hojas: calcularHojas(nota), cajas, orden: ordenDeDibujo(nota), oscuro };
 }
 
 const nuevaCapa = (ancho, alto) => new OffscreenCanvas(Math.max(1, Math.ceil(ancho)), Math.max(1, Math.ceil(alto)));
@@ -46,8 +68,9 @@ function lineas(ctx, segmentos, escala, izquierda, arriba, color) {
 
 // Un trazo. Con alfa (resaltador) o con marcas de goma se compone en una capa del tamano de su
 // caja: el alfa se aplica a la capa entera, y la goma recorta con destination-out.
-function dibujarTrazo(ctx, trazo, marcas, caja, escala, izquierda, arriba) {
-  const { css, alfa } = colorDe(trazo[0].color);
+function dibujarTrazo(ctx, trazo, marcas, caja, escala, izquierda, arriba, oscuro) {
+  const { alfa } = colorDe(trazo[0].color);
+  const { css } = colorDe(colorVisible(trazo[0].color, oscuro));
   const translucido = alfa < 1;
   if (!translucido && marcas.length === 0) {
     lineas(ctx, trazo, escala, izquierda, arriba, css);
@@ -104,7 +127,7 @@ function dibujarImagen(ctx, imagen, bitmap, escala, izquierda, arriba) {
 // unidades de la nota, a `escala` px por unidad. `bitmaps`: Map id de imagen -> ImageBitmap; las
 // que faltan se saltan (la miniatura o la vista no esperan a un fichero que no esta).
 export function dibujarRegion(ctx, preparada, bitmaps, izquierda, arriba, escala, ancho, alto, fondo) {
-  const { nota, hojas, cajas, orden } = preparada;
+  const { nota, hojas, cajas, orden, oscuro } = preparada;
   if (fondo) { ctx.fillStyle = fondo; ctx.fillRect(0, 0, ancho, alto); }
   const derecha = izquierda + ancho / escala, abajo = arriba + alto / escala;
   for (const hoja of hojas) {
@@ -116,7 +139,7 @@ export function dibujarRegion(ctx, preparada, bitmaps, izquierda, arriba, escala
     ctx.beginPath();
     ctx.rect(x, y, w, h);
     ctx.clip();
-    ctx.fillStyle = colorDe(hoja.papel.color).css;
+    ctx.fillStyle = colorDe(papelVisible(hoja.papel.color, oscuro)).css;
     ctx.fillRect(x, y, w, h);
     for (const indice of orden) {
       if (indice < 0) {
@@ -132,7 +155,7 @@ export function dibujarRegion(ctx, preparada, bitmaps, izquierda, arriba, escala
         x0: Math.max(c.x0, izquierda), y0: Math.max(c.y0, arriba),
         x1: Math.min(c.x1, derecha), y1: Math.min(c.y1, abajo),
       };
-      dibujarTrazo(ctx, nota.trazos[indice], nota.borrados[indice] ?? [], visible, escala, izquierda, arriba);
+      dibujarTrazo(ctx, nota.trazos[indice], nota.borrados[indice] ?? [], visible, escala, izquierda, arriba, oscuro);
     }
     ctx.restore();
   }

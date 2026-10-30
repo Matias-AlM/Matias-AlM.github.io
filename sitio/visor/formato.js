@@ -90,6 +90,12 @@ export function leerNota(contenido) {
   };
 }
 
+// Si la primera hoja es apaisada (Note.esApaisada): su papel, o el de la nota si no tiene uno propio.
+function esApaisada(d) {
+  const propio = d.pagePapers && typeof d.pagePapers === "object" ? d.pagePapers["0"] : null;
+  return (propio && propio.orientation ? propio.orientation : d.paperOrientation) === "HORIZONTAL";
+}
+
 // Lo justo para la lista: sin trazos. Una nota bloqueada no lleva nada mas que esto.
 export function resumenDeNota(contenido) {
   const d = leerJson(contenido);
@@ -101,12 +107,17 @@ export function resumenDeNota(contenido) {
     bloqueada: d.bloqueada === true,
     fijada: d.fijada === true,
     borrada: typeof d.deletedAt === "number",
+    lienzoInfinito: d.lienzoInfinito === true,
+    apaisada: esApaisada(d),
+    papel: numero(d.paperColor, 0xFFFCFBF4 | 0),
   };
 }
 
 export function leerCarpeta(contenido) {
   const d = leerJson(contenido);
-  return { id: d.id, nombre: texto(d.name) ?? "", padreId: texto(d.parentId) };
+  // El color de la carpeta es un ARGB sin signo dentro de un Long (Folder.color); 0xFF8E8E8E si falta.
+  const color = typeof d.color === "number" && Number.isFinite(d.color) ? ((d.color % 2 ** 32) + 2 ** 32) % 2 ** 32 : 0xFF8E8E8E;
+  return { id: d.id, nombre: texto(d.name) ?? "", padreId: texto(d.parentId), color, posicion: numero(d.posicion, null) };
 }
 
 // "Padre / Hija". Corta ciclos por si el sync dejo carpetas mal enlazadas.

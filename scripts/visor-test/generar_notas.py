@@ -101,11 +101,16 @@ def main(destino):
     out = pathlib.Path(destino)
     out.mkdir(parents=True, exist_ok=True)
     nuevo = lambda: str(uuid.UUID(int=rnd.getrandbits(128), version=4))
-    carpetas = {"trabajo": nuevo(), "ideas": nuevo(), "diario": nuevo()}
-    (out / f"folder-{carpetas['trabajo']}.json").write_text(json.dumps({"id": carpetas["trabajo"], "name": "Trabajo", "createdAt": 1}))
-    (out / f"folder-{carpetas['ideas']}.json").write_text(json.dumps({"id": carpetas["ideas"], "name": "Ideas", "parentId": carpetas["trabajo"]}))
-    (out / f"folder-{carpetas['diario']}.json").write_text(json.dumps({"id": carpetas["diario"], "name": "Diario"}))
-
+    nombres = {"trabajo": ("Trabajo", None, 0xFF1976D2), "ideas": ("Ideas", "trabajo", 0xFF2E7D32), "borradores": ("Borradores", "ideas", 0xFFD32F2F),
+               "diario": ("Diario", None, 0xFF8E24AA), "vacia": ("Carpeta vacía", None, 0xFFF9A825), "clases": ("Clases de matemáticas y física", None, 0xFF00897B),
+               "huerfana": ("Huérfana (su padre no existe)", "no-existe", 0xFF8E8E8E)}
+    carpetas = {k: nuevo() for k in nombres}
+    carpetas["no-existe"] = nuevo()
+    for k, (nombre, padre, color) in nombres.items():
+        carpeta = {"id": carpetas[k], "name": nombre, "createdAt": 1, "color": color}
+        if padre:
+            carpeta["parentId"] = carpetas[padre]
+        (out / f"folder-{carpetas[k]}.json").write_text(json.dumps(carpeta, ensure_ascii=False))
     notas = []
     # 1. Tinta de varios colores y grosores
     t = [segs(espiral(1300, 1500, 40, 700, 4), 3, NEGRO), segs(onda(300, 600, 2000, 120, 5), 8, ROJO),
@@ -153,11 +158,16 @@ def main(destino):
     notas.append(nota(nuevo(), "", [segs(onda(300, 800, 2000, 200, 2), 6, VERDE)], fijada=True, lastModifiedAt=1))
     notas.append(nota(nuevo(), '<img src=x onerror="document.title=\'XSS\'"> <b>hostil</b>',
                       [segs(onda(300, 800, 2000, 100, 2), 6, AZUL)], lastModifiedAt=1_699_999_000_000))
+    notas.append(nota(nuevo(), "Boceto en Borradores", [segs(espiral(1300, 1500, 40, 700, 3), 4, ROJO)], folderId=carpetas["borradores"], lastModifiedAt=1_700_000_800_000))
+    notas.append(nota(nuevo(), "Apuntes de clase", [segs(onda(300, 800 + 200 * k, 2000, 60, 5), 4, AZUL) for k in range(6)], folderId=carpetas["clases"], lastModifiedAt=1_700_000_700_000))
+    notas.append(nota(nuevo(), "Hoja apaisada", [segs(onda(300, 900, 3000, 150, 4), 7, VERDE)], paperOrientation="HORIZONTAL", lastModifiedAt=1_700_000_650_000))
+    notas.append(nota(nuevo(), "En carpeta huérfana", [segs(espiral(1300, 1500, 40, 500, 2), 4, NEGRO)], folderId=carpetas["huerfana"], lastModifiedAt=1_700_000_640_000))
+    notas.append(nota(nuevo(), "Secreta en Trabajo", [segs(espiral(1300, 1500, 40, 700, 4), 3)], bloqueada=True, folderId=carpetas["trabajo"], lastModifiedAt=1_700_000_630_000))
     # 7. Muchas notas pequenas para la rejilla y el scroll
     for i in range(14):
         notas.append(nota(nuevo(), f"Garabato {i + 1}", [segs(espiral(1300, 1700, 20, 300 + 40 * i, 2 + i % 4), 3 + i % 5,
                                                               [ROJO, AZUL, VERDE, NEGRO][i % 4])],
-                          folderId=[carpetas["trabajo"], None, carpetas["diario"]][i % 3],
+                          folderId=[carpetas["trabajo"], None, carpetas["diario"], carpetas["ideas"]][i % 4],
                           lastModifiedAt=1_698_000_000_000 - i * 86_400_000))
     for n in notas:
         (out / f"note-{n['id']}.json").write_text(json.dumps(n, ensure_ascii=False))

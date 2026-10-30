@@ -31,16 +31,15 @@
 </section>
 
 <section id="biblioteca" hidden>
-  <div class="visor-barra">
-    <h1><span lang="es">Tus notas</span><span lang="en">Your notes</span><span lang="fr">Vos notes</span></h1>
-    <span id="cuenta" class="visor-cuenta" aria-live="polite"></span>
+  <div class="bib-cabecera">
+    <button id="carpeta-subir" class="bib-subir" type="button" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.25 5.75L7.75 12.25L14.25 18.75"/></svg></button>
+    <nav id="migas" class="bib-migas"></nav>
     <label class="solo-lectores" for="busqueda"><span lang="es">Buscar</span><span lang="en">Search</span><span lang="fr">Rechercher</span></label>
     <input id="busqueda" type="search" class="visor-campo" autocomplete="off" spellcheck="false" placeholder="">
-    <label class="solo-lectores" for="carpeta"><span lang="es">Carpeta</span><span lang="en">Folder</span><span lang="fr">Dossier</span></label>
-    <select id="carpeta" class="visor-campo"></select>
   </div>
   <p id="aviso" class="nota-pequena" hidden></p>
-  <div id="lista" class="visor-lista"></div>
+  <div id="carpetas" class="bib-carpetas" hidden></div>
+  <div id="lista" class="bib-lista"></div>
 </section>
 
 <section id="nota" class="visor-nota" hidden>

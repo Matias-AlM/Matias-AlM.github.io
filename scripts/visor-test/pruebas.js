@@ -9,6 +9,11 @@ import {
   cajaDeHojas, zoomDeAjuste, limitarZoom, zoomHaciaPunto, acotarVista, paginaActual, vistaDePagina, factorDeRueda, porcentajeDeZoom, paginasALaVista, estadoDePastilla,
   ZOOM_MIN_RELATIVO, ZOOM_MAX_RELATIVO,
 } from "/sitio/visor/gestos.js";
+import {
+  contenidoDeCarpeta, rutaDeCarpeta as rutaDeCarpetaLista, migasAMostrar, subcarpetasPorCarpeta, notasPorCarpeta, ladoDeTarjetaDeCarpeta,
+  minimoDeTarjeta, colorPestanaDeCarpeta, contrasteWCAG,
+} from "/sitio/visor/explorador.js";
+import { colorVisible, papelVisible } from "/sitio/visor/pintar.js";
 import { colorDe, prepararNota, dibujarMiniatura, dibujarRegion } from "/sitio/visor/pintar.js";
 
 const pruebas = [];
@@ -278,6 +283,71 @@ prueba("pastilla: varias hojas a la vista dan fraccion y activan las flechas", (
   igual(estadoDePastilla({ porcentaje: 150, primera: 2, ultima: 3, total: 12 }),
     { zoom: "150%", arriba: "2", abajo: "3", anteriorActiva: true, siguienteActiva: true });
   igual(estadoDePastilla({ porcentaje: 100, primera: 12, ultima: 12, total: 12 }).siguienteActiva, false);
+});
+
+// ---- explorador de carpetas (ExploradorDeCarpetas.kt / OrdenDeCarpetas.kt / FolderTint.kt) ----
+const car = (id, nombre, padreId = null) => ({ id, nombre, padreId, color: 0xFF8E8E8E, posicion: null });
+const nt = (id, titulo, carpetaId = null, fecha = 0, extra = {}) => ({ id, titulo, carpetaId, fecha, bloqueada: false, borrada: false, ...extra });
+const arbol = [car("t", "Trabajo"), car("i", "ideas", "t"), car("b", "Borradores", "i"), car("d", "Diario"), car("a", "alfa"), car("h", "Huerfana", "fantasma")];
+
+prueba("explorador: la raiz lleva las carpetas sin padre y las huerfanas, por nombre sin distinguir mayusculas", () => {
+  igual(contenidoDeCarpeta(arbol, [], null).carpetas.map((c) => c.id), ["a", "d", "h", "t"]);
+});
+prueba("explorador: dentro de una carpeta, solo sus hijas; las notas de la raiz incluyen las de carpeta inexistente", () => {
+  igual(contenidoDeCarpeta(arbol, [], "t").carpetas.map((c) => c.id), ["i"]);
+  const notas = [nt("n1", "a", null, 1), nt("n2", "b", "t", 2), nt("n3", "c", "fantasma", 3), nt("n4", "d", "d", 4)];
+  igual(contenidoDeCarpeta(arbol, notas, null).notas.map((n) => n.id), ["n3", "n1"]);
+  igual(contenidoDeCarpeta(arbol, notas, "t").notas.map((n) => n.id), ["n2"]);
+});
+prueba("explorador: las notas, de mas a menos recientes y sin las borradas; sin fijadas aparte", () => {
+  const notas = [nt("a", "a", null, 1), nt("b", "b", null, 5, { fijada: true }), nt("c", "c", null, 9, { borrada: true }), nt("d", "d", null, 3)];
+  igual(contenidoDeCarpeta(arbol, notas, null).notas.map((n) => n.id), ["b", "d", "a"]);
+});
+prueba("explorador: migas de pan y recuentos", () => {
+  igual(rutaDeCarpetaLista(arbol, "b").map((c) => c.id), ["t", "i", "b"]);
+  igual(rutaDeCarpetaLista(arbol, "nada"), []);
+  igual(rutaDeCarpetaLista([car("x", "X", "y"), car("y", "Y", "x")], "x").map((c) => c.id), ["y", "x"], "corta el ciclo");
+  const subs = subcarpetasPorCarpeta(arbol);
+  igual([subs.get("t"), subs.get("i"), subs.get("d") ?? 0], [1, 1, 0]);
+  const cuantas = notasPorCarpeta([nt("1", "", "t"), nt("2", "", "t"), nt("3", "", "t", 0, { borrada: true }), nt("4", "")]);
+  igual([cuantas.get("t"), cuantas.get(null)], [2, 1], "las borradas no cuentan");
+});
+prueba("explorador: con mas de tres eslabones, primera, colapso y ultima", () => {
+  const ruta = ["a", "b", "c", "d", "e"].map((x) => car(x, x));
+  igual(migasAMostrar(ruta.slice(0, 3)).length, 3);
+  const m = migasAMostrar(ruta);
+  igual([m.length, m[0].carpeta.id, m[1].colapso.map((c) => c.id), m[2].carpeta.id], [3, "a", ["b", "c", "d"], "e"]);
+});
+prueba("explorador: lado de la tarjeta de carpeta = columna de la rejilla adaptativa", () => {
+  igual(ladoDeTarjetaDeCarpeta(1000, 180, 16), 187);
+  igual(ladoDeTarjetaDeCarpeta(328, 150, 16), 156);
+  igual(ladoDeTarjetaDeCarpeta(100, 150, 16), 100, "al menos una columna");
+  igual([minimoDeTarjeta(1200), minimoDeTarjeta(400), minimoDeTarjeta(320)], [180, 150, 128]);
+});
+prueba("explorador: color de la pestana, 15 % menos de luminosidad, o mas clara si apenas se distingue", () => {
+  igual(colorPestanaDeCarpeta(0xFF8E8E8E), 0xFF686868);
+  const oscura = colorPestanaDeCarpeta(0xFF101010);
+  igual(oscura > 0xFF101010, true, "aclarada");
+  igual(contrasteWCAG(0xFF8E8E8E, 0xFF686868) >= 1.12, true);
+});
+prueba("carpeta: color como ARGB sin signo, con el gris por defecto", () => {
+  igual(leerCarpeta(JSON.stringify({ id: "c", name: "C", color: 4287532686 })).color, 0xFF8E8E8E);
+  igual(leerCarpeta(JSON.stringify({ id: "c", name: "C" })).color, 0xFF8E8E8E);
+  igual(leerCarpeta(JSON.stringify({ id: "c", name: "C", color: -15108398 })).color, 0xFF1976D2, "con signo");
+});
+prueba("resumen: lienzo infinito, hoja apaisada y papel", () => {
+  const r = resumenDeNota(nota({ lienzoInfinito: true, paperOrientation: "HORIZONTAL", paperColor: -1 }));
+  igual([r.lienzoInfinito, r.apaisada, r.papel], [true, true, -1]);
+  igual(resumenDeNota(nota({ paperOrientation: "HORIZONTAL", pagePapers: { "0": { orientation: "VERTICAL" } } })).apaisada, false, "manda el papel de la hoja 0");
+  igual(resumenDeNota(nota()).apaisada, false);
+});
+prueba("tema oscuro de la nota: tinta clara y papel oscuro poco saturado", () => {
+  const tinta = colorDe(colorVisible(-16777216, true)).css;   // negro -> gris claro
+  igual(tinta, "rgb(237 237 237)");
+  igual(colorVisible(-16777216, false), -16777216, "en claro no cambia");
+  const papel = colorDe(papelVisible(0xFFFCFBF4 | 0, true)).css.match(/\d+/g).map(Number);
+  igual(papel.every((v) => v >= 35 && v <= 55) && papel[0] >= papel[2], true, "papel " + papel);
+  igual(papelVisible(0xFFFCFBF4 | 0, false), 0xFFFCFBF4 | 0);
 });
 
 // ---- ejecucion ----

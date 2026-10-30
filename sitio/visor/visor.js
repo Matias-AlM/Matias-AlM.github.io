@@ -2,9 +2,13 @@
 // lee con File API, sin red. Los textos de las notas se ponen siempre con textContent.
 import {
   esFicheroDeNota, esFicheroDeCarpeta, leerCarpeta, resumenDeNota, leerNota,
-  rutaDeCarpeta, ordenarNotas, filtrarNotas, nombreDeImagen,
+  filtrarNotas, nombreDeImagen,
 } from "./formato.js";
-import { prepararNota, cargarBitmaps } from "./pintar.js";
+import {
+  contenidoDeCarpeta, rutaDeCarpeta, subcarpetasPorCarpeta, notasPorCarpeta, migasAMostrar, ladoDeTarjetaDeCarpeta,
+  minimoDeTarjeta, colorPestanaDeCarpeta, rgbCss,
+} from "./explorador.js";
+import { prepararNota, cargarBitmaps, colorDe, papelVisible } from "./pintar.js";
 import { crearVista } from "./vista.js";
 import { estadoDePastilla } from "./gestos.js";
 
@@ -15,6 +19,7 @@ const TEXTOS = {
     ilegibles: (n) => `${n} ${n === 1 ? "fichero no se pudo leer" : "ficheros no se pudieron leer"}.`,
     vacia: "No hay notas de SwiftPen en esa carpeta.", sinResultados: "Ninguna nota coincide.",
     cargando: "Cargando…", notaVacia: "Esta nota está vacía.", cdContador: "Página actual. Toca para ir a otra", cdAnterior: "Página anterior", cdSiguiente: "Página siguiente", zoomRapido: "Zoom rápido", rango: (n) => `Del 1 al ${n}`,
+    carpetas: "Carpetas", subir: "Subir un nivel", migasOcultas: "Mostrar las carpetas intermedias", carpetaVacia: "Esta carpeta está vacía.", nSub: (n) => `${n} ${n === 1 ? "subcarpeta" : "subcarpetas"}`, horizontal: "Horizontal", infinito: "Lienzo infinito", notaBloqueada: "Nota bloqueada",
     bloqueada: "Bloqueada", buscar: "Buscar por título", noSeDibuja: "No se pudo dibujar esta nota.",
   },
   en: {
@@ -23,6 +28,7 @@ const TEXTOS = {
     ilegibles: (n) => `${n} ${n === 1 ? "file could not be read" : "files could not be read"}.`,
     vacia: "There are no SwiftPen notes in that folder.", sinResultados: "No note matches.",
     cargando: "Loading…", notaVacia: "This note is empty.", cdContador: "Current page. Tap to go to another", cdAnterior: "Previous page", cdSiguiente: "Next page", zoomRapido: "Quick zoom", rango: (n) => `1 to ${n}`,
+    carpetas: "Folders", subir: "Up one level", migasOcultas: "Show the folders in between", carpetaVacia: "This folder is empty.", nSub: (n) => `${n} ${n === 1 ? "subfolder" : "subfolders"}`, horizontal: "Landscape", infinito: "Infinite canvas", notaBloqueada: "Locked note",
     bloqueada: "Locked", buscar: "Search by title", noSeDibuja: "This note could not be drawn.",
   },
   fr: {
@@ -31,6 +37,7 @@ const TEXTOS = {
     ilegibles: (n) => `${n} ${n === 1 ? "fichier illisible" : "fichiers illisibles"}.`,
     vacia: "Aucune note SwiftPen dans ce dossier.", sinResultados: "Aucune note ne correspond.",
     cargando: "Chargement…", notaVacia: "Cette note est vide.", cdContador: "Page actuelle. Touchez pour aller à une autre", cdAnterior: "Page précédente", cdSiguiente: "Page suivante", zoomRapido: "Zoom rapide", rango: (n) => `1 à ${n}`,
+    carpetas: "Dossiers", subir: "Remonter d'un niveau", migasOcultas: "Afficher les dossiers intermédiaires", carpetaVacia: "Ce dossier est vide.", nSub: (n) => `${n} ${n === 1 ? "sous-dossier" : "sous-dossiers"}`, horizontal: "Paysage", infinito: "Canevas infini", notaBloqueada: "Note verrouillée",
     bloqueada: "Verrouillée", buscar: "Rechercher par titre", noSeDibuja: "Impossible de dessiner cette note.",
   },
 };
@@ -48,10 +55,10 @@ const el = (etiqueta, clase, contenido) => {
 const estado = {
   archivos: new Map(),   // nombre -> File
   notas: [],             // resumenes
-  carpetas: new Map(),   // id -> {id, nombre, padreId}
+  carpetas: [],          // {id, nombre, padreId, color, posicion}
   ilegibles: 0,
   busqueda: "",
-  carpetaId: undefined,
+  carpetaActual: null,   // null = la raiz del explorador
 };
 
 // ---- Lectura de la carpeta ----
@@ -78,7 +85,7 @@ async function recorrerManejador(manejador, destino) {
 
 async function cargar(ficheros) {
   estado.archivos = new Map(ficheros.map((f) => [f.name, f]));
-  estado.carpetas = new Map();
+  estado.carpetas = [];
   estado.notas = [];
   estado.ilegibles = 0;
   const leer = async (fichero, interpretar, guardar) => {
@@ -90,15 +97,14 @@ async function cargar(ficheros) {
   };
   const trabajos = [];
   for (const [nombre, fichero] of estado.archivos) {
-    if (esFicheroDeCarpeta(nombre)) trabajos.push(leer(fichero, leerCarpeta, (c) => estado.carpetas.set(c.id, c)));
+    if (esFicheroDeCarpeta(nombre)) trabajos.push(leer(fichero, leerCarpeta, (c) => estado.carpetas.push(c)));
     else if (esFicheroDeNota(nombre)) {
       trabajos.push(leer(fichero, resumenDeNota, (n) => estado.notas.push({ ...n, nombreDeFichero: nombre })));
     }
   }
   await Promise.all(trabajos);
-  estado.notas = ordenarNotas(estado.notas);
   estado.busqueda = "";
-  estado.carpetaId = undefined;
+  estado.carpetaActual = null;
   $("busqueda").value = "";
   pintarTodo();
 }
@@ -116,7 +122,37 @@ async function elegirConManejador() {
   await cargar(ficheros);
 }
 
-// ---- Lista ----
+// ---- Biblioteca: el explorador de la app ----
+
+const NS = "http://www.w3.org/2000/svg";
+const svg = (clase, atributos, ...hijos) => {
+  const nodo = document.createElementNS(NS, "svg");
+  nodo.setAttribute("viewBox", "0 0 24 24");
+  nodo.setAttribute("aria-hidden", "true");
+  if (clase) nodo.setAttribute("class", clase);
+  for (const [k, v] of Object.entries(atributos ?? {})) nodo.setAttribute(k, v);
+  nodo.append(...hijos);
+  return nodo;
+};
+const camino = (d, atributos = {}) => {
+  const p = document.createElementNS(NS, "path");
+  p.setAttribute("d", d);
+  for (const [k, v] of Object.entries(atributos)) p.setAttribute(k, v);
+  return p;
+};
+const TRAZO_FINO = { fill: "none", stroke: "currentColor", "stroke-width": "1.5", "stroke-linecap": "round", "stroke-linejoin": "round" };
+
+// ic_lock, ic_infinite, ic_landscape_page, ic_folder_filled / ic_folder_tab: los vectores de la app.
+const D_CANDADO = "M7.25 10.75L17.25 10.75A2 2 0 0 1 19.25 12.75L19.25 18.75A2 2 0 0 1 17.25 20.75L7.25 20.75A2 2 0 0 1 5.25 18.75L5.25 12.75A2 2 0 0 1 7.25 10.75ZM8.25 10.75V7.75A4 4 0 0 1 16.25 7.75V10.75M12.25 14.5V17";
+const D_INFINITO = "M12.25 12.25C10.25 9.5 8.75 8.5 7 8.5A3.75 3.75 0 0 0 7 16C8.75 16 10.25 15 12.25 12.25C14.25 9.5 15.75 8.5 17.5 8.5A3.75 3.75 0 0 1 17.5 16C15.75 16 14.25 15 12.25 12.25Z";
+const D_HORIZONTAL = "M5.75 6.25L18.75 6.25A2 2 0 0 1 20.75 8.25L20.75 16.25A2 2 0 0 1 18.75 18.25L5.75 18.25A2 2 0 0 1 3.75 16.25L3.75 8.25A2 2 0 0 1 5.75 6.25ZM7.25 10.25H17.25M7.25 14.25H13.25";
+const D_CARPETA = "M3.5 7.5A2 2 0 0 1 5.5 5.5H9.25L11.25 7.75H18.5A2 2 0 0 1 20.5 9.75V17.5A2 2 0 0 1 18.5 19.5H5.5A2 2 0 0 1 3.5 17.5Z";
+
+const esOscuro = () => {
+  const forzado = document.documentElement.getAttribute("data-tema");
+  return forzado ? forzado === "oscuro" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+};
+const esMovil = () => window.matchMedia("(max-width: 599px)").matches;   // CORTE_COMPACTA_DP = 600
 
 const miniaturas = { worker: null, cola: [], enCurso: new Map(), siguiente: 1, ocupado: false };
 
@@ -131,8 +167,11 @@ function iniciarWorker() {
       const img = el("img", "miniatura-img");
       img.alt = "";
       img.src = URL.createObjectURL(data.blob);
-      img.addEventListener("load", () => URL.revokeObjectURL(img.src));
-      tarjeta.querySelector(".miniatura").replaceChildren(img);
+      img.addEventListener("load", () => { URL.revokeObjectURL(img.src); img.classList.add("lista"); });
+      const marco = tarjeta.querySelector(".miniatura");
+      marco.replaceChildren(img);
+      // La insignia "Horizontal" solo va sobre una miniatura ya dibujada, como en la app.
+      if (tarjeta.nota.apaisada) marco.append(insigniaHorizontal());
     }
     siguienteMiniatura();
   };
@@ -148,7 +187,10 @@ function siguienteMiniatura() {
   for (const [nombre, fichero] of estado.archivos) if (nombre.startsWith(prefijo)) imagenes[nombre] = fichero;
   miniaturas.ocupado = true;
   miniaturas.enCurso.set(id, tarjeta);
-  miniaturas.worker.postMessage({ id, archivo: estado.archivos.get(nota.nombreDeFichero), imagenes, ancho: 320 });
+  // ThumbnailStore.anchoPara: 720 px en tableta, 480 en movil.
+  miniaturas.worker.postMessage({
+    id, archivo: estado.archivos.get(nota.nombreDeFichero), imagenes, ancho: esMovil() ? 480 : 720, oscuro: esOscuro(),
+  });
 }
 
 const observador = new IntersectionObserver((entradas) => {
@@ -160,75 +202,175 @@ const observador = new IntersectionObserver((entradas) => {
   siguienteMiniatura();
 }, { rootMargin: "300px" });
 
-const ICONO_CANDADO = "M7 10V8a5 5 0 0 1 10 0v2h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1zm2 0h6V8a3 3 0 0 0-6 0z";
-function candado() {
-  const ns = "http://www.w3.org/2000/svg";
-  const svg = document.createElementNS(ns, "svg");
-  svg.setAttribute("viewBox", "0 0 24 24");
-  svg.setAttribute("aria-hidden", "true");
-  svg.setAttribute("class", "candado");
-  const camino = document.createElementNS(ns, "path");
-  camino.setAttribute("d", ICONO_CANDADO);
-  svg.append(camino);
-  return svg;
+function insigniaHorizontal() {
+  const nodo = el("span", "insignia-horizontal");
+  nodo.append(svg("", TRAZO_FINO, camino(D_HORIZONTAL)), el("span", "", t().horizontal));
+  return nodo;
 }
 
-function formatoDeFecha(ms) {
-  if (!ms) return "";
-  return new Intl.DateTimeFormat(idioma(), { dateStyle: "medium" }).format(new Date(ms));
-}
-
-function tarjetaDe(nota) {
+// TarjetaDeCuaderno: la miniatura con esquinas de 12, y debajo el titulo en negrita y la carpeta.
+function tarjetaDeNota(nota) {
   const tarjeta = el("button", "tarjeta");
   tarjeta.type = "button";
   tarjeta.nota = nota;
   const marco = el("span", "miniatura");
+  // Mientras no hay miniatura, el papel de la nota (como la app).
+  marco.style.background = colorDe(papelVisible(nota.papel, esOscuro())).css;
   if (nota.bloqueada) {
-    marco.classList.add("bloqueada");
-    marco.append(candado());
+    // La app desenfoca la miniatura de una bloqueada; aqui una bloqueada no se dibuja nunca: papel liso y candado.
+    marco.append(el("span", "candado-redondo"));
+    marco.firstChild.append(svg("", TRAZO_FINO, camino(D_CANDADO)));
+    marco.firstChild.setAttribute("role", "img");
+    marco.firstChild.setAttribute("aria-label", t().notaBloqueada);
   }
-  const titulo = el("span", "tarjeta-titulo", nota.titulo || t().sinTitulo);
-  const meta = el("span", "tarjeta-meta");
-  const carpeta = nota.carpetaId ? rutaDeCarpeta(estado.carpetas, nota.carpetaId) : "";
-  if (carpeta) meta.append(el("span", "tarjeta-carpeta", carpeta));
-  meta.append(el("span", "tarjeta-fecha", formatoDeFecha(nota.fecha)));
-  tarjeta.append(marco, titulo, meta);
-  if (nota.bloqueada) {
-    tarjeta.append(el("span", "etiqueta-bloqueada", t().bloqueada));
-    tarjeta.setAttribute("aria-label", `${nota.titulo || t().sinTitulo} (${t().bloqueada})`);
+  const titulo = el("span", "tarjeta-titulo", nota.titulo.trim() === "" ? t().sinTitulo : nota.titulo);
+  if (nota.titulo.trim() === "") titulo.classList.add("sin-nombre");
+  const fila = el("span", "tarjeta-fila");
+  fila.append(titulo);
+  if (nota.lienzoInfinito) {
+    const icono = svg("tarjeta-infinito", TRAZO_FINO, camino(D_INFINITO));
+    icono.setAttribute("role", "img");
+    icono.setAttribute("aria-label", t().infinito);
+    fila.append(icono);
   }
+  const carpeta = estado.carpetas.find((c) => c.id === nota.carpetaId);
+  const pie = el("span", "tarjeta-pie", carpeta ? carpeta.nombre : t().sinCarpeta);
+  const texto = el("span", "tarjeta-texto");
+  texto.append(fila, pie);
+  tarjeta.append(marco, texto);
   tarjeta.addEventListener("click", () => abrirNota(nota));
   if (!nota.bloqueada) observador.observe(tarjeta);
   return tarjeta;
 }
 
-function pintarCarpetas() {
-  $("busqueda").placeholder = t().buscar;
-  const selector = $("carpeta");
-  const conCarpeta = new Set(estado.notas.map((n) => n.carpetaId).filter(Boolean));
-  const opciones = [["", t().todas]];
-  if (estado.notas.some((n) => !n.carpetaId)) opciones.push(["__ninguna", t().sinCarpeta]);
-  const rutas = [...conCarpeta].map((id) => [id, rutaDeCarpeta(estado.carpetas, id) || id]);
-  rutas.sort((a, b) => a[1].localeCompare(b[1]));
-  opciones.push(...rutas);
-  const actual = estado.carpetaId === undefined ? "" : estado.carpetaId === null ? "__ninguna" : estado.carpetaId;
-  selector.replaceChildren(...opciones.map(([valor, nombre]) => {
-    const o = el("option", "", nombre);
-    o.value = valor;
-    return o;
-  }));
-  selector.value = actual;
+// TarjetaDeCarpeta: cuadrada, del ancho de una columna; tinte suave del color, franja solida a la
+// izquierda, nombre en negrita, la carpeta grande en el centro y el recuento debajo.
+function iconoDeCarpeta(color) {
+  const pestana = rgbCss(colorPestanaDeCarpeta(color));
+  const trazo = { "stroke-width": "1.75", "stroke-linecap": "round", "stroke-linejoin": "round" };
+  const cuerpo = camino(D_CARPETA, { fill: rgbCss(color), stroke: rgbCss(color), ...trazo });
+  const recorte = document.createElementNS(NS, "clipPath");
+  const id = `pestana-${color}`;
+  recorte.setAttribute("id", id);
+  const rect = document.createElementNS(NS, "rect");
+  for (const [k, v] of Object.entries({ x: "0", y: "0", width: "24", height: "8.4" })) rect.setAttribute(k, v);
+  recorte.append(rect);
+  const arriba = camino(D_CARPETA, { fill: pestana, stroke: pestana, "clip-path": `url(#${id})`, ...trazo });
+  return svg("carpeta-icono", {}, recorte, cuerpo, arriba);
+}
+
+function tarjetaDeCarpeta(carpeta, subcarpetas, notas) {
+  const tarjeta = el("button", "carpeta");
+  tarjeta.type = "button";
+  tarjeta.style.setProperty("--carpeta", rgbCss(carpeta.color));
+  const sinNombre = carpeta.nombre.trim() === "";
+  const nombre = el("span", "carpeta-nombre", sinNombre ? t().sinTitulo : carpeta.nombre);
+  if (sinNombre) nombre.classList.add("sin-nombre");
+  const resumen = subcarpetas > 0 ? `${t().nSub(subcarpetas)} · ${t().cargadas(notas)}` : t().cargadas(notas);
+  const centro = el("span", "carpeta-centro");
+  centro.append(iconoDeCarpeta(carpeta.color));
+  tarjeta.append(nombre, centro, el("span", "carpeta-resumen", resumen));
+  tarjeta.addEventListener("click", () => entrarEnCarpeta(carpeta.id));
+  return tarjeta;
+}
+
+function entrarEnCarpeta(id) {
+  estado.carpetaActual = id;
+  estado.busqueda = "";
+  $("busqueda").value = "";
+  pintarLista();
+  window.scrollTo({ top: 0 });
+}
+
+// FolderBreadcrumb: "Carpetas > A > B"; los ancestros en gris y pulsables, la actual en negro.
+function pintarMigas(ruta, buscando) {
+  const migas = $("migas");
+  const raiz = { id: null, nombre: t().carpetas };
+  const eslabones = migasAMostrar([raiz, ...ruta]);
+  const ultimo = ruta.length === 0 || buscando ? raiz : ruta[ruta.length - 1];
+  const nodos = [];
+  eslabones.forEach((eslabon, i) => {
+    const esAncestro = eslabon.colapso ? true : (buscando ? true : eslabon.carpeta !== (ruta[ruta.length - 1] ?? raiz));
+    let miga;
+    if (eslabon.colapso) {
+      miga = el("button", "miga ancestro", "…");
+      miga.type = "button";
+      miga.setAttribute("aria-label", t().migasOcultas);
+      miga.addEventListener("click", () => pintarMigasExpandidas(ruta));
+    } else {
+      const c = eslabon.carpeta;
+      const vacio = c !== raiz && c.nombre.trim() === "";
+      miga = el(esAncestro ? "button" : "span", `miga ${esAncestro ? "ancestro" : "actual"}`, vacio ? t().sinTitulo : c.nombre);
+      if (esAncestro) { miga.type = "button"; miga.addEventListener("click", () => entrarEnCarpeta(c.id)); }
+      if (vacio) miga.classList.add("sin-nombre");
+      if (!esAncestro) miga.setAttribute("aria-current", "page");
+    }
+    nodos.push(miga);
+    if (esAncestro) nodos.push(svg("miga-chevron", TRAZO_FINO, camino("M9.75 5.75L16.25 12.25L9.75 18.75")));
+  });
+  void ultimo;
+  migas.replaceChildren(...nodos);
+  migas.scrollLeft = migas.scrollWidth;
+}
+
+function pintarMigasExpandidas(ruta) {
+  const migas = $("migas");
+  const nodos = [{ id: null, nombre: t().carpetas }, ...ruta].flatMap((c, i, todas) => {
+    const ultima = i === todas.length - 1;
+    const miga = el(ultima ? "span" : "button", `miga ${ultima ? "actual" : "ancestro"}`, c.nombre);
+    if (!ultima) { miga.type = "button"; miga.addEventListener("click", () => entrarEnCarpeta(c.id)); }
+    return ultima ? [miga] : [miga, svg("miga-chevron", TRAZO_FINO, camino("M9.75 5.75L16.25 12.25L9.75 18.75"))];
+  });
+  migas.replaceChildren(...nodos);
+  migas.scrollLeft = migas.scrollWidth;
+}
+
+// La fila de carpetas se desplaza de lado y se desvanece en los bordes con mas que ver.
+function marcarDesvanecidoDeLaFila() {
+  const fila = $("carpetas");
+  fila.classList.toggle("puede-izquierda", fila.scrollLeft > 1);
+  fila.classList.toggle("puede-derecha", fila.scrollLeft + fila.clientWidth < fila.scrollWidth - 1);
+}
+
+// El lado de una tarjeta de carpeta es el de una columna de notas (la cuenta de GridCells.Adaptive).
+function medirLadoDeCarpeta() {
+  const ancho = $("lista").clientWidth || $("biblioteca").clientWidth;
+  if (ancho > 0) $("carpetas").style.setProperty("--lado", `${ladoDeTarjetaDeCarpeta(ancho, minimoDeTarjeta(window.innerWidth), 16)}px`);
+  marcarDesvanecidoDeLaFila();
 }
 
 function pintarLista() {
   miniaturas.cola = [];
-  const visibles = filtrarNotas(estado.notas, { busqueda: estado.busqueda, carpetaId: estado.carpetaId });
-  $("cuenta").textContent = t().cargadas(visibles.length);
-  $("lista").replaceChildren(...visibles.map(tarjetaDe));
+  const buscando = estado.busqueda.trim() !== "";
+  const vivas = estado.notas.filter((n) => !n.borrada);
+  let carpetasAqui = [], notasAqui;
+  if (buscando) {
+    notasAqui = filtrarNotas(vivas, { busqueda: estado.busqueda }).sort((a, b) => b.fecha - a.fecha);
+  } else {
+    const contenido = contenidoDeCarpeta(estado.carpetas, vivas, estado.carpetaActual);
+    carpetasAqui = contenido.carpetas;
+    notasAqui = contenido.notas;
+  }
+  const ruta = estado.carpetaActual === null ? [] : rutaDeCarpeta(estado.carpetas, estado.carpetaActual);
+  pintarMigas(ruta, buscando);
+  $("carpeta-subir").hidden = buscando || ruta.length === 0;
+  $("carpeta-subir").setAttribute("aria-label", t().subir);
+  $("busqueda").placeholder = t().buscar;
+
+  const fila = $("carpetas");
+  const subs = subcarpetasPorCarpeta(estado.carpetas), cuantas = notasPorCarpeta(vivas);
+  fila.replaceChildren(...carpetasAqui.map((c) => tarjetaDeCarpeta(c, subs.get(c.id) ?? 0, cuantas.get(c.id) ?? 0)));
+  fila.hidden = carpetasAqui.length === 0;
+  fila.scrollLeft = 0;
+  $("lista").replaceChildren(...notasAqui.map(tarjetaDeNota));
+  medirLadoDeCarpeta();
+
   const aviso = $("aviso");
   const mensajes = [];
   if (estado.ilegibles) mensajes.push(t().ilegibles(estado.ilegibles));
-  if (visibles.length === 0) mensajes.push(estado.notas.length === 0 ? t().vacia : t().sinResultados);
+  if (carpetasAqui.length === 0 && notasAqui.length === 0) {
+    mensajes.push(buscando ? t().sinResultados : estado.notas.length === 0 && estado.carpetas.length === 0 ? t().vacia : t().carpetaVacia);
+  }
   aviso.textContent = mensajes.join(" ");
   aviso.hidden = mensajes.length === 0;
 }
@@ -239,7 +381,6 @@ function pintarTodo() {
   $("biblioteca").hidden = !hayCarpeta;
   if (!hayCarpeta) return;
   iniciarWorker();
-  pintarCarpetas();
   pintarLista();
 }
 
@@ -336,7 +477,7 @@ async function abrirNota(resumen) {
     lienzo.hidden = false;
     const vacia = nota.trazos.every((trazo) => trazo.length === 0) && nota.imagenes.every((i) => i.esCajaDeTexto);
     mostrarEstado("vacia", vacia ? t().notaVacia : null);
-    vistaActual = crearVista(lienzo, prepararNota(nota), bitmaps, {
+    vistaActual = crearVista(lienzo, prepararNota(nota, { oscuro: esOscuro() }), bitmaps, {
       alCambiarVista: (v) => { vistaMostrada = v; pintarPildora(); mostrarPildora(); },
     });
     lienzo.focus();
@@ -386,12 +527,16 @@ function iniciar() {
   });
 
   $("busqueda").addEventListener("input", (e) => { estado.busqueda = e.target.value; pintarLista(); });
-  $("carpeta").addEventListener("change", (e) => {
-    const v = e.target.value;
-    estado.carpetaId = v === "" ? undefined : v === "__ninguna" ? null : v;
-    pintarLista();
+  $("carpeta-subir").addEventListener("click", () => {
+    const ruta = rutaDeCarpeta(estado.carpetas, estado.carpetaActual);
+    entrarEnCarpeta(ruta.length > 1 ? ruta[ruta.length - 2].id : null);
   });
-
+  $("carpetas").addEventListener("scroll", marcarDesvanecidoDeLaFila, { passive: true });
+  new ResizeObserver(medirLadoDeCarpeta).observe($("lista"));
+  // Los dibujos de las miniaturas siguen al tema, como las de la app.
+  const repintarPorTema = () => { if (estado.archivos.size) pintarLista(); };
+  document.addEventListener("cambiotema", repintarPorTema);
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", repintarPorTema);
   $("nota-volver").addEventListener("click", cerrarNota);
   // Zoom rapido: tocar el porcentaje abre una fila, "Ajustar a la pantalla" (solo con hojas).
   $("zoom-etiqueta").addEventListener("click", () => {
@@ -418,7 +563,7 @@ function iniciar() {
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("nota").hidden) { if (hayPanelAbierto()) { cerrarPaneles(); $("lienzo").focus(); } else cerrarNota(); } });
 
   // Los textos que genera el JS siguen al selector de idioma de la barra.
-  new MutationObserver(() => { if (estado.archivos.size) { pintarCarpetas(); pintarLista(); } pintarPildora(); })
+  new MutationObserver(() => { if (estado.archivos.size) pintarLista(); pintarPildora(); })
     .observe(document.documentElement, { attributes: true, attributeFilter: ["data-lang"] });
 }
 

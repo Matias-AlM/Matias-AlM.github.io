@@ -8,38 +8,82 @@
 .visor h1 { font-family: var(--fuente-titulo); font-size: clamp(1.8rem, 5vw, 2.6rem); margin: 0 0 12px; }
 body.arrastrando .visor { outline: 2px dashed var(--accent); outline-offset: -8px; border-radius: 16px; }
 
-.visor-barra { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 16px; margin-bottom: 20px; }
-.visor-barra h1 { margin: 0; font-size: 1.8rem; }
-.visor-cuenta { color: var(--muted); font-size: 15px; flex: 1 1 auto; }
+/* La biblioteca como el explorador de la app (MainActivity.kt: FolderBreadcrumb, FilaDeCarpetas,
+ * TarjetaDeCarpeta, TarjetaDeCuaderno; LibraryPalette; DesignTokens). Los valores en dp pasan a px. */
+:root {
+  --bib-card: #f1eefb; --bib-divisor: #cfd3e1; --bib-texto: #19191c; --bib-texto-2: #5e5f67;
+  --bib-tinte-carpeta: 12%; --ratio-miniatura: 3 / 4; --min-tarjeta: 180px;
+}
+:root[data-tema="oscuro"] { --bib-card: #1e1c32; --bib-divisor: #2e3344; --bib-texto: #f2f2f5; --bib-texto-2: #9a9ca5; --bib-tinte-carpeta: 10%; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema="claro"]) { --bib-card: #1e1c32; --bib-divisor: #2e3344; --bib-texto: #f2f2f5; --bib-texto-2: #9a9ca5; --bib-tinte-carpeta: 10%; }
+}
+@media (max-width: 599px) { :root { --ratio-miniatura: 4 / 3; --min-tarjeta: 150px; } }   /* TamanoDeVistaPrevia.COMPACTA en movil */
+@media (max-width: 339px) { :root { --min-tarjeta: 128px; } }
+
 .visor-campo {
   font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--border);
   border-radius: 12px; padding: 9px 12px; min-width: 0; max-width: 100%;
 }
 .visor-campo:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 
-.visor-lista { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 16px; }
+/* Cabecera: subir un nivel + migas de pan, y la busqueda (solo de la web) a la derecha. */
+.bib-cabecera { display: flex; align-items: center; gap: 8px 16px; flex-wrap: wrap; margin-bottom: 16px; }
+.bib-subir { flex: none; width: 40px; height: 40px; display: grid; place-items: center; padding: 0; color: var(--bib-texto); background: none; border: 0; border-radius: 50%; cursor: pointer; }
+.bib-subir svg { width: 24px; height: 24px; }
+.bib-subir:focus-visible, .miga:focus-visible, .tarjeta:focus-visible, .carpeta:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.bib-migas { flex: 1 1 200px; min-width: 0; display: flex; align-items: center; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
+.bib-migas::-webkit-scrollbar { display: none; }
+.miga { flex: none; max-width: 280px; overflow: hidden; text-overflow: ellipsis; font: inherit; font-family: var(--fuente-titulo); font-size: 24px; font-weight: 700; line-height: 1.3; padding: 0; background: none; border: 0; }
+.miga.actual { color: var(--bib-texto); }
+.miga.ancestro { color: var(--bib-texto-2); cursor: pointer; }
+.miga-chevron { flex: none; width: 20px; height: 20px; margin: 0 6px; color: var(--bib-texto-2); }
+.sin-nombre { font-style: italic; color: var(--bib-texto-2); }
+.bib-cabecera .visor-campo { flex: 0 1 260px; }
+
+/* La fila de carpetas: se desplaza de lado y se desvanece en los bordes con mas. */
+.bib-carpetas { display: flex; gap: 16px; overflow-x: auto; margin-bottom: 16px; scrollbar-width: none; }
+.bib-carpetas::-webkit-scrollbar { display: none; }
+.bib-carpetas.puede-derecha { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 48px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 48px), transparent); }
+.bib-carpetas.puede-izquierda { -webkit-mask-image: linear-gradient(270deg, #000 calc(100% - 48px), transparent); mask-image: linear-gradient(270deg, #000 calc(100% - 48px), transparent); }
+.bib-carpetas.puede-izquierda.puede-derecha { -webkit-mask-image: linear-gradient(90deg, transparent, #000 48px, #000 calc(100% - 48px), transparent); mask-image: linear-gradient(90deg, transparent, #000 48px, #000 calc(100% - 48px), transparent); }
+
+.carpeta {
+  position: relative; flex: none; width: var(--lado, var(--min-tarjeta)); aspect-ratio: 1; display: flex; flex-direction: column; text-align: left;
+  box-sizing: border-box; padding: 0; overflow: hidden; cursor: pointer; font: inherit; color: var(--bib-texto);
+  border-radius: 12px; border: 1px solid var(--bib-divisor);
+  background: color-mix(in srgb, var(--carpeta) var(--bib-tinte-carpeta), var(--bib-card));
+}
+.carpeta::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 6px; background: var(--carpeta); }
+.carpeta-nombre { display: block; padding: 8px 4px 8px 12px; font-size: 15px; font-weight: 700; line-height: 24px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.carpeta-centro { flex: 1; min-height: 0; display: grid; place-items: center; }
+.carpeta-icono { height: 80%; aspect-ratio: 1; }
+.carpeta-resumen { padding: 0 12px 8px; font-size: 11px; color: var(--bib-texto-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Las notas: la rejilla adaptativa de la app (minimo 180 / 150 / 128 dp, separacion 16). */
+.bib-lista { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--min-tarjeta), 1fr)); gap: 16px; }
 .tarjeta {
-  position: relative; display: flex; flex-direction: column; gap: 4px; text-align: left; cursor: pointer;
-  font: inherit; color: var(--text); padding: 10px; border-radius: 16px; min-width: 0;
-  background: color-mix(in srgb, var(--surface) 80%, transparent); border: 1px solid var(--border);
-  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: var(--shadow-suave);
+  display: flex; flex-direction: column; text-align: left; cursor: pointer; font: inherit; color: var(--bib-texto);
+  padding: 0; background: none; border: 0; min-width: 0; border-radius: 12px;
 }
-.tarjeta:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--border)); }
-.tarjeta:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .miniatura {
-  display: block; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 10px;
-  background: var(--surface-2); border: 1px solid var(--border);
+  position: relative; display: block; width: 100%; aspect-ratio: var(--ratio-miniatura); overflow: hidden; border-radius: 12px;
+  background: var(--surface-2);
 }
-.miniatura-img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
-.miniatura.bloqueada { display: grid; place-items: center; }
-.candado { width: 44px; height: 44px; fill: var(--faint); }
-.tarjeta-titulo { font-weight: 650; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.tarjeta-meta { display: flex; flex-direction: column; font-size: 13px; color: var(--muted); }
-.tarjeta-carpeta { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.etiqueta-bloqueada {
-  position: absolute; top: 16px; left: 16px; font-size: 11px; font-weight: 700; padding: 2px 8px;
-  border-radius: 999px; background: var(--surface); color: var(--muted); border: 1px solid var(--border);
+.miniatura-img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; opacity: 0; transition: opacity .2s; }
+.miniatura-img.lista { opacity: 1; }
+.candado-redondo { position: absolute; inset: 0; margin: auto; width: 56px; height: 56px; display: grid; place-items: center; border-radius: 50%; color: var(--bib-texto); background: color-mix(in srgb, var(--bib-card) 85%, transparent); }
+.candado-redondo svg { width: 24px; height: 24px; }
+.insignia-horizontal {
+  position: absolute; right: 4px; bottom: 4px; display: flex; align-items: center; gap: 2px; padding: 2px 8px; border-radius: 999px;
+  background: rgba(0, 0, 0, .55); color: #fff; font-size: 11px; font-weight: 700; line-height: 1.2;
 }
+.insignia-horizontal svg { width: 20px; height: 20px; }
+.tarjeta-texto { display: flex; flex-direction: column; justify-content: center; min-width: 0; min-height: 40px; padding-left: 4px; box-sizing: border-box; }
+.tarjeta-fila { display: flex; align-items: center; min-width: 0; }
+.tarjeta-titulo { min-width: 0; font-size: 15px; font-weight: 700; line-height: 1.4; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tarjeta-infinito { flex: none; width: 18px; height: 18px; margin-left: 4px; color: var(--bib-texto-2); }
+.tarjeta-pie { font-size: 11px; color: var(--bib-texto-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 /* Nota abierta: ocupa la ventana; el escenario se lleva todo el alto que sobra. */
 :root { --hoja-sombra: rgba(40, 30, 90, 0.28); --hoja-borde: rgba(22, 22, 40, 0.14); }
@@ -155,8 +199,7 @@ body.arrastrando .visor { outline: 2px dashed var(--accent); outline-offset: -8p
 .visor-bloqueada .candado { width: 56px; height: 56px; }
 body.con-nota { overflow: hidden; }
 @media (max-width: 520px) {
-  .visor-lista { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .visor-campo { flex: 1 1 100%; }
+  .bib-cabecera .visor-campo { flex: 1 1 100%; }
   .visor-nota-barra { gap: 8px; padding: 8px 10px; }
   .texto-volver { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .visor-nota-barra .boton { padding: 8px 12px; }
