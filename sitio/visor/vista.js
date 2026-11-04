@@ -7,16 +7,17 @@
 // inercia) y la barra los resuelve el navegador y aqui solo se lee el scroll para saber que se ve.
 //
 // Gestos: rueda = desplazar (dos dedos en un trackpad); Ctrl+rueda o pellizco de trackpad = zoom
-// hacia el cursor; Safari manda gesturestart/gesturechange; arrastrar con raton o dedo = mano;
+// hacia el cursor (los captura captura-zoom.js en todo el documento); arrastrar con raton o dedo = mano;
 // pellizco tactil; doble clic o doble toque = ajustar al ancho / acercar. Teclas: flechas,
 // Re Pag / Av Pag (hoja anterior / siguiente), Home / End, + - 0.
 import { dibujarRegion } from "./pintar.js";
 import {
-  cajaDeHojas, zoomDeAjuste, limitarZoom, zoomHaciaPunto, acotarVista, paginaActual, vistaDePagina, factorDeRueda,
+  cajaDeHojas, zoomDeAjuste, zoomHaciaPunto, acotarVista, paginaActual, vistaDePagina,
   porcentajeDeZoom, paginasALaVista,
 } from "./gestos.js";
 
 const ESPERA_REDIBUJO_MS = 140;
+const entre = (v, min, max) => Math.min(Math.max(v, min), max);
 const MARGEN_PX = 48;   // el mismo margen de nota a la vista que acotarVista
 const sinMovimiento = matchMedia("(prefers-reduced-motion: reduce)");
 // Los saltos (pagina, teclas) se animan con el suavizado del navegador, salvo si se pide menos movimiento.
@@ -151,25 +152,13 @@ export function crearVista(lienzo, preparada, bitmaps, { alCambiarVista = () => 
 
   const punto = (e) => { const r = lienzo.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
 
-  // Rueda: Ctrl (o el pellizco del trackpad) hace zoom; sin Ctrl se deja pasar y desplaza el
-  // navegador (suavizado e inercia del trackpad incluidos). Por eso el listener no es pasivo, pero solo
-  // cancela el evento con Ctrl.
-  lienzo.addEventListener("wheel", (e) => {
-    if (!(e.ctrlKey || e.metaKey)) return;
-    e.preventDefault();
-    const [x, y] = punto(e);
-    zoomEn(factorDeRueda(e.deltaY, e.deltaMode), x, y);
-  }, { passive: false });
-
-  // Safari de escritorio: el pellizco llega como gesturestart/gesturechange con `scale` acumulada.
-  let zoomAlEmpezar = 1;
-  lienzo.addEventListener("gesturestart", (e) => { e.preventDefault(); zoomAlEmpezar = vista.zoom; });
-  lienzo.addEventListener("gesturechange", (e) => {
-    e.preventDefault();
-    const [x, y] = punto(e);
-    zoomEn(limitarZoom(zoomAlEmpezar * e.scale, ajuste()) / vista.zoom, x, y);
-  });
-  lienzo.addEventListener("gestureend", (e) => e.preventDefault());
+  // Ctrl+rueda, pellizco de trackpad y gestos de Safari los captura captura-zoom.js en todo el documento
+  // (visor.js) y llegan aqui: el punto del cursor se acota a la zona visible para que el zoom
+  // nunca gire en torno a un punto fuera de la hoja (p. ej. con el cursor sobre la pastilla).
+  const zoomEnPantalla = (factor, clientX, clientY) => {
+    const r = desplazador.getBoundingClientRect(), o = lienzo.getBoundingClientRect();
+    zoomEn(factor, entre(clientX, r.left, r.right) - o.left, entre(clientY, r.top, r.bottom) - o.top);
+  };
 
   // Un puntero = mano; dos = pellizco (y desplazamiento con el punto medio).
   const punteros = new Map();
@@ -237,7 +226,7 @@ export function crearVista(lienzo, preparada, bitmaps, { alCambiarVista = () => 
   aplicar({ zoom: ajuste(), izquierda: (caja.x0 + caja.x1) / 2 - ancho() / ajuste() / 2, arriba: caja.y0 - 12 / ajuste() });
 
   return {
-    acercar: () => zoomEn(1.25), alejar: () => zoomEn(1 / 1.25), encajar, irAPagina,
+    zoomEnPantalla, acercar: () => zoomEn(1.25), alejar: () => zoomEn(1 / 1.25), encajar, irAPagina,
     total: hojas.length, pagina: paginaDeLaVista,
     estado: () => ({ ...vista, ajuste: ajuste() }),
     destruir: () => { observador.disconnect(); clearTimeout(temporizador); lienzo.style.transform = ""; pliego.style.width = pliego.style.height = ""; },
