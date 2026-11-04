@@ -10,6 +10,7 @@ import {
 } from "./explorador.js";
 import { prepararNota, cargarBitmaps, colorDe, papelVisible } from "./pintar.js";
 import { crearVista } from "./vista.js";
+import { capturarZoom } from "./captura-zoom.js";
 import { estadoDePastilla } from "./gestos.js";
 
 const TEXTOS = {
@@ -561,6 +562,13 @@ function iniciar() {
   $("lienzo").addEventListener("pointermove", (ev) => { if (ev.buttons && vistaMostrada) mostrarPildora(); });
   $("lienzo").addEventListener("keydown", () => vistaMostrada && mostrarPildora());
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("nota").hidden) { if (hayPanelAbierto()) { cerrarPaneles(); $("lienzo").focus(); } else cerrarNota(); } });
+
+  // Zoom del visor en toda la pagina, nunca el del navegador (ver captura-zoom.js).
+  capturarZoom(document, {
+    hayNota: () => !$("nota").hidden,
+    alZoom: (factor, x, y) => vistaActual && vistaActual.zoomEnPantalla(factor, x, y),
+    alTecla: (accion) => vistaActual && vistaActual[accion](),
+  });
 
   // Los textos que genera el JS siguen al selector de idioma de la barra.
   new MutationObserver(() => { if (estado.archivos.size) pintarLista(); pintarPildora(); })

@@ -13,6 +13,7 @@ import {
   contenidoDeCarpeta, rutaDeCarpeta as rutaDeCarpetaLista, migasAMostrar, subcarpetasPorCarpeta, notasPorCarpeta, ladoDeTarjetaDeCarpeta,
   minimoDeTarjeta, colorPestanaDeCarpeta, contrasteWCAG,
 } from "/sitio/visor/explorador.js";
+import { capturarZoom } from "/sitio/visor/captura-zoom.js";
 import { colorVisible, papelVisible } from "/sitio/visor/pintar.js";
 import { colorDe, prepararNota, dibujarMiniatura, dibujarRegion } from "/sitio/visor/pintar.js";
 
@@ -348,6 +349,64 @@ prueba("tema oscuro de la nota: tinta clara y papel oscuro poco saturado", () =>
   const papel = colorDe(papelVisible(0xFFFCFBF4 | 0, true)).css.match(/\d+/g).map(Number);
   igual(papel.every((v) => v >= 35 && v <= 55) && papel[0] >= papel[2], true, "papel " + papel);
   igual(papelVisible(0xFFFCFBF4 | 0, false), 0xFFFCFBF4 | 0);
+});
+
+// ---- zoom: la rueda con Ctrl y el teclado nunca llegan al zoom del navegador (issue #98) ----
+const lanzar = (destino, evento) => { destino.dispatchEvent(evento); return evento.defaultPrevented; };
+const rueda = (extra = {}) => new WheelEvent("wheel", { ctrlKey: true, deltaY: -20, bubbles: true, cancelable: true, ...extra });
+const tecla = (key, extra = {}) => new KeyboardEvent("keydown", { key, ctrlKey: true, bubbles: true, cancelable: true, ...extra });
+function escenario(hayNota) {
+  const raiz = document.createElement("div");
+  raiz.innerHTML = '<section id="biblioteca"><div id="lista"><button>x</button></div></section><div id="nota"><div id="barra"></div><div id="desplazador"><canvas id="lienzo" tabindex="0"></canvas></div><div id="pildora"></div></div>';
+  document.body.append(raiz);
+  const llamadas = { zoom: [], tecla: [] };
+  const quitar = capturarZoom(document, {
+    hayNota: () => hayNota,
+    alZoom: (factor, x, y) => llamadas.zoom.push([factor, x, y]),
+    alTecla: (accion) => llamadas.tecla.push(accion),
+  });
+  return { raiz, llamadas, limpiar: () => { quitar(); raiz.remove(); } };
+}
+prueba("Ctrl+rueda se cancela en cada zona del visor, con o sin nota", () => {
+  for (const hayNota of [true, false]) {
+    const { raiz, limpiar } = escenario(hayNota);
+    for (const id of ["lista", "barra", "desplazador", "lienzo", "pildora"]) {
+      igual(lanzar(raiz.querySelector("#" + id), rueda()), true, `${id} nota=${hayNota}`);
+    }
+    igual(lanzar(raiz.querySelector("button"), rueda({ ctrlKey: false, metaKey: true })), true, "Cmd+rueda");
+    igual(lanzar(document.body, rueda({ deltaY: 0 })), true, "deltaY 0");
+    igual(lanzar(document.documentElement, rueda()), true, "fuera del contenedor");
+    limpiar();
+  }
+});
+prueba("la rueda sin Ctrl no se toca (desplaza el navegador)", () => {
+  const { raiz, limpiar, llamadas } = escenario(true);
+  igual(lanzar(raiz.querySelector("#lienzo"), rueda({ ctrlKey: false })), false);
+  igual(llamadas.zoom.length, 0);
+  limpiar();
+});
+prueba("Ctrl+rueda con nota abierta hace zoom del visor al cursor; sin nota, ninguno", () => {
+  let e = escenario(true);
+  lanzar(e.raiz.querySelector("#barra"), rueda({ clientX: 30, clientY: 40 }));
+  igual(e.llamadas.zoom.length, 1); igual(e.llamadas.zoom[0].slice(1), [30, 40]); igual(e.llamadas.zoom[0][0] > 1, true);
+  e.limpiar();
+  e = escenario(false);
+  lanzar(e.raiz.querySelector("#lista"), rueda());
+  igual(e.llamadas.zoom.length, 0);
+  e.limpiar();
+});
+prueba("Ctrl/Cmd + + - = 0 con nota abierta: zoom del visor desde cualquier foco; sin nota, del navegador", () => {
+  const casos = [["+", "acercar"], ["=", "acercar"], ["-", "alejar"], ["_", "alejar"], ["0", "encajar"]];
+  for (const [key, accion] of casos) for (const mod of [{}, { ctrlKey: false, metaKey: true }]) {
+    const e = escenario(true);
+    igual(lanzar(e.raiz.querySelector("button"), tecla(key, mod)), true, key);
+    igual(e.llamadas.tecla, [accion], key);
+    e.limpiar();
+  }
+  const e = escenario(false);
+  igual(lanzar(e.raiz.querySelector("button"), tecla("+")), false, "sin nota se deja el zoom del navegador");
+  igual(lanzar(document.body, tecla("c")), false, "otras combinaciones intactas");
+  e.limpiar();
 });
 
 // ---- ejecucion ----
