@@ -15,6 +15,7 @@ import {
 } from "/sitio/visor/explorador.js";
 import { capturarZoom } from "/sitio/visor/captura-zoom.js";
 import { colorVisible, papelVisible } from "/sitio/visor/pintar.js";
+import { registrar as registrarZoomSalto } from "./zoom-salto.js";
 import { colorDe, prepararNota, dibujarMiniatura, dibujarRegion } from "/sitio/visor/pintar.js";
 
 const pruebas = [];
@@ -409,6 +410,8 @@ prueba("Ctrl/Cmd + + - = 0 con nota abierta: zoom del visor desde cualquier foco
   e.limpiar();
 });
 
+registrarZoomSalto(prueba, igual);
+
 // ---- ejecucion ----
 const salida = [];
 let fallos = 0;
@@ -417,3 +420,4 @@ for (const [nombre, fn] of pruebas) {
 }
 salida.push(fallos ? `RESULTADO: ${fallos} FALLOS de ${pruebas.length}` : `RESULTADO: OK ${pruebas.length}`);
 document.getElementById("resultado").textContent = salida.join("\n");
+fetch("/resultado", { method: "POST", body: salida.join("\n") }).catch(() => {});
