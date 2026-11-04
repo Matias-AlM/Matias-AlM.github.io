@@ -150,14 +150,17 @@ export function crearVista(lienzo, preparada, bitmaps, { alCambiarVista = () => 
     else encajar();
   }
 
-  const punto = (e) => { const r = lienzo.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  // Coordenadas de pantalla -> del lienzo. El origen es el del contenedor: el lienzo lleva la escala CSS
+  // del gesto en curso y su rectangulo ya no coincide con la vista (anclaria el zoom a un punto falso).
+  const origen = () => desplazador.getBoundingClientRect();
+  const punto = (e) => { const r = origen(); return [e.clientX - r.left, e.clientY - r.top]; };
 
   // Ctrl+rueda, pellizco de trackpad y gestos de Safari los captura captura-zoom.js en todo el documento
   // (visor.js) y llegan aqui: el punto del cursor se acota a la zona visible para que el zoom
   // nunca gire en torno a un punto fuera de la hoja (p. ej. con el cursor sobre la pastilla).
   const zoomEnPantalla = (factor, clientX, clientY) => {
-    const r = desplazador.getBoundingClientRect(), o = lienzo.getBoundingClientRect();
-    zoomEn(factor, entre(clientX, r.left, r.right) - o.left, entre(clientY, r.top, r.bottom) - o.top);
+    const r = origen();
+    zoomEn(factor, entre(clientX, r.left, r.right) - r.left, entre(clientY, r.top, r.bottom) - r.top);
   };
 
   // Un puntero = mano; dos = pellizco (y desplazamiento con el punto medio).
@@ -182,7 +185,7 @@ export function crearVista(lienzo, preparada, bitmaps, { alCambiarVista = () => 
       desplazar(antes.x - ahora.x, antes.y - ahora.y);
     } else if (punteros.size === 2) {
       const [mx, my, d] = medioDe();
-      const r = lienzo.getBoundingClientRect();
+      const r = origen();
       if (distancia > 0) zoomEn(d / distancia, mx - r.left, my - r.top);
       desplazar(medio[0] - mx, medio[1] - my);
       medio = [mx, my]; distancia = d;
