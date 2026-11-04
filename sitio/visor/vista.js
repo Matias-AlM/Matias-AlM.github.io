@@ -2,6 +2,10 @@
 // cae en el lienzo (las hojas fuera de la pantalla no cuestan nada ni guardan memoria), y el zoom
 // se anima con una escala CSS que se afina con un redibujo al acabar el gesto.
 //
+// El desplazamiento es el del navegador: el lienzo (sticky) vive en un contenedor con overflow cuyo
+// "pliego" mide lo que mide la nota al zoom actual; la rueda, los dos dedos del trackpad (con su
+// inercia) y la barra los resuelve el navegador y aqui solo se lee el scroll para saber que se ve.
+//
 // Gestos: rueda = desplazar (dos dedos en un trackpad); Ctrl+rueda o pellizco de trackpad = zoom
 // hacia el cursor; Safari manda gesturestart/gesturechange; arrastrar con raton o dedo = mano;
 // pellizco tactil; doble clic o doble toque = ajustar al ancho / acercar. Teclas: flechas,
@@ -13,16 +17,22 @@ import {
 } from "./gestos.js";
 
 const ESPERA_REDIBUJO_MS = 140;
+const MARGEN_PX = 48;   // el mismo margen de nota a la vista que acotarVista
+const sinMovimiento = matchMedia("(prefers-reduced-motion: reduce)");
+// Los saltos (pagina, teclas) se animan con el suavizado del navegador, salvo si se pide menos movimiento.
+const saltoSuave = () => (sinMovimiento.matches ? "auto" : "smooth");
 
 export function crearVista(lienzo, preparada, bitmaps, { alCambiarVista = () => {} } = {}) {
   const ctx = lienzo.getContext("2d");
+  const desplazador = lienzo.closest(".visor-desplazador"), pliego = lienzo.parentElement;
   const hojas = preparada.hojas;
   const caja = cajaDeHojas(hojas);
   let vista = { zoom: 1, izquierda: 0, arriba: 0 };
   let dibujada = { ...vista };   // la vista con la que se pinto el lienzo por ultima vez
   let pendiente = false, temporizador = 0;
+  let zoomDelPliego = 0, esperado = { x: 0, y: 0 };   // esperado: el scroll que se puso desde aqui
 
-  const ancho = () => lienzo.clientWidth, alto = () => lienzo.clientHeight;
+  const ancho = () => desplazador.clientWidth, alto = () => desplazador.clientHeight;
   const ajuste = () => zoomDeAjuste(caja, ancho());
   const estilo = () => getComputedStyle(lienzo);
 
@@ -67,10 +77,24 @@ export function crearVista(lienzo, preparada, bitmaps, { alCambiarVista = () => 
     });
   }
 
-  // Aplica `vista`: si solo se desplazo, se redibuja ya (en el siguiente fotograma); si cambio el zoom,
+  // Scroll del contenedor que corresponde a una vista (y al reves): el pliego deja MARGEN_PX de nota
+  // a la vista en cada extremo, igual que acotarVista.
+  const scrollDe = (v) => ({ x: (v.izquierda - caja.x0) * v.zoom + ancho() - MARGEN_PX, y: (v.arriba - caja.y0) * v.zoom + alto() - MARGEN_PX });
+  function medirPliego() {
+    lienzo.style.width = `${ancho()}px`; lienzo.style.height = `${alto()}px`;
+    pliego.style.width = `${(caja.x1 - caja.x0) * vista.zoom + 2 * ancho() - 2 * MARGEN_PX}px`;
+    pliego.style.height = `${(caja.y1 - caja.y0) * vista.zoom + 2 * alto() - 2 * MARGEN_PX}px`;
+    zoomDelPliego = vista.zoom;
+  }
+  function colocar() {
+    const { x, y } = scrollDe(vista);
+    desplazador.scrollTo({ left: x, top: y, behavior: "auto" });
+    esperado = { x: desplazador.scrollLeft, y: desplazador.scrollTop };
+  }
+
+  // Muestra `vista`: si solo se desplazo, se redibuja ya (en el siguiente fotograma); si cambio el zoom,
   // se escala el lienzo ya dibujado con CSS y el redibujo nitido llega al acabar el gesto.
-  function aplicar(nueva) {
-    vista = acotarVista(nueva, caja, ancho(), alto());
+  function presentar() {
     avisarVista();
     if (vista.zoom === dibujada.zoom) {
       if (!pendiente) { pendiente = true; requestAnimationFrame(pintar); }
@@ -84,15 +108,39 @@ export function crearVista(lienzo, preparada, bitmaps, { alCambiarVista = () => 
     temporizador = setTimeout(pintar, ESPERA_REDIBUJO_MS);
   }
 
+  // Pone una vista de golpe (zoom, ajuste): redimensiona el pliego si cambio el zoom y mueve el scroll.
+  function aplicar(nueva) {
+    vista = acotarVista(nueva, caja, ancho(), alto());
+    if (vista.zoom !== zoomDelPliego) medirPliego();
+    colocar();
+    presentar();
+  }
+
+  // El scroll lo mueve el navegador (rueda, trackpad, barra, teclas): la vista sale de el.
+  desplazador.addEventListener("scroll", () => {
+    const x = desplazador.scrollLeft, y = desplazador.scrollTop;
+    if (Math.abs(x - esperado.x) < 1 && Math.abs(y - esperado.y) < 1) return;
+    esperado = { x, y };
+    vista = { zoom: vista.zoom, izquierda: caja.x0 + (x - ancho() + MARGEN_PX) / vista.zoom, arriba: caja.y0 + (y - alto() + MARGEN_PX) / vista.zoom };
+    presentar();
+  }, { passive: true });
+
   const zoomEn = (factor, px = ancho() / 2, py = alto() / 2) => aplicar(zoomHaciaPunto(vista, factor, px, py, ajuste()));
-  const desplazar = (dx, dy) => aplicar({ ...vista, izquierda: vista.izquierda + dx / vista.zoom, arriba: vista.arriba + dy / vista.zoom });
+  // dx, dy en pixeles de pantalla; con "smooth" el navegador anima el desplazamiento.
+  const desplazar = (dx, dy, comportamiento = "auto") => desplazador.scrollBy({ left: dx, top: dy, behavior: comportamiento });
+  // Sin cambio de zoom el destino es solo un scroll y se anima; con cambio de zoom se pone de golpe.
+  function irA(destino) {
+    if (destino.zoom !== vista.zoom) return aplicar(destino);
+    const { x, y } = scrollDe(acotarVista(destino, caja, ancho(), alto()));
+    desplazador.scrollTo({ left: x, top: y, behavior: saltoSuave() });
+  }
 
   function encajar() {
     const zoom = ajuste();
-    aplicar({ zoom, izquierda: (caja.x0 + caja.x1) / 2 - ancho() / zoom / 2, arriba: caja.y0 - 12 / zoom });
+    irA({ zoom, izquierda: (caja.x0 + caja.x1) / 2 - ancho() / zoom / 2, arriba: caja.y0 - 12 / zoom });
   }
   function irAPagina(numero) {
-    aplicar(vistaDePagina(hojas, numero - 1, ancho(), vista.zoom));
+    irA(vistaDePagina(hojas, numero - 1, ancho(), vista.zoom));
   }
   const paginaDeLaVista = () => paginaActual(hojas, vista, alto()) + 1;
   // Doble clic o toque: ajusta al ancho; si ya esta ajustado, acerca 3x al punto tocado.
@@ -103,12 +151,14 @@ export function crearVista(lienzo, preparada, bitmaps, { alCambiarVista = () => 
 
   const punto = (e) => { const r = lienzo.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
 
-  // Rueda: Ctrl (o el pellizco del trackpad) hace zoom; sin Ctrl, desplaza (dos dedos).
+  // Rueda: Ctrl (o el pellizco del trackpad) hace zoom; sin Ctrl se deja pasar y desplaza el
+  // navegador (suavizado e inercia del trackpad incluidos). Por eso el listener no es pasivo, pero solo
+  // cancela el evento con Ctrl.
   lienzo.addEventListener("wheel", (e) => {
+    if (!(e.ctrlKey || e.metaKey)) return;
     e.preventDefault();
-    if (e.ctrlKey || e.metaKey) { const [x, y] = punto(e); zoomEn(factorDeRueda(e.deltaY, e.deltaMode), x, y); return; }
-    const k = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? alto() : 1;
-    desplazar(e.deltaX * k, e.deltaY * k);
+    const [x, y] = punto(e);
+    zoomEn(factorDeRueda(e.deltaY, e.deltaMode), x, y);
   }, { passive: false });
 
   // Safari de escritorio: el pellizco llega como gesturestart/gesturechange con `scale` acumulada.
@@ -170,8 +220,8 @@ export function crearVista(lienzo, preparada, bitmaps, { alCambiarVista = () => 
     const paso = 80;
     const acciones = {
       "+": () => zoomEn(1.25), "=": () => zoomEn(1.25), "-": () => zoomEn(1 / 1.25), "0": encajar,
-      ArrowLeft: () => desplazar(-paso, 0), ArrowRight: () => desplazar(paso, 0),
-      ArrowUp: () => desplazar(0, -paso), ArrowDown: () => desplazar(0, paso),
+      ArrowLeft: () => desplazar(-paso, 0, saltoSuave()), ArrowRight: () => desplazar(paso, 0, saltoSuave()),
+      ArrowUp: () => desplazar(0, -paso, saltoSuave()), ArrowDown: () => desplazar(0, paso, saltoSuave()),
       PageDown: () => irAPagina(Math.min(paginaDeLaVista() + 1, hojas.length)),
       PageUp: () => irAPagina(Math.max(paginaDeLaVista() - 1, 1)),
       Home: () => irAPagina(1), End: () => irAPagina(hojas.length),
@@ -180,14 +230,16 @@ export function crearVista(lienzo, preparada, bitmaps, { alCambiarVista = () => 
     if (acciones[e.key]) { e.preventDefault(); acciones[e.key](); }
   });
 
-  const observador = new ResizeObserver(() => { pendiente = true; requestAnimationFrame(pintar); avisarVista(); });
-  observador.observe(lienzo);
-  encajar();
+  // Al cambiar el tamano del contenedor se remide el pliego y se mantiene la misma vista.
+  const observador = new ResizeObserver(() => { medirPliego(); colocar(); pendiente = true; requestAnimationFrame(pintar); avisarVista(); });
+  observador.observe(desplazador);
+  medirPliego();
+  aplicar({ zoom: ajuste(), izquierda: (caja.x0 + caja.x1) / 2 - ancho() / ajuste() / 2, arriba: caja.y0 - 12 / ajuste() });
 
   return {
     acercar: () => zoomEn(1.25), alejar: () => zoomEn(1 / 1.25), encajar, irAPagina,
     total: hojas.length, pagina: paginaDeLaVista,
     estado: () => ({ ...vista, ajuste: ajuste() }),
-    destruir: () => { observador.disconnect(); clearTimeout(temporizador); lienzo.style.transform = ""; },
+    destruir: () => { observador.disconnect(); clearTimeout(temporizador); lienzo.style.transform = ""; pliego.style.width = pliego.style.height = ""; },
   };
 }

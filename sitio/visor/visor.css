@@ -102,7 +102,9 @@ body.arrastrando .visor { outline: 2px dashed var(--accent); outline-offset: -8p
 .volver { gap: 6px; }
 .volver svg { width: 18px; height: 18px; }
 .visor-escenario { position: relative; flex: 1; min-height: 0; background: var(--surface-2); }
-.visor-lienzo { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; outline: none; }
+.visor-desplazador { position: absolute; inset: 0; overflow: auto; overscroll-behavior: contain; }
+.visor-pliego { position: relative; }
+.visor-lienzo { position: sticky; top: 0; left: 0; display: block; touch-action: none; cursor: grab; outline: none; }
 .visor-lienzo.agarrando { cursor: grabbing; }
 
 /* La pildora de zoom y pagina del editor de la app (NoteEditorActivity.kt: pildoraInferior, zoomLabel,
