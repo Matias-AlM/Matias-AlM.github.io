@@ -31,6 +31,13 @@ en bucle (`interaccion.js`, `.video-caja[data-video="hero"]`) y con `prefers-red
 - Origen: informes `video-web-zoom` y `video-web-zoom-en` (grabación sin barras del sistema), pasados por `bucle_sin_salto.py`
   (crf 24, 60 fps, `+faststart`).
 
+## Bordes negros de la captura
+
+Los `hero*` y `carrusel-*` (mp4 y webp) salían de la captura con 1–2 px negros en cada lateral
+(se veían como barras negras finas junto al marco). Se recortan 2 px a la izquierda y 3 a la derecha
+(1 y 3 en `hero`) y se reescala al tamaño original con `scale=…:flags=lanczos`, así la proporción y el
+marcado (`width`/`height`, `aspect-ratio`) no cambian. Si se regeneran con `scripts/videos.sh`, aplicar el mismo recorte.
+
 ## Dimensiones
 
 | Clip | Ancho×alto | Duración | MP4 (KB) |
