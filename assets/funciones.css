@@ -80,8 +80,6 @@ html:not(.js) .fn-pestanas-barra { display: none; }
 /* Las dos teselas junto a la grande se estiran a su altura: el contenido va centrado, sin hueco entre numero y titulo. */
 @media (min-width: 960px) {
   .fn-bento > .fn-tesela:not(.fn-tesela-grande) { justify-content: center; }
-  /* La captura se recorta por abajo para que la grande no pase de ~520 px y las pequenas no queden medio vacias. */
-  .fn-bento .fn-tesela-media picture, .fn-bento .fn-tesela-media .h-sync, .fn-bento .fn-tesela-media .captura-pendiente { max-height: 300px; overflow: hidden; }
 }
 /* PRO y BETA, a la derecha de la tesela (la grande lo lleva junto a su etiqueta). */
 .fn-tesela .pro, .fn-tesela .beta { position: absolute; top: 24px; right: 24px; margin: 0; }
