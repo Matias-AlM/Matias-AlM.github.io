@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lápiz · Funciones | SwiftPen</title>
-<meta name="description" content="SwiftPen funciona con lápices activos de cualquier marca: S Pen, USI, Wacom, Lenovo y HONOR Magic-Pencil. Doble toque y botón (BETA), borrar con el botón y escribir con el dedo.">
+<meta name="description" content="SwiftPen funciona con lápices activos con gestos reconocidos (experimental): S Pen, USI, Wacom, Lenovo y HONOR Magic-Pencil. Doble toque y botón (BETA), borrar con el botón y escribir con el dedo.">
 <link rel="icon" href="/favicon.png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.webmanifest">
@@ -16,7 +16,9 @@
 <meta property="og:image" content="https://getswiftpen.com/img/portada.jpg?v=3">
 <link rel="preload" href="/assets/fuentes/mona-sans-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/site.css?v=4">
-<link rel="stylesheet" href="/assets/funciones.css?v=2">
+<link rel="stylesheet" href="/assets/funciones.css?v=5">
+<link rel="stylesheet" href="/assets/sync-ilustracion.css?v=1">
+<link rel="stylesheet" href="/assets/lapiz-ilustracion.css?v=4">
 <script src="/assets/idioma.js?v=2"></script>
 <!-- Estadisticas sin cookies ni datos personales (ver la politica de privacidad). Solo en getswiftpen.com: las vistas previas y las pruebas locales no cuentan. Sin la parte ?... de la direccion. -->
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8e72a64d-fc98-425b-8b24-4017cd4c6f43" data-domains="getswiftpen.com" data-exclude-search="true" data-do-not-track="true"></script>
@@ -37,23 +39,15 @@
 <header class="cabecera-pagina cabecera-aurora">
   <div class="contenedor">
     <nav class="migas" aria-label="Migas"><a href="/funciones/"><span lang="es">Funciones</span><span lang="en">Features</span><span lang="fr">Fonctions</span></a><span aria-current="page"><span lang="es">Lápiz</span><span lang="en">Pen</span><span lang="fr">Stylet</span></span></nav>
-    <p class="etiqueta"><span lang="es">Lápiz</span><span lang="en">Pen</span><span lang="fr">Stylet</span></p>
+    <p class="etiqueta"><span lang="es">Lápiz</span><span lang="en">Pen</span><span lang="fr">Stylet</span> <span class="beta experimental"><span lang="es">Experimental</span><span lang="en">Experimental</span><span lang="fr">Expérimental</span></span></p>
     <h1><span lang="es">Tu lápiz, sea cual sea.</span><span lang="en">Whatever pen you have.</span><span lang="fr">Votre stylet, quel qu'il soit.</span></h1>
-    <p class="entradilla"><span lang="es">Funciona con lápices activos de cualquier marca, con doble toque y botón.</span><span lang="en">Works with active pens from any brand, with double-tap and button.</span><span lang="fr">Compatible avec les stylets actifs de toutes marques, avec double tape et bouton.</span></p>
-    <figure class="cabecera-imagen">
-      <picture lang="es">
-        <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/lapiz-gestos-es-oscuro-800.webp 800w, /img/funciones/lapiz-gestos-es-oscuro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw">
-        <img src="/img/funciones/lapiz-gestos-es-claro-800.webp" srcset="/img/funciones/lapiz-gestos-es-claro-800.webp 800w, /img/funciones/lapiz-gestos-es-claro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw" width="1600" height="1051" loading="lazy" alt="Los ajustes de escritura con los gestos del lápiz (BETA): tu lápiz, botón lateral y segundo botón.">
-      </picture>
-      <picture lang="en">
-        <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/lapiz-gestos-en-oscuro-800.webp 800w, /img/funciones/lapiz-gestos-en-oscuro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw">
-        <img src="/img/funciones/lapiz-gestos-en-claro-800.webp" srcset="/img/funciones/lapiz-gestos-en-claro-800.webp 800w, /img/funciones/lapiz-gestos-en-claro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw" width="1600" height="1051" loading="lazy" alt="The writing settings with pen gestures (BETA): your pen, side button and second button.">
-      </picture>
-      <picture lang="fr">
-        <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/lapiz-gestos-en-oscuro-800.webp 800w, /img/funciones/lapiz-gestos-en-oscuro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw">
-        <img src="/img/funciones/lapiz-gestos-en-claro-800.webp" srcset="/img/funciones/lapiz-gestos-en-claro-800.webp 800w, /img/funciones/lapiz-gestos-en-claro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw" width="1600" height="1051" loading="lazy" alt="Les réglages d'écriture avec les gestes du stylet (BÊTA) : votre stylet, bouton latéral et second bouton.">
-      </picture>
+    <p class="entradilla"><span lang="es">Escribe con tu lápiz activo. El doble toque y el botón se reconocen en estas marcas, de forma experimental.</span><span lang="en">Write with your active pen. Double-tap and button are recognized on these brands, as an experimental feature.</span><span lang="fr">Écrivez avec votre stylet actif. Le double tape et le bouton sont reconnus sur ces marques, à titre expérimental.</span></p>
+    <figure class="cabecera-imagen h-sync h-lapiz cabecera-aurora" role="img" aria-labelledby="lapiz-cab-nombre">
+      <span class="solo-lectores" id="lapiz-cab-nombre"><span lang="es">Lápices con gestos reconocidos en SwiftPen: Samsung S Pen, HONOR Magic-Pencil, Lenovo Tab Pen, Wacom, USI, Surface y Pixel; con otro lápiz puedes grabar tus gestos. Función experimental.</span><span lang="en">Pens with recognized gestures in SwiftPen: Samsung S Pen, HONOR Magic-Pencil, Lenovo Tab Pen, Wacom, USI, Surface and Pixel; with any other pen you can record your own gestures. Experimental feature.</span><span lang="fr">Stylets aux gestes reconnus dans SwiftPen : Samsung S Pen, HONOR Magic-Pencil, Lenovo Tab Pen, Wacom, USI, Surface et Pixel ; avec un autre stylet, vous pouvez enregistrer vos gestes. Fonction expérimentale.</span></span>
+      <div class="h-lapiz-contenido" aria-hidden="true" style="display:contents"><span class="h-lapiz-app"><img src="/img/icon.png" width="192" height="192" alt="" draggable="false"></span><span class="h-lapiz-hilo"></span><div class="h-lapiz-fila"><span class="h-lapiz-marca"><svg viewBox="0 0 24 24"><path d="m12 19 7-7 3 3-7 7z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18z"/></svg>Samsung S Pen</span><span class="h-lapiz-marca"><svg viewBox="0 0 24 24"><path d="m12 19 7-7 3 3-7 7z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18z"/></svg>HONOR Magic-Pencil</span><span class="h-lapiz-marca"><svg viewBox="0 0 24 24"><path d="m12 19 7-7 3 3-7 7z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18z"/></svg>Lenovo Tab Pen</span><span class="h-lapiz-marca"><svg viewBox="0 0 24 24"><path d="m12 19 7-7 3 3-7 7z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18z"/></svg>Wacom</span><span class="h-lapiz-marca"><svg viewBox="0 0 24 24"><path d="m12 19 7-7 3 3-7 7z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18z"/></svg>USI</span><span class="h-lapiz-marca"><svg viewBox="0 0 24 24"><path d="m12 19 7-7 3 3-7 7z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18z"/></svg>Surface</span><span class="h-lapiz-marca"><svg viewBox="0 0 24 24"><path d="m12 19 7-7 3 3-7 7z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18z"/></svg>Pixel</span><span class="h-lapiz-marca h-lapiz-otro"><svg viewBox="0 0 24 24"><path d="m12 19 7-7 3 3-7 7z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18z"/></svg><span lang="es">Otro lápiz: graba tus gestos</span><span lang="en">Other pen: record your gestures</span><span lang="fr">Autre stylet : enregistrez vos gestes</span></span></div></div>
     </figure>
+    <p class="aviso-marcas"><span lang="es">Las marcas pertenecen a sus propietarios. SwiftPen no está afiliado ni respaldado por ellas; los nombres solo indican con qué lápices funciona.</span><span lang="en">Trademarks belong to their respective owners. SwiftPen is not affiliated with or endorsed by them; the names only indicate which pens it works with.</span><span lang="fr">Les marques appartiennent à leurs propriétaires. SwiftPen n'est ni affilié à elles ni approuvé par elles ; les noms indiquent seulement avec quels stylets l'appli fonctionne.</span></p>
+    <p class="aviso-marcas aviso-experimental"><span lang="es">Función experimental: no garantizamos que funcione con todos los lápices y la implementación sigue en desarrollo.</span><span lang="en">Experimental feature: we can’t guarantee it works with every pen, and the implementation is still in development.</span><span lang="fr">Fonction expérimentale : nous ne garantissons pas son bon fonctionnement avec tous les stylets et son développement est toujours en cours.</span></p>
   </div>
 </header>
 
@@ -67,20 +61,7 @@
           <h3><span lang="es">Escribe con tu lápiz</span><span lang="en">Write with your pen</span><span lang="fr">Écrivez avec votre stylet</span></h3>
           <p><span lang="es">Usa el lápiz activo que ya tienes: S Pen, USI, Wacom, Lenovo o HONOR Magic-Pencil 4/4S.</span><span lang="en">Use the active pen you already own: S Pen, USI, Wacom, Lenovo or HONOR Magic-Pencil 4/4S.</span><span lang="fr">Utilisez le stylet actif que vous avez déjà : S Pen, USI, Wacom, Lenovo ou HONOR Magic-Pencil 4/4S.</span></p>
         </div>
-        <figure class="fn-captura">
-            <picture lang="es">
-              <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/lapiz-gestos-es-oscuro-800.webp 800w, /img/funciones/lapiz-gestos-es-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
-              <img src="/img/funciones/lapiz-gestos-es-claro-800.webp" srcset="/img/funciones/lapiz-gestos-es-claro-800.webp 800w, /img/funciones/lapiz-gestos-es-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="Los ajustes de escritura con los gestos del lápiz (BETA): tu lápiz, botón lateral y segundo botón.">
-            </picture>
-            <picture lang="en">
-              <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/lapiz-gestos-en-oscuro-800.webp 800w, /img/funciones/lapiz-gestos-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
-              <img src="/img/funciones/lapiz-gestos-en-claro-800.webp" srcset="/img/funciones/lapiz-gestos-en-claro-800.webp 800w, /img/funciones/lapiz-gestos-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="The writing settings with pen gestures (BETA): your pen, side button and second button.">
-            </picture>
-            <picture lang="fr">
-              <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/lapiz-gestos-en-oscuro-800.webp 800w, /img/funciones/lapiz-gestos-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
-              <img src="/img/funciones/lapiz-gestos-en-claro-800.webp" srcset="/img/funciones/lapiz-gestos-en-claro-800.webp 800w, /img/funciones/lapiz-gestos-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="Les réglages d'écriture avec les gestes du stylet (BÊTA) : votre stylet, bouton latéral et second bouton.">
-            </picture>
-          </figure>
+        <figure class="fn-captura-ilu h-sync h-paso cabecera-aurora" role="img" aria-labelledby="lapiz-p1"><span class="solo-lectores" id="lapiz-p1"><span lang="es">Un lápiz activo escribe en una nota de SwiftPen.</span><span lang="en">An active pen writes on a SwiftPen note.</span><span lang="fr">Un stylet actif écrit sur une note SwiftPen.</span></span><div class="h-sync-fila" aria-hidden="true"><div class="h-sync-nodo"><span class="h-sync-icono"><svg viewBox="0 0 24 24" class="h-ic"><path d="m12 19 7-7 3 3-7 7z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18z"/></svg></span><span class="h-sync-nombre"><span lang="es">Tu lápiz</span><span lang="en">Your pen</span><span lang="fr">Votre stylet</span></span></div><svg class="h-sync-flecha" viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg><div class="h-sync-nodo"><span class="h-sync-icono"><svg viewBox="0 0 24 24" class="h-ic"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 9c1.5-2 2.5 2 4 0s2.5 2 4 0M8 14c1.5-2 2.5 2 4 0"/></svg></span><span class="h-sync-nombre"><span lang="es">Tu nota</span><span lang="en">Your note</span><span lang="fr">Votre note</span></span></div></div></figure>
       </li>
       <li class="fn-paso">
         <div class="fn-paso-texto">
@@ -88,20 +69,7 @@
           <h3><span lang="es">Asigna el doble toque y el botón</span><span lang="en">Assign double-tap and button</span><span lang="fr">Associez le double tape et le bouton</span></h3>
           <p><span lang="es">Elige qué hace el doble toque y el botón del lápiz (función en BETA). Con el botón también puedes borrar al instante, sin cambiar de herramienta.</span><span lang="en">Choose what the pen's double-tap and button do (a BETA feature). You can also erase instantly with the button, without switching tools.</span><span lang="fr">Choisissez ce que font le double tape et le bouton du stylet (fonction en BETA). Avec le bouton, vous pouvez aussi effacer aussitôt, sans changer d'outil.</span></p>
         </div>
-        <figure class="fn-captura">
-        <picture lang="es">
-          <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/lapiz-botones-es-oscuro-800.webp 800w, /img/funciones/lapiz-botones-es-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
-          <img src="/img/funciones/lapiz-botones-es-claro-800.webp" srcset="/img/funciones/lapiz-botones-es-claro-800.webp 800w, /img/funciones/lapiz-botones-es-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="Los ajustes de escritura con el desplegable de acciones del botón del lápiz abierto: nada, alternar goma, deshacer, rehacer…">
-        </picture>
-        <picture lang="en">
-          <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/lapiz-botones-en-oscuro-800.webp 800w, /img/funciones/lapiz-botones-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
-          <img src="/img/funciones/lapiz-botones-en-claro-800.webp" srcset="/img/funciones/lapiz-botones-en-claro-800.webp 800w, /img/funciones/lapiz-botones-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="The writing settings with the pen button's action menu open: nothing, toggle eraser, undo, redo…">
-        </picture>
-        <picture lang="fr">
-          <source media="(prefers-color-scheme: dark)" srcset="/img/funciones/lapiz-botones-en-oscuro-800.webp 800w, /img/funciones/lapiz-botones-en-oscuro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw">
-          <img src="/img/funciones/lapiz-botones-en-claro-800.webp" srcset="/img/funciones/lapiz-botones-en-claro-800.webp 800w, /img/funciones/lapiz-botones-en-claro-1600.webp 1600w" sizes="(min-width: 900px) 600px, 100vw" width="1600" height="1051" loading="lazy" alt="Les réglages d'écriture avec le menu des actions du bouton du stylet ouvert : rien, alterner gomme, annuler, rétablir…">
-        </picture>
-      </figure>
+        <figure class="fn-captura-ilu h-sync h-paso cabecera-aurora" role="img" aria-labelledby="lapiz-p2"><span class="solo-lectores" id="lapiz-p2"><span lang="es">El doble toque lanza una acción y el botón borra al instante.</span><span lang="en">Double-tap runs an action and the button erases instantly.</span><span lang="fr">Le double tape lance une action et le bouton efface aussitôt.</span></span><div class="h-sync-fila" aria-hidden="true"><div class="h-sync-nodo"><span class="h-sync-icono"><svg viewBox="0 0 24 24" class="h-ic"><circle cx="12" cy="12" r="2.2"/><path d="M7.5 7.5a6.4 6.4 0 0 0 0 9M16.5 7.5a6.4 6.4 0 0 1 0 9M4.7 4.7a10.4 10.4 0 0 0 0 14.6M19.3 4.7a10.4 10.4 0 0 1 0 14.6"/></svg></span><span class="h-sync-nombre"><span lang="es">Doble toque</span><span lang="en">Double-tap</span><span lang="fr">Double tape</span></span></div><svg class="h-sync-flecha" viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg><div class="h-sync-nodo"><span class="h-sync-icono"><svg viewBox="0 0 24 24" class="h-ic"><path d="m13 2-9 12h7l-1 8 9-12h-7z"/></svg></span><span class="h-sync-nombre"><span lang="es">Tu acción</span><span lang="en">Your action</span><span lang="fr">Votre action</span></span></div><span class="h-paso-sep"></span><div class="h-sync-nodo"><span class="h-sync-icono"><svg viewBox="0 0 24 24" class="h-ic"><rect x="9" y="2" width="6" height="20" rx="3"/><rect x="10.5" y="6" width="3" height="5" rx="1.5"/></svg></span><span class="h-sync-nombre"><span lang="es">Botón</span><span lang="en">Button</span><span lang="fr">Bouton</span></span></div><svg class="h-sync-flecha" viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg><div class="h-sync-nodo"><span class="h-sync-icono"><svg viewBox="0 0 24 24" class="h-ic"><path d="m7 21-4-4a2 2 0 0 1 0-2.8l10-10a2 2 0 0 1 2.8 0l5 5a2 2 0 0 1 0 2.8L12 21z"/><path d="M22 21H7M5 11l8 8"/></svg></span><span class="h-sync-nombre"><span lang="es">Borrar</span><span lang="en">Erase</span><span lang="fr">Effacer</span></span></div></div></figure>
       </li>
       <li class="fn-paso">
         <div class="fn-paso-texto">
@@ -132,7 +100,7 @@
   <div class="contenedor">
     <h2 id="detalles"><span lang="es">Los detalles</span><span lang="en">The details</span><span lang="fr">Les détails</span></h2>
     <ul class="fn-detalles">
-      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Lápices activos de cualquier marca: S Pen, USI, Wacom, Lenovo y HONOR Magic-Pencil 4/4S.</span><span lang="en">Active pens from any brand: S Pen, USI, Wacom, Lenovo and HONOR Magic-Pencil 4/4S.</span><span lang="fr">Stylets actifs de toutes marques : S Pen, USI, Wacom, Lenovo et HONOR Magic-Pencil 4/4S.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Lápices activos con gestos reconocidos: S Pen, USI, Wacom, Lenovo y HONOR Magic-Pencil 4/4S.</span><span lang="en">Active pens with recognized gestures: S Pen, USI, Wacom, Lenovo and HONOR Magic-Pencil 4/4S.</span><span lang="fr">Stylets actifs aux gestes reconnus : S Pen, USI, Wacom, Lenovo et HONOR Magic-Pencil 4/4S.</span></li>
       <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Doble toque y botón del lápiz con acciones a tu elección (BETA).</span><span lang="en">Pen double-tap and button with actions of your choice (BETA).</span><span lang="fr">Double tape et bouton du stylet avec les actions de votre choix (BETA).</span></li>
       <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Con el botón del lápiz se borra al instante, sin levantar el lápiz.</span><span lang="en">The pen button erases instantly, without lifting the pen.</span><span lang="fr">Avec le bouton du stylet, on efface aussitôt, sans lever le stylet.</span></li>
       <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Escribir con el dedo es opcional: actívalo si no usas lápiz.</span><span lang="en">Finger writing is optional: turn it on if you don't use a pen.</span><span lang="fr">L'écriture au doigt est facultative : activez-la si vous n'utilisez pas de stylet.</span></li>

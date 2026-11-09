@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lienzo infinito · Funciones | SwiftPen</title>
-<meta name="description" content="El lienzo infinito de SwiftPen (BETA): una nota sin bordes para mapas mentales, esquemas y lluvias de ideas, con zoom con dos dedos e insertar espacio vertical.">
+<meta name="description" content="El lienzo infinito de SwiftPen (BETA): una nota sin bordes para mapas mentales, esquemas y lluvias de ideas, con zoom con dos dedos y «Hacer hueco» en vertical.">
 <link rel="icon" href="/favicon.png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.webmanifest">
@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="/assets/site.css?v=4">
 <link rel="stylesheet" href="/assets/funciones.css?v=2">
 <script src="/assets/idioma.js?v=2"></script>
+<script defer src="/assets/fn-video.js"></script>
 <!-- Estadisticas sin cookies ni datos personales (ver la politica de privacidad). Solo en getswiftpen.com: las vistas previas y las pruebas locales no cuentan. Sin la parte ?... de la direccion. -->
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8e72a64d-fc98-425b-8b24-4017cd4c6f43" data-domains="getswiftpen.com" data-exclude-search="true" data-do-not-track="true"></script>
 </head>
@@ -40,18 +41,18 @@
     <p class="etiqueta"><span lang="es">Lienzo infinito</span><span lang="en">Infinite canvas</span><span lang="fr">Canevas infini</span> <span class="beta">BETA</span></p>
     <h1><span lang="es">Para las ideas que no caben en una hoja.</span><span lang="en">For ideas that won't fit on a page.</span><span lang="fr">Pour les idées qui ne tiennent pas sur une page.</span></h1>
     <p class="entradilla"><span lang="es">Una nota sin bordes que crece hacia donde haga falta: mapas mentales, esquemas y lluvias de ideas.</span><span lang="en">A note with no edges that grows in any direction: mind maps, outlines and brainstorms.</span><span lang="fr">Une note sans bords qui s'étend dans toutes les directions : cartes mentales, plans et brainstormings.</span></p>
-    <figure class="cabecera-imagen">
+    <figure class="cabecera-imagen fn-video" data-video="carrusel-lienzo">
       <picture lang="es">
-        <source media="(prefers-color-scheme: dark)" srcset="/img/bento/lienzo-es-oscuro-800.webp 800w, /img/bento/lienzo-es-oscuro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw">
-        <img src="/img/bento/lienzo-es-claro-800.webp" srcset="/img/bento/lienzo-es-claro-800.webp 800w, /img/bento/lienzo-es-claro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw" width="1600" height="1051" loading="lazy" alt="Un mapa mental en el lienzo infinito de SwiftPen.">
+        <source srcset="/video/es/carrusel-lienzo-oscuro.webp" media="(prefers-color-scheme: dark)">
+        <img src="/video/es/carrusel-lienzo.webp" width="1600" height="1051" loading="lazy" alt="Un mapa mental en el lienzo infinito de SwiftPen.">
       </picture>
       <picture lang="en">
-        <source media="(prefers-color-scheme: dark)" srcset="/img/bento/lienzo-en-oscuro-800.webp 800w, /img/bento/lienzo-en-oscuro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw">
-        <img src="/img/bento/lienzo-en-claro-800.webp" srcset="/img/bento/lienzo-en-claro-800.webp 800w, /img/bento/lienzo-en-claro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw" width="1600" height="1051" loading="lazy" alt="A mind map on SwiftPen's infinite canvas.">
+        <source srcset="/video/en/carrusel-lienzo-oscuro.webp" media="(prefers-color-scheme: dark)">
+        <img src="/video/en/carrusel-lienzo.webp" width="1600" height="1051" loading="lazy" alt="A mind map on SwiftPen's infinite canvas.">
       </picture>
       <picture lang="fr">
-        <source media="(prefers-color-scheme: dark)" srcset="/img/bento/lienzo-en-oscuro-800.webp 800w, /img/bento/lienzo-en-oscuro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw">
-        <img src="/img/bento/lienzo-en-claro-800.webp" srcset="/img/bento/lienzo-en-claro-800.webp 800w, /img/bento/lienzo-en-claro-1600.webp 1600w" sizes="(min-width: 1120px) 1056px, 100vw" width="1600" height="1051" loading="lazy" alt="Une carte mentale sur le canevas infini de SwiftPen.">
+        <source srcset="/video/fr/carrusel-lienzo-oscuro.webp" media="(prefers-color-scheme: dark)">
+        <img src="/video/fr/carrusel-lienzo.webp" width="1600" height="1051" loading="lazy" alt="Une carte mentale sur le canevas infini de SwiftPen.">
       </picture>
     </figure>
   </div>
@@ -106,8 +107,8 @@
       <li class="fn-paso">
         <div class="fn-paso-texto">
           <span class="fn-num" aria-hidden="true">3</span>
-          <h3><span lang="es">Hazte hueco</span><span lang="en">Make room</span><span lang="fr">Faites de la place</span></h3>
-          <p><span lang="es">Con «Insertar espacio» abres hueco en vertical entre lo ya escrito, sin tener que mover todo a mano.</span><span lang="en">With "Insert space" you open up vertical room between what you've already written, without moving everything by hand.</span><span lang="fr">Avec « Insérer de l'espace », vous ouvrez de la place à la verticale entre ce que vous avez déjà écrit, sans tout déplacer à la main.</span></p>
+          <h3><span lang="es">Hacer hueco</span><span lang="en">Make room</span><span lang="fr">Faire de la place</span></h3>
+          <p><span lang="es">Con «Hacer hueco» abres espacio en vertical entre lo ya escrito, sin tener que mover todo a mano.</span><span lang="en">With "Make room" you open up vertical room between what you've already written, without moving everything by hand.</span><span lang="fr">Avec « Faire de la place », vous ouvrez de la place à la verticale entre ce que vous avez déjà écrit, sans tout déplacer à la main.</span></p>
         </div>
         <figure class="fn-captura">
           <picture lang="es">
@@ -136,7 +137,7 @@
       <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Pensado para mapas mentales, esquemas y lluvias de ideas.</span><span lang="en">Made for mind maps, outlines and brainstorms.</span><span lang="fr">Pensée pour les cartes mentales, les plans et les brainstormings.</span></li>
       <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Zoom con dos dedos: al detalle o al conjunto.</span><span lang="en">Two-finger zoom: into the detail or out to the whole.</span><span lang="fr">Zoom à deux doigts : sur le détail ou sur l'ensemble.</span></li>
       <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Botón «ir al trazo más cercano» para volver a lo escrito si te pierdes.</span><span lang="en">"Jump to the nearest ink" button to get back to your writing if you get lost.</span><span lang="fr">Bouton « aller au tracé le plus proche » pour revenir à votre écriture si vous vous perdez.</span></li>
-      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Insertar espacio vertical entre lo ya escrito.</span><span lang="en">Insert vertical space between what you've written.</span><span lang="fr">Insérez de l'espace vertical entre ce que vous avez déjà écrit.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">Hacer hueco en vertical entre lo ya escrito.</span><span lang="en">Make vertical room between what you've written.</span><span lang="fr">Faites de la place à la verticale entre ce que vous avez déjà écrit.</span></li>
       <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span lang="es">El zoom rápido «Ajustar a la pantalla» no aparece en el lienzo infinito.</span><span lang="en">The quick zoom "Fit to screen" is not shown on the infinite canvas.</span><span lang="fr">Le zoom rapide « Ajuster à l'écran » n'apparaît pas sur le canevas infini.</span></li>
     </ul>
   </div>
