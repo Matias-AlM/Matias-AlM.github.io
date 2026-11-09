@@ -80,7 +80,7 @@ html:not(.js) .fn-panel + .fn-panel { padding-top: 64px; }
 .fn-tesela:not(.fn-tesela-grande)::before {
   counter-increment: fn; content: counter(fn, decimal-leading-zero); content: counter(fn, decimal-leading-zero) / "";
   align-self: flex-start; margin-bottom: 16px; font: 700 1.9rem/1 var(--fuente-titulo); letter-spacing: -0.02em;
-  background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+  color: var(--accent);
 }
 .fn-tesela h3 { font-size: 1.2rem; }
 .fn-tesela:not(.fn-tesela-grande) h3 { margin-top: auto; }
