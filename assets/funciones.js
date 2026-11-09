@@ -1,15 +1,16 @@
-// Pestanas de /funciones/: un boton por grupo y un panel (bento) por grupo.
+// Pestanas de /funciones/: un boton por grupo (Escribir, Organizar, Estudiar) y un
+// grupo de paneles (bentos) por boton.
 //
 // Sin JS se ven todos los paneles seguidos y la fila de pestanas no aparece (CSS).
-// Con JS se ve un panel: el del #<grupo> de la direccion (por ejemplo
-// /funciones/#lazo, para enlazar desde la portada) o el primero. Al cambiar de
-// pestana se actualiza el # sin anadir pasos al historial. Teclado del patron
+// Con JS se ve un grupo: el del #<grupo> o el del #<panel> de la direccion (por
+// ejemplo /funciones/#lazo, para enlazar desde la portada) o el primero. Al cambiar
+// de pestana se actualiza el # sin anadir pasos al historial. Teclado del patron
 // "tabs" de WAI-ARIA: flechas, Inicio y Fin; activacion al mover el foco.
 (function () {
   var lista = document.querySelector(".fn-pestanas");
   if (!lista) return;
   var pestanas = Array.prototype.slice.call(lista.querySelectorAll(".fn-pestana"));
-  var paneles = pestanas.map(function (p) { return document.getElementById(p.dataset.panel); });
+  var paneles = pestanas.map(function (p) { return document.getElementById(p.dataset.grupo); });
   var barra = document.querySelector(".fn-pestanas-barra");
   var TECLAS = { ArrowRight: 1, ArrowLeft: -1 };
 
@@ -19,8 +20,14 @@
     p.setAttribute("aria-controls", paneles[i].id);
     paneles[i].setAttribute("role", "tabpanel");
     paneles[i].setAttribute("aria-labelledby", p.id);
-    paneles[i].tabIndex = 0;
   });
+
+  // El grupo que corresponde a un # (el del propio grupo o el de uno de sus paneles), o -1.
+  function desdeEnlace() {
+    var destino = document.getElementById(location.hash.slice(1));
+    for (var i = 0; destino && i < paneles.length; i++) if (paneles[i].contains(destino)) return i;
+    return -1;
+  }
 
   function mostrar(i, conFoco) {
     pestanas.forEach(function (p, j) {
@@ -38,12 +45,6 @@
   function elegir(i, conFoco) {
     mostrar(i, conFoco);
     history.replaceState(null, "", "#" + paneles[i].id);
-  }
-
-  function desdeEnlace() {
-    var id = location.hash.slice(1);
-    for (var i = 0; i < paneles.length; i++) if (paneles[i].id === id) return i;
-    return -1;
   }
 
   pestanas.forEach(function (p, i) {
@@ -74,4 +75,7 @@
   });
 
   mostrar(Math.max(desdeEnlace(), 0), false);
+  // Con un #<panel> concreto, lleva el panel a su sitio una vez mostrado su grupo.
+  var enlazado = document.getElementById(location.hash.slice(1));
+  if (enlazado && enlazado !== paneles[desdeEnlace()]) enlazado.scrollIntoView();
 })();
