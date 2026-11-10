@@ -9,7 +9,7 @@
 
 /* Bloques de pagina: menos aire que section de site.css, porque van seguidos. */
 .fn-bloque { padding: 72px 0; }
-.fn-panel + .fn-bloque { padding-top: 56px; }
+.fn-grupo + .fn-bloque { padding-top: 56px; }
 .fn-bloque + .fn-bloque { padding-top: 0; }
 @media (max-width: 719px) { .fn-bloque { padding: 48px 0; } }
 .fn-bloque h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); }
@@ -49,16 +49,10 @@ html:not(.js) .fn-pestanas-barra { display: none; }
 .fn-pestana:hover { color: var(--text); background: var(--surface-2); }
 .fn-pestana[aria-selected="true"] { color: #fff; background: var(--grad); }
 .fn-pestana:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-/* En escritorio caben las 11 en una fila solo sin iconos; en movil la fila se desplaza. */
-@media (min-width: 1100px) {
-  .fn-pestanas { justify-content: space-between; gap: 2px; }
-  .fn-pestana svg { display: none; }
-}
+.fn-grupo { scroll-margin-top: 140px; }
 
 .fn-panel { padding: 40px 0 0; scroll-margin-top: 140px; }
-.fn-panel:focus-visible { outline: none; }
-.fn-panel:focus-visible .fn-tesela-grande { outline: 2px solid var(--accent); outline-offset: 3px; }
-html:not(.js) .fn-panel + .fn-panel { padding-top: 64px; }
+.fn-panel + .fn-panel { padding-top: 64px; }
 .fn-bento, .fn-bento-resto { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
 .fn-bento-resto { margin-top: 12px; }
 @media (min-width: 600px) {
@@ -83,7 +77,10 @@ html:not(.js) .fn-panel + .fn-panel { padding-top: 64px; }
   background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .fn-tesela h3 { font-size: 1.2rem; }
-.fn-tesela:not(.fn-tesela-grande) h3 { margin-top: auto; }
+/* Las dos teselas junto a la grande se estiran a su altura: el contenido va centrado, sin hueco entre numero y titulo. */
+@media (min-width: 960px) {
+  .fn-bento > .fn-tesela:not(.fn-tesela-grande) { justify-content: center; }
+}
 /* PRO y BETA, a la derecha de la tesela (la grande lo lleva junto a su etiqueta). */
 .fn-tesela .pro, .fn-tesela .beta { position: absolute; top: 24px; right: 24px; margin: 0; }
 .fn-tesela-grande .pro, .fn-tesela-grande .beta { top: 28px; right: 28px; }
