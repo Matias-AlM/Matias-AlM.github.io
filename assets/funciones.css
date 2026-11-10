@@ -30,14 +30,16 @@
  *     </div>
  *     <div class="fn-bento-resto"><article class="fn-tesela">...</article>...</div>
  *   </div></section> */
-.fn-pestanas-barra {
-  position: sticky; top: 64px; z-index: 5; padding: 12px 0;
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
+.fn-pestanas-barra { position: sticky; top: 64px; z-index: 5; isolation: isolate; padding: 12px 0; }
+/* El vidrio va en un pseudo-elemento con los bordes difuminados: sin linea ni corte contra el hero ni el contenido. */
+.fn-pestanas-barra::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
   -webkit-backdrop-filter: saturate(160%) blur(14px); backdrop-filter: saturate(160%) blur(14px);
-  border-bottom: 1px solid var(--border);
+  -webkit-mask-image: linear-gradient(transparent, #000 30%, #000 70%, transparent); mask-image: linear-gradient(transparent, #000 30%, #000 70%, transparent);
 }
 html:not(.js) .fn-pestanas-barra { display: none; }
-.fn-pestanas { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: -4px; padding: 4px; }
+.fn-pestanas { display: flex; justify-content: safe center; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: -4px; padding: 4px; }
 .fn-pestanas::-webkit-scrollbar { display: none; }
 .fn-pestana {
   flex: none; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 14px;
