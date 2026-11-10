@@ -30,7 +30,8 @@ html.js .h-pista::-webkit-scrollbar { display: none; }
 .h-enlace { margin: 12px 0 0; font-weight: 600; }
 .h-enlace a { display: inline-flex; align-items: center; min-height: 44px; }
 
-.h-mas { margin: 32px 0 0; text-align: center; }
+.h-mas { margin: 32px 0 0; text-align: center; font-weight: 600; }
+.h-mas a { display: inline-flex; align-items: center; min-height: 44px; }
 
 /* Franja de precio: las mismas tarjetas que /precios/ (.precios y .plan de site.css). */
 .h-precio { padding-top: 0; }

@@ -9,7 +9,7 @@
 
 /* Bloques de pagina: menos aire que section de site.css, porque van seguidos. */
 .fn-bloque { padding: 72px 0; }
-.fn-panel + .fn-bloque { padding-top: 56px; }
+.fn-grupo + .fn-bloque { padding-top: 56px; }
 .fn-bloque + .fn-bloque { padding-top: 0; }
 @media (max-width: 719px) { .fn-bloque { padding: 48px 0; } }
 .fn-bloque h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); }
@@ -30,14 +30,16 @@
  *     </div>
  *     <div class="fn-bento-resto"><article class="fn-tesela">...</article>...</div>
  *   </div></section> */
-.fn-pestanas-barra {
-  position: sticky; top: 64px; z-index: 5; padding: 12px 0;
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
+.fn-pestanas-barra { position: sticky; top: 64px; z-index: 5; isolation: isolate; padding: 12px 0; }
+/* El vidrio va en un pseudo-elemento con los bordes difuminados: sin linea ni corte contra el hero ni el contenido. */
+.fn-pestanas-barra::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
   -webkit-backdrop-filter: saturate(160%) blur(14px); backdrop-filter: saturate(160%) blur(14px);
-  border-bottom: 1px solid var(--border);
+  -webkit-mask-image: linear-gradient(transparent, #000 30%, #000 70%, transparent); mask-image: linear-gradient(transparent, #000 30%, #000 70%, transparent);
 }
 html:not(.js) .fn-pestanas-barra { display: none; }
-.fn-pestanas { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: -4px; padding: 4px; }
+.fn-pestanas { display: flex; justify-content: safe center; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: -4px; padding: 4px; }
 .fn-pestanas::-webkit-scrollbar { display: none; }
 .fn-pestana {
   flex: none; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 14px;
@@ -49,16 +51,10 @@ html:not(.js) .fn-pestanas-barra { display: none; }
 .fn-pestana:hover { color: var(--text); background: var(--surface-2); }
 .fn-pestana[aria-selected="true"] { color: #fff; background: var(--grad); }
 .fn-pestana:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-/* En escritorio caben las 11 en una fila solo sin iconos; en movil la fila se desplaza. */
-@media (min-width: 1100px) {
-  .fn-pestanas { justify-content: space-between; gap: 2px; }
-  .fn-pestana svg { display: none; }
-}
+.fn-grupo { scroll-margin-top: 140px; }
 
 .fn-panel { padding: 40px 0 0; scroll-margin-top: 140px; }
-.fn-panel:focus-visible { outline: none; }
-.fn-panel:focus-visible .fn-tesela-grande { outline: 2px solid var(--accent); outline-offset: 3px; }
-html:not(.js) .fn-panel + .fn-panel { padding-top: 64px; }
+.fn-panel + .fn-panel { padding-top: 64px; }
 .fn-bento, .fn-bento-resto { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
 .fn-bento-resto { margin-top: 12px; }
 @media (min-width: 600px) {
@@ -83,7 +79,10 @@ html:not(.js) .fn-panel + .fn-panel { padding-top: 64px; }
   color: var(--accent);
 }
 .fn-tesela h3 { font-size: 1.2rem; }
-.fn-tesela:not(.fn-tesela-grande) h3 { margin-top: auto; }
+/* Las dos teselas junto a la grande se estiran a su altura: el contenido va centrado, sin hueco entre numero y titulo. */
+@media (min-width: 960px) {
+  .fn-bento > .fn-tesela:not(.fn-tesela-grande) { justify-content: center; }
+}
 /* PRO y BETA, a la derecha de la tesela (la grande lo lleva junto a su etiqueta). */
 .fn-tesela .pro, .fn-tesela .beta { position: absolute; top: 24px; right: 24px; margin: 0; }
 .fn-tesela-grande .pro, .fn-tesela-grande .beta { top: 28px; right: 28px; }
@@ -96,6 +95,9 @@ html:not(.js) .fn-panel + .fn-panel { padding-top: 64px; }
 .fn-tesela-media { margin-top: auto; padding: 0 28px; }
 .fn-tesela-media picture { display: block; border-radius: 16px 16px 0 0; overflow: hidden; border: 1px solid var(--border); border-bottom: 0; }
 .fn-tesela-media img { width: 100%; height: auto; }
+/* Video de la tesela grande (assets/fn-video.js): recorta el video con las esquinas del poster. */
+.fn-tesela-media .fn-video { border-radius: 16px 16px 0 0; overflow: hidden; border: 1px solid var(--border); border-bottom: 0; }
+.fn-tesela-media .fn-video picture { border: 0; border-radius: 0; }
 .fn-tesela-media .captura-pendiente { border-radius: 16px 16px 0 0; border-bottom: 0; }
 /* Ilustracion de sincronizacion (assets/sync-ilustracion.css) en la tesela y en los pasos. */
 .fn-tesela-media .h-sync { margin: 0; border-radius: 16px 16px 0 0; border-bottom: 0; box-shadow: none; }
@@ -158,3 +160,6 @@ html:not(.js) .fn-panel + .fn-panel { padding-top: 64px; }
 /* Cabecera con vídeo (assets/fn-video.js): el póster (<picture>) queda debajo y el vídeo, al arrancar, encima. */
 .fn-video { position: relative; }
 .fn-video video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+
+/* "Experimental" con el estilo de BETA: contorno en mayusculas. */
+.beta.experimental { text-transform: uppercase; }
